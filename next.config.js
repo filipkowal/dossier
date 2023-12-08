@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const path = require("path");
+
 const nextConfig = {
   webpack: (config) => {
     config.resolve.alias["/"] = path.resolve(__dirname);
@@ -23,6 +25,7 @@ const nextConfig = {
       { protocol: "https", hostname: "vercel-insights.com" },
       { protocol: "https", hostname: "*sentry.io" },
       { protocol: "https", hostname: "sentry.io" },
+      { protocol: "https", hostname: "fonts.gstatic.com" },
     ],
   },
 };
