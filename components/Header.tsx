@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import Spinner from "./Spinner";
 import { getDictionary } from "@/utils/server/helpers";
 import { type Locale } from "@/i18n-config";
+import NavLinks from "./NavLinks";
 
 export default async function Header({
   params,
@@ -43,22 +44,7 @@ export default async function Header({
         </Link>
       </div>
       <div className="flex flex-row items-center font-title">
-        <Link
-          href={`/${params?.locale}#overview`}
-          className="target:border-digitalent-white target:border-b-2"
-        >
-          <div className="font-medium text-white cursor-pointer">
-            {dict.header.overview}
-          </div>
-        </Link>
-        <Link
-          href={`/${params?.locale}#cvAndCertificates`}
-          className="target:border-digitalent-white target:border-b-2"
-        >
-          <div className="font-medium text-white cursor-pointer ml-8">
-            {dict.header.cvAndCertificates}
-          </div>
-        </Link>
+        <NavLinks dict={dict.header} />
         <div className="ml-8">
           <Suspense fallback={<Spinner />}>
             <LanguageSelector params={params} />
