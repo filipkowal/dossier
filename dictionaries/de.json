@@ -3,5 +3,9 @@
     "title": "Cookie-Hinweis",
     "message": "Diese Website verwendet Cookies, um Deine Browser-Erfahrung zu verbessern und für Analyse- und Werbezwecke.",
     "acceptButton": "Akzeptieren"
+  },
+  "header": {
+    "overview": "Übersicht",
+    "cvAndCertificates": "CV und Zertifikate"
   }
 }

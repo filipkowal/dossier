@@ -35,7 +35,7 @@ export default function LanguageSelector({
     <div className="flex flex-col items-center font-medium font-title text-white">
       <div
         key={params.locale}
-        className="font-medium border-digitalent-white border-b-2 translate-y-[1px] m-4 sm:m-0 cursor-pointer"
+        className="font-medium border-digitalent-white border-b-2 m-4 sm:m-0 cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
         ref={buttonRef}
       >

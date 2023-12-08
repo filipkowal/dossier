@@ -42,10 +42,28 @@ export default async function Header({
           </>
         </Link>
       </div>
-      <div className="flex flex-row items-center">
-        <Suspense fallback={<Spinner />}>
-          <LanguageSelector params={params} />
-        </Suspense>
+      <div className="flex flex-row items-center font-title">
+        <Link
+          href={`/${params?.locale}#overview`}
+          className="target:border-digitalent-white target:border-b-2"
+        >
+          <div className="font-medium text-white cursor-pointer">
+            {dict.header.overview}
+          </div>
+        </Link>
+        <Link
+          href={`/${params?.locale}#cvAndCertificates`}
+          className="target:border-digitalent-white target:border-b-2"
+        >
+          <div className="font-medium text-white cursor-pointer ml-8">
+            {dict.header.cvAndCertificates}
+          </div>
+        </Link>
+        <div className="ml-8">
+          <Suspense fallback={<Spinner />}>
+            <LanguageSelector params={params} />
+          </Suspense>
+        </div>
       </div>
     </header>
   );
