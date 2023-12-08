@@ -80,7 +80,7 @@ export default async function RootLayout({
         `}
         </Script> */}
       </head>
-      <body>
+      <body className="font-serif">
         <main className="min-h-screen bg-digitalent-gray-light overflow-y-auto flex flex-col overflow-x-hidden justify-between">
           <Header params={params} />
           {children}

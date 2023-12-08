@@ -12,3 +12,11 @@
   --digitalent-blue: #193b44;
   --digitalent-mine: #363636;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Stolzl", sans-serif;
+}
