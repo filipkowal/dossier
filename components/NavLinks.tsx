@@ -9,12 +9,14 @@ export default function NavLinks({ dict }: { dict: any }) {
     if (typeof window === "undefined") return;
 
     const handleScroll = () => {
-      const overview = document.getElementById("overview");
+      const cvAndCertificates = document.getElementById("cvAndCertificates");
 
-      if (overview) {
-        const overviewPosition = overview.getBoundingClientRect().top;
+      if (cvAndCertificates) {
+        const cvAndCertificatesPosition =
+          cvAndCertificates.getBoundingClientRect().top;
 
-        if (overviewPosition <= 0) {
+        const topMargin = 128;
+        if (cvAndCertificatesPosition <= topMargin) {
           setIsScrolledToCv(true);
           return;
         }
