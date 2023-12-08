@@ -1,12 +1,12 @@
-import { type Locale } from "/i18n-config";
+import { type Locale } from "@/i18n-config";
 import Link from "next/link";
 import "../globals.css";
 import localFont from "next/font/local";
 import { Merriweather } from "next/font/google";
 import type { Metadata } from "next";
 import Script from "next/script";
-import CookiePopup from "/components/CookiePopup";
-import { getDictionary } from "/utils/server/helpers";
+import CookiePopup from "@/components/CookiePopup";
+import { getDictionary } from "@/utils/server/helpers";
 
 export const metadata: Metadata = {
   title: "Digitalent Dossier",

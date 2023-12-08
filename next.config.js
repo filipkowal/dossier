@@ -2,10 +2,6 @@
 const path = require("path");
 
 const nextConfig = {
-  webpack: (config) => {
-    config.resolve.alias["/"] = path.resolve(__dirname);
-    return config;
-  },
   images: {
     minimumCacheTTL: 86400, // 1 day
     remotePatterns: [

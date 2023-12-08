@@ -10,10 +10,13 @@
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.5.2",
+    "@tailwindcss/forms": "^0.5.7",
     "negotiator": "^0.6.3",
     "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "tailwind-scrollbar-hide": "^1.1.7",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@types/negotiator": "^0.6.3",
