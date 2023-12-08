@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import CookiePopup from "@/components/CookiePopup";
 import { getDictionary } from "@/utils/server/helpers";
+import Header from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "Digitalent Dossier",
@@ -80,7 +81,8 @@ export default async function RootLayout({
         </Script> */}
       </head>
       <body>
-        <main className="min-h-screen overflow-y-auto flex flex-col overflow-x-hidden justify-between">
+        <main className="min-h-screen bg-digitalent-gray-light overflow-y-auto flex flex-col overflow-x-hidden justify-between">
+          <Header params={params} />
           {children}
 
           <footer className={`self-bottom w-screen ${loew.variable}`}>
