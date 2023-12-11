@@ -10,14 +10,14 @@ export default function Home({ params }: { params: { locale: Locale } }) {
             <div className="rounded-full w-52 h-52 bg-digitalent-yellow" />
           </div>
           <div className="flex flex-col mt-16 px-32">
-            <h2 className="text-xl mb-8">Contact Details</h2>
+            <h2 className="text-xl font-title mb-8">Contact Details</h2>
             <p>+48 601 299 200</p>
             <p>filip.kowal@protonmail.com</p>
             <p>linkedin.com/in/filip-kowal-8a4a3767</p>
-            <h2 className="text-xl my-8">Personal Details</h2>
+            <h2 className="text-xl font-title my-8">Personal Details</h2>
             <p>24.09.1992 (31 y/o)</p>
             <p>Wymyślona Street 26, Kraków </p>
-            <h2 className="text-xl my-8">Languages</h2>
+            <h2 className="text-xl font-title my-8">Languages</h2>
             <p>English: Fluent - C1</p>
             <p>Polish: Native - C2</p>
             <p>Kx’a: None - A0</p>
@@ -26,7 +26,7 @@ export default function Home({ params }: { params: { locale: Locale } }) {
         </div>
         <div className="flex flex-col">
           <div className="flex flex-col pt-16 px-32 bg-digitalent-blue text-white justify-end h-[34vh]">
-            <div className="max-w-[48rem] flex text-2xl font-medium gap-12 mb-16">
+            <div className="max-w-[48rem] font-title flex text-3xl gap-12 mb-16">
               <div className="text-digitalent-green">
                 <h1>Candidate:</h1>
                 <h1>Vacancy:</h1>
@@ -39,13 +39,13 @@ export default function Home({ params }: { params: { locale: Locale } }) {
           </div>
           <div className="flex flex-col my-16 px-32">
             <div className="max-w-[48rem]">
-              <h2 className="text-xl mb-8">Professional Details</h2>
+              <h2 className="text-xl font-title mb-8 ">Professional Details</h2>
               <p>Desired salary: 130 000 CHF</p>
               <p>Target salary: 90 000 - 140 CHF</p>
               <p>Notice period: 1 month</p>
               <p>Commute Distance to Work: 3 km</p>
               <p>Current position: Frontend Engineer @NASA</p>
-              <h2 className="text-xl my-8">Relevant Experience</h2>
+              <h2 className="text-xl font-title my-8">Relevant Experience</h2>
               <p>
                 Christoph Pfister ist seit vielen Jahren in verschiedenen Rollen
                 im BereichInformationstechnik unterwegs und würde sein Wissen
@@ -65,7 +65,7 @@ export default function Home({ params }: { params: { locale: Locale } }) {
                 die Identifikation sowie Einführung von neuen Technologienund
                 für regulatorische und IT-rechtliche Themen.
               </p>
-              <h2 className="text-xl my-8">Reason for Change</h2>
+              <h2 className="text-xl font-title my-8">Reason for Change</h2>
               <p>
                 Die basenet Informatik (grösster Teil der Gruppe) wurde verkauft
                 und vielekleinere Gesellschaften konsolidiert. Er begleitet

@@ -61,7 +61,7 @@ export default async function RootLayout({
   return (
     <html
       lang={params.locale || "en"}
-      className={`${merriweather.variable} ${stolzl.variable}`}
+      className={`${merriweather.variable} ${stolzl.variable} text-digitalent-blue`}
     >
       <head>
         <title>Dossier digitalent</title>
