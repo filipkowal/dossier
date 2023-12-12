@@ -64,6 +64,10 @@ export default function InviteSection() {
                 : "Address of the interview meeting"
             }
           ></TextInput>
+          <TextInput
+            name="location"
+            label="(Optional) Link to your availibility calendar"
+          ></TextInput>
         </form>
       </Dialog>
     </>
