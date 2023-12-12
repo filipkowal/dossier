@@ -29,7 +29,7 @@ export default function TextInput({
   onChange?: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
-  autofocus: boolean;
+  autofocus?: boolean;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -46,7 +46,7 @@ export default function TextInput({
   };
 
   return (
-    <div className={`group relative  ${className}`}>
+    <div className={`group relative mb-[0.5rem] ${className}`}>
       {rows ? (
         <textarea
           className={`w-full ring-2 bg-digitalent-gray-light text-digitalent-blue 
@@ -89,7 +89,7 @@ export default function TextInput({
       )}
       {typeof label !== "undefined" ? (
         <label
-          className={` bg-digitalent-gray-light px-1 absolute left-4 top-2 transition-all ease-out font-light
+          className={` bg-digitalent-gray-light px-1 absolute left-4 top-6 transition-all ease-out font-light
           group-focus-within:-translate-y-[1.2rem] group-focus-within:text-sm
           max-w-[90%] overflow-hidden overflow-ellipsis whitespace-nowrap`}
           htmlFor={name}
