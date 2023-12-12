@@ -7,6 +7,7 @@ export default function Checkbox({
   required,
   disabled,
   className,
+  classNameLabel,
   children,
 }: {
   name: string;
@@ -17,6 +18,7 @@ export default function Checkbox({
   required?: boolean;
   disabled?: boolean;
   className?: string;
+  classNameLabel?: string;
   children?: React.ReactNode;
 }) {
   return (
