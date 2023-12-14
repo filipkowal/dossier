@@ -51,9 +51,7 @@ export default function Dialog({
         <XButton />
       </div>
 
-      <div className="max-h-[72dvh] md:max-h-[64vh] px-1 -mx-1 sm:mx-0 max-w-full overflow-x-hidden overflow-y-auto">
-        {children}
-      </div>
+      <div className="px-1 -mx-1 sm:mx-0 max-w-full">{children}</div>
 
       <div
         className="w-full mt-7 md:mt-10"

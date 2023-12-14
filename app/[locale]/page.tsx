@@ -6,7 +6,7 @@ export default function Home({ params }: { params: { locale: Locale } }) {
   return (
     <div className="w-full grid grid-cols-[minmax(250px,1fr),2fr] pt-16">
       <div className="flex flex-col bg-digitalent-blue text-white items-end">
-        <div className="flex flex-col justify-end h-[34vh] pt-16 px-32 w-[35rem]">
+        <div className="flex flex-col justify-end h-[34vh] 3xl:h-[20vh] pt-16 px-32 w-[35rem]">
           <div className="rounded-full w-52 h-52 bg-digitalent-yellow" />
         </div>
         <div className="flex flex-col mt-16 px-32 w-[35rem]">
@@ -25,7 +25,7 @@ export default function Home({ params }: { params: { locale: Locale } }) {
         </div>
       </div>
       <div className="flex flex-col">
-        <div className="flex flex-col pt-16 px-32 bg-digitalent-blue text-white justify-end h-[34vh]">
+        <div className="flex flex-col pt-16 px-32 bg-digitalent-blue text-white justify-end h-[34vh] 3xl:h-[20vh]">
           <div className="max-w-[48rem] font-title flex text-3xl gap-12 mb-16">
             <div className="text-digitalent-green">
               <h1>Candidate:</h1>

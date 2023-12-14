@@ -64,11 +64,16 @@ export default function InviteSection() {
                 : "Address of the interview meeting"
             }
           ></TextInput>
-          <span className="text-xl mt-4 -mb-2">Time</span>
+          <span className="text-xl mt-4 -mb-2">
+            Provide your availibility calendar (optional)...
+          </span>
           <TextInput
             name="location"
-            label="(Optional) Link to your availibility calendar"
+            label="https://calendly.com/your-name/..."
           ></TextInput>
+          <span className="text-xl ">
+            ... or set your availibility in the next step
+          </span>
         </form>
       </Dialog>
     </>
