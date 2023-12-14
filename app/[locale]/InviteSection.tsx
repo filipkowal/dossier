@@ -64,6 +64,7 @@ export default function InviteSection() {
                 : "Address of the interview meeting"
             }
           ></TextInput>
+          <span className="text-xl mt-4 -mb-2">Time</span>
           <TextInput
             name="location"
             label="(Optional) Link to your availibility calendar"

@@ -5,11 +5,11 @@ import InviteSection from "./InviteSection";
 export default function Home({ params }: { params: { locale: Locale } }) {
   return (
     <div className="w-full grid grid-cols-[minmax(250px,1fr),2fr] pt-16">
-      <div className="flex flex-col bg-digitalent-blue text-white">
-        <div className="flex flex-col justify-end h-[34vh] pt-16 px-32">
+      <div className="flex flex-col bg-digitalent-blue text-white items-end">
+        <div className="flex flex-col justify-end h-[34vh] pt-16 px-32 w-[35rem]">
           <div className="rounded-full w-52 h-52 bg-digitalent-yellow" />
         </div>
-        <div className="flex flex-col mt-16 px-32">
+        <div className="flex flex-col mt-16 px-32 w-[35rem]">
           <h2 className="text-xl font-title mb-8">Contact Details</h2>
           <p>+48 601 299 200</p>
           <p>filip.kowal@protonmail.com</p>
