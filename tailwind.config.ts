@@ -46,6 +46,13 @@ const config: Config = {
     require("@tailwindcss/forms"),
     require("tailwind-scrollbar-hide"),
     require("tailwindcss-animate"),
+    function ({ addBase }) {
+      addBase({
+        "@screen 3xl": {
+          html: { zoom: "125%" }, // adjust the zoom level as needed
+        },
+      });
+    },
   ],
 };
 export default config;
