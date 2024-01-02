@@ -4,6 +4,8 @@ import Dialog from "@/components/Dialog";
 import { Dispatch, SetStateAction, useState } from "react";
 import Button from "@/components/Button";
 import Checkbox from "@/components/Checkbox";
+import Tooltip from "@/components/Tooltip";
+import { InformationCircleIcon } from "@heroicons/react/24/outline";
 
 export default function InviteSection() {
   const [isOpen, setIsOpen] = useState(false);
@@ -93,15 +95,30 @@ function LocationStep({
           In person
         </Checkbox>
       </div>
-      <TextInput
-        name="location"
-        label={
-          isInterviewOnline
-            ? "Link to the meeting online"
-            : "Address of the interview meeting"
-        }
-        onChange={(e) => setLocation(e.target.value)}
-      ></TextInput>
+      <div className="flex items-center">
+        <TextInput
+          name="location"
+          label={
+            isInterviewOnline
+              ? "Link to the meeting online (optional)"
+              : "Address of the interview meeting"
+          }
+          onChange={(e) => setLocation(e.target.value)}
+          className="max-w-3/4 w-[28rem] mr-4"
+        ></TextInput>
+        {isInterviewOnline ? (
+          <div className="relative">
+            <Tooltip
+              content="We will provide the link later unless you add it here."
+              ariaLabel="We will provide the link later unless you add it here."
+            >
+              <InformationCircleIcon width={24} />
+            </Tooltip>
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
       <div className="w-full flex justify-end">
         <Button
           type="primary"
