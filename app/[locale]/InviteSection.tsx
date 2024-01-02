@@ -102,17 +102,6 @@ function LocationStep({
         }
         onChange={(e) => setLocation(e.target.value)}
       ></TextInput>
-      <span className="text-xl mt-4 -mb-2">
-        Provide your availibility calendar (optional)...
-      </span>
-      <TextInput
-        name="location"
-        label="https://calendly.com/your-name/..."
-        onChange={(e) => setAvailabilityCalendar(e.target.value)}
-      ></TextInput>
-      <span className="text-xl ">
-        ... or set your availibility in the next step
-      </span>
       <div className="w-full flex justify-end">
         <Button
           type="primary"
