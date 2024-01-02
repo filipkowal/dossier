@@ -14,7 +14,6 @@ export default function InviteSection() {
 
   const [isInterviewOnline, setIsInterviewOnline] = useState(true);
   const [location, setLocation] = useState("");
-  const [availabilityCalendar, setAvailabilityCalendar] = useState("");
   const [meetingDuration, setMeetingDuration] = useState(30);
 
   const steps = [
@@ -23,7 +22,6 @@ export default function InviteSection() {
       setStep={setStep}
       setIsInterviewOnline={setIsInterviewOnline}
       setLocation={setLocation}
-      setAvailabilityCalendar={setAvailabilityCalendar}
       isInterviewOnline={isInterviewOnline}
     />,
     <AvailibilityStep
@@ -32,7 +30,6 @@ export default function InviteSection() {
       setMeetingDuration={setMeetingDuration}
       isInterviewOnline={isInterviewOnline}
       location={location}
-      availabilityCalendar={availabilityCalendar}
       meetingDuration={meetingDuration}
     />,
   ];
@@ -59,13 +56,11 @@ function LocationStep({
   setStep,
   setIsInterviewOnline,
   setLocation,
-  setAvailabilityCalendar,
   isInterviewOnline,
 }: {
   setStep: Dispatch<SetStateAction<number>>;
   setIsInterviewOnline: Dispatch<SetStateAction<boolean>>;
   setLocation: Dispatch<SetStateAction<string>>;
-  setAvailabilityCalendar: Dispatch<SetStateAction<string>>;
   isInterviewOnline: any;
 }) {
   return (
@@ -138,14 +133,12 @@ function AvailibilityStep({
   setMeetingDuration,
   isInterviewOnline,
   location,
-  availabilityCalendar,
   meetingDuration,
 }: {
   setStep: Dispatch<SetStateAction<number>>;
   setMeetingDuration: Dispatch<SetStateAction<number>>;
   isInterviewOnline: boolean;
   location: string;
-  availabilityCalendar: string;
   meetingDuration: number;
 }) {
   return (
@@ -179,7 +172,6 @@ function AvailibilityStep({
             const formValues = {
               isInterviewOnline,
               location,
-              availabilityCalendar,
               meetingDuration,
             };
             console.log("vals: ", formValues);
