@@ -15,6 +15,7 @@ export default function InviteSection() {
   const [isInterviewOnline, setIsInterviewOnline] = useState(true);
   const [location, setLocation] = useState("");
   const [meetingDuration, setMeetingDuration] = useState(30);
+  const [meetingTime, setMeetingTime] = useState("");
 
   const steps = [
     <LocationStep
@@ -31,6 +32,8 @@ export default function InviteSection() {
       isInterviewOnline={isInterviewOnline}
       location={location}
       meetingDuration={meetingDuration}
+      meetingTime={meetingTime}
+      setMeetingTime={setMeetingTime}
     />,
   ];
 
@@ -134,12 +137,16 @@ function AvailibilityStep({
   isInterviewOnline,
   location,
   meetingDuration,
+  meetingTime,
+  setMeetingTime,
 }: {
   setStep: Dispatch<SetStateAction<number>>;
   setMeetingDuration: Dispatch<SetStateAction<number>>;
   isInterviewOnline: boolean;
   location: string;
   meetingDuration: number;
+  meetingTime: string;
+  setMeetingTime: Dispatch<SetStateAction<string>>;
 }) {
   return (
     <>
@@ -153,6 +160,16 @@ function AvailibilityStep({
         label="Duration of the meeting (minutes)"
         className="w-72"
       />
+
+      <TextInput
+        name="meetingTime"
+        type="datetime-local"
+        className="w-72"
+        value={meetingTime}
+        onChange={(e) => setMeetingTime(e.target.value)}
+        label="Date & Time of the meeting"
+      />
+
       <div className="w-full flex justify-between">
         <Button
           type="default"
