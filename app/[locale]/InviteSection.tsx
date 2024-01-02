@@ -6,6 +6,7 @@ import Button from "@/components/Button";
 import Checkbox from "@/components/Checkbox";
 import Tooltip from "@/components/Tooltip";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
+import NumberInput from "@/components/NumberInput";
 
 export default function InviteSection() {
   const [isOpen, setIsOpen] = useState(false);
@@ -149,15 +150,15 @@ function AvailibilityStep({
 }) {
   return (
     <>
-      <span className="text-xl">Meeting duration</span>
-      <input
-        type="number"
+      <NumberInput
         name="duration"
         min="15"
         max="120"
         step="15"
-        defaultValue={30}
+        value={meetingDuration}
         onChange={(e) => setMeetingDuration(parseInt(e.target.value))}
+        label="Duration of the meeting (minutes)"
+        className="w-72"
       />
       <div className="w-full flex justify-between">
         <Button
