@@ -1,14 +1,16 @@
 openapi: 3.0.0
-servers:
-  - url: https://virtserver.swaggerhub.com/filipkowal/dossier/1.0
-    description: SwaggerHub API Auto Mocking
 info:
-  title: API Specification
-  version: 1.0.0
+  version: "1.0"
+  title: Dossier
+  description: ""
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/FILIPKOWAL_1/Dossier/1.0
 paths:
-  /{locale}/{id}:
+  /{locale}/candidate/{id}:
     get:
-      summary: Retrieve a specific resource
+      summary: Retrieve a candidate information
       operationId: getResource
       parameters:
         - name: locale
@@ -78,10 +80,21 @@ paths:
                 properties:
                   error:
                     type: string
-  /user:
+  /{locale}/user/{id}:
     get:
       summary: Retrieve user information
       operationId: getUser
+      parameters:
+        - name: locale
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Successful operation
@@ -110,8 +123,9 @@ paths:
                   error:
                     type: string
   /invite/{id}:
+    description: Don't include a locale as the receipent (candidate) of the invitation may use a different language then the user
     post:
-      summary: Invite a user
+      summary: Invite a candidate
       operationId: inviteUser
       parameters:
         - name: id
@@ -140,7 +154,7 @@ paths:
           description: Error
   /reject/{id}:
     post:
-      summary: Reject a user
+      summary: Reject a candidate
       operationId: rejectUser
       parameters:
         - name: id
