@@ -7,10 +7,15 @@ import Checkbox from "@/components/Checkbox";
 import Tooltip from "@/components/Tooltip";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import NumberInput from "@/components/NumberInput";
+import { type Dictionary } from "@/utils/server";
 
-export default function InviteSection() {
+export default function InviteSection({
+  dict,
+}: {
+  dict: Dictionary["inviteModal"] & Dictionary["mainButtons"];
+}) {
   const [isOpen, setIsOpen] = useState(false);
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState<0 | 1>(0);
 
   const [isInterviewOnline, setIsInterviewOnline] = useState(true);
   const [location, setLocation] = useState("");
@@ -24,6 +29,7 @@ export default function InviteSection() {
       setIsInterviewOnline={setIsInterviewOnline}
       setLocation={setLocation}
       isInterviewOnline={isInterviewOnline}
+      dict={dict}
     />,
     <AvailibilityStep
       key={"availibilityStep"}
@@ -34,6 +40,7 @@ export default function InviteSection() {
       meetingDuration={meetingDuration}
       meetingTime={meetingTime}
       setMeetingTime={setMeetingTime}
+      dict={dict}
     />,
   ];
 
@@ -41,14 +48,18 @@ export default function InviteSection() {
     <>
       <Button
         type="primary"
-        name="Invite"
+        name={dict.inviteToInterview}
         className="w-1/3 xl:w-1/4 max-w-[32rem]"
         onClick={() => setIsOpen(true)}
       >
-        Invite to an interview
+        {dict.inviteToInterview}
       </Button>
 
-      <Dialog isOpen={isOpen} setIsOpen={setIsOpen} title="Interview Details">
+      <Dialog
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        title={dict[`title${step}`]}
+      >
         <form className="flex flex-col gap-6">{steps[step]}</form>
       </Dialog>
     </>
@@ -60,15 +71,17 @@ function LocationStep({
   setIsInterviewOnline,
   setLocation,
   isInterviewOnline,
+  dict,
 }: {
-  setStep: Dispatch<SetStateAction<number>>;
+  setStep: Dispatch<SetStateAction<0 | 1>>;
   setIsInterviewOnline: Dispatch<SetStateAction<boolean>>;
   setLocation: Dispatch<SetStateAction<string>>;
   isInterviewOnline: any;
+  dict: Dictionary["inviteModal"];
 }) {
   return (
     <>
-      <span className="text-xl">Location</span>
+      <span className="text-xl">{dict.location}</span>
       <div className="flex gap-6">
         <Checkbox
           name="interviewType"
@@ -80,7 +93,7 @@ function LocationStep({
             setIsInterviewOnline(true);
           }}
         >
-          Online
+          {dict.online}
         </Checkbox>
         <Checkbox
           name="interviewType"
@@ -91,20 +104,16 @@ function LocationStep({
             setIsInterviewOnline(false);
           }}
         >
-          In person
+          {dict.inPerson}
         </Checkbox>
       </div>
       <div className="flex items-center">
         <TextInput
           name="location"
-          label={
-            isInterviewOnline
-              ? "Link to the meeting online (optional)"
-              : "Address of the interview meeting"
-          }
+          label={isInterviewOnline ? dict.meetingLink : dict.address}
           onChange={(e) => setLocation(e.target.value)}
           className="max-w-3/4 w-[28rem] mr-4"
-        ></TextInput>
+        />
         {isInterviewOnline ? (
           <div className="relative">
             <Tooltip
@@ -122,11 +131,11 @@ function LocationStep({
         <Button
           type="primary"
           name="Invite"
-          onClick={() => setStep((step) => step + 1)}
+          onClick={() => setStep((step) => 1)}
         >
-          Next
+          {dict.next}
         </Button>
-      </div>{" "}
+      </div>
     </>
   );
 }
@@ -139,44 +148,48 @@ function AvailibilityStep({
   meetingDuration,
   meetingTime,
   setMeetingTime,
+  dict,
 }: {
-  setStep: Dispatch<SetStateAction<number>>;
+  setStep: Dispatch<SetStateAction<0 | 1>>;
   setMeetingDuration: Dispatch<SetStateAction<number>>;
-  isInterviewOnline: boolean;
+  isInterviewOnline: any;
   location: string;
   meetingDuration: number;
   meetingTime: string;
   setMeetingTime: Dispatch<SetStateAction<string>>;
+  dict: Dictionary["inviteModal"];
 }) {
   return (
     <>
-      <NumberInput
-        name="duration"
-        min="15"
-        max="120"
-        step="15"
-        value={meetingDuration}
-        onChange={(e) => setMeetingDuration(parseInt(e.target.value))}
-        label="Duration of the meeting (minutes)"
-        className="w-72"
-      />
+      <div className="flex gap-6">
+        <NumberInput
+          name="duration"
+          min="15"
+          max="120"
+          step="15"
+          value={meetingDuration}
+          onChange={(e) => setMeetingDuration(parseInt(e.target.value))}
+          label={dict.duration}
+          className="w-72"
+        />
 
-      <TextInput
-        name="meetingTime"
-        type="datetime-local"
-        className="w-72"
-        value={meetingTime}
-        onChange={(e) => setMeetingTime(e.target.value)}
-        label="Date & Time of the meeting"
-      />
+        <TextInput
+          name="meetingTime"
+          type="datetime-local"
+          className="w-72"
+          value={meetingTime}
+          onChange={(e) => setMeetingTime(e.target.value)}
+          label={dict.dateTime}
+        />
+      </div>
 
       <div className="w-full flex justify-between">
         <Button
           type="default"
           name="Previous"
-          onClick={() => setStep((step) => step - 1)}
+          onClick={() => setStep((step) => 0)}
         >
-          Previous
+          {dict.previous}
         </Button>
 
         <Button
@@ -194,7 +207,7 @@ function AvailibilityStep({
             console.log("vals: ", formValues);
           }}
         >
-          Send
+          {dict.send}
         </Button>
       </div>
     </>

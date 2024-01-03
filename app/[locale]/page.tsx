@@ -97,7 +97,7 @@ export default async function Home({ params }: { params: { locale: Locale } }) {
         </h1>
       </div>
       <div className="flex fixed bottom-6 justify-center gap-6 w-full">
-        <InviteSection />
+        <InviteSection dict={{ ...dict.inviteModal, ...dict.mainButtons }} />
         <Button
           name="Reject"
           className="w-1/3 xl:w-1/4 max-w-[32rem] text-white bg-digitalent-blue"

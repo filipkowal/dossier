@@ -29,9 +29,11 @@
     "downloadAsPDF": "Download as PDF"
   },
   "inviteModal": {
-    "title1": "Interview Location",
-    "title2": "Interview Time",
+    "title0": "Interview Location",
+    "title1": "Interview Time",
     "location": "Location",
+    "online": "Online",
+    "inPerson": "In person",
     "meetingLink": "Link to the meeting online (optional)",
     "meetingLinkTooltip": "We will provide the link later unless you add it here.",
     "address": "Address of the interview meeting",

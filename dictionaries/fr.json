@@ -29,9 +29,11 @@
     "downloadAsPDF": "Télécharger en PDF"
   },
   "inviteModal": {
-    "title1": "Lieu de l'entretien",
-    "title2": "Heure de l'entretien",
+    "title0": "Lieu de l'entretien",
+    "title1": "Heure de l'entretien",
     "location": "Lieu",
+    "online": "Online",
+    "inPerson": "En personne",
     "meetingLink": "Lien vers la réunion en ligne (facultatif)",
     "meetingLinkTooltip": "Nous fournirons le lien ultérieurement à moins que vous ne l'ajoutiez ici.",
     "address": "Adresse de l'entretien",
