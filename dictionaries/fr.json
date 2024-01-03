@@ -1,11 +1,43 @@
 {
   "cookiePopup": {
     "title": "Avis sur les cookies",
-    "message": "Ce site utilise des cookies pour améliorer votre expérience de navigation et à des fins d'analyse et de publicité.",
+    "message": "Ce site web utilise des cookies pour améliorer votre expérience de navigation et à des fins d'analyse et de publicité.",
     "acceptButton": "Accepter"
   },
   "header": {
     "overview": "Aperçu",
-    "cvAndCertificates": "CV et certificats"
+    "cvAndCertificates": "CV et Certificats"
+  },
+  "candidate": {
+    "candidate": "Candidat",
+    "vacancy": "Vacance",
+    "contactDetails": "Coordonnées de contact",
+    "personalDetails": "Détails personnels",
+    "desiredSalary": "Salaire souhaité",
+    "targetSalary": "Salaire cible",
+    "commuteDistanceToWork": "Distance domicile-travail",
+    "currentPosition": "Poste actuel",
+    "languages": "Langues",
+    "professionalDetails": "Détails professionnels",
+    "relevantExperience": "Expérience pertinente",
+    "reasonForChange": "Raison du changement"
+  },
+  "mainButtons": {
+    "inviteToInterview": "Inviter à un entretien",
+    "notInterested": "Pas intéressé",
+    "downloadAsPDF": "Télécharger en PDF"
+  },
+  "inviteModal": {
+    "title1": "Lieu de l'entretien",
+    "title2": "Heure de l'entretien",
+    "location": "Lieu",
+    "meetingLink": "Lien vers la réunion en ligne (facultatif)",
+    "meetingLinkTooltip": "Nous fournirons le lien ultérieurement à moins que vous ne l'ajoutiez ici.",
+    "address": "Adresse de l'entretien",
+    "duration": "Durée de l'entretien (minutes)",
+    "dateTime": "Date et heure de l'entretien",
+    "send": "Envoyer",
+    "previous": "Précédent",
+    "next": "Suivant"
   }
 }

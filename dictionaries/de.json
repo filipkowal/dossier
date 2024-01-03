@@ -1,11 +1,43 @@
 {
   "cookiePopup": {
     "title": "Cookie-Hinweis",
-    "message": "Diese Website verwendet Cookies, um Deine Browser-Erfahrung zu verbessern und für Analyse- und Werbezwecke.",
+    "message": "Diese Website verwendet Cookies, um Ihre Browsing-Erfahrung zu verbessern und zu Analyse- sowie Werbezwecken.",
     "acceptButton": "Akzeptieren"
   },
   "header": {
     "overview": "Übersicht",
-    "cvAndCertificates": "CV und Zertifikate"
+    "cvAndCertificates": "Lebenslauf und Zertifikate"
+  },
+  "candidate": {
+    "candidate": "Bewerber",
+    "vacancy": "Stellenangebot",
+    "contactDetails": "Kontaktdetails",
+    "personalDetails": "Persönliche Details",
+    "desiredSalary": "Gewünschtes Gehalt",
+    "targetSalary": "Zielgehalt",
+    "commuteDistanceToWork": "Arbeitsweg",
+    "currentPosition": "Aktuelle Position",
+    "languages": "Sprachen",
+    "professionalDetails": "Berufliche Details",
+    "relevantExperience": "Relevante Erfahrung",
+    "reasonForChange": "Grund für den Wechsel"
+  },
+  "mainButtons": {
+    "inviteToInterview": "Zum Vorstellungsgespräch einladen",
+    "notInterested": "Nicht interessiert",
+    "downloadAsPDF": "Als PDF herunterladen"
+  },
+  "inviteModal": {
+    "title1": "Interviewort",
+    "title2": "Interviewzeit",
+    "location": "Ort",
+    "meetingLink": "Link zum Online-Meeting (optional)",
+    "meetingLinkTooltip": "Wir werden den Link später bereitstellen, es sei denn, Sie fügen ihn hier hinzu.",
+    "address": "Adresse des Vorstellungsgesprächs",
+    "duration": "Dauer des Vorstellungsgesprächs (Minuten)",
+    "dateTime": "Datum und Uhrzeit des Vorstellungsgesprächs",
+    "send": "Senden",
+    "previous": "Zurück",
+    "next": "Weiter"
   }
 }

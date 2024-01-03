@@ -7,5 +7,37 @@
   "header": {
     "overview": "Overview",
     "cvAndCertificates": "CV and Certificates"
+  },
+  "candidate": {
+    "candidate": "Candidate",
+    "vacancy": "Vacancy",
+    "contactDetails": "Contact Details",
+    "personalDetails": "Personal Details",
+    "desiredSalary": "Desired Salary",
+    "targetSalary": "Target Salary",
+    "commuteDistanceToWork": "Commute Distance to Work",
+    "currentPosition": "Current Position",
+    "languages": "Languages",
+    "professionalDetails": "Professional Details",
+    "relevantExperience": "Relevant Experience",
+    "reasonForChange": "Reason for Change"
+  },
+  "mainButtons": {
+    "inviteToInterview": "Invite to an interview",
+    "notInterested": "Not interested",
+    "downloadAsPDF": "Download as PDF"
+  },
+  "inviteModal": {
+    "title1": "Interview Location",
+    "title2": "Interview Time",
+    "location": "Location",
+    "meetingLink": "Link to the meeting online (optional)",
+    "meetingLinkTooltip": "We will provide the link later unless you add it here.",
+    "address": "Address of the interview meeting",
+    "duration": "Duration of the interview (minutes)",
+    "dateTime": "Date and time of the interview",
+    "send": "Send",
+    "previous": "Previous",
+    "next": "Next"
   }
 }
