@@ -7,6 +7,20 @@ servers:
   # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
     url: https://virtserver.swaggerhub.com/FILIPKOWAL_1/Dossier/1.0
+
+security:
+  - OAuth2: []
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://example.com/oauth/authorize
+          tokenUrl: https://example.com/oauth/token
+          scopes:
+            arranger: Access to /invite and /reject endpoints
+
 paths:
   /{locale}/candidate/{id}:
     get:
@@ -80,6 +94,7 @@ paths:
                 properties:
                   error:
                     type: string
+
   /{locale}/user/{id}:
     get:
       summary: Retrieve user information
@@ -122,8 +137,8 @@ paths:
                 properties:
                   error:
                     type: string
+
   /invite/{id}:
-    description: Don't include a locale as the receipent (candidate) of the invitation may use a different language then the user
     post:
       summary: Invite a candidate
       operationId: inviteUser
@@ -152,6 +167,9 @@ paths:
           description: Success
         "400":
           description: Error
+      security:
+        - OAuth2: ["arranger"]
+
   /reject/{id}:
     post:
       summary: Reject a candidate
@@ -167,11 +185,5 @@ paths:
           description: Success
         "400":
           description: Error
-security:
-  - ApiKeyAuth: []
-components:
-  securitySchemes:
-    ApiKeyAuth:
-      type: apiKey
-      in: header
-      name: X-API-KEY
+      security:
+        - OAuth2: ["arranger"]
