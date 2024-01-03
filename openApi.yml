@@ -1,0 +1,163 @@
+openapi: 3.0.0
+servers:
+  - url: https://virtserver.swaggerhub.com/filipkowal/dossier/1.0
+    description: SwaggerHub API Auto Mocking
+info:
+  title: API Specification
+  version: 1.0.0
+paths:
+  /{locale}/{id}:
+    get:
+      summary: Retrieve a specific resource
+      operationId: getResource
+      parameters:
+        - name: locale
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  jobTitle:
+                    type: string
+                  employerName:
+                    type: string
+                  birthDate:
+                    type: string
+                  address:
+                    type: string
+                  phoneNumber:
+                    type: string
+                  email:
+                    type: string
+                  linkedIn:
+                    type: string
+                  languages:
+                    type: array
+                    items:
+                      type: string
+                  distanceToWork:
+                    type: integer
+                  desiredSalary:
+                    type: integer
+                  targetSalary:
+                    type: string
+                  noticePeriod:
+                    type: string
+                  reasonForChange:
+                    type: string
+                  relevantExperience:
+                    type: string
+                  driversLicence:
+                    type: boolean
+                  files:
+                    type: array
+                    items:
+                      type: string
+                  statusOfCandidacy:
+                    type: string
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /user:
+    get:
+      summary: Retrieve user information
+      operationId: getUser
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  canDownloadPdf:
+                    type: boolean
+                  canViewSalary:
+                    type: boolean
+                  canInvite:
+                    type: boolean
+                  setsTime:
+                    type: boolean
+                  address:
+                    type: string
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /invite/{id}:
+    post:
+      summary: Invite a user
+      operationId: inviteUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                duration:
+                  type: integer
+                channel:
+                  type: string
+                address:
+                  type: string
+                startTime:
+                  type: string
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Error
+  /reject/{id}:
+    post:
+      summary: Reject a user
+      operationId: rejectUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Error
+security:
+  - ApiKeyAuth: []
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
