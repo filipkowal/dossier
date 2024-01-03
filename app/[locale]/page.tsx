@@ -1,8 +1,11 @@
 import Button from "@/components/Button";
 import { Locale } from "@/i18n-config";
 import InviteSection from "./InviteSection";
+import { getDictionary } from "@/utils/server";
 
-export default function Home({ params }: { params: { locale: Locale } }) {
+export default async function Home({ params }: { params: { locale: Locale } }) {
+  const dict = await getDictionary(params.locale);
+
   return (
     <div className="w-full grid grid-cols-[minmax(250px,1fr),2fr] pt-16">
       <div className="flex flex-col bg-digitalent-blue text-white items-end">
@@ -10,14 +13,20 @@ export default function Home({ params }: { params: { locale: Locale } }) {
           <div className="rounded-full w-52 h-52 bg-digitalent-yellow" />
         </div>
         <div className="flex flex-col mt-16 px-32 w-[35rem]">
-          <h2 className="text-xl font-title mb-8">Contact Details</h2>
+          <h2 className="text-xl font-title mb-8">
+            {dict.candidate.contactDetails}
+          </h2>
           <p>+48 601 299 200</p>
           <p>filip.kowal@protonmail.com</p>
           <p>linkedin.com/in/filip-kowal-8a4a3767</p>
-          <h2 className="text-xl font-title my-8">Personal Details</h2>
+          <h2 className="text-xl font-title my-8">
+            {dict.candidate.personalDetails}
+          </h2>
           <p>24.09.1992 (31 y/o)</p>
           <p>Wymyślona Street 26, Kraków </p>
-          <h2 className="text-xl font-title my-8">Languages</h2>
+          <h2 className="text-xl font-title my-8">
+            {dict.candidate.languages}
+          </h2>
           <p>English: Fluent - C1</p>
           <p>Polish: Native - C2</p>
           <p>Kx’a: None - A0</p>
@@ -28,8 +37,8 @@ export default function Home({ params }: { params: { locale: Locale } }) {
         <div className="flex flex-col pt-16 px-32 bg-digitalent-blue text-white justify-end h-[34vh] 3xl:h-[20vh]">
           <div className="max-w-[48rem] font-title flex text-3xl gap-12 mb-16">
             <div className="text-digitalent-green">
-              <h1>Candidate:</h1>
-              <h1>Vacancy:</h1>
+              <h1>{dict.candidate.candidate}:</h1>
+              <h1>{dict.candidate.vacancy}:</h1>
             </div>
             <div>
               <h1>Christoph Kowalski</h1>
@@ -39,13 +48,17 @@ export default function Home({ params }: { params: { locale: Locale } }) {
         </div>
         <div className="flex flex-col my-16 px-32">
           <div className="max-w-[48rem]">
-            <h2 className="text-xl font-title mb-8 ">Professional Details</h2>
-            <p>Desired salary: 130 000 CHF</p>
-            <p>Target salary: 90 000 - 140 CHF</p>
-            <p>Notice period: 1 month</p>
-            <p>Commute Distance to Work: 3 km</p>
-            <p>Current position: Frontend Engineer @NASA</p>
-            <h2 className="text-xl font-title my-8">Relevant Experience</h2>
+            <h2 className="text-xl font-title mb-8 ">
+              {dict.candidate.professionalDetails}
+            </h2>
+            <p>{dict.candidate.desiredSalary}: 130 000 CHF</p>
+            <p>{dict.candidate.targetSalary}: 90 000 - 140 CHF</p>
+            <p>{dict.candidate.noticePeriod}: 1 month</p>
+            <p>{dict.candidate.commuteDistanceToWork}: 3 km</p>
+            <p>{dict.candidate.currentPosition}: Frontend Engineer @NASA</p>
+            <h2 className="text-xl font-title my-8">
+              {dict.candidate.relevantExperience}
+            </h2>
             <p>
               Christoph Pfister ist seit vielen Jahren in verschiedenen Rollen
               im BereichInformationstechnik unterwegs und würde sein Wissen und
@@ -65,7 +78,9 @@ export default function Home({ params }: { params: { locale: Locale } }) {
               Identifikation sowie Einführung von neuen Technologienund für
               regulatorische und IT-rechtliche Themen.
             </p>
-            <h2 className="text-xl font-title my-8">Reason for Change</h2>
+            <h2 className="text-xl font-title my-8">
+              {dict.candidate.reasonForChange}
+            </h2>
             <p>
               Die basenet Informatik (grösster Teil der Gruppe) wurde verkauft
               und vielekleinere Gesellschaften konsolidiert. Er begleitet diese
@@ -87,13 +102,13 @@ export default function Home({ params }: { params: { locale: Locale } }) {
           name="Reject"
           className="w-1/3 xl:w-1/4 max-w-[32rem] text-white bg-digitalent-blue"
         >
-          Not interested
+          {dict.mainButtons.notInterested}
         </Button>
         <Button
           name="Pdf"
           className="w-1/3 xl:w-1/4 max-w-[32rem] bg-digitalent-gray-light"
         >
-          Download as PDF
+          {dict.mainButtons.downloadAsPDF}
         </Button>
       </div>
     </div>
