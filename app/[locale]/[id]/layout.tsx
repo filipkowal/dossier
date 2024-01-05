@@ -1,6 +1,6 @@
 import { type Locale } from "@/i18n-config";
 import Link from "next/link";
-import "../globals.css";
+import "@/app/globals.css";
 import localFont from "next/font/local";
 import { Merriweather } from "next/font/google";
 import type { Metadata } from "next";
@@ -38,14 +38,14 @@ const merriweather = Merriweather({
 const stolzl = localFont({
   variable: "--font-stolzl",
   src: [
-    { path: "../../public/fonts/Stolzl-Regular.ttf", weight: "400" },
-    { path: "../../public/fonts/Stolzl-Medium.ttf", weight: "500" },
+    { path: "../../../public/fonts/Stolzl-Regular.ttf", weight: "400" },
+    { path: "../../../public/fonts/Stolzl-Medium.ttf", weight: "500" },
   ],
 });
 
 const loew = localFont({
   variable: "--font-loew",
-  src: "../../public/fonts/Loew-Heavy.otf",
+  src: "../../../public/fonts/Loew-Heavy.otf",
   preload: false,
 });
 
