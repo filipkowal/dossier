@@ -32,7 +32,7 @@ async function getData({
   init?: RequestInit;
 }) {
   try {
-    const url = `${SERVER_URL}/${locale}/${endpoint}${
+    const url = `${SERVER_URL}${locale ? `/${locale}` : ""}/${endpoint}${
       param ? `/${param}` : ""
     }`;
 
@@ -78,11 +78,25 @@ function throwOnNoDataWhenBuilding(
   }
 }
 
+export async function getCandidateIds(): Promise<string[]> {
+  const response = await getData({
+    endpoint: "candidateIds",
+    // @fixme: add real cache policies to the fetchers
+    init: { cache: "no-cache" },
+  });
+
+  throwOnNoDataWhenBuilding(response, response, "candidateIds");
+
+  return response;
+}
+
 export async function getCandidate(locale: Locale, id: string) {
   const response = await getData({
     endpoint: "candidate",
     param: id,
     locale,
+    // @fixme: add real cache policies to the fetchers
+    init: { cache: "no-cache" },
   });
 
   throwOnNoDataWhenBuilding(response, response, "candidates");
@@ -96,8 +110,6 @@ export async function getUser(locale: Locale, id: string) {
     param: id,
     locale,
   });
-
-  throwOnNoDataWhenBuilding(response, response, "user");
 
   return response;
 }
@@ -117,15 +129,11 @@ export async function inviteCandidate(
     startTime,
   });
 
-  throwOnNoDataWhenBuilding(response, response, "invite");
-
   return response;
 }
 
 export async function rejectCandidate(locale: Locale, id: string) {
   const response = await postData(`reject/${id}`, locale);
-
-  throwOnNoDataWhenBuilding(response, response, "reject");
 
   return response;
 }
