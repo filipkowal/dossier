@@ -22,6 +22,7 @@ const nextConfig = {
       { protocol: "https", hostname: "*sentry.io" },
       { protocol: "https", hostname: "sentry.io" },
       { protocol: "https", hostname: "fonts.gstatic.com" },
+      { protocol: "https", hostname: "virtserver.swaggerhub.com" },
     ],
   },
 };
