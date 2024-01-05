@@ -1,4 +1,4 @@
-import { SERVER_URL, MOCK_SERVER_URL } from "./constants";
+import { SERVER_URL } from "./constants";
 import { type Locale } from "../i18n-config";
 
 export async function postData(endpoint: string, locale: Locale, data: any) {
@@ -24,19 +24,15 @@ async function getData({
   endpoint,
   locale,
   param,
-  searchParams,
-  mock,
   init = {},
 }: {
   endpoint: string;
   locale?: Locale;
   param?: string;
-  searchParams?: Record<string, any>;
-  mock?: boolean;
   init?: RequestInit;
 }) {
   try {
-    const url = `${mock ? MOCK_SERVER_URL : SERVER_URL}/${locale}/${endpoint}${
+    const url = `${SERVER_URL}/${locale}/${endpoint}${
       param ? `/${param}` : ""
     }`;
 
@@ -80,4 +76,48 @@ function throwOnNoDataWhenBuilding(
       "Response of 0 length when building: " + responseName.toUpperCase()
     );
   }
+}
+
+export async function getCandidates(locale: Locale, id: string) {
+  const response = await getData({
+    endpoint: "candidate",
+    param: id,
+    locale,
+  });
+
+  throwOnNoDataWhenBuilding(response, response, "candidates");
+
+  return response;
+}
+
+export async function getUser(locale: Locale, id: string) {
+  const response = await getData({
+    endpoint: "user",
+    param: id,
+    locale,
+  });
+
+  throwOnNoDataWhenBuilding(response, response, "user");
+
+  return response;
+}
+
+export async function inviteCandidate(
+  locale: Locale,
+  id: string,
+  duration: string,
+  address: string,
+  channel: string,
+  startTime: string
+) {
+  const response = await postData(`invite/${id}`, locale, {
+    duration,
+    address,
+    channel,
+    startTime,
+  });
+
+  throwOnNoDataWhenBuilding(response, response, "invite");
+
+  return response;
 }
