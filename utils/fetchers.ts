@@ -1,7 +1,7 @@
 import { SERVER_URL } from "./constants";
 import { type Locale } from "../i18n-config";
 
-export async function postData(endpoint: string, locale: Locale, data: any) {
+export async function postData(endpoint: string, locale: Locale, data?: any) {
   const url = `${SERVER_URL}/${locale}/${endpoint}`;
   const rawResponse = await fetch(url, {
     method: "POST",
@@ -78,7 +78,7 @@ function throwOnNoDataWhenBuilding(
   }
 }
 
-export async function getCandidates(locale: Locale, id: string) {
+export async function getCandidate(locale: Locale, id: string) {
   const response = await getData({
     endpoint: "candidate",
     param: id,
@@ -118,6 +118,14 @@ export async function inviteCandidate(
   });
 
   throwOnNoDataWhenBuilding(response, response, "invite");
+
+  return response;
+}
+
+export async function rejectCandidate(locale: Locale, id: string) {
+  const response = await postData(`reject/${id}`, locale);
+
+  throwOnNoDataWhenBuilding(response, response, "reject");
 
   return response;
 }
