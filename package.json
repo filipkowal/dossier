@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "schema": "npx openapi-typescript openApi.yml --output schema.ts"
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.5.2",
