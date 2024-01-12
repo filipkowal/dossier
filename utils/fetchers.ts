@@ -1,5 +1,6 @@
 import { SERVER_URL } from "./constants";
 import { type Locale } from "../i18n-config";
+import { GetCandidateResponse, GetUserResponse } from ".";
 
 export async function postData(endpoint: string, locale: Locale, data?: any) {
   const url = `${SERVER_URL}/${locale}/${endpoint}`;
@@ -90,7 +91,10 @@ export async function getCandidateIds(): Promise<string[]> {
   return response;
 }
 
-export async function getCandidate(locale: Locale, id: string) {
+export async function getCandidate(
+  locale: Locale,
+  id: string
+): Promise<GetCandidateResponse> {
   const response = await getData({
     endpoint: "candidate",
     param: id,
@@ -104,7 +108,10 @@ export async function getCandidate(locale: Locale, id: string) {
   return response;
 }
 
-export async function getUser(locale: Locale, id: string) {
+export async function getUser(
+  locale: Locale,
+  id: string
+): Promise<GetUserResponse> {
   const response = await getData({
     endpoint: "user",
     param: id,

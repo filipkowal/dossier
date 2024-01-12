@@ -1,18 +1,10 @@
 import Button from "@/components/Button";
-import { Locale, i18n } from "@/i18n-config";
+import { Locale } from "@/i18n-config";
 import InviteSection from "./InviteSection";
 import { getDictionary } from "@/utils/server";
-import { getCandidate, getCandidateIds } from "@/utils";
-
-export async function generateStaticParams() {
-  const ids = await getCandidateIds();
-
-  const params = ids
-    .map((id) => i18n.locales.map((locale) => ({ id, locale })))
-    .flat(2);
-
-  return params;
-}
+import { getCandidate } from "@/utils";
+import CvAndCertificates from "./CvAndCertificates";
+import { cv } from "@/public/cv";
 
 export default async function Home({
   params,
@@ -23,7 +15,7 @@ export default async function Home({
   const dict = await getDictionary(params.locale);
   const candidate = await getCandidate(locale, id);
 
-  console.log("candidate", candidate);
+  const MOCK_FILES = [cv];
 
   return (
     <div className="w-full grid grid-cols-[minmax(250px,1fr),2fr] pt-16">
@@ -46,7 +38,7 @@ export default async function Home({
           <h2 className="text-xl font-title my-8">
             {dict.candidate.languages}
           </h2>
-          <p>{candidate.languages.join("\n")}</p>
+          <p>{candidate.languages?.join("\n")}</p>
         </div>
       </div>
       <div className="flex flex-col">
@@ -93,7 +85,9 @@ export default async function Home({
           </div>
         </div>
         <h1 id="cvAndCertificates" className="h-[100vh] bg-digitalent-yellow">
-          Cv
+          <CvAndCertificates
+            cvAndCertificates={MOCK_FILES || candidate.files || []}
+          />
         </h1>
       </div>
       <div className="flex fixed bottom-6 justify-center gap-6 w-full">
