@@ -124,3 +124,15 @@ button:focus {
     content: "...";
   }
 }
+
+.react-pdf__Page__textContent {
+  display: none !important;
+}
+
+.react-pdf__Page__annotations {
+  display: none !important;
+}
+
+.react-pdf__message {
+  display: none !important;
+}

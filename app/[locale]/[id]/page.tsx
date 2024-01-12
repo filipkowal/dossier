@@ -4,7 +4,6 @@ import InviteSection from "./InviteSection";
 import { getDictionary } from "@/utils/server";
 import { getCandidate } from "@/utils";
 import CvAndCertificates from "./CvAndCertificates";
-import { cv } from "@/public/cv";
 
 export default async function Home({
   params,
@@ -15,7 +14,7 @@ export default async function Home({
   const dict = await getDictionary(params.locale);
   const candidate = await getCandidate(locale, id);
 
-  const MOCK_FILES = [cv];
+  const MOCK_FILES = ["/cv.pdf", "/certificates.pdf"];
 
   return (
     <div className="w-full grid grid-cols-[minmax(250px,1fr),2fr] pt-16">

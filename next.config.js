@@ -2,6 +2,11 @@
 const path = require("path");
 
 const nextConfig = {
+  webpack: (config) => {
+    config.resolve.alias.canvas = false;
+
+    return config;
+  },
   images: {
     minimumCacheTTL: 86400, // 1 day
     remotePatterns: [
