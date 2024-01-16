@@ -20,7 +20,7 @@ const CvAndCertificates = ({
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full" id="cvAndCertificates">
       {cvAndCertificates.map((path, index) => (
         <Document file={path} key={index} onLoadSuccess={onDocumentLoadSuccess}>
           {Array.from(new Array(numPages), (el, index) => (
