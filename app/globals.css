@@ -136,3 +136,8 @@ button:focus {
 .react-pdf__message {
   display: none !important;
 }
+
+.react-pdf__Page__canvas {
+  width: 100% !important;
+  height: auto !important;
+}
