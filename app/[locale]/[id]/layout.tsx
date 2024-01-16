@@ -81,12 +81,12 @@ export default async function RootLayout({
         </Script> */}
       </head>
       <body className="font-serif">
-        <main className="min-h-screen bg-digitalent-gray-light overflow-y-auto flex flex-col overflow-x-hidden justify-between">
+        <main className="min-h-screen bg-digitalent-gray-light flex flex-col justify-between">
           <Header params={params} />
           {children}
 
-          <footer className={`self-bottom w-screen ${loew.variable}`}>
-            <div className="text-center py-2 max-w-screen bg-digitalent-gray-dark font-sans text-[11px]">
+          <footer className={`self-bottom w-full ${loew.variable}`}>
+            <div className="text-center py-2 max-w-full bg-digitalent-gray-dark font-sans text-[11px]">
               powered by
               <Link href="https://digitalent.community" target="_blank">
                 <span className="font-logo"> DIGITALENT </span>
