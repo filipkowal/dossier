@@ -25,9 +25,12 @@ components:
     Candidate:
       type: object
       properties:
-        name:
+        firstName:
           type: string
-          example: Christoph Kowalski
+          example: Christoph
+        lastName:
+          type: string
+          example: Kowalski
         jobTitle:
           type: string
           example: Senior Consultant (CIO Advisory)

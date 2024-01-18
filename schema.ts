@@ -38,8 +38,10 @@ export type webhooks = Record<string, never>;
 export interface components {
   schemas: {
     Candidate: {
-      /** @example Christoph Kowalski */
-      name?: string;
+      /** @example Christoph */
+      firstName?: string;
+      /** @example Kowalski */
+      lastName?: string;
       /** @example Senior Consultant (CIO Advisory) */
       jobTitle?: string;
       /** @example atrete ag */
