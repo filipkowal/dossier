@@ -13,7 +13,6 @@ export const metadata: Metadata = {
   title: "Digitalent Dossier",
   description: "Candidates' data in one place by digitalent.ch",
   icons: "/thumbnail.png",
-  viewport: "width=device-width, initial-scale=1",
   robots: {
     index: true, // Allow search engines to index the page
     follow: true, // Allow search engines to follow links on the page
@@ -64,10 +63,7 @@ export default async function RootLayout({
       className={`${merriweather.variable} ${stolzl.variable} text-digitalent-blue`}
     >
       <head>
-        <title>Dossier digitalent</title>
-        <meta name="description" content="Digitalent jobs" />
         <link rel="icon" href="/thumbnail.png" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
         />
