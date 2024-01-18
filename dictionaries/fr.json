@@ -10,6 +10,7 @@
   },
   "candidate": {
     "candidate": "Candidat",
+    "candidatesFor": "postule pour",
     "vacancy": "Vacance",
     "contactDetails": "Coordonnées de contact",
     "personalDetails": "Détails personnels",

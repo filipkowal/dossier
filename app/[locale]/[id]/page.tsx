@@ -17,12 +17,23 @@ export default async function Home({
   const MOCK_FILES = ["/cv.pdf", "/certificates.pdf"];
 
   return (
-    <div className="w-full grid grid-cols-[minmax(250px,1fr),2fr] pt-16">
+    <div className="w-full sm:grid sm:grid-cols-[minmax(250px,1fr),2fr] sm:pt-16">
       <div className="flex flex-col bg-digitalent-blue text-white items-end">
-        <div className="flex flex-col justify-end h-[34vh] 3xl:h-[20vh] pt-16 px-32 w-[35rem]">
-          <div className="rounded-full w-52 h-52 bg-digitalent-yellow" />
+        <div className="flex flex-col justify-end items-center sm:items-start h-[34vh] 3xl:h-[20vh] pt-16 sm:px-32 sm:w-[35rem] w-full">
+          <div className="rounded-full sm:w-52 sm:h-52 h-40 w-40 bg-digitalent-yellow" />
         </div>
-        <div className="flex flex-col mt-16 px-32 w-[35rem]">
+        <div className="flex flex-col sm:mt-16 mt-20 sm:px-32 px-8 sm:w-[35rem]">
+          <div className="flex flex-col sm:hidden font-title text-3xl gap-12 mb-16">
+            <div>
+              <h1>
+                {candidate.firstName} {candidate.lastName}
+              </h1>
+              <h1 className="text-digitalent-green text-xl">
+                {" " + dict.candidate.candidatesFor}:
+              </h1>
+              <h1>{candidate.jobTitle}</h1>
+            </div>
+          </div>
           <h2 className="text-xl font-title mb-8">
             {dict.candidate.contactDetails}
           </h2>
@@ -41,19 +52,22 @@ export default async function Home({
         </div>
       </div>
       <div className="flex flex-col">
-        <div className="flex flex-col pt-16 px-32 bg-digitalent-blue text-white justify-end h-[34vh] 3xl:h-[20vh]">
+        <div className="hidden sm:flex flex-col pt-16 sm:px-32 bg-digitalent-blue text-white justify-end h-[34vh] 3xl:h-[20vh]">
           <div className="max-w-[48rem] font-title flex text-3xl gap-12 mb-16">
             <div className="text-digitalent-green">
               <h1>{dict.candidate.candidate}:</h1>
               <h1>{dict.candidate.vacancy}:</h1>
             </div>
             <div>
-              <h1>{candidate.name}</h1>
+              <h1>
+                {candidate.firstName} {candidate.lastName}
+              </h1>
               <h1>{candidate.jobTitle}</h1>
             </div>
           </div>
         </div>
-        <div className="flex flex-col my-16 px-32">
+
+        <div className="flex flex-col my-16 sm:px-32">
           <div className="max-w-[48rem]">
             <h2 className="text-xl font-title mb-8 ">
               {dict.candidate.professionalDetails}
