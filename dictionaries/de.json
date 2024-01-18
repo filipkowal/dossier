@@ -27,7 +27,9 @@
   "mainButtons": {
     "inviteToInterview": "Zum Vorstellungsgespräch einladen",
     "notInterested": "Nicht interessiert",
-    "downloadAsPDF": "Als PDF herunterladen"
+    "downloadAsPDF": "Als PDF herunterladen",
+    "reject": "Ablehnen",
+    "invite": "Einladen"
   },
   "inviteModal": {
     "title0": "Interviewort",

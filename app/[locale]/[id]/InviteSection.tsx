@@ -52,7 +52,8 @@ export default function InviteSection({
         className="w-1/3 xl:w-1/4 max-w-[32rem]"
         onClick={() => setIsOpen(true)}
       >
-        {dict.inviteToInterview}
+        <span className="hidden sm:block">{dict.inviteToInterview}</span>
+        <span className="sm:hidden">{dict.invite}</span>
       </Button>
 
       <Dialog

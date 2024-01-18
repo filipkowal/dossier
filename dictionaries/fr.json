@@ -27,7 +27,9 @@
   "mainButtons": {
     "inviteToInterview": "Inviter à un entretien",
     "notInterested": "Pas intéressé",
-    "downloadAsPDF": "Télécharger en PDF"
+    "downloadAsPDF": "Télécharger en PDF",
+    "reject": "Rejeter",
+    "invite": "Inviter"
   },
   "inviteModal": {
     "title0": "Lieu de l'entretien",

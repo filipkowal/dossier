@@ -105,13 +105,16 @@ export default async function Home({
         <InviteSection dict={{ ...dict.inviteModal, ...dict.mainButtons }} />
         <Button
           name="Reject"
-          className="w-1/3 xl:w-1/4 max-w-[32rem] text-white bg-digitalent-blue"
+          className="sm:w-1/3 xl:w-1/4 max-w-[32rem] text-white bg-digitalent-blue"
         >
-          {dict.mainButtons.notInterested}
+          <span className="hidden sm:block">
+            {dict.mainButtons.notInterested}
+          </span>
+          <span className="sm:hidden">{dict.mainButtons.reject}</span>
         </Button>
         <Button
           name="Pdf"
-          className="w-1/3 xl:w-1/4 max-w-[32rem] bg-digitalent-gray-light"
+          className="sm:w-1/3 xl:w-1/4 max-w-[32rem] bg-digitalent-gray-light hidden sm:block"
         >
           {dict.mainButtons.downloadAsPDF}
         </Button>

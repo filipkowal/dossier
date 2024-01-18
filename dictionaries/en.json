@@ -27,7 +27,9 @@
   "mainButtons": {
     "inviteToInterview": "Invite to an interview",
     "notInterested": "Not interested",
-    "downloadAsPDF": "Download as PDF"
+    "downloadAsPDF": "Download as PDF",
+    "reject": "Reject",
+    "invite": "Invite"
   },
   "inviteModal": {
     "title0": "Interview Location",
