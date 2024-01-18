@@ -8,6 +8,8 @@ import Spinner from "./Spinner";
 import { getDictionary } from "@/utils/server/helpers";
 import { type Locale } from "@/i18n-config";
 import NavLinks from "./NavLinks";
+import Button from "./Button";
+import DownloadIcon from "@/public/download.png";
 
 export default async function Header({
   params,
@@ -44,7 +46,17 @@ export default async function Header({
         </Link>
       </div>
       <div className="flex flex-row items-center font-title">
-        <NavLinks dict={dict.header} />
+        <div className="hidden sm:block">
+          <NavLinks dict={dict.header} />
+        </div>
+        <Button name={"PDF"} type="invert" className="flex gap-2 sm:hidden">
+          <Image
+            src={DownloadIcon}
+            className="h-4 w-4 mt-1"
+            alt="download as pdf"
+          />{" "}
+          PDF
+        </Button>
         <div className="ml-8">
           <Suspense fallback={<Spinner />}>
             <LanguageSelector params={params} />

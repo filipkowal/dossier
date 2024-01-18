@@ -23,12 +23,12 @@ export default async function Home({
           <div className="rounded-full sm:w-52 sm:h-52 h-40 w-40 bg-digitalent-yellow" />
         </div>
         <div className="flex flex-col sm:mt-16 mt-20 sm:px-32 px-8 sm:w-[35rem]">
-          <div className="flex flex-col sm:hidden font-title text-3xl gap-12 mb-16">
+          <div className="flex flex-col sm:hidden font-title text-2xl gap-12 mb-16">
             <div>
               <h1>
                 {candidate.firstName} {candidate.lastName}
               </h1>
-              <h1 className="text-digitalent-green text-xl">
+              <h1 className="text-digitalent-green text-xl mt-4">
                 {" " + dict.candidate.candidatesFor}:
               </h1>
               <h1>{candidate.jobTitle}</h1>
