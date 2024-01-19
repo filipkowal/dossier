@@ -22,7 +22,7 @@ export default async function Home({
         <div className="flex flex-col justify-end items-center sm:items-start h-[34vh] 3xl:h-[20vh] pt-16 sm:px-32 sm:w-[35rem] w-full">
           <div className="rounded-full sm:w-52 sm:h-52 h-40 w-40 bg-digitalent-yellow" />
         </div>
-        <div className="flex flex-col sm:mt-16 mt-20 sm:px-32 px-8 sm:w-[35rem]">
+        <div className="flex flex-col sm:mt-16 mt-20 sm:px-32 px-8 sm:w-[35rem] mb-12">
           <div className="flex flex-col sm:hidden font-title text-2xl gap-12 mb-16">
             <div>
               <h1>
@@ -31,7 +31,7 @@ export default async function Home({
               <h1 className="text-digitalent-green text-xl mt-4">
                 {" " + dict.candidate.candidatesFor}:
               </h1>
-              <h1>{candidate.jobTitle}</h1>
+              <h1 className="text-xl">{candidate.jobTitle}</h1>
             </div>
           </div>
           <h2 className="text-xl font-title mb-8">
@@ -43,7 +43,17 @@ export default async function Home({
           <h2 className="text-xl font-title my-8">
             {dict.candidate.personalDetails}
           </h2>
-          <p>{candidate.birthDate} (31 y/o)</p>
+          <p>
+            {candidate.birthDate}{" "}
+            {candidate.birthDate
+              ? `(${
+                  new Date(
+                    new Date().getTime() -
+                      new Date(candidate.birthDate).getTime()
+                  ).getUTCFullYear() - 1970
+                } y/o)`
+              : ""}
+          </p>
           <p>{candidate.address}</p>
           <h2 className="text-xl font-title my-8">
             {dict.candidate.languages}
@@ -67,7 +77,7 @@ export default async function Home({
           </div>
         </div>
 
-        <div className="flex flex-col my-16 sm:px-32">
+        <div className="flex flex-col my-16 sm:px-32 px-8">
           <div className="max-w-[48rem]">
             <h2 className="text-xl font-title mb-8 ">
               {dict.candidate.professionalDetails}
