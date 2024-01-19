@@ -101,11 +101,11 @@ export default async function Home({
           cvAndCertificates={MOCK_FILES || candidate.files || []}
         />
       </div>
-      <div className="flex fixed bottom-6 justify-center gap-6 w-full">
+      <div className="flex fixed sm:bottom-6 bottom-0 justify-center sm:gap-6 w-full">
         <InviteSection dict={{ ...dict.inviteModal, ...dict.mainButtons }} />
         <Button
           name="Reject"
-          className="sm:w-1/3 xl:w-1/4 max-w-[32rem] text-white bg-digitalent-blue"
+          className="w-full sm:w-1/3 xl:w-1/4 max-w-[32rem] text-white bg-digitalent-blue"
         >
           <span className="hidden sm:block">
             {dict.mainButtons.notInterested}
