@@ -77,7 +77,7 @@ export default async function Home({
           </div>
         </div>
 
-        <div className="flex flex-col my-16 sm:px-32 px-8">
+        <div className="flex flex-col my-12 sm:my-16 sm:px-32 px-8">
           <div className="max-w-[48rem]">
             <h2 className="text-xl font-title mb-8 ">
               {dict.candidate.professionalDetails}
