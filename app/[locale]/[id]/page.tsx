@@ -28,19 +28,19 @@ export default async function Home({
               <h1>
                 {candidate.firstName} {candidate.lastName}
               </h1>
-              <h1 className="text-digitalent-green text-xl mt-4">
+              <h1 className="text-base mt-4 text-digitalent-green">
                 {" " + dict.candidate.candidatesFor}:
               </h1>
               <h1 className="text-xl">{candidate.jobTitle}</h1>
             </div>
           </div>
-          <h2 className="text-xl font-title mb-8">
+          <h2 className="text-xl font-title mb-4 sm:mb-8">
             {dict.candidate.contactDetails}
           </h2>
           <p>{candidate.phoneNumber}</p>
           <p>{candidate.email}</p>
           <p>{candidate.linkedIn}</p>
-          <h2 className="text-xl font-title my-8">
+          <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">
             {dict.candidate.personalDetails}
           </h2>
           <p>
@@ -55,7 +55,7 @@ export default async function Home({
               : ""}
           </p>
           <p>{candidate.address}</p>
-          <h2 className="text-xl font-title my-8">
+          <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">
             {dict.candidate.languages}
           </h2>
           <p>{candidate.languages?.join("\n")}</p>
@@ -79,7 +79,7 @@ export default async function Home({
 
         <div className="flex flex-col my-12 sm:my-16 sm:px-32 px-8">
           <div className="max-w-[48rem]">
-            <h2 className="text-xl font-title mb-8 ">
+            <h2 className="text-xl font-title mb-4 sm:mb-8 ">
               {dict.candidate.professionalDetails}
             </h2>
             <p>
@@ -97,11 +97,11 @@ export default async function Home({
             <p>
               {dict.candidate.currentPosition}: {candidate.jobTitle}
             </p>
-            <h2 className="text-xl font-title my-8">
+            <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">
               {dict.candidate.relevantExperience}
             </h2>
             <p>{candidate.relevantExperience}</p>
-            <h2 className="text-xl font-title my-8">
+            <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">
               {dict.candidate.reasonForChange}
             </h2>
             <p>{candidate.reasonForChange}</p>
