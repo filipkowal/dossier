@@ -41,8 +41,7 @@ components:
           type: string
           example: 01.01.1990
         address:
-          type: string
-          example: Wymyślona Street 66, Kraków
+          $ref: "#/components/schemas/Address"
         phoneNumber:
           type: string
           example: +48 666 666 666
@@ -116,8 +115,38 @@ components:
           type: boolean
           example: false
         address:
+          $ref: "#/components/schemas/Address"
+    Address:
+      type: object
+      properties:
+        street:
           type: string
-          example: Szwajcarska 4, Kraków
+          example: Wiener Str. 55
+        city:
+          type: string
+          example: Bern
+        state:
+          type: string
+          example: Bern
+        region:
+          type: string
+          example: Western Part of Switzerland
+        country:
+          type: string
+          example: Switzerland
+        geoCoordinates:
+          $ref: "#/components/schemas/GeoCoordinates"
+    GeoCoordinate:
+      pattern: ^(-?\d+(\.\d+)?)
+      type: string
+      example: "47.4708538"
+    GeoCoordinates:
+      type: object
+      properties:
+        latitude:
+          $ref: "#/components/schemas/GeoCoordinate"
+        longitude:
+          $ref: "#/components/schemas/GeoCoordinate"
 
 paths:
   /candidateIds:
