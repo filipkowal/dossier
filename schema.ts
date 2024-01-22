@@ -75,7 +75,7 @@ export interface components {
       /** @example Die basenet Informatik (grösster Teil der Gruppe) wurde verkauft und viele kleinere Gesellschaften konsolidiert. Er begleitet diese 'Carve-outs' der Gesellschaften, danach ist seine Rolle obsolet bzw. nicht mehr so spannend. Er hat deshalb entschieden außerhalb der Gruppe eine neue Herausforderung zu suchen. Das Dienstleistungsportfolio von atrete tönt sehr spannend und mit den. Werten von atrete kann er sich sehr gut identifizieren. */
       reasonForChange?: string;
       /** @example Christoph Pfister ist seit vielen Jahren in verschiedenen Rollen im Bereich Informationstechnik unterwegs und würde sein Wissen und seine Erfahrung sehr gerne als Berater einbringen. Es reizt ihn spannende sowie komplexe Problemstellungen zu lösen und er kann dank seiner Erfahrung eine holistische Betrachtung auf Challenges einnehmen. In seiner aktuellen Rolle als CIO der PEAX AG verantwortet er die Produktentwicklung und den Betrieb einer SaaS-Plattform für digitale Services. In seiner zusätzlichen Gruppen-Rolle durfte er in der Base-Net Unternehmensgruppe verschiedene große Projekte erfolgreich umsetzen. Er ist sich gewohnt mit einer 360 Grad Sicht zu agieren und dazu die verschiedenen Sachverhalte und Themen für unterschiedliche Ziel- und Anspruchsgruppen verständlich und nachvollziehbar aufzubereiten und zu präsentieren. Als Mitglied des Enterprise Architektur Boards ist er zudem verantwortlich für die Identifikation sowie Einführung von neuen Technologien und für regulatorische und IT-rechtliche Themen. */
-      relevantExperience?: string;
+      interviewSummary?: string;
       /** @example A1, B1 */
       driversLicence?: string;
       files?: string[];
@@ -84,6 +84,10 @@ export interface components {
        * @enum {string}
        */
       statusOfCandidacy?: "" | "We will send you an invitation once Christoph has chosen a meeting time." | "We will inform you which date Christoph has chosen so that you can send him the meeting invite. Please make sure to CC: atrete@digitalent.ch to the meeting" | "Please get in touch with Christoph to arrange an interview" | "Iterview scheduled for ${dateTime}" | "Candidate rejected";
+      /** @example 100% */
+      desiredWorkload?: string;
+      /** @example The candidate is a very experienced IT professional with a strong background in software development and architecture. He has been working in the financial industry for many years and has a deep understanding of the business processes and challenges in this industry. He is a very good communicator and has a strong customer focus. He is a team player and has a strong focus on quality and security. He is a very good communicator and has a strong customer focus. He is a team player and has a strong focus on quality and security. He is a very good communicator and has a strong customer focus. He is a team player and has a strong focus on quality and security. He is a very good communicator and has a strong customer focus. He is a team player and has a strong focus on quality and security. He is a very good communicator and has a strong customer focus. He is a team player and has a strong focus on quality and security. */
+      educationSummary?: string;
     };
     User: {
       canDownloadPdf?: boolean;

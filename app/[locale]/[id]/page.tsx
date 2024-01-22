@@ -126,7 +126,7 @@ export default async function Home({
             <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">
               {dict.candidate.relevantExperience}
             </h2>
-            <p>{candidate.relevantExperience}</p>
+            <p>{candidate.interviewSummary}</p>
             <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">
               {dict.candidate.reasonForChange}
             </h2>
