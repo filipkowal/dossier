@@ -291,6 +291,32 @@ paths:
           required: true
           schema:
             type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+                  enum:
+                    - "notEnoughExperience"
+                    - "notEnoughSkills"
+                    - "notEnoughEducation"
+                    - "notEnoughSalary"
+                    - "notEnoughLanguageSkills"
+                    - "notEnoughSoftSkills"
+                    - "notEnoughHardSkills"
+                    - "notEnoughDomainKnowledge"
+                    - "notEnoughAvailability"
+                    - "notEnoughMotivation"
+                    - "notEnoughCulturalFit"
+                    - "notEnoughPersonality"
+                    - "notEnoughTeamFit"
+                    - "notEnoughOther"
+                message:
+                  type: string
+                  example: "We are sorry to inform you that we will not proceed with candidate's application. We wish you all the best and can't wait for future candidates."
       responses:
         "200":
           description: Success
