@@ -17,12 +17,12 @@ export default async function Home({
   const MOCK_FILES = ["/cv.pdf", "/certificates.pdf"];
 
   return (
-    <div className="w-full sm:pt-2 xl:pt-16 xl:grid xl:grid-cols-[minmax(250px,1fr),2fr]">
-      <div className="flex flex-col bg-digitalent-blue text-white items-end sm:items-start">
-        <div className="flex flex-col justify-end items-center md:items-start h-[34vh] 3xl:h-[20vh] pt-16 md:px-16 lg:px-32 md:w-[35rem] w-full">
+    <div className="w-full sm:pt-16 xl:grid xl:grid-cols-[minmax(450px,1fr),2fr] 2xl:grid-cols-[minmax(250px,1fr),2fr]">
+      <div className="flex flex-col bg-digitalent-blue text-white sm:items-start xl:items-end md:px-8 lg:px-16 xl:px-0">
+        <div className="flex flex-col justify-end items-center md:items-start xl:h-[34vh] 3xl:h-[30vh] pt-16 md:px-16 2xl:px-32 md:w-[27rem] 2xl:w-[35rem] w-full">
           <div className="rounded-full sm:w-52 sm:h-52 h-40 w-40 bg-digitalent-yellow" />
         </div>
-        <div className="flex flex-col w-full mt-20 sm:px-16 lg:px-32 px-8 mb-12">
+        <div className="flex flex-col mt-20 xl:mt-8 sm:px-16 2xl:px-32 px-8 mb-12">
           <div className="flex flex-col md:hidden font-title text-2xl gap-12 mb-16">
             <div>
               <h1>
@@ -50,8 +50,8 @@ export default async function Home({
             </div>
           </div>
 
-          <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 sm:mt-8 justify-between w-full">
-            <div className="md:w-1/3">
+          <div className="flex flex-col lg:flex-row xl:flex-col  lg:gap-16 sm:gap-8 sm:mt-8 justify-between xl:w-[19rem]">
+            <div className="md:w-1/3 xl:w-full">
               <h2 className="text-xl font-title mb-4 sm:mb-8">
                 {dict.candidate.contactDetails}
               </h2>
@@ -59,7 +59,7 @@ export default async function Home({
               <p>{candidate.email}</p>
               <p>{candidate.linkedIn}</p>
             </div>
-            <div className="md:w-1/3">
+            <div className="md:w-1/3 xl:w-full">
               <h2 className="text-xl font-title mb-4 mt-8 sm:mt-0 sm:mb-8">
                 {dict.candidate.personalDetails}
               </h2>
@@ -76,7 +76,7 @@ export default async function Home({
               </p>
               <p>{candidate.address}</p>
             </div>
-            <div className="md:w-1/3">
+            <div className="md:w-1/3 xl:w-full">
               <h2 className="text-xl font-title mb-4 mt-8 sm:mt-0 sm:mb-8">
                 {dict.candidate.languages}
               </h2>
@@ -87,8 +87,9 @@ export default async function Home({
           </div>
         </div>
       </div>
+
       <div className="flex flex-col">
-        <div className="hidden xl:flex flex-col pt-16 sm:px-16 lg:px-32 bg-digitalent-blue text-white justify-end h-[34vh] 3xl:h-[20vh]">
+        <div className="hidden xl:flex flex-col pt-16 sm:px-16 2xl:px-32 bg-digitalent-blue text-white justify-end h-[34vh] 3xl:h-[30vh]">
           <div className="max-w-[48rem] font-title flex text-3xl gap-12 mb-16">
             <div className="text-digitalent-green">
               <h1>{dict.candidate.candidate}:</h1>
@@ -103,7 +104,7 @@ export default async function Home({
           </div>
         </div>
 
-        <div className="flex flex-col my-12 sm:my-16 sm:px-16 lg:px-32 px-8">
+        <div className="flex flex-col my-12 sm:my-16 sm:px-16 md:px-24 lg:px-32 px-8">
           <div className="max-w-[48rem]">
             <h2 className="text-xl font-title mb-4 sm:mb-8 ">
               {dict.candidate.professionalDetails}
@@ -137,7 +138,7 @@ export default async function Home({
           cvAndCertificates={MOCK_FILES || candidate.files || []}
         />
       </div>
-      <div className="flex fixed sm:bottom-6 bottom-0 justify-center sm:gap-6 w-full">
+      <div className="flex fixed md:bottom-6 bottom-0 justify-center sm:gap-3 md:gap-6 w-full">
         <InviteSection dict={{ ...dict.inviteModal, ...dict.mainButtons }} />
         <Button
           name="Reject"
