@@ -17,13 +17,13 @@ export default async function Home({
   const MOCK_FILES = ["/cv.pdf", "/certificates.pdf"];
 
   return (
-    <div className="w-full sm:grid sm:grid-cols-[minmax(250px,1fr),2fr] sm:pt-16">
-      <div className="flex flex-col bg-digitalent-blue text-white items-end">
-        <div className="flex flex-col justify-end items-center sm:items-start h-[34vh] 3xl:h-[20vh] pt-16 sm:px-32 sm:w-[35rem] w-full">
+    <div className="w-full sm:pt-2 xl:pt-16 xl:grid xl:grid-cols-[minmax(250px,1fr),2fr]">
+      <div className="flex flex-col bg-digitalent-blue text-white items-end sm:items-start">
+        <div className="flex flex-col justify-end items-center md:items-start h-[34vh] 3xl:h-[20vh] pt-16 md:px-16 lg:px-32 md:w-[35rem] w-full">
           <div className="rounded-full sm:w-52 sm:h-52 h-40 w-40 bg-digitalent-yellow" />
         </div>
-        <div className="flex flex-col sm:mt-16 mt-20 sm:px-32 px-8 sm:w-[35rem] mb-12">
-          <div className="flex flex-col sm:hidden font-title text-2xl gap-12 mb-16">
+        <div className="flex flex-col w-full mt-20 sm:px-16 lg:px-32 px-8 mb-12">
+          <div className="flex flex-col md:hidden font-title text-2xl gap-12 mb-16">
             <div>
               <h1>
                 {candidate.firstName} {candidate.lastName}
@@ -34,35 +34,61 @@ export default async function Home({
               <h1 className="text-xl">{candidate.jobTitle}</h1>
             </div>
           </div>
-          <h2 className="text-xl font-title mb-4 sm:mb-8">
-            {dict.candidate.contactDetails}
-          </h2>
-          <p>{candidate.phoneNumber}</p>
-          <p>{candidate.email}</p>
-          <p>{candidate.linkedIn}</p>
-          <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">
-            {dict.candidate.personalDetails}
-          </h2>
-          <p>
-            {candidate.birthDate}{" "}
-            {candidate.birthDate
-              ? `(${
-                  new Date(
-                    new Date().getTime() -
-                      new Date(candidate.birthDate).getTime()
-                  ).getUTCFullYear() - 1970
-                } y/o)`
-              : ""}
-          </p>
-          <p>{candidate.address}</p>
-          <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">
-            {dict.candidate.languages}
-          </h2>
-          <p>{candidate.languages?.join("\n")}</p>
+
+          <div className="hidden md:flex xl:hidden flex-col md">
+            <div className="max-w-[48rem] font-title flex text-3xl gap-12 mb-16">
+              <div className="text-digitalent-green">
+                <h1>{dict.candidate.candidate}:</h1>
+                <h1>{dict.candidate.vacancy}:</h1>
+              </div>
+              <div>
+                <h1>
+                  {candidate.firstName} {candidate.lastName}
+                </h1>
+                <h1>{candidate.jobTitle}</h1>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 sm:mt-8 justify-between w-full">
+            <div className="md:w-1/3">
+              <h2 className="text-xl font-title mb-4 sm:mb-8">
+                {dict.candidate.contactDetails}
+              </h2>
+              <p>{candidate.phoneNumber}</p>
+              <p>{candidate.email}</p>
+              <p>{candidate.linkedIn}</p>
+            </div>
+            <div className="md:w-1/3">
+              <h2 className="text-xl font-title mb-4 mt-8 sm:mt-0 sm:mb-8">
+                {dict.candidate.personalDetails}
+              </h2>
+              <p>
+                {candidate.birthDate}{" "}
+                {candidate.birthDate
+                  ? `(${
+                      new Date(
+                        new Date().getTime() -
+                          new Date(candidate.birthDate).getTime()
+                      ).getUTCFullYear() - 1970
+                    } y/o)`
+                  : ""}
+              </p>
+              <p>{candidate.address}</p>
+            </div>
+            <div className="md:w-1/3">
+              <h2 className="text-xl font-title mb-4 mt-8 sm:mt-0 sm:mb-8">
+                {dict.candidate.languages}
+              </h2>
+              {candidate.languages?.map((language) => (
+                <p key={language}>{language}</p>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
       <div className="flex flex-col">
-        <div className="hidden sm:flex flex-col pt-16 sm:px-32 bg-digitalent-blue text-white justify-end h-[34vh] 3xl:h-[20vh]">
+        <div className="hidden xl:flex flex-col pt-16 sm:px-16 lg:px-32 bg-digitalent-blue text-white justify-end h-[34vh] 3xl:h-[20vh]">
           <div className="max-w-[48rem] font-title flex text-3xl gap-12 mb-16">
             <div className="text-digitalent-green">
               <h1>{dict.candidate.candidate}:</h1>
@@ -77,7 +103,7 @@ export default async function Home({
           </div>
         </div>
 
-        <div className="flex flex-col my-12 sm:my-16 sm:px-32 px-8">
+        <div className="flex flex-col my-12 sm:my-16 sm:px-16 lg:px-32 px-8">
           <div className="max-w-[48rem]">
             <h2 className="text-xl font-title mb-4 sm:mb-8 ">
               {dict.candidate.professionalDetails}
