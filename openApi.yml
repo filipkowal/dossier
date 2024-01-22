@@ -84,16 +84,16 @@ components:
           type: array
           items:
             type: string
-        statusOfCandidacy:
-          description: If there's a non-empty status, front-end assumes the candidate has been invited or rejected and hides relevant action buttons.
+        dossierPhase:
           type: string
           enum:
             - ""
-            - "We will send you an invitation once Christoph has chosen a meeting time."
-            - "We will inform you which date Christoph has chosen so that you can send him the meeting invite. Please make sure to CC: atrete@digitalent.ch to the meeting"
-            - "Please get in touch with Christoph to arrange an interview"
-            - "Iterview scheduled for ${dateTime}"
-            - "Candidate rejected"
+            - "candidateAccepted"
+            - "intervieScheduled"
+            - "candidateRejected"
+        dossierMessage:
+          type: string
+          example: "We will inform you which date Christoph has chosen so that you can send him the meeting invite. Please make sure to CC: atrete@digitalent.ch to the meeting"
         desiredWorkload:
           type: string
           example: 100%
