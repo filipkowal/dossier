@@ -40,8 +40,8 @@
     "meetingLink": "Link to the meeting online (optional)",
     "meetingLinkTooltip": "We will provide the link later unless you add it here.",
     "address": "Address of the interview meeting",
-    "duration": "Duration of the interview (minutes)",
-    "dateTime": "Date and time of the interview",
+    "duration": "Duration (minutes)",
+    "dateTime": "Date and time",
     "send": "Send",
     "previous": "Previous",
     "next": "Next"

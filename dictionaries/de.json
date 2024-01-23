@@ -40,8 +40,8 @@
     "meetingLink": "Link zum Online-Meeting (optional)",
     "meetingLinkTooltip": "Wir werden den Link später bereitstellen, es sei denn, Sie fügen ihn hier hinzu.",
     "address": "Adresse des Vorstellungsgesprächs",
-    "duration": "Dauer des Vorstellungsgesprächs (Minuten)",
-    "dateTime": "Datum und Uhrzeit des Vorstellungsgesprächs",
+    "duration": "Dauer (Minuten)",
+    "dateTime": "Datum und Uhrzeit",
     "send": "Senden",
     "previous": "Zurück",
     "next": "Weiter"
