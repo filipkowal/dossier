@@ -48,8 +48,7 @@ export interface components {
       employerName?: string;
       /** @example 01.01.1990 */
       birthDate?: string;
-      /** @example Wymyślona Street 66, Kraków */
-      address?: string;
+      address?: components["schemas"]["Address"];
       /** @example +48 666 666 666 */
       phoneNumber?: string;
       /** @example example@example.com */
@@ -79,11 +78,10 @@ export interface components {
       /** @example A1, B1 */
       driversLicence?: string;
       files?: string[];
-      /**
-       * @description If there's a non-empty status, front-end assumes the candidate has been invited or rejected and hides relevant action buttons.
-       * @enum {string}
-       */
-      statusOfCandidacy?: "" | "We will send you an invitation once Christoph has chosen a meeting time." | "We will inform you which date Christoph has chosen so that you can send him the meeting invite. Please make sure to CC: atrete@digitalent.ch to the meeting" | "Please get in touch with Christoph to arrange an interview" | "Iterview scheduled for ${dateTime}" | "Candidate rejected";
+      /** @enum {string} */
+      dossierPhase?: "" | "candidateAccepted" | "intervieScheduled" | "candidateRejected";
+      /** @example We will inform you which date Christoph has chosen so that you can send him the meeting invite. Please make sure to CC: atrete@digitalent.ch to the meeting */
+      dossierMessage?: string;
       /** @example 100% */
       desiredWorkload?: string;
       /** @example The candidate is a very experienced IT professional with a strong background in software development and architecture. He has been working in the financial industry for many years and has a deep understanding of the business processes and challenges in this industry. He is a very good communicator and has a strong customer focus. He is a team player and has a strong focus on quality and security. He is a very good communicator and has a strong customer focus. He is a team player and has a strong focus on quality and security. He is a very good communicator and has a strong customer focus. He is a team player and has a strong focus on quality and security. He is a very good communicator and has a strong customer focus. He is a team player and has a strong focus on quality and security. He is a very good communicator and has a strong customer focus. He is a team player and has a strong focus on quality and security. */
@@ -99,8 +97,26 @@ export interface components {
        * @example false
        */
       isInviting?: boolean;
-      /** @example Szwajcarska 4, Kraków */
-      address?: string;
+      address?: components["schemas"]["Address"];
+    };
+    Address: {
+      /** @example Wiener Str. 55 */
+      street?: string;
+      /** @example Bern */
+      city?: string;
+      /** @example Bern */
+      state?: string;
+      /** @example Western Part of Switzerland */
+      region?: string;
+      /** @example Switzerland */
+      country?: string;
+      geoCoordinates?: components["schemas"]["GeoCoordinates"];
+    };
+    /** @example 47.4708538 */
+    GeoCoordinate: string;
+    GeoCoordinates: {
+      latitude?: components["schemas"]["GeoCoordinate"];
+      longitude?: components["schemas"]["GeoCoordinate"];
     };
   };
   responses: never;
@@ -198,10 +214,16 @@ export interface operations {
     requestBody?: {
       content: {
         "application/json": {
-          duration?: number;
+          /** @description In minutes */
+          interviewDuration?: number;
           channel?: string;
           address?: string;
-          startTime?: string;
+          availibilitySlots?: {
+              /** Format: date-time */
+              startTime?: string;
+              /** Format: date-time */
+              endTime?: string;
+            }[];
         };
       };
     };
@@ -224,6 +246,16 @@ export interface operations {
     parameters: {
       path: {
         id: string;
+      };
+    };
+    requestBody?: {
+      content: {
+        "application/json": {
+          /** @enum {string} */
+          reason?: "notEnoughExperience" | "notEnoughSkills" | "notEnoughEducation" | "notEnoughSalary" | "notEnoughLanguageSkills" | "notEnoughSoftSkills" | "notEnoughHardSkills" | "notEnoughDomainKnowledge" | "notEnoughAvailability" | "notEnoughMotivation" | "notEnoughCulturalFit" | "notEnoughPersonality" | "notEnoughTeamFit" | "notEnoughOther";
+          /** @example We are sorry to inform you that we will not proceed with candidate's application. We wish you all the best and can't wait for future candidates. */
+          message?: string;
+        };
       };
     };
     responses: {

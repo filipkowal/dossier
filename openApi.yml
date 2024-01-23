@@ -255,13 +255,14 @@ paths:
             schema:
               type: object
               properties:
-                duration:
+                interviewDuration:
+                  description: In minutes
                   type: integer
                 channel:
                   type: string
                 address:
                   type: string
-                slots:
+                availibilitySlots:
                   type: array
                   items:
                     type: object
