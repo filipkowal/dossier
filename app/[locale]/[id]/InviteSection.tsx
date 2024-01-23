@@ -162,16 +162,15 @@ function AvailibilityStep({
 }) {
   return (
     <>
-      <div className="flex gap-6">
+      <div className="flex flex-col sm:flex-row gap-6">
         <NumberInput
           name="duration"
-          min="15"
-          max="120"
-          step="15"
+          min={15}
+          step={15}
           value={meetingDuration}
-          onChange={(e) => setMeetingDuration(parseInt(e.target.value))}
+          setValue={setMeetingDuration}
           label={dict.duration}
-          className="w-72"
+          className="w-[11.58rem]"
         />
 
         <TextInput
