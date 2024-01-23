@@ -40,6 +40,24 @@ export default function NumberInput({
     setValue(newValue);
   };
 
+  const handleButtonClick = (operation: "add" | "subtract") => {
+    let newValue = inputValue;
+    if (operation === "add") {
+      newValue += step || 1;
+    } else if (operation === "subtract") {
+      newValue -= step || 1;
+    }
+
+    if (min !== undefined && newValue < min) {
+      newValue = min;
+    } else if (max !== undefined && newValue > max) {
+      newValue = max;
+    }
+
+    setInputValue(newValue);
+    setValue(newValue);
+  };
+
   useEffect(() => {
     setInputValue(value);
   }, [value]);
@@ -82,10 +100,18 @@ export default function NumberInput({
         ) : null}
       </div>
 
-      <Button name="-" className="h-[2.75rem] mt-2">
+      <Button
+        name="-"
+        className="h-[2.75rem] mt-2"
+        onClick={() => handleButtonClick("subtract")}
+      >
         -
       </Button>
-      <Button name="+" className="h-[2.75rem] mt-2 border-l-0">
+      <Button
+        name="+"
+        className="h-[2.75rem] mt-2 border-l-0"
+        onClick={() => handleButtonClick("add")}
+      >
         +
       </Button>
     </div>
