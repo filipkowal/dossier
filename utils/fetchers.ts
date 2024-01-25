@@ -33,7 +33,7 @@ async function getData({
   init?: RequestInit;
 }) {
   try {
-    const url = `${SERVER_URL}${locale ? `/${locale}` : ""}/${endpoint}${
+    const url = `${SERVER_URL}${false ? `/${locale}` : ""}/${endpoint}${
       param ? `/${param}` : ""
     }`;
 
@@ -58,7 +58,7 @@ async function getData({
 }
 
 function throwOnNoDataWhenBuilding(
-  reponse: Response,
+  response: Response,
   responseContent: any,
   responseName: string
 ) {
@@ -68,7 +68,7 @@ function throwOnNoDataWhenBuilding(
   if (typeof document !== "undefined" || process.env.NODE_ENV !== "production")
     return;
 
-  if (!reponse) {
+  if (!response) {
     throw new Error("No response when building: " + responseName.toUpperCase());
   }
 

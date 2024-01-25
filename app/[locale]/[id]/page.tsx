@@ -64,17 +64,10 @@ export default async function Home({
                 {dict.candidate.personalDetails}
               </h2>
               <p>
-                {candidate.birthDate}{" "}
-                {candidate.birthDate
-                  ? `(${
-                      new Date(
-                        new Date().getTime() -
-                          new Date(candidate.birthDate).getTime()
-                      ).getUTCFullYear() - 1970
-                    } y/o)`
-                  : ""}
+                {candidate.birthDate} {"(" + candidate.candidateAge + " y/o)"}
               </p>
-              <p>{candidate.address}</p>
+              <p>{candidate.address?.street}</p>
+              <p>{candidate.address?.city}</p>
             </div>
             <div className="md:w-1/3 xl:w-full">
               <h2 className="text-xl font-title mb-4 mt-8 sm:mt-0 sm:mb-8">

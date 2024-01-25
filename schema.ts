@@ -48,6 +48,8 @@ export interface components {
       employerName?: string;
       /** @example 01.01.1990 */
       birthDate?: string;
+      /** @example 30 */
+      candidateAge?: string;
       address?: components["schemas"]["Address"];
       /** @example +48 666 666 666 */
       phoneNumber?: string;
@@ -67,7 +69,7 @@ export interface components {
       distanceToWork?: string;
       /** @example 130 000 CHF */
       desiredSalary?: string;
-      /** @example 100 000 CHF */
+      /** @example 80 000 - 100 000 CHF */
       targetSalary?: string;
       /** @example 1 month */
       noticePeriod?: string;
@@ -75,8 +77,6 @@ export interface components {
       reasonForChange?: string;
       /** @example Christoph Pfister ist seit vielen Jahren in verschiedenen Rollen im Bereich Informationstechnik unterwegs und würde sein Wissen und seine Erfahrung sehr gerne als Berater einbringen. Es reizt ihn spannende sowie komplexe Problemstellungen zu lösen und er kann dank seiner Erfahrung eine holistische Betrachtung auf Challenges einnehmen. In seiner aktuellen Rolle als CIO der PEAX AG verantwortet er die Produktentwicklung und den Betrieb einer SaaS-Plattform für digitale Services. In seiner zusätzlichen Gruppen-Rolle durfte er in der Base-Net Unternehmensgruppe verschiedene große Projekte erfolgreich umsetzen. Er ist sich gewohnt mit einer 360 Grad Sicht zu agieren und dazu die verschiedenen Sachverhalte und Themen für unterschiedliche Ziel- und Anspruchsgruppen verständlich und nachvollziehbar aufzubereiten und zu präsentieren. Als Mitglied des Enterprise Architektur Boards ist er zudem verantwortlich für die Identifikation sowie Einführung von neuen Technologien und für regulatorische und IT-rechtliche Themen. */
       interviewSummary?: string;
-      /** @example A1, B1 */
-      driversLicence?: string;
       files?: string[];
       /** @enum {string} */
       dossierPhase?: "" | "candidateAccepted" | "intervieScheduled" | "candidateRejected";
