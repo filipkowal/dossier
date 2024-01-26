@@ -246,8 +246,9 @@ paths:
                   type: integer
                 channel:
                   type: string
+                  enum: ["online", "onsite"]
                 address:
-                  type: string
+                  $ref: "#/components/schemas/Address"
                 availibilitySlots:
                   type: array
                   items:
