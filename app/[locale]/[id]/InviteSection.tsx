@@ -237,6 +237,16 @@ function AvailibilityStep({
               }
               label={dict.dateTime}
             />
+            <Button
+              onClick={() =>
+                setAvailibilitySlots((slots) =>
+                  slots.filter((s) => s.id !== slot.id)
+                )
+              }
+              className="h-[2.75rem] mt-[0.9rem] flex items-center justify-center"
+            >
+              <div>Remove slot</div>
+            </Button>
           </div>
         );
       })}
@@ -288,9 +298,13 @@ function AvailibilityStep({
             e.preventDefault();
 
             const formValues = {
+              interviewDuration,
               isInterviewOnline,
               location,
-              availibilitySlots,
+              availibilitySlots: [
+                ...availibilitySlots,
+                newSlot.startTime ? newSlot : null,
+              ],
             };
             console.log("vals: ", formValues);
           }}
