@@ -50,8 +50,8 @@ export default async function Home({
             </div>
           </div>
 
-          <div className="flex flex-col lg:flex-row xl:flex-col  lg:gap-16 sm:gap-8 sm:mt-8 justify-between xl:w-[19rem]">
-            <div className="md:w-1/3 xl:w-full">
+          <div className="flex flex-col lg:flex-row xl:flex-col  lg:gap-16 xl:gap-8 sm:gap-8 sm:mt-8 justify-between xl:w-[19rem]">
+            <div className="md:w-1/2 xl:w-full">
               <h2 className="text-xl font-title mb-4 sm:mb-8">
                 {dict.candidate.contactDetails}
               </h2>
@@ -59,23 +59,16 @@ export default async function Home({
               <p>{candidate.email}</p>
               <p>{candidate.linkedIn}</p>
             </div>
-            <div className="md:w-1/3 xl:w-full">
-              <h2 className="text-xl font-title mb-4 mt-8 sm:mt-0 sm:mb-8">
+            <div className="md:w-1/2 xl:w-full">
+              <h2 className="text-xl font-title mb-4 mt-8 sm:mt-0 sm:mb-8 whitespace-nowrap">
                 {dict.candidate.personalDetails}
               </h2>
-              <p>
+              <p className="whitespace-nowrap">
                 {candidate.birthDate} {"(" + candidate.candidateAge + " y/o)"}
               </p>
               <p>{candidate.address?.street}</p>
               <p>{candidate.address?.city}</p>
-            </div>
-            <div className="md:w-1/3 xl:w-full">
-              <h2 className="text-xl font-title mb-4 mt-8 sm:mt-0 sm:mb-8">
-                {dict.candidate.languages}
-              </h2>
-              {candidate.languages?.map((language) => (
-                <p key={language}>{language}</p>
-              ))}
+              <p>{candidate.address?.country}</p>
             </div>
           </div>
         </div>
@@ -106,13 +99,7 @@ export default async function Home({
               {dict.candidate.desiredSalary}: {candidate.desiredSalary}
             </p>
             <p>
-              {dict.candidate.targetSalary}: {candidate.targetSalary}
-            </p>
-            <p>
               {dict.candidate.noticePeriod}: {candidate.noticePeriod}
-            </p>
-            <p>
-              {dict.candidate.commuteDistanceToWork}: {candidate.distanceToWork}
             </p>
             <p>
               {dict.candidate.currentPosition}: {candidate.jobTitle}

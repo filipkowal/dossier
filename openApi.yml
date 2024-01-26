@@ -54,23 +54,9 @@ components:
         linkedIn:
           type: string
           example: linkedin.com/in/example
-        languages:
-          type: array
-          items:
-            type: string
-          example:
-            - Polish - native
-            - English - fluent
-            - German - basic
-        distanceToWork:
-          type: string
-          example: 5km
         desiredSalary:
           type: string
           example: 130 000 CHF
-        targetSalary:
-          type: string
-          example: 80 000 - 100 000 CHF
         noticePeriod:
           type: string
           example: 1 month
