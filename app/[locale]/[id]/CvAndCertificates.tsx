@@ -41,8 +41,12 @@ const CvAndCertificates = ({
 
   return (
     <div className="w-full" id="cvAndCertificates" ref={parentRef}>
-      {cvAndCertificates.map((path, index) => (
-        <Document file={path} key={index} onLoadSuccess={onDocumentLoadSuccess}>
+      {cvAndCertificates.map((file, index) => (
+        <Document
+          file={{ data: atob(file) }}
+          key={index}
+          onLoadSuccess={onDocumentLoadSuccess}
+        >
           {Array.from(new Array(numPages), (el, index) => (
             <Page
               key={`page_${index + 1}`}

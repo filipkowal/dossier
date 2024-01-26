@@ -114,9 +114,7 @@ export default async function Home({
             <p>{candidate.reasonForChange}</p>
           </div>
         </div>
-        <CvAndCertificates
-          cvAndCertificates={MOCK_FILES || candidate.files || []}
-        />
+        <CvAndCertificates cvAndCertificates={candidate.files || []} />
       </div>
       <div className="flex fixed md:bottom-6 bottom-0 justify-center sm:gap-3 md:gap-6 w-full">
         <InviteSection dict={{ ...dict.inviteModal, ...dict.mainButtons }} />
