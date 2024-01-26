@@ -33,7 +33,7 @@ async function getData({
   init?: RequestInit;
 }) {
   try {
-    const url = `${SERVER_URL}${false ? `/${locale}` : ""}/${endpoint}${
+    const url = `${SERVER_URL}${locale ? `/${locale}` : ""}/${endpoint}${
       param ? `/${param}` : ""
     }`;
 
