@@ -32,8 +32,8 @@
     "invite": "Invite"
   },
   "inviteModal": {
-    "title0": "Interview Location",
-    "title1": "Interview Time",
+    "title0": "Interview Location & Duration",
+    "title1": "Your Availibility",
     "location": "Location",
     "online": "Online",
     "inPerson": "In person",
@@ -41,7 +41,13 @@
     "meetingLinkTooltip": "We will provide the link later unless you add it here.",
     "address": "Address of the interview meeting",
     "duration": "Duration (minutes)",
-    "dateTime": "Date and time",
+    "slotsDescription": {
+      "0": "Choose",
+      "1": "2 - 3 availability time slots",
+      "2": "The slots can be longer than the interview meeting duration."
+    },
+    "slotStart": "Availibility Start Time",
+    "slotEnd": "Availibility End Time",
     "send": "Send",
     "previous": "Previous",
     "next": "Next"

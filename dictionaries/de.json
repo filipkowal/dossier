@@ -32,8 +32,8 @@
     "invite": "Einladen"
   },
   "inviteModal": {
-    "title0": "Interviewort",
-    "title1": "Interviewzeit",
+    "title0": "Interviewort und Dauer",
+    "title1": "Ihre Verfügbarkeit",
     "location": "Ort",
     "online": "Online",
     "inPerson": "Persönlich",
@@ -41,7 +41,13 @@
     "meetingLinkTooltip": "Wir werden den Link später bereitstellen, es sei denn, Sie fügen ihn hier hinzu.",
     "address": "Adresse des Vorstellungsgesprächs",
     "duration": "Dauer (Minuten)",
-    "dateTime": "Datum und Uhrzeit",
+    "slotsDescription": {
+      "0": "Wähle",
+      "1": "2 - 3 verfügbare Zeitfenster",
+      "2": "Die Zeitfenster können länger sein als die Dauer des Interviews."
+    },
+    "slotStart": "Verfügbarkeits Startzeit",
+    "slotEnd": "Verfügbarkeits Endzeit",
     "send": "Senden",
     "previous": "Zurück",
     "next": "Weiter"

@@ -32,8 +32,8 @@
     "invite": "Inviter"
   },
   "inviteModal": {
-    "title0": "Lieu de l'entretien",
-    "title1": "Heure de l'entretien",
+    "title0": "Lieu et durée de l'entretien",
+    "title1": "Votre disponibilité",
     "location": "Lieu",
     "online": "Online",
     "inPerson": "En personne",
@@ -41,7 +41,13 @@
     "meetingLinkTooltip": "Nous fournirons le lien ultérieurement à moins que vous ne l'ajoutiez ici.",
     "address": "Adresse de l'entretien",
     "duration": "Durée (minutes)",
-    "dateTime": "Date et heure",
+    "slotsDescription": {
+      "0": "Choisis",
+      "1": "2 - 3 créneaux horaires disponibles",
+      "2": "Les créneaux peuvent être plus longs que la durée de l'entretien."
+    },
+    "slotStart": "Disponibilité début",
+    "slotEnd": "Disponibilité fin",
     "send": "Envoyer",
     "previous": "Précédent",
     "next": "Suivant"

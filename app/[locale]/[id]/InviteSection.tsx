@@ -31,16 +31,17 @@ export default function InviteSection({
       setIsInterviewOnline={setIsInterviewOnline}
       setLocation={setLocation}
       isInterviewOnline={isInterviewOnline}
+      interviewDuration={interviewDuration}
+      setInterviewDuration={setInterviewDuration}
       dict={dict}
     />,
     <AvailibilityStep
       key={"availibilityStep"}
       setStep={setStep}
       isInterviewOnline={isInterviewOnline}
-      interviewDuration={interviewDuration}
-      setInterviewDuration={setInterviewDuration}
       location={location}
       availibilitySlots={availibilitySlots}
+      interviewDuration={interviewDuration}
       setAvailibilitySlots={setAvailibilitySlots}
       dict={dict}
     />,
@@ -74,25 +75,27 @@ function LocationStep({
   setIsInterviewOnline,
   setLocation,
   isInterviewOnline,
+  interviewDuration,
+  setInterviewDuration,
   dict,
 }: {
   setStep: Dispatch<SetStateAction<0 | 1>>;
   setIsInterviewOnline: Dispatch<SetStateAction<boolean>>;
   setLocation: Dispatch<SetStateAction<string>>;
   isInterviewOnline: any;
+  interviewDuration: number;
+  setInterviewDuration: Dispatch<SetStateAction<number>>;
   dict: Dictionary["inviteModal"];
 }) {
   return (
     <>
-      <span className="text-xl">{dict.location}</span>
-      <div className="flex gap-6">
+      <div className="flex gap-6 -mb-2">
         <Checkbox
           name="interviewType"
           value="online"
           checked={isInterviewOnline === true}
           required
           onChange={() => {
-            console.log("setttt");
             setIsInterviewOnline(true);
           }}
         >
@@ -103,7 +106,6 @@ function LocationStep({
           value="inPerson"
           checked={isInterviewOnline === false}
           onChange={() => {
-            console.log("yo");
             setIsInterviewOnline(false);
           }}
         >
@@ -130,12 +132,18 @@ function LocationStep({
           ""
         )}
       </div>
-      <div className="w-full flex justify-end">
-        <Button
-          type="primary"
-          name="Invite"
-          onClick={() => setStep((step) => 1)}
-        >
+
+      <NumberInput
+        name="interviewDuration"
+        min={15}
+        step={15}
+        value={interviewDuration}
+        setValue={setInterviewDuration}
+        label={dict.duration}
+        className="w-[11.58rem]"
+      />
+      <div className="w-full flex justify-end mt-8">
+        <Button type="primary" name="Invite" onClick={() => setStep(() => 1)}>
           {dict.next}
         </Button>
       </div>
@@ -145,21 +153,19 @@ function LocationStep({
 
 function AvailibilityStep({
   setStep,
-  interviewDuration,
-  setInterviewDuration,
   isInterviewOnline,
   location,
   availibilitySlots,
   setAvailibilitySlots,
+  interviewDuration,
   dict,
 }: {
   setStep: Dispatch<SetStateAction<0 | 1>>;
-  interviewDuration: number;
-  setInterviewDuration: Dispatch<SetStateAction<number>>;
   isInterviewOnline: any;
   location: string;
   availibilitySlots: TimeSlots;
   setAvailibilitySlots: Dispatch<SetStateAction<TimeSlots>>;
+  interviewDuration: number;
   dict: Dictionary["inviteModal"];
 }) {
   const [newSlot, setNewSlot] = useState({ id: 0, startTime: "", endTime: "" });
@@ -185,19 +191,9 @@ function AvailibilityStep({
 
   return (
     <>
-      <NumberInput
-        name="interviewDuration"
-        min={15}
-        step={15}
-        value={interviewDuration}
-        setValue={setInterviewDuration}
-        label={dict.duration}
-        className="w-[11.58rem]"
-      />
-
-      <p className="">
-        Choose <b>2- 3 time slots</b>. The slots can be longer than the actual
-        meeting duration
+      <p>
+        {dict.slotsDescription[0]} <b>{dict.slotsDescription[1]}</b>.{" "}
+        {dict.slotsDescription[2]}
       </p>
 
       {availibilitySlots.map((slot, index) => {
@@ -218,7 +214,7 @@ function AvailibilityStep({
                   })
                 )
               }
-              label={dict.dateTime}
+              label={dict.slotStart}
             />
             <TextInput
               name={`slot-${index}-endTime`}
@@ -235,7 +231,7 @@ function AvailibilityStep({
                   })
                 )
               }
-              label={dict.dateTime}
+              label={dict.slotEnd}
             />
             <Button
               onClick={() =>
@@ -260,7 +256,7 @@ function AvailibilityStep({
           onChange={(e) =>
             setNewSlot({ ...newSlot, startTime: e.target.value })
           }
-          label={dict.dateTime}
+          label={dict.slotStart}
         />
         <TextInput
           name={`newSlot-endTime`}
@@ -268,7 +264,7 @@ function AvailibilityStep({
           className="w-72"
           value={newSlot.endTime}
           onChange={(e) => setNewSlot({ ...newSlot, endTime: e.target.value })}
-          label={dict.dateTime}
+          label={dict.slotEnd}
         />
       </div>
       <Button
@@ -281,7 +277,7 @@ function AvailibilityStep({
         Add new availibility slot
       </Button>
 
-      <div className="w-full flex justify-between">
+      <div className="w-full flex justify-between mt-8">
         <Button
           type="default"
           name="Previous"
