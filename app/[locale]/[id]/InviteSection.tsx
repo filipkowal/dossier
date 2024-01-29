@@ -23,6 +23,7 @@ export default function InviteSection({
   const [location, setLocation] = useState("");
   const [availibilitySlots, setAvailibilitySlots] = useState<TimeSlots>([]);
   const [interviewDuration, setInterviewDuration] = useState(30);
+  const [newSlot, setNewSlot] = useState({ id: 0, startTime: "", endTime: "" });
 
   const steps = [
     <LocationStep
@@ -37,14 +38,55 @@ export default function InviteSection({
     />,
     <AvailibilityStep
       key={"availibilityStep"}
-      setStep={setStep}
-      isInterviewOnline={isInterviewOnline}
-      location={location}
+      newSlot={newSlot}
+      setNewSlot={setNewSlot}
       availibilitySlots={availibilitySlots}
-      interviewDuration={interviewDuration}
       setAvailibilitySlots={setAvailibilitySlots}
       dict={dict}
     />,
+  ];
+
+  const footers = [
+    <Button
+      key={0}
+      type="primary"
+      name="Invite"
+      onClick={() => setStep(() => 1)}
+    >
+      {dict.next}
+    </Button>,
+    <>
+      <Button
+        key={1}
+        type="default"
+        name="Previous"
+        onClick={() => setStep((step) => 0)}
+      >
+        {dict.previous}
+      </Button>
+
+      <Button
+        type="primary"
+        submitType
+        name="Send"
+        onClick={(e) => {
+          e.preventDefault();
+
+          const formValues = {
+            interviewDuration,
+            isInterviewOnline,
+            location,
+            availibilitySlots: [
+              ...availibilitySlots,
+              newSlot.startTime ? newSlot : null,
+            ],
+          };
+          console.log("vals: ", formValues);
+        }}
+      >
+        {dict.send}
+      </Button>
+    </>,
   ];
 
   return (
@@ -63,6 +105,7 @@ export default function InviteSection({
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         title={dict[`title${step}`]}
+        footer={footers[step]}
       >
         <form className="flex flex-col gap-6">{steps[step]}</form>
       </Dialog>
@@ -142,34 +185,23 @@ function LocationStep({
         label={dict.duration}
         className="w-[11.58rem]"
       />
-      <div className="w-full flex justify-end mt-8">
-        <Button type="primary" name="Invite" onClick={() => setStep(() => 1)}>
-          {dict.next}
-        </Button>
-      </div>
     </>
   );
 }
 
 function AvailibilityStep({
-  setStep,
-  isInterviewOnline,
-  location,
+  newSlot,
+  setNewSlot,
   availibilitySlots,
   setAvailibilitySlots,
-  interviewDuration,
   dict,
 }: {
-  setStep: Dispatch<SetStateAction<0 | 1>>;
-  isInterviewOnline: any;
-  location: string;
+  newSlot: TimeSlots[0];
+  setNewSlot: Dispatch<SetStateAction<TimeSlots[0]>>;
   availibilitySlots: TimeSlots;
   setAvailibilitySlots: Dispatch<SetStateAction<TimeSlots>>;
-  interviewDuration: number;
   dict: Dictionary["inviteModal"];
 }) {
-  const [newSlot, setNewSlot] = useState({ id: 0, startTime: "", endTime: "" });
-
   useEffect(() => {
     if (!newSlot.startTime) return;
     setNewSlot((slot) => {
@@ -187,7 +219,7 @@ function AvailibilityStep({
         endTime: endTimeFormatted,
       };
     });
-  }, [newSlot.startTime]);
+  }, [newSlot.startTime, setNewSlot]);
 
   return (
     <>
@@ -276,38 +308,6 @@ function AvailibilityStep({
       >
         Add new availibility slot
       </Button>
-
-      <div className="w-full flex justify-between mt-8">
-        <Button
-          type="default"
-          name="Previous"
-          onClick={() => setStep((step) => 0)}
-        >
-          {dict.previous}
-        </Button>
-
-        <Button
-          type="primary"
-          submitType
-          name="Send"
-          onClick={(e) => {
-            e.preventDefault();
-
-            const formValues = {
-              interviewDuration,
-              isInterviewOnline,
-              location,
-              availibilitySlots: [
-                ...availibilitySlots,
-                newSlot.startTime ? newSlot : null,
-              ],
-            };
-            console.log("vals: ", formValues);
-          }}
-        >
-          {dict.send}
-        </Button>
-      </div>
     </>
   );
 }

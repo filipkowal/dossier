@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { JSXElementConstructor, useEffect, useRef } from "react";
 
 export default function Dialog({
   isOpen,
@@ -12,7 +12,7 @@ export default function Dialog({
   isOpen: boolean;
   title: string;
   children: React.ReactNode;
-  footer?: React.ReactNode;
+  footer?: React.ReactElement<any, string | JSXElementConstructor<any>>;
   setIsOpen: (isOpen: boolean) => void;
 }) {
   const ref = useRef<HTMLDialogElement>(null);
@@ -43,9 +43,10 @@ export default function Dialog({
   return (
     <dialog
       ref={ref}
+      style={{ overflowY: "auto", maxHeight: "100vh" }}
       className="fixed inset-0 z-50 bg-digitalent-gray-light p-10 transform overflow-hidden text-digitalent-blue px-4 pt-4 pb-7 md:py-10 md:px-16 text-left align-middle shadow-xl transition-all w-[60rem] max-w-full"
     >
-      <div className="text-2xl font-title font-medium uppercase pb-2 md:pb-6 flex justify-between">
+      <div className="text-2xl font-title font-medium uppercase pb-8 flex justify-between">
         <span className="pr-10 max-w-[90%]">{title}</span>
 
         <XButton />
@@ -54,7 +55,12 @@ export default function Dialog({
       <div className="px-1 -mx-1 sm:mx-0 max-w-full">{children}</div>
 
       <div
-        className="w-full mt-7 md:mt-10"
+        className={`w-full flex mt-12 ${
+          footer?.props?.children?.length > 1 &&
+          Array.isArray(footer?.props?.children)
+            ? "justify-between"
+            : "justify-end"
+        }`}
         style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       >
         {footer}
