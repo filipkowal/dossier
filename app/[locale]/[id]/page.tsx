@@ -4,6 +4,7 @@ import InviteSection from "./InviteSection";
 import { getDictionary } from "@/utils/server";
 import { getCandidate, getUser } from "@/utils";
 import CvAndCertificates from "./CvAndCertificates";
+import RejectSection from "./RejectSection";
 
 export default async function Home({
   params,
@@ -120,15 +121,8 @@ export default async function Home({
           dict={{ ...dict.inviteModal, ...dict.mainButtons }}
           userAddress={user.address}
         />
-        <Button
-          name="Reject"
-          className="w-full sm:w-1/3 xl:w-1/4 max-w-[32rem] text-white bg-digitalent-blue"
-        >
-          <span className="hidden sm:block">
-            {dict.mainButtons.notInterested}
-          </span>
-          <span className="sm:hidden">{dict.mainButtons.reject}</span>
-        </Button>
+        <RejectSection dict={{ ...dict.rejectModal, ...dict.mainButtons }} />
+
         <Button
           name="Pdf"
           className="sm:w-1/3 xl:w-1/4 max-w-[32rem] bg-digitalent-gray-light hidden sm:block"

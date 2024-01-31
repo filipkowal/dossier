@@ -51,5 +51,11 @@
     "send": "Senden",
     "previous": "Zurück",
     "next": "Weiter"
+  },
+  "rejectModal": {
+    "title": "Kandidat ablehnen",
+    "reason": "Zu schlecht. Was ist der Hintergrund für Ihre Entscheidung?",
+    "message": "Kommentare (optional)",
+    "send": "Senden"
   }
 }

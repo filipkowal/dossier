@@ -51,5 +51,11 @@
     "send": "Send",
     "previous": "Previous",
     "next": "Next"
+  },
+  "rejectModal": {
+    "title": "Reject Candidate",
+    "reason": "Too bad. What is the background for your decision?",
+    "message": "Comments (optional)",
+    "send": "Send"
   }
 }

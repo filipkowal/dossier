@@ -92,6 +92,7 @@ export default function InviteSection({
             ],
           };
           console.log("vals: ", formValues);
+          setIsOpen(false);
         }}
       >
         {dict.send}

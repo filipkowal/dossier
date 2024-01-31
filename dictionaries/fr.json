@@ -51,5 +51,11 @@
     "send": "Envoyer",
     "previous": "Précédent",
     "next": "Suivant"
+  },
+  "rejectModal": {
+    "title": "Rejeter le candidat",
+    "reason": "Dommage. Quelle est la raison de votre décision?",
+    "message": "Commentaires (facultatif)",
+    "send": "Envoyer"
   }
 }
