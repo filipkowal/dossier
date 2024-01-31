@@ -88,9 +88,9 @@ components:
         dossierPhase:
           type: string
           enum:
-            - ""
+            - "candidateNotAssessed"
             - "candidateAccepted"
-            - "intervieScheduled"
+            - "interviewScheduled"
             - "candidateRejected"
         dossierMessage:
           type: string

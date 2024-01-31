@@ -57,29 +57,26 @@ export interface components {
       email?: string;
       /** @example linkedin.com/in/example */
       linkedIn?: string;
-      /**
-       * @example [
-       *   "Polish - native",
-       *   "English - fluent",
-       *   "German - basic"
-       * ]
-       */
-      languages?: string[];
-      /** @example 5km */
-      distanceToWork?: string;
       /** @example 130 000 CHF */
       desiredSalary?: string;
-      /** @example 80 000 - 100 000 CHF */
-      targetSalary?: string;
       /** @example 1 month */
       noticePeriod?: string;
       /** @example Die basenet Informatik (grösster Teil der Gruppe) wurde verkauft und viele kleinere Gesellschaften konsolidiert. Er begleitet diese 'Carve-outs' der Gesellschaften, danach ist seine Rolle obsolet bzw. nicht mehr so spannend. Er hat deshalb entschieden außerhalb der Gruppe eine neue Herausforderung zu suchen. Das Dienstleistungsportfolio von atrete tönt sehr spannend und mit den. Werten von atrete kann er sich sehr gut identifizieren. */
       reasonForChange?: string;
       /** @example Christoph Pfister ist seit vielen Jahren in verschiedenen Rollen im Bereich Informationstechnik unterwegs und würde sein Wissen und seine Erfahrung sehr gerne als Berater einbringen. Es reizt ihn spannende sowie komplexe Problemstellungen zu lösen und er kann dank seiner Erfahrung eine holistische Betrachtung auf Challenges einnehmen. In seiner aktuellen Rolle als CIO der PEAX AG verantwortet er die Produktentwicklung und den Betrieb einer SaaS-Plattform für digitale Services. In seiner zusätzlichen Gruppen-Rolle durfte er in der Base-Net Unternehmensgruppe verschiedene große Projekte erfolgreich umsetzen. Er ist sich gewohnt mit einer 360 Grad Sicht zu agieren und dazu die verschiedenen Sachverhalte und Themen für unterschiedliche Ziel- und Anspruchsgruppen verständlich und nachvollziehbar aufzubereiten und zu präsentieren. Als Mitglied des Enterprise Architektur Boards ist er zudem verantwortlich für die Identifikation sowie Einführung von neuen Technologien und für regulatorische und IT-rechtliche Themen. */
       interviewSummary?: string;
-      files?: string[];
+      files?: {
+          content?: string;
+          id?: string;
+          /** Format: int64 */
+          lastModified?: number;
+          name?: string;
+          /** Format: int64 */
+          size?: number;
+          type?: string;
+        }[];
       /** @enum {string} */
-      dossierPhase?: "" | "candidateAccepted" | "intervieScheduled" | "candidateRejected";
+      dossierPhase?: "candidateNotAssessed" | "candidateAccepted" | "interviewScheduled" | "candidateRejected";
       /** @example We will inform you which date Christoph has chosen so that you can send him the meeting invite. Please make sure to CC: atrete@digitalent.ch to the meeting */
       dossierMessage?: string;
       /** @example 100% */
@@ -216,8 +213,9 @@ export interface operations {
         "application/json": {
           /** @description In minutes */
           interviewDuration?: number;
-          channel?: string;
-          address?: string;
+          /** @enum {string} */
+          channel?: "online" | "onsite";
+          address?: components["schemas"]["Address"];
           availibilitySlots?: {
               /** Format: date-time */
               startTime?: string;
