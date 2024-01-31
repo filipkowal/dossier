@@ -69,7 +69,22 @@ components:
         files:
           type: array
           items:
-            type: string
+            type: object
+            properties:
+              content:
+                type: string
+              id:
+                type: string
+              lastModified:
+                type: integer
+                format: int64
+              name:
+                type: string
+              size:
+                type: integer
+                format: int64
+              type:
+                type: string
         dossierPhase:
           type: string
           enum:
