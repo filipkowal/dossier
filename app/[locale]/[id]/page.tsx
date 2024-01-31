@@ -14,8 +14,6 @@ export default async function Home({
   const dict = await getDictionary(params.locale);
   const candidate = await getCandidate(locale, id);
 
-  const MOCK_FILES = ["/cv.pdf", "/certificates.pdf"];
-
   return (
     <div className="w-full sm:pt-16 xl:grid xl:grid-cols-[minmax(450px,1fr),2fr] 2xl:grid-cols-[minmax(250px,1fr),2fr]">
       <div className="flex flex-col bg-digitalent-blue text-white sm:items-start xl:items-end md:px-8 lg:px-16 xl:px-0">
