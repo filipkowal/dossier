@@ -23,10 +23,11 @@ export default async function Home({
         <div className="flex flex-col justify-end items-center md:items-start xl:h-[34vh] 3xl:h-[30vh] pt-16 md:px-16 2xl:px-32 md:w-[27rem] 2xl:w-[35rem] w-full">
           <div className="rounded-full sm:w-52 sm:h-52 h-40 w-40 bg-digitalent-yellow" />
         </div>
+        <div className="block xl:hidden mt-16 -mb-16 px-8 sm:px-16 w-full">
+          <DossierStatus candidate={candidate} />
+        </div>
         <div className="flex flex-col mt-20 xl:mt-8 sm:px-16 2xl:px-32 px-8 mb-12">
           {/* Mobile */}
-          <DossierStatus candidate={candidate} />
-
           <div className="flex flex-col md:hidden font-title text-2xl gap-12 mb-16">
             <div>
               <h1>
