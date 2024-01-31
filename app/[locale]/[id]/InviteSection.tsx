@@ -8,19 +8,26 @@ import Tooltip from "@/components/Tooltip";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import NumberInput from "@/components/NumberInput";
 import { type Dictionary } from "@/utils/server";
+import { User } from "@/utils";
 
 type TimeSlots = { id: number; startTime: string; endTime: string }[];
 
 export default function InviteSection({
   dict,
+  userAddress,
 }: {
   dict: Dictionary["inviteModal"] & Dictionary["mainButtons"];
+  userAddress: User["address"];
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState<0 | 1>(0);
 
   const [isInterviewOnline, setIsInterviewOnline] = useState(true);
-  const [location, setLocation] = useState("");
+  const [inteviewLocation, setInterviewLocation] = useState(
+    `${userAddress?.street}, ${userAddress?.city}, ${userAddress?.country}` ||
+      ""
+  );
+  const [interviewLink, setInterviewLink] = useState("");
   const [availibilitySlots, setAvailibilitySlots] = useState<TimeSlots>([]);
   const [interviewDuration, setInterviewDuration] = useState(30);
   const [newSlot, setNewSlot] = useState({ id: 0, startTime: "", endTime: "" });
@@ -30,7 +37,10 @@ export default function InviteSection({
       key={"locationStep"}
       setStep={setStep}
       setIsInterviewOnline={setIsInterviewOnline}
-      setLocation={setLocation}
+      interviewLocation={inteviewLocation}
+      setInterviewLocation={setInterviewLocation}
+      interviewLink={interviewLink}
+      setInterviewLink={setInterviewLink}
       isInterviewOnline={isInterviewOnline}
       interviewDuration={interviewDuration}
       setInterviewDuration={setInterviewDuration}
@@ -75,7 +85,7 @@ export default function InviteSection({
           const formValues = {
             interviewDuration,
             isInterviewOnline,
-            location,
+            location: isInterviewOnline ? interviewLink : inteviewLocation,
             availibilitySlots: [
               ...availibilitySlots,
               newSlot.startTime ? newSlot : null,
@@ -116,7 +126,10 @@ export default function InviteSection({
 function LocationStep({
   setStep,
   setIsInterviewOnline,
-  setLocation,
+  interviewLocation,
+  setInterviewLocation,
+  interviewLink,
+  setInterviewLink,
   isInterviewOnline,
   interviewDuration,
   setInterviewDuration,
@@ -124,7 +137,10 @@ function LocationStep({
 }: {
   setStep: Dispatch<SetStateAction<0 | 1>>;
   setIsInterviewOnline: Dispatch<SetStateAction<boolean>>;
-  setLocation: Dispatch<SetStateAction<string>>;
+  interviewLocation: string;
+  setInterviewLocation: Dispatch<SetStateAction<string>>;
+  interviewLink: string;
+  setInterviewLink: Dispatch<SetStateAction<string>>;
   isInterviewOnline: any;
   interviewDuration: number;
   setInterviewDuration: Dispatch<SetStateAction<number>>;
@@ -155,25 +171,32 @@ function LocationStep({
           {dict.inPerson}
         </Checkbox>
       </div>
-      <div className="flex items-center">
+
+      <div className={isInterviewOnline ? "flex items-center" : "hidden"}>
         <TextInput
-          name="location"
-          label={isInterviewOnline ? dict.meetingLink : dict.address}
-          onChange={(e) => setLocation(e.target.value)}
+          name="interviewLink"
+          label={dict.meetingLink}
+          onChange={(e) => setInterviewLink(e.target.value)}
           className="max-w-3/4 w-[28rem] mr-4"
         />
-        {isInterviewOnline ? (
-          <div className="relative">
-            <Tooltip
-              content="We will provide the link later unless you add it here."
-              ariaLabel="We will provide the link later unless you add it here."
-            >
-              <InformationCircleIcon width={24} />
-            </Tooltip>
-          </div>
-        ) : (
-          ""
-        )}
+        <div className="relative">
+          <Tooltip
+            content="We will provide the link later unless you add it here."
+            ariaLabel="We will provide the link later unless you add it here."
+          >
+            <InformationCircleIcon width={24} />
+          </Tooltip>
+        </div>
+      </div>
+
+      <div className={!isInterviewOnline ? "flex" : "hidden"}>
+        <TextInput
+          name="interviewLocation"
+          value={interviewLocation}
+          label={dict.address}
+          onChange={(e) => setInterviewLocation(e.target.value)}
+          className={`max-w-3/4 w-[28rem] mr-4`}
+        />
       </div>
 
       <NumberInput
