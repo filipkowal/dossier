@@ -5,6 +5,7 @@ import { getDictionary } from "@/utils/server";
 import { getCandidate, getUser } from "@/utils";
 import CvAndCertificates from "./CvAndCertificates";
 import RejectSection from "./RejectSection";
+import DossierStatus from "./DossierStatus";
 
 export default async function Home({
   params,
@@ -23,6 +24,9 @@ export default async function Home({
           <div className="rounded-full sm:w-52 sm:h-52 h-40 w-40 bg-digitalent-yellow" />
         </div>
         <div className="flex flex-col mt-20 xl:mt-8 sm:px-16 2xl:px-32 px-8 mb-12">
+          {/* Mobile */}
+          <DossierStatus candidate={candidate} />
+
           <div className="flex flex-col md:hidden font-title text-2xl gap-12 mb-16">
             <div>
               <h1>
@@ -49,6 +53,7 @@ export default async function Home({
               </div>
             </div>
           </div>
+          {/* Mobile End */}
 
           <div className="flex flex-col lg:flex-row xl:flex-col  lg:gap-16 xl:gap-8 sm:gap-8 sm:mt-8 justify-between xl:w-[19rem]">
             <div className="md:w-1/2 xl:w-full">
@@ -75,7 +80,10 @@ export default async function Home({
       </div>
 
       <div className="flex flex-col">
+        {/* Desktop */}
         <div className="hidden xl:flex flex-col pt-16 sm:px-16 2xl:px-32 bg-digitalent-blue text-white justify-end h-[34vh] 3xl:h-[30vh]">
+          <DossierStatus candidate={candidate} />
+
           <div className="max-w-[48rem] font-title flex text-3xl gap-12 mb-16">
             <div className="text-digitalent-green">
               <h1>{dict.candidate.candidate}:</h1>
@@ -89,6 +97,7 @@ export default async function Home({
             </div>
           </div>
         </div>
+        {/* Desktop End */}
 
         <div className="flex flex-col my-12 sm:my-16 sm:px-16 md:px-24 lg:px-32 px-8">
           <div className="max-w-[48rem]">
