@@ -31,9 +31,12 @@ components:
         lastName:
           type: string
           example: Kowalski
-        jobTitle:
+        vacancyTitle:
           type: string
           example: Senior Consultant (CIO Advisory)
+        currentPosition:
+          type: string
+          example: Gardener Senior Consultant @Google
         employerName:
           type: string
           example: atrete ag
