@@ -42,6 +42,7 @@ export default function RejectSection({
           <p>{dict.reason}</p>
           <select
             value={reason}
+            required
             onChange={(e) => setReason(e.target.value)}
             className="bg-transparent border-2 border-digitalent-blue text-digitalent-blue px-4 -mx-[0.1rem] focus:outline-none focus:ring-2 focus:ring-digitalent-blue focus:border-transparent    "
           >
