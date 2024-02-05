@@ -82,7 +82,7 @@ export default async function RootLayout({
           {children}
 
           <footer className={`self-bottom w-full ${loew.variable}`}>
-            <div className="text-center py-2 max-w-full bg-digitalent-gray-dark font-sans text-[11px]">
+            <div className="text-center py-2 max-w-full bg-digitalent-gray-dark text-white font-sans text-[11px]">
               powered by
               <Link href="https://digitalent.community" target="_blank">
                 <span className="font-logo"> DIGITALENT </span>
