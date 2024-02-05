@@ -48,6 +48,7 @@
     },
     "slotStart": "Availibility Start Time",
     "slotEnd": "Availibility End Time",
+    "removeSlot": "Remove Slot",
     "send": "Send",
     "previous": "Previous",
     "next": "Next"

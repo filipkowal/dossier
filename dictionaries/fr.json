@@ -48,6 +48,7 @@
     },
     "slotStart": "Disponibilité début",
     "slotEnd": "Disponibilité fin",
+    "removeSlot": "Supprimer",
     "send": "Envoyer",
     "previous": "Précédent",
     "next": "Suivant"

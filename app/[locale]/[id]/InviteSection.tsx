@@ -297,7 +297,7 @@ function AvailibilityStep({
               }
               className="h-[2.75rem] mt-[0.9rem] flex items-center justify-center"
             >
-              <div>Remove slot</div>
+              <div>{dict.removeSlot}</div>
             </Button>
           </div>
         );
