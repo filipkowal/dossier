@@ -17,14 +17,14 @@ export interface paths {
     /** Retrieve user information */
     get: operations["getUser"];
   };
-  "/invite/{id}": {
+  "/candidate/{id}/invite": {
     /**
      * Invite a candidate
      * @description Locale is not specified as a candidate might use a different language than the user
      */
     post: operations["inviteUser"];
   };
-  "/reject/{id}": {
+  "/candidate/{id}/reject": {
     /**
      * Reject a candidate
      * @description Locale is not specified as a candidate might use a different language than the user
@@ -43,7 +43,9 @@ export interface components {
       /** @example Kowalski */
       lastName?: string;
       /** @example Senior Consultant (CIO Advisory) */
-      jobTitle?: string;
+      vacancyTitle?: string;
+      /** @example Gardener Senior Consultant @Google */
+      currentPosition?: string;
       /** @example atrete ag */
       employerName?: string;
       /** @example 01.01.1990 */

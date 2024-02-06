@@ -242,7 +242,7 @@ paths:
                   error:
                     type: string
 
-  /invite/{id}:
+  /candidate/{id}/invite:
     post:
       summary: Invite a candidate
       description: Locale is not specified as a candidate might use a different language than the user
@@ -286,7 +286,7 @@ paths:
       security:
         - OAuth2: ["arranger"]
 
-  /reject/{id}:
+  /candidate/{id}/reject:
     post:
       summary: Reject a candidate
       description: Locale is not specified as a candidate might use a different language than the user

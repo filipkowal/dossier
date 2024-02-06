@@ -36,7 +36,7 @@ export default async function Home({
               <h1 className="text-base mt-4 text-digitalent-green">
                 {" " + dict.candidate.candidatesFor}:
               </h1>
-              <h1 className="text-xl">{candidate.jobTitle}</h1>
+              <h1 className="text-xl">{candidate.vacancyTitle}</h1>
             </div>
           </div>
 
@@ -50,7 +50,7 @@ export default async function Home({
                 <h1>
                   {candidate.firstName} {candidate.lastName}
                 </h1>
-                <h1>{candidate.jobTitle}</h1>
+                <h1>{candidate.vacancyTitle}</h1>
               </div>
             </div>
           </div>
@@ -94,7 +94,7 @@ export default async function Home({
               <h1>
                 {candidate.firstName} {candidate.lastName}
               </h1>
-              <h1>{candidate.jobTitle}</h1>
+              <h1>{candidate.vacancyTitle}</h1>
             </div>
           </div>
         </div>
@@ -112,7 +112,7 @@ export default async function Home({
               {dict.candidate.noticePeriod}: {candidate.noticePeriod}
             </p>
             <p>
-              {dict.candidate.currentPosition}: {candidate.jobTitle}
+              {dict.candidate.currentPosition}: {candidate.currentPosition}
             </p>
             <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">
               {dict.candidate.relevantExperience}
