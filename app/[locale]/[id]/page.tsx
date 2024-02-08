@@ -6,6 +6,9 @@ import { getCandidate, getUser } from "@/utils";
 import CvAndCertificates from "./CvAndCertificates";
 import RejectSection from "./RejectSection";
 import DossierStatus from "./DossierStatus";
+import Link from "next/link";
+import LinkedInIcon from "@/public/linkedin.png";
+import Image from "next/image";
 
 export default async function Home({
   params,
@@ -56,14 +59,28 @@ export default async function Home({
           </div>
           {/* Mobile End */}
 
-          <div className="flex flex-col lg:flex-row xl:flex-col  lg:gap-16 xl:gap-8 sm:gap-8 sm:mt-8 justify-between xl:w-[19rem]">
+          <div className="flex flex-col leading-7 lg:flex-row xl:flex-col lg:gap-16 xl:gap-8 sm:gap-8 sm:mt-8 justify-between xl:w-[19rem]">
             <div className="md:w-1/2 xl:w-full">
               <h2 className="text-xl font-title mb-4 sm:mb-8">
                 {dict.candidate.contactDetails}
               </h2>
               <p>{candidate.phoneNumber}</p>
               <p>{candidate.email}</p>
-              <p>{candidate.linkedIn}</p>
+              {candidate.linkedIn && (
+                <Link
+                  href={candidate.linkedIn}
+                  target="_blank"
+                  className="block overflow-hidden whitespace-nowrap text-overflow-ellipsis max-w-[80%]"
+                >
+                  <Image
+                    alt="linked-in"
+                    src={LinkedInIcon}
+                    className="inline mb-[0.3rem]"
+                    width={18}
+                  />{" "}
+                  {candidate.linkedIn?.replace(/\/$/, "").slice(27)}
+                </Link>
+              )}
             </div>
             <div className="md:w-1/2 xl:w-full">
               <h2 className="text-xl font-title mb-4 mt-8 sm:mt-0 sm:mb-8 whitespace-nowrap">
