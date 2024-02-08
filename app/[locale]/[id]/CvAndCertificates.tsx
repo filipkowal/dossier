@@ -1,10 +1,10 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
-import { Document, Page } from "react-pdf";
 import { pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import { Candidate } from "@/utils";
+import PdfDocument from "@/components/PdfDocument";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
@@ -45,19 +45,13 @@ const CvAndCertificates = ({
       {cvAndCertificates?.map(
         (file, index) =>
           typeof file.content === "string" && (
-            <Document
-              file={{ data: atob(file.content) }}
+            <PdfDocument
               key={index}
-              onLoadSuccess={onDocumentLoadSuccess}
-            >
-              {Array.from(new Array(numPages), (el, index) => (
-                <Page
-                  key={`page_${index + 1}`}
-                  pageNumber={index + 1}
-                  width={parentWidth && parentWidth < 1000 ? parentWidth : 1000}
-                />
-              ))}
-            </Document>
+              fileContent={file.content}
+              numPages={numPages}
+              parentWidth={parentWidth}
+              onDocumentLoadSuccess={onDocumentLoadSuccess}
+            />
           )
       )}
     </div>
