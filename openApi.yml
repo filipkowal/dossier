@@ -129,6 +129,9 @@ components:
         city:
           type: string
           example: Bern
+        zip:
+          type: string
+          example: 30-101
         state:
           type: string
           example: Bern

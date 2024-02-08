@@ -90,7 +90,7 @@ export default async function Home({
                 {candidate.birthDate} {"(" + candidate.candidateAge + " y/o)"}
               </p>
               <p>{candidate.address?.street}</p>
-              <p>{candidate.address?.city}</p>
+              <p>{candidate.address?.city + " " + candidate.address?.zip}</p>
               <p>{candidate.address?.country}</p>
             </div>
           </div>

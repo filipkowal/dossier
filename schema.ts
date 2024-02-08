@@ -103,6 +103,8 @@ export interface components {
       street?: string;
       /** @example Bern */
       city?: string;
+      /** @example 30-101 */
+      zip?: string;
       /** @example Bern */
       state?: string;
       /** @example Western Part of Switzerland */
