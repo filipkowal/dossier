@@ -65,12 +65,12 @@ export default async function Home({
                 {dict.candidate.contactDetails}
               </h2>
               <p>{candidate.phoneNumber}</p>
-              <p>{candidate.email}</p>
+              <p className="overflow-hidden text-ellipsis">{candidate.email}</p>
               {candidate.linkedIn && (
                 <Link
                   href={candidate.linkedIn}
                   target="_blank"
-                  className="block overflow-hidden whitespace-nowrap text-overflow-ellipsis max-w-[80%]"
+                  className="block whitespace-nowrap overflow-hidden text-ellipsis max-w-[100%]"
                 >
                   <Image
                     alt="linked-in"
@@ -89,8 +89,12 @@ export default async function Home({
               <p className="whitespace-nowrap">
                 {candidate.birthDate} {"(" + candidate.candidateAge + " y/o)"}
               </p>
-              <p>{candidate.address?.street}</p>
-              <p>{candidate.address?.city + " " + candidate.address?.zip}</p>
+              <p className="overflow-hidden text-ellipsis">
+                {candidate.address?.street}
+              </p>
+              <p className="overflow-hidden text-ellipsis">
+                {candidate.address?.city + " " + candidate.address?.zip}
+              </p>
               <p>{candidate.address?.country}</p>
             </div>
           </div>
