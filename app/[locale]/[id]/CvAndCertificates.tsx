@@ -16,12 +16,7 @@ const CvAndCertificates = ({
 }: {
   cvAndCertificates: Candidate["files"];
 }) => {
-  const [numPages, setNumPages] = useState<number>();
   const [parentWidth, setParentWidth] = useState<number>();
-
-  function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
-    setNumPages(numPages);
-  }
 
   const parentRef = useRef<HTMLDivElement>(null);
 
@@ -48,9 +43,7 @@ const CvAndCertificates = ({
             <PdfDocument
               key={index}
               fileContent={file.content}
-              numPages={numPages}
               parentWidth={parentWidth}
-              onDocumentLoadSuccess={onDocumentLoadSuccess}
             />
           )
       )}
