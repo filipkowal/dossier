@@ -137,9 +137,13 @@ export default async function Home({
             <h2 className="text-xl font-title mb-4 sm:mb-8 ">
               {dict.candidate.professionalDetails}
             </h2>
-            <p>
-              {dict.candidate.desiredSalary}: {candidate.desiredSalary}
-            </p>
+            {user.canViewSalary ? (
+              <p>
+                {dict.candidate.desiredSalary}: {candidate.desiredSalary}
+              </p>
+            ) : (
+              ""
+            )}
             <p>
               {dict.candidate.noticePeriod}: {candidate.noticePeriod}
             </p>
