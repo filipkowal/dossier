@@ -165,24 +165,28 @@ export default async function Home({
         />
         <RejectSection dict={{ ...dict.rejectModal, ...dict.mainButtons }} />
 
-        <Suspense
-          fallback={
-            <Button
-              name="Pdf"
-              className="sm:w-1/3 xl:w-1/4 max-w-[32rem] bg-digitalent-gray-light hidden sm:block  disabled:hover:bg-digitalent-gray-light"
-              disabled
-            >
-              {dict.mainButtons.downloadAsPDF}
-            </Button>
-          }
-        >
-          <div className="hidden sm:block">
-            <PdfButton
-              dict={dict.mainButtons}
-              pdfDossierPromise={pdfDossierPromise}
-            />
-          </div>
-        </Suspense>
+        {user.canDownloadPdf ? (
+          <Suspense
+            fallback={
+              <Button
+                name="Pdf"
+                className="sm:w-1/3 xl:w-1/4 max-w-[32rem] bg-digitalent-gray-light hidden sm:block  disabled:hover:bg-digitalent-gray-light"
+                disabled
+              >
+                {dict.mainButtons.downloadAsPDF}
+              </Button>
+            }
+          >
+            <div className="hidden sm:block">
+              <PdfButton
+                dict={dict.mainButtons}
+                pdfDossierPromise={pdfDossierPromise}
+              />
+            </div>
+          </Suspense>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
