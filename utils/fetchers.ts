@@ -99,7 +99,7 @@ export async function getCandidate(
     init: { cache: "no-cache" },
   });
 
-  throwOnNoDataWhenBuilding(response, response, "candidates");
+  // throwOnNoDataWhenBuilding(response, response, "candidates");
 
   return response;
 }
