@@ -27,7 +27,15 @@ export default async function Home({
     <div className="w-full sm:pt-16 xl:grid xl:grid-cols-[minmax(450px,1fr),2fr] 2xl:grid-cols-[minmax(250px,1fr),2fr]">
       <div className="flex flex-col bg-digitalent-blue text-white sm:items-start xl:items-end md:px-8 lg:px-16 xl:px-0">
         <div className="flex flex-col justify-end items-center md:items-start xl:h-[34vh] 3xl:h-[30vh] pt-16 md:px-16 2xl:px-32 md:w-[27rem] 2xl:w-[35rem] w-full">
-          <div className="rounded-full sm:w-52 sm:h-52 h-40 w-40 bg-digitalent-yellow" />
+          {candidate.candidateImage?.content ? (
+            <img
+              alt="Candidate image"
+              src={"data:image/jpeg;base64," + candidate.candidateImage.content}
+              className="rounded-full sm:w-52 sm:h-52 h-40 w-40"
+            />
+          ) : (
+            <div className="rounded-full sm:w-52 sm:h-52 h-40 w-40 bg-digitalent-yellow" />
+          )}
         </div>
         <div className="block xl:hidden mt-16 -mb-16 px-8 sm:px-16 w-full">
           <DossierStatus candidate={candidate} />
