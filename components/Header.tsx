@@ -8,17 +8,18 @@ import Spinner from "./Spinner";
 import { getDictionary } from "@/utils/server/helpers";
 import { type Locale } from "@/i18n-config";
 import NavLinks from "./NavLinks";
-import Button from "./Button";
-import DownloadIcon from "@/public/download.png";
+import PdfButton from "@/app/[locale]/[id]/PdfButton";
+import { getPdfDossier } from "@/utils";
 
 export default async function Header({
   params,
   logo,
 }: {
-  params: { locale: Locale };
+  params: { locale: Locale; id: string };
   logo?: string;
 }) {
   const dict = await getDictionary(params.locale);
+  const pdfDossierPromise = getPdfDossier(params.locale, params.id);
 
   return (
     <header
@@ -49,14 +50,12 @@ export default async function Header({
         <div className="hidden sm:block">
           <NavLinks dict={dict.header} />
         </div>
-        <Button name={"PDF"} type="invert" className="flex gap-2 sm:hidden">
-          <Image
-            src={DownloadIcon}
-            className="h-4 w-4 mt-1"
-            alt="download as pdf"
-          />{" "}
-          PDF
-        </Button>
+        <div className="sm:hidden">
+          <PdfButton
+            dict={dict.mainButtons}
+            pdfDossierPromise={pdfDossierPromise}
+          />
+        </div>
         <div className="ml-8">
           <Suspense fallback={<Spinner />}>
             <LanguageSelector params={params} />

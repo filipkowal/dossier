@@ -176,10 +176,12 @@ export default async function Home({
             </Button>
           }
         >
-          <PdfButton
-            dict={dict.mainButtons}
-            pdfDossierPromise={pdfDossierPromise}
-          />
+          <div className="hidden sm:block">
+            <PdfButton
+              dict={dict.mainButtons}
+              pdfDossierPromise={pdfDossierPromise}
+            />
+          </div>
         </Suspense>
       </div>
     </div>

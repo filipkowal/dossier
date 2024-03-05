@@ -4,7 +4,6 @@ import "@/app/globals.css";
 import localFont from "next/font/local";
 import { Merriweather } from "next/font/google";
 import type { Metadata } from "next";
-import Script from "next/script";
 import CookiePopup from "@/components/CookiePopup";
 import { getDictionary } from "@/utils/server/helpers";
 import Header from "@/components/Header";
@@ -52,7 +51,7 @@ export default async function RootLayout({
   params,
   children,
 }: {
-  params: { locale: Locale };
+  params: { locale: Locale; id: string };
   children: React.ReactNode;
 }) {
   const dict = await getDictionary(params.locale);

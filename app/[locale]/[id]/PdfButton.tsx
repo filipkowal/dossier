@@ -1,6 +1,8 @@
 import Button from "@/components/Button";
 import { GetPdfDossierResponse } from "@/utils";
 import { Dictionary } from "@/utils/server";
+import DownloadIcon from "@/public/download.png";
+import Image from "next/image";
 
 export default async function PdfButton({
   dict,
@@ -19,13 +21,21 @@ export default async function PdfButton({
         new Blob([pdfDossier.content], { type: "application/pdf" })
       )}
       download="dossier.pdf"
-      className="sm:w-1/3 xl:w-1/4 max-w-[32rem] hidden sm:block"
+      className="sm:w-1/3 xl:w-1/4 max-w-[32rem]"
     >
       <Button
-        name="Pdf"
+        name="PDF"
         className="w-full h-full bg-digitalent-gray-light hidden sm:block disabled:hover:bg-digitalent-gray-light"
       >
         {dict.downloadAsPDF}
+      </Button>
+      <Button name={"PDF"} type="invert" className="flex gap-2 sm:hidden">
+        <Image
+          src={DownloadIcon}
+          className="h-4 w-4 mt-1"
+          alt="download as pdf"
+        />{" "}
+        PDF
       </Button>
     </a>
   );
