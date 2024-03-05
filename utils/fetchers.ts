@@ -79,18 +79,6 @@ function throwOnNoDataWhenBuilding(
   }
 }
 
-export async function getCandidateIds(): Promise<string[]> {
-  const response = await getData({
-    endpoint: "candidateIds",
-    // @fixme: add real cache policies to the fetchers
-    init: { cache: "no-cache" },
-  });
-
-  throwOnNoDataWhenBuilding(response, response, "candidateIds");
-
-  return response;
-}
-
 export async function getCandidate(
   locale: Locale,
   id: string
