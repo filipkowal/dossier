@@ -48,6 +48,8 @@ components:
         lastName:
           type: string
           example: Kowalski
+        candidateImage:
+          $ref: "#/components/schemas/File"
         vacancyTitle:
           type: string
           example: Senior Consultant (CIO Advisory)

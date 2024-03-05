@@ -5,13 +5,13 @@
 
 
 export interface paths {
-  "/candidateIds": {
-    /** Retrieve a list of candidate IDs */
-    get: operations["getCandidateIds"];
-  };
   "/{locale}/candidate/{id}": {
     /** Retrieve a candidate information */
     get: operations["getResource"];
+  };
+  "/{locale}/candidate/{id}/pdf": {
+    /** Download a candidate's dossier as a PDF */
+    get: operations["downloadPdf"];
   };
   "/{locale}/user/{id}": {
     /** Retrieve user information */
@@ -37,11 +37,22 @@ export type webhooks = Record<string, never>;
 
 export interface components {
   schemas: {
+    File: {
+      content?: string;
+      id?: string;
+      /** Format: int64 */
+      lastModified?: number;
+      name?: string;
+      /** Format: int64 */
+      size?: number;
+      type?: string;
+    };
     Candidate: {
       /** @example Christoph */
       firstName?: string;
       /** @example Kowalski */
       lastName?: string;
+      candidateImage?: components["schemas"]["File"];
       /** @example Senior Consultant (CIO Advisory) */
       vacancyTitle?: string;
       /** @example Gardener Senior Consultant @Google */
@@ -67,16 +78,7 @@ export interface components {
       reasonForChange?: string;
       /** @example Christoph Pfister ist seit vielen Jahren in verschiedenen Rollen im Bereich Informationstechnik unterwegs und würde sein Wissen und seine Erfahrung sehr gerne als Berater einbringen. Es reizt ihn spannende sowie komplexe Problemstellungen zu lösen und er kann dank seiner Erfahrung eine holistische Betrachtung auf Challenges einnehmen. In seiner aktuellen Rolle als CIO der PEAX AG verantwortet er die Produktentwicklung und den Betrieb einer SaaS-Plattform für digitale Services. In seiner zusätzlichen Gruppen-Rolle durfte er in der Base-Net Unternehmensgruppe verschiedene große Projekte erfolgreich umsetzen. Er ist sich gewohnt mit einer 360 Grad Sicht zu agieren und dazu die verschiedenen Sachverhalte und Themen für unterschiedliche Ziel- und Anspruchsgruppen verständlich und nachvollziehbar aufzubereiten und zu präsentieren. Als Mitglied des Enterprise Architektur Boards ist er zudem verantwortlich für die Identifikation sowie Einführung von neuen Technologien und für regulatorische und IT-rechtliche Themen. */
       interviewSummary?: string;
-      files?: {
-          content?: string;
-          id?: string;
-          /** Format: int64 */
-          lastModified?: number;
-          name?: string;
-          /** Format: int64 */
-          size?: number;
-          type?: string;
-        }[];
+      files?: components["schemas"]["File"][];
       /** @enum {string} */
       dossierPhase?: "candidateNotAssessed" | "candidateAccepted" | "interviewScheduled" | "candidateRejected";
       /** @example We will inform you which date Christoph has chosen so that you can send him the meeting invite. Please make sure to CC: atrete@digitalent.ch to the meeting */
@@ -133,25 +135,6 @@ export type external = Record<string, never>;
 
 export interface operations {
 
-  /** Retrieve a list of candidate IDs */
-  getCandidateIds: {
-    responses: {
-      /** @description Successful operation */
-      200: {
-        content: {
-          "application/json": string[];
-        };
-      };
-      /** @description Bad request */
-      400: {
-        content: {
-          "application/json": {
-            error?: string;
-          };
-        };
-      };
-    };
-  };
   /** Retrieve a candidate information */
   getResource: {
     parameters: {
@@ -165,6 +148,31 @@ export interface operations {
       200: {
         content: {
           "application/json": components["schemas"]["Candidate"];
+        };
+      };
+      /** @description Bad request */
+      400: {
+        content: {
+          "application/json": {
+            error?: string;
+          };
+        };
+      };
+    };
+  };
+  /** Download a candidate's dossier as a PDF */
+  downloadPdf: {
+    parameters: {
+      path: {
+        locale: string;
+        id: string;
+      };
+    };
+    responses: {
+      /** @description Successful operation */
+      200: {
+        content: {
+          "application/json": components["schemas"]["File"];
         };
       };
       /** @description Bad request */

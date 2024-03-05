@@ -1,6 +1,10 @@
 import { SERVER_URL } from "./constants";
 import { type Locale } from "../i18n-config";
-import { GetCandidateResponse, GetUserResponse } from ".";
+import {
+  GetCandidateResponse,
+  GetPdfDossierResponse,
+  GetUserResponse,
+} from ".";
 
 export async function postData(endpoint: string, locale: Locale, data?: any) {
   const url = `${SERVER_URL}/${locale}/${endpoint}`;
@@ -34,14 +38,23 @@ async function getData({
     const url = `${SERVER_URL}${locale ? `/${locale}` : ""}/${endpoint}`;
 
     const res = await fetch(url, init);
+    const contentType = res.headers.get("Content-Type");
 
     if (!res.ok) {
       throw new Error(`HTTP error! status: ${res.status}`);
     }
 
-    return res.json();
+    if (contentType?.includes("text/html")) {
+      throw new Error("HTML received instead of JSON");
+    }
+
+    const json = res.json();
+
+    return json;
   } catch (e: any) {
     const message = "Failed fetching " + endpoint + ": " + e.message;
+
+    console.error(message);
 
     if (
       typeof document === "undefined" &&
@@ -97,6 +110,18 @@ export async function getUser(
 ): Promise<GetUserResponse> {
   const response = await getData({
     endpoint: `user/${id}`,
+    locale,
+  });
+
+  return response;
+}
+
+export async function getPdfDossier(
+  locale: Locale,
+  id: string
+): Promise<GetPdfDossierResponse> {
+  const response = await getData({
+    endpoint: `candidate/${id}/pdf`,
     locale,
   });
 

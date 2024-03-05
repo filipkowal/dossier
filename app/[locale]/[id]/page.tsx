@@ -2,13 +2,15 @@ import Button from "@/components/Button";
 import { Locale } from "@/i18n-config";
 import InviteSection from "./InviteSection";
 import { getDictionary } from "@/utils/server";
-import { getCandidate, getUser } from "@/utils";
+import { getCandidate, getPdfDossier, getUser } from "@/utils";
 import CvAndCertificates from "./CvAndCertificates";
 import RejectSection from "./RejectSection";
 import DossierStatus from "./DossierStatus";
 import Link from "next/link";
 import LinkedInIcon from "@/public/linkedin.png";
 import Image from "next/image";
+import { Suspense } from "react";
+import PdfButton from "./PdfButton";
 
 export default async function Home({
   params,
@@ -19,6 +21,7 @@ export default async function Home({
   const dict = await getDictionary(params.locale);
   const candidate = await getCandidate(locale, id);
   const user = await getUser(locale, id);
+  const pdfDossierPromise = getPdfDossier(locale, id);
 
   return (
     <div className="w-full sm:pt-16 xl:grid xl:grid-cols-[minmax(450px,1fr),2fr] 2xl:grid-cols-[minmax(250px,1fr),2fr]">
@@ -154,12 +157,22 @@ export default async function Home({
         />
         <RejectSection dict={{ ...dict.rejectModal, ...dict.mainButtons }} />
 
-        <Button
-          name="Pdf"
-          className="sm:w-1/3 xl:w-1/4 max-w-[32rem] bg-digitalent-gray-light hidden sm:block"
+        <Suspense
+          fallback={
+            <Button
+              name="Pdf"
+              className="sm:w-1/3 xl:w-1/4 max-w-[32rem] bg-digitalent-gray-light hidden sm:block  disabled:hover:bg-digitalent-gray-light"
+              disabled
+            >
+              {dict.mainButtons.downloadAsPDF}
+            </Button>
+          }
         >
-          {dict.mainButtons.downloadAsPDF}
-        </Button>
+          <PdfButton
+            dict={dict.mainButtons}
+            pdfDossierPromise={pdfDossierPromise}
+          />
+        </Suspense>
       </div>
     </div>
   );
