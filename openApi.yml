@@ -22,6 +22,23 @@ components:
           scopes:
             arranger: Access to /invite and /reject endpoints
   schemas:
+    File:
+      type: object
+      properties:
+        content:
+          type: string
+        id:
+          type: string
+        lastModified:
+          type: integer
+          format: int64
+        name:
+          type: string
+        size:
+          type: integer
+          format: int64
+        type:
+          type: string
     Candidate:
       type: object
       properties:
@@ -72,22 +89,7 @@ components:
         files:
           type: array
           items:
-            type: object
-            properties:
-              content:
-                type: string
-              id:
-                type: string
-              lastModified:
-                type: integer
-                format: int64
-              name:
-                type: string
-              size:
-                type: integer
-                format: int64
-              type:
-                type: string
+            $ref: "#/components/schemas/File"
         dossierPhase:
           type: string
           enum:
@@ -203,6 +205,38 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Candidate"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /{locale}/candidate/{id}/pdf:
+    get:
+      summary: Download a candidate's dossier as a PDF
+      operationId: downloadPdf
+      parameters:
+        - name: locale
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/File"
         "400":
           description: Bad request
           content:
