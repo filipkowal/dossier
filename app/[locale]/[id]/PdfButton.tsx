@@ -14,24 +14,19 @@ export default async function PdfButton({
   if (!pdfDossier?.content) return null;
 
   return (
-    <Button
-      name="Pdf"
-      className="sm:w-1/3 xl:w-1/4 max-w-[32rem] bg-digitalent-gray-light hidden sm:block disabled:hover:bg-digitalent-gray-light"
-      disabled={!pdfDossier.content}
-      onClick={() => {
-        if (!pdfDossier.content) return;
-
-        const blob = new Blob([pdfDossier.content], {
-          type: "application/pdf",
-        });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "dossier.pdf";
-        a.click();
-      }}
+    <a
+      href={URL.createObjectURL(
+        new Blob([pdfDossier.content], { type: "application/pdf" })
+      )}
+      download="dossier.pdf"
+      className="sm:w-1/3 xl:w-1/4 max-w-[32rem] hidden sm:block"
     >
-      {dict.downloadAsPDF}
-    </Button>
+      <Button
+        name="Pdf"
+        className="w-full h-full bg-digitalent-gray-light hidden sm:block disabled:hover:bg-digitalent-gray-light"
+      >
+        {dict.downloadAsPDF}
+      </Button>
+    </a>
   );
 }
