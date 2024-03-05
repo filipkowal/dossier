@@ -24,18 +24,14 @@ export async function postData(endpoint: string, locale: Locale, data?: any) {
 async function getData({
   endpoint,
   locale,
-  param,
   init = {},
 }: {
   endpoint: string;
   locale?: Locale;
-  param?: string;
   init?: RequestInit;
 }) {
   try {
-    const url = `${SERVER_URL}${locale ? `/${locale}` : ""}/${endpoint}${
-      param ? `/${param}` : ""
-    }`;
+    const url = `${SERVER_URL}${locale ? `/${locale}` : ""}/${endpoint}`;
 
     const res = await fetch(url, init);
 
@@ -84,8 +80,7 @@ export async function getCandidate(
   id: string
 ): Promise<GetCandidateResponse> {
   const response = await getData({
-    endpoint: "candidate",
-    param: id,
+    endpoint: `candidate/${id}`,
     locale,
     // @fixme: add real cache policies to the fetchers
     init: { cache: "no-cache" },
@@ -101,8 +96,7 @@ export async function getUser(
   id: string
 ): Promise<GetUserResponse> {
   const response = await getData({
-    endpoint: "user",
-    param: id,
+    endpoint: `user/${id}`,
     locale,
   });
 
