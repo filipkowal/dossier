@@ -158,31 +158,6 @@ components:
           $ref: "#/components/schemas/GeoCoordinate"
 
 paths:
-  /candidateIds:
-    get:
-      summary: Retrieve a list of candidate IDs
-      operationId: getCandidateIds
-      responses:
-        "200":
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: string
-                  example: "1"
-                example: ["1", "2", "3", "4", "5"]
-        "400":
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-
   /{locale}/candidate/{id}:
     get:
       summary: Retrieve a candidate information
