@@ -115,13 +115,13 @@ components:
           type: boolean
         canViewSalary:
           type: boolean
-        isSettingAvailibility:
-          description: False means User Case 3
-          type: boolean
         isInviting:
-          description: True means User Case 2
+          description: True means User Case 2 or 3, there's no Location/Link input then. False means User Case 1.
           type: boolean
           example: false
+        isSettingAvailibility:
+          description: False means User Case 3. True means User Case 1 or 2.
+          type: boolean
         address:
           $ref: "#/components/schemas/Address"
     Address:
