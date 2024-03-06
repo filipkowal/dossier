@@ -9,22 +9,23 @@ import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import NumberInput from "@/components/NumberInput";
 import { type Dictionary } from "@/utils/server";
 import { User } from "@/utils";
+import FormFooterButtons from "@/components/FormFooterButtons";
 
 type TimeSlots = { id: number; startTime: string; endTime: string }[];
 
 export default function InviteSection({
   dict,
-  userAddress,
+  user,
 }: {
   dict: Dictionary["inviteModal"] & Dictionary["mainButtons"];
-  userAddress: User["address"];
+  user: User;
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [step, setStep] = useState<0 | 1>(0);
+  const [step, setStep] = useState<number>(0);
 
   const [isInterviewOnline, setIsInterviewOnline] = useState(true);
   const [inteviewLocation, setInterviewLocation] = useState(
-    `${userAddress?.street}, ${userAddress?.city}, ${userAddress?.country}` ||
+    `${user.address?.street}, ${user.address?.city}, ${user.address?.country}` ||
       ""
   );
   const [interviewLink, setInterviewLink] = useState("");
@@ -32,73 +33,42 @@ export default function InviteSection({
   const [interviewDuration, setInterviewDuration] = useState(30);
   const [newSlot, setNewSlot] = useState({ id: 0, startTime: "", endTime: "" });
 
-  const steps = [
-    <LocationStep
-      key={"locationStep"}
-      setStep={setStep}
-      setIsInterviewOnline={setIsInterviewOnline}
-      interviewLocation={inteviewLocation}
-      setInterviewLocation={setInterviewLocation}
-      interviewLink={interviewLink}
-      setInterviewLink={setInterviewLink}
-      isInterviewOnline={isInterviewOnline}
-      interviewDuration={interviewDuration}
-      setInterviewDuration={setInterviewDuration}
-      dict={dict}
-    />,
-    <AvailibilityStep
-      key={"availibilityStep"}
-      newSlot={newSlot}
-      setNewSlot={setNewSlot}
-      availibilitySlots={availibilitySlots}
-      setAvailibilitySlots={setAvailibilitySlots}
-      dict={dict}
-    />,
-  ];
+  const steps = [];
 
-  const footers = [
-    <Button
-      key={0}
-      type="primary"
-      name="Invite"
-      onClick={() => setStep(() => 1)}
-    >
-      {dict.next}
-    </Button>,
-    <>
-      <Button
-        key={1}
-        type="default"
-        name="Previous"
-        onClick={() => setStep((step) => 0)}
-      >
-        {dict.previous}
-      </Button>
-
-      <Button
-        type="primary"
-        submitType
-        name="Send"
-        onClick={(e) => {
-          e.preventDefault();
-
-          const formValues = {
-            interviewDuration,
-            isInterviewOnline,
-            location: isInterviewOnline ? interviewLink : inteviewLocation,
-            availibilitySlots: [
-              ...availibilitySlots,
-              newSlot.startTime ? newSlot : null,
-            ],
-          };
-          console.log("vals: ", formValues);
-          setIsOpen(false);
+  if (user.isInviting) {
+    steps.push(
+      <LocationStep
+        {...{
+          key: "locationStep",
+          setStep,
+          setIsInterviewOnline,
+          interviewLocation: inteviewLocation,
+          setInterviewLocation,
+          interviewLink,
+          setInterviewLink,
+          isInterviewOnline,
+          interviewDuration,
+          setInterviewDuration,
+          dict,
         }}
-      >
-        {dict.send}
-      </Button>
-    </>,
-  ];
+      />
+    );
+  }
+
+  if (user.isSettingAvailibility) {
+    steps.push(
+      <AvailibilityStep
+        {...{
+          key: "availibilityStep",
+          newSlot,
+          setNewSlot,
+          availibilitySlots,
+          setAvailibilitySlots,
+          dict,
+        }}
+      />
+    );
+  }
 
   return (
     <>
@@ -115,8 +85,28 @@ export default function InviteSection({
       <Dialog
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        title={dict[`title${step}`]}
-        footer={footers[step]}
+        title={dict[`title${step as 0 | 1}`]}
+        footer={
+          <FormFooterButtons
+            step={step}
+            setStep={setStep}
+            stepsLength={steps.length}
+            dict={dict}
+            onSubmit={() => {
+              const formValues = {
+                interviewDuration,
+                isInterviewOnline,
+                location: isInterviewOnline ? interviewLink : inteviewLocation,
+                availibilitySlots: [
+                  ...availibilitySlots,
+                  newSlot.startTime ? newSlot : null,
+                ],
+              };
+              console.log("vals: ", formValues);
+              setIsOpen(false);
+            }}
+          />
+        }
       >
         <form className="flex flex-col gap-6">{steps[step]}</form>
       </Dialog>
@@ -125,18 +115,16 @@ export default function InviteSection({
 }
 
 function LocationStep({
-  setStep,
   setIsInterviewOnline,
   interviewLocation,
   setInterviewLocation,
-  interviewLink,
   setInterviewLink,
   isInterviewOnline,
   interviewDuration,
   setInterviewDuration,
   dict,
 }: {
-  setStep: Dispatch<SetStateAction<0 | 1>>;
+  setStep: Dispatch<SetStateAction<number>>;
   setIsInterviewOnline: Dispatch<SetStateAction<boolean>>;
   interviewLocation: string;
   setInterviewLocation: Dispatch<SetStateAction<string>>;

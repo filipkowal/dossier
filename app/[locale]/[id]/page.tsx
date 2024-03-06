@@ -165,7 +165,7 @@ export default async function Home({
       <div className="flex fixed md:bottom-6 bottom-0 justify-center sm:gap-3 md:gap-6 w-full">
         <InviteSection
           dict={{ ...dict.inviteModal, ...dict.mainButtons }}
-          userAddress={user.address}
+          user={user}
         />
         <RejectSection dict={{ ...dict.rejectModal, ...dict.mainButtons }} />
 
