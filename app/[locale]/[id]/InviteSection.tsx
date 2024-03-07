@@ -43,19 +43,17 @@ export default function InviteSection({
   if (user.isInviting) {
     steps.push(
       <LocationStep
-        {...{
-          key: "locationStep",
-          setStep,
-          setIsInterviewOnline,
-          interviewLocation: inteviewLocation,
-          setInterviewLocation,
-          interviewLink,
-          setInterviewLink,
-          isInterviewOnline,
-          interviewDuration,
-          setInterviewDuration,
-          dict,
-        }}
+        key="locationStep"
+        setStep={setStep}
+        setIsInterviewOnline={setIsInterviewOnline}
+        interviewLocation={inteviewLocation}
+        setInterviewLocation={setInterviewLocation}
+        interviewLink={interviewLink}
+        setInterviewLink={setInterviewLink}
+        isInterviewOnline={isInterviewOnline}
+        interviewDuration={interviewDuration}
+        setInterviewDuration={setInterviewDuration}
+        dict={dict}
       />
     );
   }
@@ -63,14 +61,12 @@ export default function InviteSection({
   if (user.isSettingAvailibility) {
     steps.push(
       <AvailibilityStep
-        {...{
-          key: "availibilityStep",
-          newSlot,
-          setNewSlot,
-          availibilitySlots,
-          setAvailibilitySlots,
-          dict,
-        }}
+        key="availibilityStep"
+        newSlot={newSlot}
+        setNewSlot={setNewSlot}
+        availibilitySlots={availibilitySlots}
+        setAvailibilitySlots={setAvailibilitySlots}
+        dict={dict}
       />
     );
   }
