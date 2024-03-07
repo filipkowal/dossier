@@ -58,5 +58,8 @@
     "reason": "Dommage. Quelle est la raison de votre décision?",
     "message": "Commentaires (facultatif)",
     "send": "Envoyer"
+  },
+  "toastMessages": {
+    "somethingWrong": "Quelque chose a mal tourné. Veuillez réessayer plus tard."
   }
 }

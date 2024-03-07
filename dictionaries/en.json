@@ -58,5 +58,8 @@
     "reason": "Too bad. What is the background for your decision?",
     "message": "Comments (optional)",
     "send": "Send"
+  },
+  "toastMessages": {
+    "somethingWrong": "Something went wrong. Please try again later."
   }
 }

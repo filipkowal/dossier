@@ -58,5 +58,8 @@
     "reason": "Zu schlecht. Was ist der Hintergrund für Ihre Entscheidung?",
     "message": "Kommentare (optional)",
     "send": "Senden"
+  },
+  "toastMessages": {
+    "somethingWrong": "Etwas ist schief gelaufen. Bitte versuchen Sie es später noch einmal."
   }
 }
