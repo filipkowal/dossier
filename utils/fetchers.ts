@@ -6,8 +6,8 @@ import {
   GetUserResponse,
 } from ".";
 
-export async function postData(endpoint: string, locale: Locale, data?: any) {
-  const url = `${SERVER_URL}/${locale}/${endpoint}`;
+export async function postData(endpoint: string, data?: any) {
+  const url = `${SERVER_URL}/${endpoint}`;
   const rawResponse = await fetch(url, {
     method: "POST",
     headers: {
@@ -129,14 +129,13 @@ export async function getPdfDossier(
 }
 
 export async function inviteCandidate(
-  locale: Locale,
   id: string,
   duration: string,
   address: string,
   channel: string,
   startTime: string
 ) {
-  const response = await postData(`invite/${id}`, locale, {
+  const response = await postData(`invite/${id}`, {
     duration,
     address,
     channel,
@@ -146,8 +145,12 @@ export async function inviteCandidate(
   return response;
 }
 
-export async function rejectCandidate(locale: Locale, id: string) {
-  const response = await postData(`reject/${id}`, locale);
+export async function rejectCandidate(
+  id: string,
+  reason: string,
+  message: string
+) {
+  const response = await postData(`reject/${id}`, { reason, message });
 
   return response;
 }
