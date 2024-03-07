@@ -8,17 +8,22 @@ import Tooltip from "@/components/Tooltip";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import NumberInput from "@/components/NumberInput";
 import { type Dictionary } from "@/utils/server";
-import { User } from "@/utils";
+import { User, inviteCandidate } from "@/utils";
 import FormFooterButtons from "@/components/FormFooterButtons";
+import toast from "react-hot-toast";
 
 type TimeSlots = { id: number; startTime: string; endTime: string }[];
 
 export default function InviteSection({
   dict,
   user,
+  id,
 }: {
-  dict: Dictionary["inviteModal"] & Dictionary["mainButtons"];
+  dict: Dictionary["inviteModal"] &
+    Dictionary["mainButtons"] &
+    Dictionary["toastMessages"];
   user: User;
+  id: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState<number>(0);
@@ -92,18 +97,29 @@ export default function InviteSection({
             setStep={setStep}
             stepsLength={steps.length}
             dict={dict}
-            onSubmit={() => {
-              const formValues = {
-                interviewDuration,
-                isInterviewOnline,
-                location: isInterviewOnline ? interviewLink : inteviewLocation,
-                availibilitySlots: [
-                  ...availibilitySlots,
-                  newSlot.startTime ? newSlot : null,
-                ],
-              };
-              console.log("vals: ", formValues);
-              setIsOpen(false);
+            onSubmit={async () => {
+              const slots = availibilitySlots;
+              if (newSlot.startTime) {
+                slots.push(newSlot);
+              }
+
+              try {
+                const formValues = {
+                  duration: interviewDuration,
+                  channel: isInterviewOnline
+                    ? "online"
+                    : ("onsite" as "online" | "onsite"),
+                  address: inteviewLocation,
+                  url: interviewLink,
+                  availibilitySlots: slots,
+                };
+
+                await inviteCandidate(id, formValues);
+
+                setIsOpen(false);
+              } catch (e) {
+                toast.error(dict["somethingWrong"]);
+              }
             }}
           />
         }

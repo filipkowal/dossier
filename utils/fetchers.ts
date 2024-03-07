@@ -130,17 +130,18 @@ export async function getPdfDossier(
 
 export async function inviteCandidate(
   id: string,
-  duration: string,
-  address: string,
-  channel: string,
-  startTime: string
+  data: {
+    interviewDuration?: number;
+    channel?: "online" | "onsite";
+    address?: string;
+    url?: string;
+    availibilitySlots?: {
+      startTime?: string;
+      endTime?: string;
+    }[];
+  }
 ) {
-  const response = await postData(`invite/${id}`, {
-    duration,
-    address,
-    channel,
-    startTime,
-  });
+  const response = await postData(`invite/${id}`, data);
 
   return response;
 }

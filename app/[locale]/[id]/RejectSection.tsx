@@ -40,9 +40,6 @@ export default function RejectSection({
           onSubmit={async (e) => {
             e.preventDefault();
 
-            // Send the form data to the server
-            console.log({ reason, message });
-
             try {
               await rejectCandidate(id, reason, message);
               setIsOpen(false);
