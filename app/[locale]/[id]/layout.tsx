@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 import CookiePopup from "@/components/CookiePopup";
 import { getDictionary } from "@/utils/server/helpers";
 import Header from "@/components/Header";
+import ToastProvider from "@/components/ToastProvider";
 
 export const metadata: Metadata = {
   title: "Digitalent Dossier",
@@ -77,6 +78,7 @@ export default async function RootLayout({
       </head>
       <body className="font-serif">
         <main className="min-h-screen bg-digitalent-gray-light flex flex-col justify-between">
+          <ToastProvider />
           <Header params={params} />
           {children}
 

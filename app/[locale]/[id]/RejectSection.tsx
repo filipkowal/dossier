@@ -3,13 +3,19 @@
 import Button from "@/components/Button";
 import Dialog from "@/components/Dialog";
 import TextInput from "@/components/TextInput";
+import { rejectCandidate } from "@/utils";
 import { Dictionary } from "@/utils/server";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function RejectSection({
   dict,
+  id,
 }: {
-  dict: Dictionary["rejectModal"] & Dictionary["mainButtons"];
+  dict: Dictionary["rejectModal"] &
+    Dictionary["mainButtons"] &
+    Dictionary["toastMessages"];
+  id: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [reason, setReason] = useState("");
@@ -31,12 +37,18 @@ export default function RejectSection({
       <Dialog isOpen={isOpen} setIsOpen={setIsOpen} title={dict.title}>
         <form
           className="flex flex-col gap-4"
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
 
             // Send the form data to the server
             console.log({ reason, message });
-            setIsOpen(false);
+
+            try {
+              await rejectCandidate(id, reason, message);
+              setIsOpen(false);
+            } catch (e) {
+              toast.error(dict["somethingWrong"]);
+            }
           }}
         >
           <p>{dict.reason}</p>

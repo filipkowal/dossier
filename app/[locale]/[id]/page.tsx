@@ -167,7 +167,14 @@ export default async function Home({
           dict={{ ...dict.inviteModal, ...dict.mainButtons }}
           user={user}
         />
-        <RejectSection dict={{ ...dict.rejectModal, ...dict.mainButtons }} />
+        <RejectSection
+          dict={{
+            ...dict.rejectModal,
+            ...dict.mainButtons,
+            ...dict.toastMessages,
+          }}
+          id={id}
+        />
 
         {user.canDownloadPdf ? (
           <Suspense
