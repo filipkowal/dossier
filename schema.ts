@@ -91,13 +91,13 @@ export interface components {
     User: {
       canDownloadPdf?: boolean;
       canViewSalary?: boolean;
-      /** @description False means User Case 3 */
-      isSettingAvailibility?: boolean;
       /**
-       * @description True means User Case 2
+       * @description True means User Case 2 or 3, there's no Location/Link input then. False means User Case 1.
        * @example false
        */
       isInviting?: boolean;
+      /** @description False means User Case 3. True means User Case 1 or 2. */
+      isSettingAvailibility?: boolean;
       address?: components["schemas"]["Address"];
     };
     Address: {
@@ -227,7 +227,9 @@ export interface operations {
           interviewDuration?: number;
           /** @enum {string} */
           channel?: "online" | "onsite";
-          address?: components["schemas"]["Address"];
+          address?: string;
+          /** @example https://meet.google.com/abc-def-ghi */
+          url?: string;
           availibilitySlots?: {
               /** Format: date-time */
               startTime?: string;

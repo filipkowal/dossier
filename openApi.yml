@@ -280,7 +280,10 @@ paths:
                   type: string
                   enum: ["online", "onsite"]
                 address:
-                  $ref: "#/components/schemas/Address"
+                  type: string
+                url:
+                  type: string
+                  example: "https://meet.google.com/abc-def-ghi"
                 availibilitySlots:
                   type: array
                   items:
