@@ -227,9 +227,8 @@ function AvailibilityStep({
   dict: Dictionary["inviteModal"];
 }) {
   useEffect(() => {
-    if (!newSlot.startTime) return;
-    setNewSlot((slot) => {
-      const startTime = new Date(slot.startTime);
+    if (newSlot.startTime && !newSlot.endTime) {
+      const startTime = new Date(newSlot.startTime);
       const endTime = new Date(startTime.getTime() + 60 * 60 * 1000);
 
       const endTimeFormatted = new Date(
@@ -238,12 +237,30 @@ function AvailibilityStep({
         .toISOString()
         .slice(0, 16);
 
-      return {
+      setNewSlot((slot) => ({
         ...slot,
         endTime: endTimeFormatted,
-      };
-    });
-  }, [newSlot.startTime, setNewSlot]);
+      }));
+      return;
+    }
+
+    if (newSlot.endTime && !newSlot.startTime) {
+      const endTime = new Date(newSlot.endTime);
+      const startTime = new Date(endTime.getTime() - 60 * 60 * 1000);
+
+      const startTimeFormatted = new Date(
+        startTime.getTime() - startTime.getTimezoneOffset() * 60000
+      )
+        .toISOString()
+        .slice(0, 16);
+
+      setNewSlot((slot) => ({
+        ...slot,
+        startTime: startTimeFormatted,
+      }));
+      return;
+    }
+  }, [newSlot.startTime, newSlot.endTime, setNewSlot]);
 
   return (
     <>
