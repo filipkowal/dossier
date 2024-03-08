@@ -60,6 +60,7 @@
     "send": "Send"
   },
   "toastMessages": {
-    "somethingWrong": "Something went wrong. Please try again later."
+    "somethingWrong": "Something went wrong. Please try again later.",
+    "noSlots": "Please add at least one availibility time slot."
   }
 }

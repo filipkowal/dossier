@@ -60,6 +60,7 @@
     "send": "Senden"
   },
   "toastMessages": {
-    "somethingWrong": "Etwas ist schief gelaufen. Bitte versuchen Sie es später noch einmal."
+    "somethingWrong": "Etwas ist schief gelaufen. Bitte versuchen Sie es später noch einmal.",
+    "noSlots": "Bitte fügen Sie mindestens einen Verfügbarkeitszeitraum hinzu."
   }
 }

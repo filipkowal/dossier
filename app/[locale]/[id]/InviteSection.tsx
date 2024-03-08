@@ -95,8 +95,13 @@ export default function InviteSection({
             dict={dict}
             onSubmit={async () => {
               const slots = availibilitySlots;
-              if (newSlot.startTime) {
+              if (newSlot.startTime && newSlot.endTime) {
                 slots.push(newSlot);
+              }
+
+              if (slots.length === 0) {
+                toast.error(dict["noSlots"]);
+                return;
               }
 
               try {

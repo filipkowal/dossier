@@ -60,6 +60,7 @@
     "send": "Envoyer"
   },
   "toastMessages": {
-    "somethingWrong": "Quelque chose a mal tourné. Veuillez réessayer plus tard."
+    "somethingWrong": "Quelque chose a mal tourné. Veuillez réessayer plus tard.",
+    "noSlots": "Veuillez ajouter au moins un créneau de disponibilité."
   }
 }
