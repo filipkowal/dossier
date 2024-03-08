@@ -226,41 +226,7 @@ function AvailibilityStep({
   setAvailibilitySlots: Dispatch<SetStateAction<TimeSlots>>;
   dict: Dictionary["inviteModal"];
 }) {
-  useEffect(() => {
-    if (newSlot.startTime && !newSlot.endTime) {
-      const startTime = new Date(newSlot.startTime);
-      const endTime = new Date(startTime.getTime() + 60 * 60 * 1000);
-
-      const endTimeFormatted = new Date(
-        endTime.getTime() - endTime.getTimezoneOffset() * 60000
-      )
-        .toISOString()
-        .slice(0, 16);
-
-      setNewSlot((slot) => ({
-        ...slot,
-        endTime: endTimeFormatted,
-      }));
-      return;
-    }
-
-    if (newSlot.endTime && !newSlot.startTime) {
-      const endTime = new Date(newSlot.endTime);
-      const startTime = new Date(endTime.getTime() - 60 * 60 * 1000);
-
-      const startTimeFormatted = new Date(
-        startTime.getTime() - startTime.getTimezoneOffset() * 60000
-      )
-        .toISOString()
-        .slice(0, 16);
-
-      setNewSlot((slot) => ({
-        ...slot,
-        startTime: startTimeFormatted,
-      }));
-      return;
-    }
-  }, [newSlot.startTime, newSlot.endTime, setNewSlot]);
+  useCreateOneHourSlot(newSlot, setNewSlot);
 
   return (
     <>
@@ -351,4 +317,52 @@ function AvailibilityStep({
       </Button>
     </>
   );
+}
+
+/**
+ * Custom hook that updates the newSlot state to ensure that both startTime and endTime are always present.
+ * If only startTime is provided, it calculates the endTime by adding 1 hour to the startTime.
+ * If only endTime is provided, it calculates the startTime by subtracting 1 hour from the endTime.
+ * @param {TimeSlots[0]} newSlot - The newSlot state object.
+ * @param {Dispatch<SetStateAction<TimeSlots[0]>>} setNewSlot - The state setter function for newSlot.
+ */
+function useCreateOneHourSlot(
+  newSlot: TimeSlots[0],
+  setNewSlot: Dispatch<SetStateAction<TimeSlots[0]>>
+) {
+  useEffect(() => {
+    if (newSlot.startTime && !newSlot.endTime) {
+      const startTime = new Date(newSlot.startTime);
+      const endTime = new Date(startTime.getTime() + 60 * 60 * 1000);
+
+      const endTimeFormatted = new Date(
+        endTime.getTime() - endTime.getTimezoneOffset() * 60000
+      )
+        .toISOString()
+        .slice(0, 16);
+
+      setNewSlot((slot) => ({
+        ...slot,
+        endTime: endTimeFormatted,
+      }));
+      return;
+    }
+
+    if (newSlot.endTime && !newSlot.startTime) {
+      const endTime = new Date(newSlot.endTime);
+      const startTime = new Date(endTime.getTime() - 60 * 60 * 1000);
+
+      const startTimeFormatted = new Date(
+        startTime.getTime() - startTime.getTimezoneOffset() * 60000
+      )
+        .toISOString()
+        .slice(0, 16);
+
+      setNewSlot((slot) => ({
+        ...slot,
+        startTime: startTimeFormatted,
+      }));
+      return;
+    }
+  }, [newSlot.startTime, newSlot.endTime, setNewSlot]);
 }
