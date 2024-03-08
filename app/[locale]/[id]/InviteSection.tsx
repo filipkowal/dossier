@@ -226,6 +226,8 @@ function AvailibilityStep({
   setAvailibilitySlots: Dispatch<SetStateAction<TimeSlots>>;
   dict: Dictionary["inviteModal"];
 }) {
+  const [showNewSlot, setShowNewSlot] = useState(true);
+
   useCreateOneHourSlot(newSlot, setNewSlot);
 
   return (
@@ -286,32 +288,57 @@ function AvailibilityStep({
         );
       })}
 
-      <div className="flex flex-col sm:flex-row gap-6">
-        <TextInput
-          name={`newSlot-startTime`}
-          type="datetime-local"
-          className="w-72"
-          value={newSlot.startTime}
-          onChange={(e) =>
-            setNewSlot({ ...newSlot, startTime: e.target.value })
-          }
-          label={dict.slotStart}
-        />
-        <TextInput
-          name={`newSlot-endTime`}
-          type="datetime-local"
-          className="w-72"
-          value={newSlot.endTime}
-          onChange={(e) => setNewSlot({ ...newSlot, endTime: e.target.value })}
-          label={dict.slotEnd}
-        />
-      </div>
+      {showNewSlot && (
+        <div className="flex flex-col sm:flex-row gap-6">
+          <TextInput
+            name={`newSlot-startTime`}
+            type="datetime-local"
+            className="w-72"
+            value={newSlot.startTime}
+            onChange={(e) =>
+              setNewSlot({ ...newSlot, startTime: e.target.value })
+            }
+            label={dict.slotStart}
+          />
+          <TextInput
+            name={`newSlot-endTime`}
+            type="datetime-local"
+            className="w-72"
+            value={newSlot.endTime}
+            onChange={(e) =>
+              setNewSlot({ ...newSlot, endTime: e.target.value })
+            }
+            label={dict.slotEnd}
+          />
+
+          {availibilitySlots.length > 0 ? (
+            <Button
+              onClick={() => {
+                setNewSlot((slot) => ({
+                  ...slot,
+                  startTime: "",
+                  endTime: "",
+                }));
+                setShowNewSlot(false);
+              }}
+              className="h-[2.75rem] mt-[0.9rem] flex items-center justify-center"
+            >
+              <div>{dict.removeSlot}</div>
+            </Button>
+          ) : null}
+        </div>
+      )}
+
       <Button
         name="Add new slot"
         onClick={() => {
-          setAvailibilitySlots((slots) => [...slots, newSlot]);
+          if (newSlot.startTime && newSlot.endTime) {
+            setAvailibilitySlots((slots) => [...slots, newSlot]);
+          }
           setNewSlot({ id: newSlot.id + 1, startTime: "", endTime: "" });
+          setShowNewSlot(true);
         }}
+        disabled={(!newSlot.startTime || !newSlot.endTime) && showNewSlot}
       >
         Add new availibility slot
       </Button>
