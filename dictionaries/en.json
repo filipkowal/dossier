@@ -26,14 +26,14 @@
   },
   "mainButtons": {
     "inviteToInterview": "Invite to an interview",
-    "notInterested": "Not interested",
+    "notInterested": "Do not invite and reject",
     "downloadAsPDF": "Download as PDF",
     "reject": "Reject",
     "invite": "Invite"
   },
   "inviteModal": {
     "title0": "Interview Location & Duration",
-    "title1": "Your Availibility",
+    "title1": "Your Availability",
     "location": "Location",
     "online": "Online",
     "inPerson": "In person",

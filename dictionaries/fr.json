@@ -26,7 +26,7 @@
   },
   "mainButtons": {
     "inviteToInterview": "Inviter à un entretien",
-    "notInterested": "Pas intéressé",
+    "notInterested": "Ne pas inviter et refuser",
     "downloadAsPDF": "Télécharger en PDF",
     "reject": "Rejeter",
     "invite": "Inviter"
@@ -36,7 +36,7 @@
     "title1": "Votre disponibilité",
     "location": "Lieu",
     "online": "Online",
-    "inPerson": "En personne",
+    "inPerson": "En personne sur place",
     "meetingLink": "Lien vers la réunion en ligne (facultatif)",
     "meetingLinkTooltip": "Nous fournirons le lien ultérieurement à moins que vous ne l'ajoutiez ici.",
     "address": "Adresse de l'entretien",

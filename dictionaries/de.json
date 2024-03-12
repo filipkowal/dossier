@@ -1,7 +1,7 @@
 {
   "cookiePopup": {
     "title": "Cookie-Hinweis",
-    "message": "Diese Website verwendet Cookies, um Ihre Browsing-Erfahrung zu verbessern und zu Analyse- sowie Werbezwecken.",
+    "message": "Diese Website verwendet Cookies, um deine Browsing-Erfahrung zu verbessern und zu Analyse- sowie Werbezwecken.",
     "acceptButton": "Akzeptieren"
   },
   "header": {
@@ -26,7 +26,7 @@
   },
   "mainButtons": {
     "inviteToInterview": "Zum Vorstellungsgespräch einladen",
-    "notInterested": "Nicht interessiert",
+    "notInterested": "Nicht einladen und absagen",
     "downloadAsPDF": "Als PDF herunterladen",
     "reject": "Ablehnen",
     "invite": "Einladen"
@@ -36,9 +36,9 @@
     "title1": "Ihre Verfügbarkeit",
     "location": "Ort",
     "online": "Online",
-    "inPerson": "Persönlich",
+    "inPerson": "Persönlich Vor Ort",
     "meetingLink": "Link zum Online-Meeting (optional)",
-    "meetingLinkTooltip": "Wir werden den Link später bereitstellen, es sei denn, Sie fügen ihn hier hinzu.",
+    "meetingLinkTooltip": "Wir werden den Link später bereitstellen, es sei denn, du fügst ihn hier hinzu.",
     "address": "Adresse des Vorstellungsgesprächs",
     "duration": "Dauer (Minuten)",
     "slotsDescription": {
@@ -55,12 +55,12 @@
   },
   "rejectModal": {
     "title": "Kandidat ablehnen",
-    "reason": "Zu schlecht. Was ist der Hintergrund für Ihre Entscheidung?",
+    "reason": "Schade es nicht passt. Was ist der Hintergrund für deine Entscheidung?",
     "message": "Kommentare (optional)",
     "send": "Senden"
   },
   "toastMessages": {
-    "somethingWrong": "Etwas ist schief gelaufen. Bitte versuchen Sie es später noch einmal.",
-    "noSlots": "Bitte fügen Sie mindestens einen Verfügbarkeitszeitraum hinzu."
+    "somethingWrong": "Etwas ist schief gelaufen. Bitte versuche es später noch einmal.",
+    "noSlots": "Bitte füge mindestens einen Verfügbarkeitszeitraum hinzu."
   }
 }
