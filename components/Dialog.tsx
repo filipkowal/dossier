@@ -1,6 +1,7 @@
 "use client";
 
 import { JSXElementConstructor, useEffect, useRef } from "react";
+import "./Dialog.css";
 
 export default function Dialog({
   isOpen,
@@ -52,7 +53,9 @@ export default function Dialog({
         <XButton />
       </div>
 
-      <div className="px-1 -mx-1 sm:mx-0 max-w-full">{children}</div>
+      <div className="px-1 -mx-1 sm:mx-0 max-w-full" autoFocus>
+        {children}
+      </div>
 
       <div
         className={`w-full flex mt-12 ${
