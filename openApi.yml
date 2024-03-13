@@ -107,7 +107,11 @@ components:
           example: 100%
         educationSummary:
           type: string
-          example: "The candidate is a very experienced IT professional with a strong background in software development and architecture. He has been working in the financial industry for many years and has a deep understanding of the business processes and challenges in this industry. He is a very good communicator and has a strong customer focus. He is a team player and has a strong focus on quality and security. He is a very good communicator and has a strong customer focus. He is a team player and has a strong focus on quality and security. He is a very good communicator and has a strong customer focus. He is a team player and has a strong focus on quality and security. He is a very good communicator and has a strong customer focus. He is a team player and has a strong focus on quality and security. He is a very good communicator and has a strong customer focus. He is a team player and has a strong focus on quality and security."
+          format: html
+          example: "<ul>
+            <li>2021 Berufsbildnerkurs</li>
+            <li>2020 Dipl. Betriebswirtschafter HF</li>
+            </ul>"
     User:
       type: object
       properties:

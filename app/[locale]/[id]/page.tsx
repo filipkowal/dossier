@@ -167,7 +167,11 @@ export default async function Home({
             <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">
               {dict.candidate.educationSummary}
             </h2>
-            <p>{candidate.educationSummary}</p>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: candidate.educationSummary || "",
+              }}
+            ></div>
           </div>
         </div>
         <CvAndCertificates cvAndCertificates={candidate.files || []} />

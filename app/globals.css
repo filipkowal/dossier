@@ -18,6 +18,11 @@ a {
   text-decoration: none;
 }
 
+li {
+  list-style: disc;
+  margin-left: 1.2rem;
+}
+
 * {
   box-sizing: border-box;
 }
