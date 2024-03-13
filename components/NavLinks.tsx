@@ -1,10 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function NavLinks({ dict }: { dict: any }) {
   const [isScrolledToCv, setIsScrolledToCv] = useState(false);
+
+  // Check if the user has scrolled to the CV section
   useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -32,24 +33,30 @@ export default function NavLinks({ dict }: { dict: any }) {
     };
   });
 
+  const handleClick = (id: string) => {
+    if (id === "top") return window.scrollTo({ top: 0, behavior: "smooth" });
+    const element = document.getElementById(id);
+    element?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <>
-      <Link
-        href={`#top`}
-        className={`text-white border-b-2 ${
+      <a
+        onClick={() => handleClick("top")}
+        className={`text-white border-b-2 cursor-pointer ${
           !isScrolledToCv ? "border-digitalent-white" : "border-transparent"
         }`}
       >
         {dict.overview}
-      </Link>
-      <Link
-        href={`#cvAndCertificates`}
-        className={`ml-8 text-white border-b-2 ${
+      </a>
+      <a
+        onClick={() => handleClick("cvAndCertificates")}
+        className={`ml-8 text-white border-b-2 cursor-pointer ${
           isScrolledToCv ? "border-digitalent-white" : "border-transparent"
         }`}
       >
         {dict.cvAndCertificates}
-      </Link>
+      </a>
     </>
   );
 }
