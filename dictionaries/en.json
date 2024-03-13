@@ -59,7 +59,18 @@
     "title": "Reject Candidate",
     "reason": "Too bad. What is the background for your decision?",
     "message": "Comments (optional)",
-    "send": "Send"
+    "send": "Send",
+    "reasons": {
+      "wrongGeographicalArea": "Wrong geographical area",
+      "wrongJobFocus": "Wrong job focus",
+      "salaryExpectations": "Salary expectations",
+      "qualifiedOtherCandidatesBetter": "Qualified - other CANDs are better",
+      "notBestQualifiedEducation": "Not Best Qualified - Education",
+      "notBestQualifiedExperience": "Not Best Qualified - Experience",
+      "notBestQualifiedOverqualified": "Not best qualified - Overqualified",
+      "notBestQualifiedTooOld": "Not Best Qualified - Too old",
+      "other": "Other"
+    }
   },
   "toastMessages": {
     "somethingWrong": "Something went wrong. Please try again later.",

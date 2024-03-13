@@ -59,7 +59,18 @@
     "title": "Kandidat ablehnen",
     "reason": "Schade es nicht passt. Was ist der Hintergrund für deine Entscheidung?",
     "message": "Kommentare (optional)",
-    "send": "Senden"
+    "send": "Senden",
+    "reasons": {
+      "wrongGeographicalArea": "Wohnort ist zu weit weg",
+      "wrongJobFocus": "Falscher Jobfokus",
+      "salaryExpectations": "Gehaltserwartungen",
+      "qualifiedOtherCandidatesBetter": "Qualifiziert - andere Kandidaten sind besser",
+      "notBestQualifiedEducation": "Fehlende Qualifikation - Bildungsniveau",
+      "notBestQualifiedExperience": "Fehlende Qualifikation -  Erfahrung",
+      "notBestQualifiedOverqualified": "Fehlende Qualifikation - Überqualifiziert",
+      "notBestQualifiedTooOld": "Fehlende Qualifikation - zu alt",
+      "other": "Andere"
+    }
   },
   "toastMessages": {
     "somethingWrong": "Etwas ist schief gelaufen. Bitte versuche es später noch einmal.",

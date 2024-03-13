@@ -21,7 +21,7 @@ export default function RejectSection({
   const [reason, setReason] = useState("");
   const [message, setMessage] = useState("");
 
-  const reasons = ["Reason 1", "Reason 2", "Reason 3"]; // List of reasons
+  const reasons = Object.entries(dict.reasons);
 
   return (
     <>
@@ -57,8 +57,8 @@ export default function RejectSection({
           >
             <option value="">Select a reason</option>
             {reasons.map((reason) => (
-              <option key={reason} value={reason}>
-                {reason}
+              <option key={reason[0]} value={reason[0]}>
+                {reason[1]}
               </option>
             ))}
           </select>
