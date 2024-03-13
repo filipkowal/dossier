@@ -71,7 +71,7 @@ export default function RejectSection({
             onChange={(e) => setMessage(e.target.value)}
           />
 
-          <Button type="primary" name="Reject" submitType>
+          <Button type="primary" name="Reject" submitType disabled={!reason}>
             {dict.send}
           </Button>
         </form>
