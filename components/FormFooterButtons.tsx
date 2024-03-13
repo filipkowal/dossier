@@ -8,12 +8,14 @@ export default function FormFooterButtons({
   stepsLength,
   dict,
   onSubmit,
+  submissionDisabled,
 }: {
   step: number;
   setStep: Dispatch<SetStateAction<number>>;
   stepsLength: number;
   dict: Dictionary["inviteModal"];
   onSubmit: () => void;
+  submissionDisabled?: boolean;
 }) {
   if (step === 0 && stepsLength > 1) {
     return (
@@ -29,7 +31,16 @@ export default function FormFooterButtons({
 
   if (step === 0 && stepsLength === 1) {
     return (
-      <Button type="primary" name={dict.send} onClick={() => onSubmit()}>
+      <Button
+        type="primary"
+        name={dict.send}
+        onClick={(e) => {
+          e.preventDefault();
+          if (submissionDisabled) return;
+          onSubmit();
+        }}
+        disabled={submissionDisabled}
+      >
         {dict.send}
       </Button>
     );
@@ -71,8 +82,10 @@ export default function FormFooterButtons({
           name={dict.send}
           onClick={(e) => {
             e.preventDefault();
+            if (submissionDisabled) return;
             onSubmit();
           }}
+          disabled={submissionDisabled}
         >
           {dict.send}
         </Button>

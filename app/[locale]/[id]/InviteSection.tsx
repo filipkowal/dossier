@@ -93,6 +93,10 @@ export default function InviteSection({
             setStep={setStep}
             stepsLength={steps.length}
             dict={dict}
+            submissionDisabled={
+              availibilitySlots.length === 0 &&
+              !(newSlot.startTime && newSlot.endTime)
+            }
             onSubmit={async () => {
               const slots = availibilitySlots;
               if (newSlot.startTime && newSlot.endTime) {
