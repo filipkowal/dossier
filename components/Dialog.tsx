@@ -18,6 +18,15 @@ export default function Dialog({
 }) {
   const ref = useRef<HTMLDialogElement>(null);
 
+  function closeDialog(event: React.MouseEvent<HTMLDialogElement, MouseEvent>) {
+    if (
+      event.target instanceof HTMLDialogElement &&
+      event.target.id === "dialog"
+    ) {
+      setIsOpen(false);
+    }
+  }
+
   useEffect(() => {
     if (isOpen) ref.current?.showModal();
     else ref.current?.close();
@@ -43,30 +52,34 @@ export default function Dialog({
 
   return (
     <dialog
+      onClick={closeDialog}
+      id="dialog"
       ref={ref}
       style={{ overflowY: "auto", maxHeight: "100vh" }}
-      className="fixed inset-0 z-50 bg-digitalent-gray-light p-10 transform overflow-hidden text-digitalent-blue px-4 pt-4 pb-7 md:py-10 md:px-16 text-left align-middle shadow-xl transition-all w-[60rem] max-w-full"
+      className="fixed inset-0 z-50 bg-digitalent-gray-light transform overflow-hidden text-digitalent-blue text-left align-middle shadow-xl transition-all w-[60rem] max-w-full"
     >
-      <div className="text-2xl font-title font-medium uppercase pb-8 flex justify-between">
-        <span className="pr-10 max-w-[90%]">{title}</span>
+      <div className="px-4 pt-4 pb-7 md:py-10 md:px-16">
+        <div className="text-2xl font-title font-medium uppercase pb-8 flex justify-between">
+          <span className="pr-10 max-w-[90%]">{title}</span>
 
-        <XButton />
-      </div>
+          <XButton />
+        </div>
 
-      <div className="px-1 -mx-1 sm:mx-0 max-w-full" autoFocus>
-        {children}
-      </div>
+        <div className="px-1 -mx-1 sm:mx-0 max-w-full" autoFocus>
+          {children}
+        </div>
 
-      <div
-        className={`w-full flex mt-12 ${
-          footer?.props?.children?.length > 1 &&
-          Array.isArray(footer?.props?.children)
-            ? "justify-between"
-            : "justify-end"
-        }`}
-        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
-      >
-        {footer}
+        <div
+          className={`w-full flex mt-12 ${
+            footer?.props?.children?.length > 1 &&
+            Array.isArray(footer?.props?.children)
+              ? "justify-between"
+              : "justify-end"
+          }`}
+          style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+        >
+          {footer}
+        </div>
       </div>
     </dialog>
   );
