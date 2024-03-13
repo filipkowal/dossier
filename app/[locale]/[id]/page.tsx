@@ -137,22 +137,47 @@ export default async function Home({
             <h2 className="text-xl font-title mb-4 sm:mb-8 ">
               {dict.candidate.professionalDetails}
             </h2>
-            <p>
-              {dict.candidate.currentPosition}: {candidate.currentPosition}
-            </p>
-            <p>
-              {dict.candidate.noticePeriod}: {candidate.noticePeriod}
-            </p>
-            {user.canViewSalary ? (
+
+            <div className="block sm:hidden">
               <p>
-                {dict.candidate.desiredSalary}: {candidate.desiredSalary}
+                {dict.candidate.currentPosition}:{" "}
+                <b>{candidate.currentPosition}</b>
               </p>
-            ) : (
-              ""
-            )}
-            <p>
-              {dict.candidate.desiredWorkload}: {candidate.desiredWorkload}
-            </p>
+              <p>
+                {dict.candidate.noticePeriod}: <b>{candidate.noticePeriod}</b>
+              </p>
+              {user.canViewSalary ? (
+                <p>
+                  {dict.candidate.desiredSalary}:{" "}
+                  <b>{candidate.desiredSalary}</b>
+                </p>
+              ) : (
+                ""
+              )}
+              <p>
+                {dict.candidate.desiredWorkload}:{" "}
+                <b>{candidate.desiredWorkload}</b>
+              </p>
+            </div>
+
+            <div className="hidden sm:grid grid-cols-[300px,1fr]">
+              <div>
+                <p>{dict.candidate.currentPosition}:</p>
+                <p>{dict.candidate.noticePeriod}:</p>
+                {user.canViewSalary ? (
+                  <p>{dict.candidate.desiredSalary}:</p>
+                ) : (
+                  ""
+                )}
+                <p>{dict.candidate.desiredWorkload}:</p>
+              </div>
+              <div>
+                <p>{candidate.currentPosition}</p>
+                <p>{candidate.noticePeriod}</p>
+                {user.canViewSalary ? <p>{candidate.desiredSalary}</p> : ""}
+                <p>{candidate.desiredWorkload}</p>
+              </div>
+            </div>
 
             <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">
               {dict.candidate.interviewSummary}
