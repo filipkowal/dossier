@@ -18,11 +18,13 @@
     "targetSalary": "Salaire cible",
     "noticePeriod": "Période de préavis",
     "commuteDistanceToWork": "Distance domicile-travail",
-    "currentPosition": "Poste actuel",
+    "currentPosition": "Titre",
     "languages": "Langues",
     "professionalDetails": "Détails professionnels",
-    "relevantExperience": "Expérience pertinente",
-    "reasonForChange": "Raison du changement"
+    "interviewSummary": "Résumé de l'entretien",
+    "reasonForChange": "Raison du changement",
+    "desiredWorkload": "Charge de travail souhaitée",
+    "educationSummary": "Résumé de l'éducation"
   },
   "mainButtons": {
     "inviteToInterview": "Inviter à un entretien",

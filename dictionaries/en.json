@@ -18,11 +18,13 @@
     "targetSalary": "Target Salary",
     "noticePeriod": "Notice Period",
     "commuteDistanceToWork": "Commute Distance to Work",
-    "currentPosition": "Current Position",
+    "currentPosition": "Title",
     "languages": "Languages",
     "professionalDetails": "Professional Details",
-    "relevantExperience": "Relevant Experience",
-    "reasonForChange": "Reason for Change"
+    "interviewSummary": "Interview summary",
+    "reasonForChange": "Reason for Change",
+    "desiredWorkload": "Desired Workload",
+    "educationSummary": "Education Summary"
   },
   "mainButtons": {
     "inviteToInterview": "Invite to an interview",

@@ -18,11 +18,13 @@
     "targetSalary": "Zielgehalt",
     "noticePeriod": "Kündigungsfrist",
     "commuteDistanceToWork": "Arbeitsweg",
-    "currentPosition": "Aktuelle Position",
+    "currentPosition": "Titel",
     "languages": "Sprachen",
     "professionalDetails": "Berufliche Details",
-    "relevantExperience": "Relevante Erfahrung",
-    "reasonForChange": "Grund für den Wechsel"
+    "interviewSummary": "Interview Zusammenfassung",
+    "reasonForChange": "Wechselmotivation",
+    "desiredWorkload": "Gewünschte Arbeitsbelastung",
+    "educationSummary": "Bildungszusammenfassung"
   },
   "mainButtons": {
     "inviteToInterview": "Zum Vorstellungsgespräch einladen",

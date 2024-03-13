@@ -137,6 +137,12 @@ export default async function Home({
             <h2 className="text-xl font-title mb-4 sm:mb-8 ">
               {dict.candidate.professionalDetails}
             </h2>
+            <p>
+              {dict.candidate.currentPosition}: {candidate.currentPosition}
+            </p>
+            <p>
+              {dict.candidate.noticePeriod}: {candidate.noticePeriod}
+            </p>
             {user.canViewSalary ? (
               <p>
                 {dict.candidate.desiredSalary}: {candidate.desiredSalary}
@@ -145,19 +151,23 @@ export default async function Home({
               ""
             )}
             <p>
-              {dict.candidate.noticePeriod}: {candidate.noticePeriod}
+              {dict.candidate.desiredWorkload}: {candidate.desiredWorkload}
             </p>
-            <p>
-              {dict.candidate.currentPosition}: {candidate.currentPosition}
-            </p>
+
             <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">
-              {dict.candidate.relevantExperience}
+              {dict.candidate.interviewSummary}
             </h2>
             <p>{candidate.interviewSummary}</p>
+
             <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">
               {dict.candidate.reasonForChange}
             </h2>
             <p>{candidate.reasonForChange}</p>
+
+            <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">
+              {dict.candidate.educationSummary}
+            </h2>
+            <p>{candidate.educationSummary}</p>
           </div>
         </div>
         <CvAndCertificates cvAndCertificates={candidate.files || []} />
