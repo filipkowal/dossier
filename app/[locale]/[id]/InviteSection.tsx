@@ -40,7 +40,7 @@ export default function InviteSection({
 
   const steps = [];
 
-  if (user.isInviting) {
+  if (user.isInterviewLocationInputVisible) {
     steps.push(
       <LocationStep
         key="locationStep"
@@ -58,7 +58,7 @@ export default function InviteSection({
     );
   }
 
-  if (user.isSettingAvailibility) {
+  if (user.isInterviewAvailabilityInputVisible) {
     steps.push(
       <AvailibilityStep
         key="availibilityStep"

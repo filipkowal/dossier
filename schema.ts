@@ -85,19 +85,22 @@ export interface components {
       dossierMessage?: string;
       /** @example 100% */
       desiredWorkload?: string;
-      /** @example The candidate is a very experienced IT professional with a strong background in software development and architecture. He has been working in the financial industry for many years and has a deep understanding of the business processes and challenges in this industry. He is a very good communicator and has a strong customer focus. He is a team player and has a strong focus on quality and security. He is a very good communicator and has a strong customer focus. He is a team player and has a strong focus on quality and security. He is a very good communicator and has a strong customer focus. He is a team player and has a strong focus on quality and security. He is a very good communicator and has a strong customer focus. He is a team player and has a strong focus on quality and security. He is a very good communicator and has a strong customer focus. He is a team player and has a strong focus on quality and security. */
+      /**
+       * Format: html
+       * @example <ul> <li>2021 Berufsbildnerkurs</li> <li>2020 Dipl. Betriebswirtschafter HF</li> </ul>
+       */
       educationSummary?: string;
     };
     User: {
       canDownloadPdf?: boolean;
       canViewSalary?: boolean;
       /**
-       * @description True means User Case 2 or 3, there's no Location/Link input then. False means User Case 1.
+       * @description Invitation form should show address/url input if true
        * @example false
        */
-      isInviting?: boolean;
-      /** @description False means User Case 3. True means User Case 1 or 2. */
-      isSettingAvailibility?: boolean;
+      isInterviewLocationInputVisible?: boolean;
+      /** @description Invitation form should show availability slots input if true */
+      isInterviewAvailabilityInputVisible?: boolean;
       address?: components["schemas"]["Address"];
     };
     Address: {
