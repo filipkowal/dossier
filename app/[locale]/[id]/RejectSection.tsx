@@ -4,7 +4,7 @@ import Button from "@/components/Button";
 import Dialog from "@/components/Dialog";
 import TextInput from "@/components/TextInput";
 import { rejectCandidate } from "@/utils";
-import { Dictionary } from "@/utils/server";
+import { Dictionary } from "@/utils";
 import { useState } from "react";
 import toast from "react-hot-toast";
 

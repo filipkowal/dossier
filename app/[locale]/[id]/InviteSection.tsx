@@ -7,7 +7,7 @@ import Checkbox from "@/components/Checkbox";
 import Tooltip from "@/components/Tooltip";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import NumberInput from "@/components/NumberInput";
-import { type Dictionary } from "@/utils/server";
+import { type Dictionary } from "@/utils";
 import { User, inviteCandidate } from "@/utils";
 import FormFooterButtons from "@/components/FormFooterButtons";
 import toast from "react-hot-toast";

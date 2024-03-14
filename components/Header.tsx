@@ -5,7 +5,7 @@ import DigitalentLogo from "@/public/logo.png";
 import Thumnbail from "@/public/thumbnail.png";
 import { Suspense } from "react";
 import Spinner from "./Spinner";
-import { getDictionary } from "@/utils/server/helpers";
+import { getDictionary } from "@/utils";
 import { type Locale } from "@/i18n-config";
 import NavLinks from "./NavLinks";
 import PdfButton from "@/app/[locale]/[id]/PdfButton";

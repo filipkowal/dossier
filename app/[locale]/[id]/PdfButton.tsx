@@ -1,6 +1,6 @@
 import Button from "@/components/Button";
 import { GetPdfDossierResponse } from "@/utils";
-import { Dictionary } from "@/utils/server";
+import { Dictionary } from "@/utils";
 import DownloadIcon from "@/public/download.png";
 import Image from "next/image";
 

@@ -5,7 +5,7 @@ import localFont from "next/font/local";
 import { Merriweather } from "next/font/google";
 import type { Metadata } from "next";
 import CookiePopup from "@/components/CookiePopup";
-import { getDictionary } from "@/utils/server/helpers";
+import { getDictionary } from "@/utils";
 import Header from "@/components/Header";
 import ToastProvider from "@/components/ToastProvider";
 

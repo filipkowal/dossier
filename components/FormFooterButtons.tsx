@@ -1,4 +1,4 @@
-import { Dictionary } from "@/utils/server";
+import { Dictionary } from "@/utils";
 import { Dispatch, SetStateAction } from "react";
 import Button from "./Button";
 

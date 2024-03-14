@@ -1,7 +1,7 @@
 import Button from "@/components/Button";
 import { Locale } from "@/i18n-config";
 import InviteSection from "./InviteSection";
-import { getDictionary } from "@/utils/server";
+import { getDictionary } from "@/utils";
 import { getCandidate, getPdfDossier, getUser } from "@/utils";
 import CvAndCertificates from "./CvAndCertificates";
 import RejectSection from "./RejectSection";
@@ -18,9 +18,21 @@ export default async function Home({
   params: { locale: Locale; id: string };
 }) {
   const { id, locale } = params;
-  const dict = await getDictionary(params.locale);
-  const candidate = await getCandidate(locale, id);
-  const user = await getUser(locale, id);
+  const dictPromise = getDictionary(params.locale);
+  const candidatePromise = getCandidate(locale, id);
+  const userPromise = getUser(locale, id);
+
+  console.time("dict");
+  const dict = await dictPromise;
+  console.timeEnd("dict");
+
+  console.time("candidate");
+  const candidate = await candidatePromise;
+  console.timeEnd("candidate");
+
+  console.time("user");
+  const user = await userPromise;
+  console.timeEnd("user");
   const pdfDossierPromise = getPdfDossier(locale, id);
 
   return (

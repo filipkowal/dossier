@@ -1,34 +1,41 @@
 "use client";
-import Link from "next/link";
-import { useParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Button from "./Button";
+import { Locale } from "@/i18n-config";
+import { getDictionary } from "@/utils";
 
 export default function ErrorPage({
   error,
-  reset,
+  locale,
 }: {
   error?: Error;
-  reset?: () => void;
+  locale: Locale;
 }) {
-  const locale = useParams()?.locale;
+  const [dict, setDict] = useState({
+    refreshPage: "Refresh",
+    somethingWrong: "Something went wrong!",
+  });
 
   useEffect(() => {
-    console.error(error);
-  }, [error]);
+    async function getDict() {
+      console.error(error);
+      const d = await getDictionary(locale);
+      setDict(d.utilityPages);
+    }
+    getDict();
+  }, [error, locale]);
+
+  const handleRefresh = () => {
+    window.location.reload();
+  };
 
   return (
     <div className="w-full h-full text-center pt-16 text-digitalent-blue">
-      <p className="text-3xl py-32">Something went wrong!</p>
+      <p className="text-3xl py-32">{dict.somethingWrong}</p>
       <p>{error?.message}</p>
-      <code className="block py-4">
-        {error?.stack?.split("\n").map((line, i) => `${i}: ${line}`)}
-      </code>
-      <Link href={`/${locale}`}>
-        <Button onClick={reset} name="Go back">
-          Go back home
-        </Button>
-      </Link>
+      <Button onClick={handleRefresh} name="Refresh" className="m-12">
+        {dict.refreshPage}
+      </Button>
     </div>
   );
 }
