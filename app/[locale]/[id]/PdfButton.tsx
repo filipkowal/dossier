@@ -17,9 +17,7 @@ export default async function PdfButton({
 
   return (
     <a
-      href={URL.createObjectURL(
-        new Blob([pdfDossier.content], { type: "application/pdf" })
-      )}
+      href={pdfDossier.content}
       download="dossier.pdf"
       className="sm:w-1/3 xl:w-1/4 max-w-[32rem]"
     >
