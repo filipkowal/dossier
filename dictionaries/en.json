@@ -74,7 +74,8 @@
   },
   "toastMessages": {
     "somethingWrong": "Something went wrong. Please try again later.",
-    "noSlots": "Please add at least one availibility time slot."
+    "noSlots": "Please add at least one availibility time slot.",
+    "copied": "Copied to clipboard"
   },
   "utilityPages": {
     "refreshPage": "Refresh the page",

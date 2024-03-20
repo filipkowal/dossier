@@ -1,10 +1,21 @@
 "use client";
+import { Dictionary } from "@/utils";
 import React from "react";
+import toast from "react-hot-toast";
 
-export default function CopyButton({ value }: { value: string }) {
+export default function CopyButton({
+  value,
+  dict,
+}: {
+  value: string;
+  dict: Dictionary["toastMessages"];
+}) {
   return (
     <span
-      onClick={() => value && navigator.clipboard.writeText(value)}
+      onClick={() => {
+        value && navigator.clipboard.writeText(value);
+        toast.success(dict["copied"]);
+      }}
       className="cursor-pointer"
     >
       <svg

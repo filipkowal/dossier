@@ -74,7 +74,8 @@
   },
   "toastMessages": {
     "somethingWrong": "Etwas ist schief gelaufen. Bitte versuche es später noch einmal.",
-    "noSlots": "Bitte füge mindestens einen Verfügbarkeitszeitraum hinzu."
+    "noSlots": "Bitte füge mindestens einen Verfügbarkeitszeitraum hinzu.",
+    "copied": "In die Zwischenablage kopiert"
   },
   "utilityPages": {
     "refreshPage": "Seite neu laden",

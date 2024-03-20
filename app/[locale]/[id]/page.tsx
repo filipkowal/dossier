@@ -94,7 +94,10 @@ export default async function Home({
                   <p className="overflow-hidden text-ellipsis">
                     {candidate.email}
                   </p>
-                  <CopyButton value={candidate.email} />
+                  <CopyButton
+                    value={candidate.email}
+                    dict={dict.toastMessages}
+                  />
                 </div>
               ) : (
                 ""
