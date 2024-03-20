@@ -10,6 +10,7 @@ import Link from "next/link";
 import LinkedInIcon from "@/public/linkedin.png";
 import Image from "next/image";
 import { Suspense } from "react";
+import CopyButton from "@/components/CopyButton";
 import PdfButton from "./PdfButton";
 
 export default async function Home({
@@ -88,7 +89,17 @@ export default async function Home({
                 {dict.candidate.contactDetails}
               </h2>
               <p>{candidate.phoneNumber}</p>
-              <p className="overflow-hidden text-ellipsis">{candidate.email}</p>
+              {candidate.email ? (
+                <div className="flex gap-2">
+                  <p className="overflow-hidden text-ellipsis">
+                    {candidate.email}
+                  </p>
+                  <CopyButton value={candidate.email} />
+                </div>
+              ) : (
+                ""
+              )}
+
               {candidate.linkedIn && (
                 <Link
                   href={candidate.linkedIn}
