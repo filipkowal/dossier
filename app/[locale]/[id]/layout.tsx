@@ -28,20 +28,6 @@ export const metadata: Metadata = {
   },
 };
 
-const merriweather = Merriweather({
-  variable: "--font-merriweather",
-  subsets: ["latin"],
-  weight: ["300", "400", "700"],
-});
-
-const stolzl = localFont({
-  variable: "--font-stolzl",
-  src: [
-    { path: "../../../public/fonts/Stolzl-Regular.ttf", weight: "400" },
-    { path: "../../../public/fonts/Stolzl-Medium.ttf", weight: "500" },
-  ],
-});
-
 const loew = localFont({
   variable: "--font-loew",
   src: "../../../public/fonts/Loew-Heavy.otf",
@@ -58,43 +44,24 @@ export default async function RootLayout({
   const dict = await getDictionary(params.locale);
 
   return (
-    <html
-      lang={params.locale || "en"}
-      className={`${merriweather.variable} ${stolzl.variable} text-digitalent-blue`}
-    >
-      <head>
-        <link rel="icon" href="/thumbnail.png" />
-        {/* <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
-        />
-        <Script id="googleAnalytics">
-          {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}');
-        `}
-        </Script> */}
-      </head>
-      <body className="font-serif">
-        <main className="min-h-screen bg-digitalent-gray-light flex flex-col justify-between">
-          <ToastProvider />
-          <Header params={params} />
-          {children}
+    <>
+      <main className="min-h-screen bg-digitalent-gray-light flex flex-col justify-between">
+        <ToastProvider />
+        <Header params={params} />
+        {children}
 
-          <footer className={`self-bottom w-full ${loew.variable}`}>
-            <div className="text-center py-2 max-w-full bg-digitalent-gray-dark text-white font-sans text-[11px]">
-              powered by
-              <Link href="https://digitalent.community" target="_blank">
-                <span className="font-logo"> DIGITALENT </span>
-              </Link>
-              © 2023
-            </div>
-          </footer>
-        </main>
+        <footer className={`self-bottom w-full ${loew.variable}`}>
+          <div className="text-center py-2 max-w-full bg-digitalent-gray-dark text-white font-sans text-[11px]">
+            powered by
+            <Link href="https://digitalent.community" target="_blank">
+              <span className="font-logo"> DIGITALENT </span>
+            </Link>
+            © 2023
+          </div>
+        </footer>
+      </main>
 
-        <CookiePopup dict={dict.cookiePopup} />
-      </body>
-    </html>
+      <CookiePopup dict={dict.cookiePopup} />
+    </>
   );
 }
