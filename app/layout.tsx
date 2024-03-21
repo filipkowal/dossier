@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import localFont from "next/font/local";
 import { Merriweather } from "next/font/google";
-import { useSelectedLayoutSegment } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Digitalent Dossier",
@@ -42,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    // Fixme: localize with useSelectedLayoutSegment maybe? At lest text of the not-found page
+    // Fixme: localize with headers
     <html
       className={`${merriweather.variable} ${stolzl.variable} text-digitalent-blue`}
     >

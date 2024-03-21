@@ -5,7 +5,11 @@ import localFont from "next/font/local";
 import CookiePopup from "@/components/CookiePopup";
 import { getDictionary } from "@/utils";
 import DigitalentLogo from "@/public/logo.png";
-import Thumnbail from "@/public/thumbnail.png";
+import Thumbnail from "@/public/thumbnail.png";
+import Image from "next/image";
+import NotFound from "@/components/NotFound";
+import { headers } from "next/headers";
+import { getLocale } from "@/middleware";
 
 const loew = localFont({
   variable: "--font-loew",
@@ -13,14 +17,11 @@ const loew = localFont({
   preload: false,
 });
 
-async function NotFoundLayoutLikeWrapper({
-  params,
-  children,
-}: {
-  params: { locale: Locale; id: string };
-  children: React.ReactNode;
-}) {
-  const dict = await getDictionary(params.locale);
+export default async function LayoutForNotFound({}: {}) {
+  const headersList = headers();
+
+  const locale = getLocale(headersList);
+  const dict = await getDictionary((locale || "en") as Locale);
 
   return (
     <>
@@ -30,7 +31,7 @@ async function NotFoundLayoutLikeWrapper({
           className="flex flex-row h-16 bg-digitalent-blue justify-between items-center py-3 px-4 sm:px-8 sm:fixed top-0 z-20 w-full"
         >
           <div>
-            <Link href={`/${params?.locale}`}>
+            <Link href={`/${locale}`}>
               <>
                 <Image
                   src={DigitalentLogo}
@@ -40,7 +41,7 @@ async function NotFoundLayoutLikeWrapper({
                   className="hidden sm:block"
                 />
                 <Image
-                  src={Thumnbail}
+                  src={Thumbnail}
                   alt="logo"
                   width="35"
                   height="35"
@@ -51,7 +52,7 @@ async function NotFoundLayoutLikeWrapper({
           </div>
         </header>
 
-        {children}
+        <NotFound dict={dict["utilityPages"]["notFound"]} />
 
         <footer className={`self-bottom w-full ${loew.variable}`}>
           <div className="text-center py-2 max-w-full bg-digitalent-gray-dark text-white font-sans text-[11px]">
@@ -66,17 +67,5 @@ async function NotFoundLayoutLikeWrapper({
 
       <CookiePopup dict={dict.cookiePopup} />
     </>
-  );
-}
-
-import NotFound from "@/components/NotFound";
-import Image from "next/image";
-
-export default function NotFoundPage() {
-  return (
-    <NotFoundLayoutLikeWrapper params={{ locale: "en", id: "" }}>
-      {" "}
-      <NotFound />
-    </NotFoundLayoutLikeWrapper>
   );
 }

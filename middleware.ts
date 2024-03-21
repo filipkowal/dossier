@@ -8,9 +8,9 @@ import Negotiator from "negotiator";
 
 const PUBLIC_FILE = /\.(.*)$/;
 
-function getLocale(request: NextRequest): string | undefined {
+export function getLocale(headers: Headers): string | undefined {
   const negotiatorHeaders: Record<string, string> = {};
-  request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
+  headers.forEach((value, key) => (negotiatorHeaders[key] = value));
 
   let expectedLanguages = new Negotiator({
     headers: negotiatorHeaders,
@@ -43,7 +43,7 @@ export function middleware(request: NextRequest) {
   );
 
   if (pathnameIsMissingLocale) {
-    const locale = getLocale(request);
+    const locale = getLocale(request.headers);
 
     return NextResponse.redirect(
       new URL(`/${locale}${pathname ? `/${pathname}` : ""}`, request.url)
