@@ -79,6 +79,11 @@
   },
   "utilityPages": {
     "refreshPage": "Refresh the page",
-    "somethingWrong": "Something went wrong!"
+    "somethingWrong": "Something went wrong!",
+    "notFound": {
+      "noCandidateId": "No candidate ID found",
+      "verify": "Please check the URL. It should contain the candidate's ID.",
+      "example": "For example: "
+    }
   }
 }

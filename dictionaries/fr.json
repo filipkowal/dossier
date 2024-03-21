@@ -79,6 +79,11 @@
   },
   "utilityPages": {
     "refreshPage": "Rafraîchir la page",
-    "somethingWrong": "Quelque chose a mal tourné!"
+    "somethingWrong": "Quelque chose a mal tourné!",
+    "notFound": {
+      "noCandidateId": "Aucun ID de candidat trouvé",
+      "verify": "Veuillez vérifier l'URL. Elle devrait contenir l'ID du candidat.",
+      "example": "Par exemple: "
+    }
   }
 }

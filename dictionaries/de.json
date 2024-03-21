@@ -79,6 +79,11 @@
   },
   "utilityPages": {
     "refreshPage": "Seite neu laden",
-    "somethingWrong": "Etwas ist schief gelaufen!"
+    "somethingWrong": "Etwas ist schief gelaufen!",
+    "notFound": {
+      "noCandidateId": "Keine Kandidaten-ID gefunden",
+      "verify": "Bitte überprüfe die URL. Sie sollte die ID des Kandidaten enthalten.",
+      "example": "Zum Beispiel: "
+    }
   }
 }
