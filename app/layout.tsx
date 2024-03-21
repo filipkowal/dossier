@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import localFont from "next/font/local";
 import { Merriweather } from "next/font/google";
+import { headers } from "next/headers";
+import { getLocale } from "@/middleware";
 
 export const metadata: Metadata = {
   title: "Digitalent Dossier",
@@ -40,10 +42,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const headersList = headers();
+  const locale = getLocale(headersList);
+
   return (
-    // Fixme: localize with headers
     <html
       className={`${merriweather.variable} ${stolzl.variable} text-digitalent-blue`}
+      lang={locale || "en"}
     >
       <head>
         <link rel="icon" href="/thumbnail.png" />
