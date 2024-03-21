@@ -41,10 +41,12 @@ export default async function Home({
       <div className="flex flex-col bg-digitalent-blue text-white sm:items-start xl:items-end md:px-8 lg:px-16 xl:px-0">
         <div className="flex flex-col justify-end items-center md:items-start xl:h-[34vh] 3xl:h-[30vh] pt-16 md:px-16 2xl:px-32 md:w-[27rem] 2xl:w-[35rem] w-full">
           {candidate.candidateImage?.content ? (
-            <img
+            <Image
               alt="Candidate image"
-              src={"data:image/jpeg;base64," + candidate.candidateImage.content}
+              src={candidate.candidateImage.content}
               className="rounded-full sm:w-52 sm:h-52 h-40 w-40"
+              width={160}
+              height={160}
             />
           ) : (
             <div className="rounded-full sm:w-52 sm:h-52 h-40 w-40 bg-digitalent-yellow" />
