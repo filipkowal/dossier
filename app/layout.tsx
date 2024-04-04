@@ -47,7 +47,7 @@ export default function RootLayout({
 
   return (
     <html
-      className={`${merriweather.variable} ${stolzl.variable} text-digitalent-blue`}
+      className={`${merriweather.variable} ${stolzl.variable} text-digitalent-blue font-serif`}
       lang={locale || "en"}
     >
       <head>
