@@ -130,18 +130,6 @@ button:focus {
   }
 }
 
-.react-pdf__Page__textContent {
-  display: none !important;
-}
-
-.react-pdf__Page__annotations {
-  display: none !important;
-}
-
-.react-pdf__message {
-  display: none !important;
-}
-
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
