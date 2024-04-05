@@ -49,8 +49,9 @@ export default function AvailibilityStep({
             />
             <TextInput
               name={`slot-${index}-endTime`}
-              type="datetime-local"
+              type="time"
               className="w-72"
+              disabled={!slot.startTime}
               value={slot?.endTime || ""}
               onChange={(e) =>
                 setAvailibilitySlots(
@@ -92,8 +93,9 @@ export default function AvailibilityStep({
           />
           <TextInput
             name={`newSlot-endTime`}
-            type="datetime-local"
+            type="time"
             className="w-72"
+            disabled={!newSlot.startTime}
             value={newSlot.endTime}
             onChange={(e) =>
               setNewSlot({ ...newSlot, endTime: e.target.value })
@@ -147,37 +149,21 @@ function useCreateOneHourSlot(
   newSlot: TimeSlots[0],
   setNewSlot: Dispatch<SetStateAction<TimeSlots[0]>>
 ) {
+  const formatTime = (date: Date) =>
+    new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+      .toISOString()
+      .slice(11, 16);
+
   useEffect(() => {
     if (newSlot.startTime && !newSlot.endTime) {
       const startTime = new Date(newSlot.startTime);
       const endTime = new Date(startTime.getTime() + 60 * 60 * 1000);
 
-      const endTimeFormatted = new Date(
-        endTime.getTime() - endTime.getTimezoneOffset() * 60000
-      )
-        .toISOString()
-        .slice(0, 16);
+      const endTimeFormatted = formatTime(endTime);
 
       setNewSlot((slot) => ({
         ...slot,
         endTime: endTimeFormatted,
-      }));
-      return;
-    }
-
-    if (newSlot.endTime && !newSlot.startTime) {
-      const endTime = new Date(newSlot.endTime);
-      const startTime = new Date(endTime.getTime() - 60 * 60 * 1000);
-
-      const startTimeFormatted = new Date(
-        startTime.getTime() - startTime.getTimezoneOffset() * 60000
-      )
-        .toISOString()
-        .slice(0, 16);
-
-      setNewSlot((slot) => ({
-        ...slot,
-        startTime: startTimeFormatted,
       }));
       return;
     }
