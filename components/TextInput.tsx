@@ -50,7 +50,9 @@ export default function TextInput({
       {rows ? (
         <textarea
           className={`w-full ring-2 bg-digitalent-gray-light text-digitalent-blue 
-                    ring-digitalent-blue border-none pl-4 
+                    ring-digitalent-blue ${
+                      disabled ? "opacity-50 cursor-not-allowed" : ""
+                    } border-none pl-4 
                       mt-4 block autofill:bg-digitalent-gray-light ${className}
                       [&:not(:placeholder-shown)+label]:-translate-y-[1.2rem] [&:not(:placeholder-shown)+label]:text-sm`}
           required={required}
@@ -67,7 +69,9 @@ export default function TextInput({
         <input
           type={type}
           className={`w-full ring-2 bg-digitalent-gray-light text-digitalent-blue 
-                    ring-digitalent-blue border-none pl-4 
+                    ring-digitalent-blue ${
+                      disabled ? "opacity-50 cursor-not-allowed" : ""
+                    }  border-none pl-4 
                       mt-4 block autofill:bg-digitalent-gray-light ${className} 
                       [&:not(:placeholder-shown)+label]:-translate-y-[1.2rem] [&:not(:placeholder-shown)+label]:text-sm
                       [&:not(:placeholder-shown)]:invalid:[&:not(:focus)]:ring-red-500 [&:not(:placeholder-shown)]:invalid:[&:not(:focus)]:ring-offset-red-500`}
