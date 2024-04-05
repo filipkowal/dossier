@@ -51,6 +51,7 @@
     "slotStart": "Verfügbarkeits Startzeit",
     "slotEnd": "Endzeit",
     "removeSlot": "Slot entfernen",
+    "addSlot": "Neuen Verfügbarkeits-Slot",
     "send": "Senden",
     "previous": "Zurück",
     "next": "Weiter"

@@ -51,6 +51,7 @@
     "slotStart": "Availibility Start Time",
     "slotEnd": "End Time",
     "removeSlot": "Remove Slot",
+    "addSlot": "Add new availibility slot",
     "send": "Send",
     "previous": "Previous",
     "next": "Next"
