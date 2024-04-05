@@ -293,12 +293,12 @@ paths:
                   items:
                     type: object
                     properties:
-                      startTime:
+                      startDateTime:
                         type: string
                         format: date-time
                       endTime:
                         type: string
-                        format: date-time
+                        format: time
       responses:
         "200":
           description: Success
