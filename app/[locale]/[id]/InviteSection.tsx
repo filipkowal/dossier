@@ -92,7 +92,7 @@ export default function InviteSection({
               !(newSlot.startTime && newSlot.endTime)
             }
             onSubmit={async () => {
-              const slots = availibilitySlots;
+              const slots = [...availibilitySlots];
               if (newSlot.startTime && newSlot.endTime) {
                 slots.push(newSlot);
               }
