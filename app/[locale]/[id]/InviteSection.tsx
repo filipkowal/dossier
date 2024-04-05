@@ -1,10 +1,7 @@
 "use client";
-import Dialog from "@/components/Dialog";
 import { useState } from "react";
-import Button from "@/components/Button";
-import { type Dictionary } from "@/utils";
-import { User, inviteCandidate } from "@/utils";
-import FormFooterButtons from "@/components/FormFooterButtons";
+import { type Dictionary, User, inviteCandidate } from "@/utils";
+import { FormFooterButtons, Dialog, Button } from "@/components";
 import toast from "react-hot-toast";
 import AvailibilityStep from "./InviteSectionAvailibility";
 import LocationStep from "./InviteSectionLocation";

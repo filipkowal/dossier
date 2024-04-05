@@ -1,4 +1,3 @@
-import Button from "@/components/Button";
 import { Locale } from "@/i18n-config";
 import InviteSection from "./InviteSection";
 import { getDictionary } from "@/utils";
@@ -10,7 +9,7 @@ import Link from "next/link";
 import LinkedInIcon from "@/public/linkedin.png";
 import Image from "next/image";
 import { Suspense } from "react";
-import CopyButton from "@/components/CopyButton";
+import { CopyButton, Button } from "@/components";
 import PdfButton from "./PdfButton";
 
 export default async function Home({

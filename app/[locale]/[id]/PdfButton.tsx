@@ -1,4 +1,4 @@
-import Button from "@/components/Button";
+import { Button } from "@/components";
 import { GetPdfDossierResponse } from "@/utils";
 import { Dictionary } from "@/utils";
 import DownloadIcon from "@/public/download.png";

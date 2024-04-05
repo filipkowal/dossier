@@ -1,9 +1,6 @@
-import TextInput from "@/components/TextInput";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import Checkbox from "@/components/Checkbox";
-import Tooltip from "@/components/Tooltip";
+import { TextInput, Checkbox, NumberInput, Tooltip } from "@/components";
+import { Dispatch, SetStateAction } from "react";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
-import NumberInput from "@/components/NumberInput";
 import { type Dictionary } from "@/utils";
 
 export default function LocationStep({

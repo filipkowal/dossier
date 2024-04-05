@@ -1,8 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { type TimeSlots } from "./InviteSection";
 import { Dictionary } from "@/utils";
-import TextInput from "@/components/TextInput";
-import Button from "@/components/Button";
+import { TextInput, Button } from "@/components";
 
 export default function AvailibilityStep({
   newSlot,

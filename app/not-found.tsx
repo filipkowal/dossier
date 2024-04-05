@@ -2,12 +2,11 @@ import { type Locale } from "@/i18n-config";
 import Link from "next/link";
 import "@/app/globals.css";
 import localFont from "next/font/local";
-import CookiePopup from "@/components/CookiePopup";
+import { CookiePopup, NotFound } from "@/components";
 import { getDictionary } from "@/utils";
 import DigitalentLogo from "@/public/logo.png";
 import Thumbnail from "@/public/thumbnail.png";
 import Image from "next/image";
-import NotFound from "@/components/NotFound";
 import { headers } from "next/headers";
 import { getLocale } from "@/middleware";
 

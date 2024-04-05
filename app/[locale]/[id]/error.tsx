@@ -1,5 +1,5 @@
 "use client";
-import ErrorPage from "@/components/ErrorPage";
+import { ErrorPage } from "@/components";
 import { type Locale } from "@/i18n-config";
 import { useParams } from "next/navigation";
 
