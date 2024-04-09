@@ -10,6 +10,7 @@ import { type Locale } from "@/i18n-config";
 import NavLinks from "./NavLinks";
 import PdfButton from "@/app/[locale]/[id]/PdfButton";
 import { getPdfDossier, getUser } from "@/utils";
+import { notFound } from "next/navigation";
 
 export default async function Header({
   params,
@@ -21,6 +22,10 @@ export default async function Header({
   const dict = await getDictionary(params.locale);
   const pdfDossierPromise = getPdfDossier(params.locale, params.id);
   const user = await getUser(params.locale, params.id);
+
+  if (!user) {
+    notFound();
+  }
 
   return (
     <header

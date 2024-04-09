@@ -11,6 +11,7 @@ import Image from "next/image";
 import { Suspense } from "react";
 import { CopyButton, Button } from "@/components";
 import PdfButton from "./PdfButton";
+import { notFound } from "next/navigation";
 
 export default async function Home({
   params,
@@ -34,6 +35,10 @@ export default async function Home({
   const user = await userPromise;
   console.timeEnd("user");
   const pdfDossierPromise = getPdfDossier(locale, id);
+
+  if (!candidate || !user) {
+    notFound();
+  }
 
   return (
     <div className="w-full sm:pt-16 xl:grid xl:grid-cols-[minmax(450px,1fr),2fr] 2xl:grid-cols-[minmax(250px,1fr),2fr]">
