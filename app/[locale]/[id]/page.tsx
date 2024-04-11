@@ -23,17 +23,11 @@ export default async function Home({
   const candidatePromise = getCandidate(locale, id);
   const userPromise = getUser(locale, id);
 
-  console.time("dict");
   const dict = await dictPromise;
-  console.timeEnd("dict");
 
-  console.time("candidate");
   const candidate = await candidatePromise;
-  console.timeEnd("candidate");
 
-  console.time("user");
   const user = await userPromise;
-  console.timeEnd("user");
   const pdfDossierPromise = getPdfDossier(locale, id);
 
   if (!candidate || !user) {
