@@ -54,7 +54,8 @@
     "addSlot": "Neuen Verfügbarkeits-Slot",
     "send": "Senden",
     "previous": "Zurück",
-    "next": "Weiter"
+    "next": "Weiter",
+    "success": "Einladung gesendet"
   },
   "rejectModal": {
     "title": "Kandidat ablehnen",

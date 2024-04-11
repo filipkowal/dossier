@@ -54,7 +54,8 @@
     "addSlot": "Add new availibility slot",
     "send": "Send",
     "previous": "Previous",
-    "next": "Next"
+    "next": "Next",
+    "success": "The invitation has been sent successfully."
   },
   "rejectModal": {
     "title": "Reject Candidate",

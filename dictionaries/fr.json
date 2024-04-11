@@ -54,7 +54,8 @@
     "addSlot": "Un nouveau créneau",
     "send": "Envoyer",
     "previous": "Précédent",
-    "next": "Suivant"
+    "next": "Suivant",
+    "success": "Invitation envoyée avec succès"
   },
   "rejectModal": {
     "title": "Rejeter le candidat",

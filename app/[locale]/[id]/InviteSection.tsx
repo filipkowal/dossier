@@ -116,6 +116,7 @@ export default function InviteSection({
                 await inviteCandidate(id, formValues);
 
                 setIsOpen(false);
+                toast.success(dict["success"]);
               } catch (e) {
                 toast.error(dict["somethingWrong"]);
               }
