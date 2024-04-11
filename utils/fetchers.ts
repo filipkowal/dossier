@@ -141,7 +141,7 @@ export async function inviteCandidate(
     }[];
   }
 ) {
-  const response = await postData(`invite/${id}`, data);
+  const response = await postData(`candidate/${id}/invite`, data);
 
   return response;
 }
@@ -151,7 +151,10 @@ export async function rejectCandidate(
   reason: string,
   message: string
 ) {
-  const response = await postData(`reject/${id}`, { reason, message });
+  const response = await postData(`candidate/${id}/reject`, {
+    reason,
+    message,
+  });
 
   return response;
 }
