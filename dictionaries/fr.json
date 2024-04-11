@@ -72,7 +72,8 @@
       "notBestQualifiedOverqualified": "Pas le mieux qualifié - Trop qualifié",
       "notBestQualifiedTooOld": "Pas le mieux qualifié - Trop vieux",
       "other": "Autre"
-    }
+    },
+    "success": "Candidat rejeté"
   },
   "toastMessages": {
     "somethingWrong": "Quelque chose a mal tourné. Veuillez réessayer plus tard.",

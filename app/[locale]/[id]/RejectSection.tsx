@@ -41,6 +41,7 @@ export default function RejectSection({
             try {
               await rejectCandidate(id, reason, message);
               setIsOpen(false);
+              toast.success(dict.success);
             } catch (e) {
               toast.error(dict["somethingWrong"]);
             }
