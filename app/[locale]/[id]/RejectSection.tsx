@@ -3,6 +3,7 @@
 import { Button, TextInput, Dialog } from "@/components";
 import { rejectCandidate } from "@/utils";
 import { Dictionary } from "@/utils";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -15,6 +16,7 @@ export default function RejectSection({
     Dictionary["toastMessages"];
   id: string;
 }) {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [reason, setReason] = useState("");
   const [message, setMessage] = useState("");
@@ -40,6 +42,8 @@ export default function RejectSection({
 
             try {
               await rejectCandidate(id, reason, message);
+
+              router.refresh();
               setIsOpen(false);
               toast.success(dict.success);
             } catch (e) {

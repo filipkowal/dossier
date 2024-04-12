@@ -5,6 +5,7 @@ import { FormFooterButtons, Dialog, Button } from "@/components";
 import toast from "react-hot-toast";
 import AvailibilityStep from "./InviteSectionAvailibility";
 import LocationStep from "./InviteSectionLocation";
+import { useRouter } from "next/navigation";
 
 export type TimeSlots = { id: number; startTime: string; endTime: string }[];
 
@@ -19,6 +20,7 @@ export default function InviteSection({
   user: User;
   id: string;
 }) {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState<number>(0);
 
@@ -115,6 +117,7 @@ export default function InviteSection({
 
                 await inviteCandidate(id, formValues);
 
+                router.refresh();
                 setIsOpen(false);
                 toast.success(dict["success"]);
               } catch (e) {
