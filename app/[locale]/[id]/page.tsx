@@ -125,7 +125,7 @@ export default async function Home({
                 {dict.candidate.personalDetails}
               </h2>
               <p className="whitespace-nowrap">
-                {candidate.birthDate} {"(" + candidate.candidateAge + " y/o)"}
+                {candidate.birthDate} {"(" + candidate.candidateAge + ")"}
               </p>
               <p className="overflow-hidden text-ellipsis">
                 {candidate.address?.street}
