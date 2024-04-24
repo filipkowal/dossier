@@ -7,6 +7,7 @@ import RejectSection from "./RejectSection";
 import DossierStatus from "./DossierStatus";
 import Link from "next/link";
 import LinkedInIcon from "@/public/linkedin.png";
+import ShareIcon from "@/public/share.png";
 import Image from "next/image";
 import { Suspense } from "react";
 import { CopyButton, Button } from "@/components";
@@ -124,6 +125,12 @@ export default async function Home({
                     width={18}
                   />{" "}
                   {candidate.linkedIn?.replace(/\/$/, "").slice(27)}
+                  <Image
+                    alt="open-linkedin"
+                    src={ShareIcon}
+                    className="inline mb-[0.3rem] ml-2"
+                    width={20}
+                  />
                 </Link>
               )}
             </div>
