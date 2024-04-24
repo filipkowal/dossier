@@ -30,6 +30,13 @@ export default async function Home({
   const user = await userPromise;
   const pdfDossierPromise = getPdfDossier(locale, id);
 
+  function addHighComma(value?: string) {
+    if (!value) return "";
+
+    let commaSeparated = value.replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+    return commaSeparated;
+  }
+
   if (!candidate || !user) {
     notFound();
   }
@@ -176,7 +183,7 @@ export default async function Home({
               {user.canViewSalary ? (
                 <p>
                   {dict.candidate.desiredSalary}:{" "}
-                  <b>{candidate.desiredSalary}</b>
+                  <b>{addHighComma(candidate.desiredSalary)}</b>
                 </p>
               ) : (
                 ""
@@ -201,7 +208,11 @@ export default async function Home({
               <div>
                 <p>{candidate.currentPosition}</p>
                 <p>{candidate.noticePeriod}</p>
-                {user.canViewSalary ? <p>{candidate.desiredSalary}</p> : ""}
+                {user.canViewSalary ? (
+                  <p>{addHighComma(candidate.desiredSalary)}</p>
+                ) : (
+                  ""
+                )}
                 <p>{candidate.desiredWorkload}</p>
               </div>
             </div>
