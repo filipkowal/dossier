@@ -60,6 +60,7 @@
   "rejectModal": {
     "title": "Kandidat ablehnen",
     "reason": "Schade es nicht passt. Was ist der Hintergrund für deine Entscheidung?",
+    "select": "Bitte wähle einen Grund aus",
     "message": "Kommentare (optional)",
     "send": "Senden",
     "reasons": {

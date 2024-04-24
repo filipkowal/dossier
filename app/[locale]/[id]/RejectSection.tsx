@@ -58,7 +58,7 @@ export default function RejectSection({
             onChange={(e) => setReason(e.target.value)}
             className="bg-transparent border-2 border-digitalent-blue text-digitalent-blue px-4 -mx-[0.1rem] focus:outline-none focus:ring-2 focus:ring-digitalent-blue focus:border-transparent    "
           >
-            <option value="">Select a reason</option>
+            <option value="">{dict.select}</option>
             {reasons.map((reason) => (
               <option key={reason[0]} value={reason[0]}>
                 {reason[1]}

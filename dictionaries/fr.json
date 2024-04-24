@@ -60,6 +60,7 @@
   "rejectModal": {
     "title": "Rejeter le candidat",
     "reason": "Dommage. Quelle est la raison de votre décision?",
+    "select": "Sélectionner une raison",
     "message": "Commentaires (facultatif)",
     "send": "Envoyer",
     "reasons": {

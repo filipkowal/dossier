@@ -60,6 +60,7 @@
   "rejectModal": {
     "title": "Reject Candidate",
     "reason": "Too bad. What is the background for your decision?",
+    "select": "Select a reason",
     "message": "Comments (optional)",
     "send": "Send",
     "reasons": {
