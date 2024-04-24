@@ -18,7 +18,36 @@ export default function AvailibilityStep({
 }) {
   const [showNewSlot, setShowNewSlot] = useState(true);
 
-  useCreateOneHourSlot(newSlot, setNewSlot);
+  function getNewEndTime(slot: TimeSlots[0], newStartTime: string) {
+    if (!newStartTime) return "";
+
+    // If there's no endTime, calculate the it by adding 1 hour to the startTime.
+    if (!slot.endTime) {
+      const endTime = new Date(
+        new Date(newStartTime).getTime() + 60 * 60 * 1000
+      );
+
+      const newEndTime = formatTimeToInputString(endTime);
+      return newEndTime;
+    }
+
+    // If the startTime changes, calculate the slot length and update endTime to preserve the length.
+    const now = new Date();
+    const startDateTime = new Date(newSlot.startTime);
+    const startTime = now.setTime(startDateTime.getTime());
+    const [endHour, endMinute] = newSlot.endTime.split(":");
+    const endTime = now.setHours(Number(endHour), Number(endMinute), 0, 0);
+
+    return formatTimeToInputString(
+      new Date(new Date(newStartTime).getTime() + (endTime - startTime))
+    );
+
+    function formatTimeToInputString(date: Date) {
+      return new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+        .toISOString()
+        .slice(11, 16);
+    }
+  }
 
   return (
     <>
@@ -40,7 +69,11 @@ export default function AvailibilityStep({
                     setAvailibilitySlots(
                       availibilitySlots.map((s, i) => {
                         if (i === index) {
-                          return { ...s, startTime: e.target.value };
+                          return {
+                            ...s,
+                            startTime: e.target.value,
+                            endTime: getNewEndTime(s, e.target.value),
+                          };
                         }
                         return s;
                       })
@@ -88,7 +121,11 @@ export default function AvailibilityStep({
                 type="datetime-local"
                 value={newSlot.startTime}
                 onChange={(e) =>
-                  setNewSlot({ ...newSlot, startTime: e.target.value })
+                  setNewSlot((slot) => ({
+                    ...newSlot,
+                    startTime: e.target.value,
+                    endTime: getNewEndTime(slot, e.target.value),
+                  }))
                 }
                 label={dict.slotStart}
               />
@@ -139,36 +176,4 @@ export default function AvailibilityStep({
       </div>
     </>
   );
-}
-
-/**
- * Custom hook that updates the newSlot state to ensure that both startTime and endTime are always present.
- * If only startTime is provided, it calculates the endTime by adding 1 hour to the startTime.
- * If only endTime is provided, it calculates the startTime by subtracting 1 hour from the endTime.
- * @param {TimeSlots[0]} newSlot - The newSlot state object.
- * @param {Dispatch<SetStateAction<TimeSlots[0]>>} setNewSlot - The state setter function for newSlot.
- */
-function useCreateOneHourSlot(
-  newSlot: TimeSlots[0],
-  setNewSlot: Dispatch<SetStateAction<TimeSlots[0]>>
-) {
-  const formatTime = (date: Date) =>
-    new Date(date.getTime() - date.getTimezoneOffset() * 60000)
-      .toISOString()
-      .slice(11, 16);
-
-  useEffect(() => {
-    if (newSlot.startTime && !newSlot.endTime) {
-      const startTime = new Date(newSlot.startTime);
-      const endTime = new Date(startTime.getTime() + 60 * 60 * 1000);
-
-      const endTimeFormatted = formatTime(endTime);
-
-      setNewSlot((slot) => ({
-        ...slot,
-        endTime: endTimeFormatted,
-      }));
-      return;
-    }
-  }, [newSlot.startTime, newSlot.endTime, setNewSlot]);
 }
