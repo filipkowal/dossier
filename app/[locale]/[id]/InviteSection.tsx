@@ -33,6 +33,7 @@ export default function InviteSection({
   const [availibilitySlots, setAvailibilitySlots] = useState<TimeSlots>([]);
   const [interviewDuration, setInterviewDuration] = useState(30);
   const [newSlot, setNewSlot] = useState({ id: 0, startTime: "", endTime: "" });
+  const [invitePending, setInvitePending] = useState(false);
 
   const steps = [];
 
@@ -89,11 +90,13 @@ export default function InviteSection({
             setStep={setStep}
             stepsLength={steps.length}
             dict={dict}
+            isPending={invitePending}
             submissionDisabled={
               availibilitySlots.length === 0 &&
               !(newSlot.startTime && newSlot.endTime)
             }
             onSubmit={async () => {
+              setInvitePending(true);
               const slots = [...availibilitySlots];
               if (newSlot.startTime && newSlot.endTime) {
                 slots.push(newSlot);
@@ -120,6 +123,7 @@ export default function InviteSection({
                 router.refresh();
                 setIsOpen(false);
                 toast.success(dict["success"]);
+                setInvitePending(false);
               } catch (e) {
                 toast.error(dict["somethingWrong"]);
               }

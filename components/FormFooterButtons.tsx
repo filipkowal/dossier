@@ -1,6 +1,7 @@
 import { Dictionary } from "@/utils";
 import { Dispatch, SetStateAction } from "react";
 import Button from "./Button";
+import LoadingEllipsis from "./LoadingEllipsis";
 
 export default function FormFooterButtons({
   step,
@@ -9,6 +10,7 @@ export default function FormFooterButtons({
   dict,
   onSubmit,
   submissionDisabled,
+  isPending,
 }: {
   step: number;
   setStep: Dispatch<SetStateAction<number>>;
@@ -16,6 +18,7 @@ export default function FormFooterButtons({
   dict: Dictionary["inviteModal"];
   onSubmit: () => void;
   submissionDisabled?: boolean;
+  isPending: boolean;
 }) {
   if (step === 0 && stepsLength > 1) {
     return (
@@ -23,6 +26,7 @@ export default function FormFooterButtons({
         type="primary"
         name={dict.next}
         onClick={() => setStep((step: number) => step + 1)}
+        disabled={isPending}
       >
         {dict.next}
       </Button>
@@ -39,9 +43,10 @@ export default function FormFooterButtons({
           if (submissionDisabled) return;
           onSubmit();
         }}
-        disabled={submissionDisabled}
+        disabled={submissionDisabled || isPending}
       >
         {dict.send}
+        <LoadingEllipsis isLoading={isPending} />
       </Button>
     );
   }
@@ -85,9 +90,10 @@ export default function FormFooterButtons({
             if (submissionDisabled) return;
             onSubmit();
           }}
-          disabled={submissionDisabled}
+          disabled={submissionDisabled || isPending}
         >
           {dict.send}
+          <LoadingEllipsis isLoading={isPending} />
         </Button>
       </div>
     );
