@@ -7,7 +7,7 @@ export default function ToastProvider() {
     <Toaster
       position="top-center"
       reverseOrder={false}
-      toastOptions={{ duration: 5000 }}
+      toastOptions={{ duration: 7000 }}
     >
       {(t) => (
         <ToastBar
