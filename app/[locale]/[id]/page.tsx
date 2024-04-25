@@ -13,6 +13,10 @@ import { Suspense } from "react";
 import { CopyButton, Button } from "@/components";
 import PdfButton from "./PdfButton";
 import { notFound } from "next/navigation";
+import dynamic from "next/dynamic";
+const LongCandidateInfo = dynamic(() => import("./LongCandidateInfo"), {
+  ssr: false,
+});
 
 export default async function Home({
   params,
@@ -224,24 +228,7 @@ export default async function Home({
               </div>
             </div>
 
-            <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">
-              {dict.candidate.interviewSummary}
-            </h2>
-            <p>{candidate.interviewSummary}</p>
-
-            <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">
-              {dict.candidate.reasonForChange}
-            </h2>
-            <p>{candidate.reasonForChange}</p>
-
-            <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">
-              {dict.candidate.educationSummary}
-            </h2>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: candidate.educationSummary || "",
-              }}
-            ></div>
+            <LongCandidateInfo candidate={candidate} dict={dict.candidate} />
           </div>
         </div>
         <CvAndCertificates cvAndCertificates={candidate.files || []} />
