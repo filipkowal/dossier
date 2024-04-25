@@ -7,7 +7,11 @@ import AvailibilityStep from "./InviteSectionAvailibility";
 import LocationStep from "./InviteSectionLocation";
 import { useRouter } from "next/navigation";
 
-export type TimeSlots = { id: number; startTime: string; endTime: string }[];
+export type TimeSlots = {
+  id: number;
+  startDateTime: string;
+  endTime: string;
+}[];
 
 export default function InviteSection({
   dict,
@@ -34,7 +38,11 @@ export default function InviteSection({
   const [interviewLink, setInterviewLink] = useState("");
   const [availibilitySlots, setAvailibilitySlots] = useState<TimeSlots>([]);
   const [interviewDuration, setInterviewDuration] = useState(30);
-  const [newSlot, setNewSlot] = useState({ id: 0, startTime: "", endTime: "" });
+  const [newSlot, setNewSlot] = useState({
+    id: 0,
+    startDateTime: "",
+    endTime: "",
+  });
   const [invitePending, setInvitePending] = useState(false);
 
   const steps = [];
@@ -95,12 +103,12 @@ export default function InviteSection({
             isPending={invitePending}
             submissionDisabled={
               availibilitySlots.length === 0 &&
-              !(newSlot.startTime && newSlot.endTime)
+              !(newSlot.startDateTime && newSlot.endTime)
             }
             onSubmit={async () => {
               setInvitePending(true);
               const slots = [...availibilitySlots];
-              if (newSlot.startTime && newSlot.endTime) {
+              if (newSlot.startDateTime && newSlot.endTime) {
                 slots.push(newSlot);
               }
 

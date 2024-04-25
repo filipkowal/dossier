@@ -33,7 +33,7 @@ export default function AvailibilityStep({
 
     // If the startTime changes, calculate the slot length and update endTime to preserve the length.
     const now = new Date();
-    const startDateTime = new Date(newSlot.startTime);
+    const startDateTime = new Date(newSlot.startDateTime);
     const startTime = now.setTime(startDateTime.getTime());
     const [endHour, endMinute] = newSlot.endTime.split(":");
     const endTime = now.setHours(Number(endHour), Number(endMinute), 0, 0);
@@ -64,14 +64,14 @@ export default function AvailibilityStep({
                 <TextInput
                   name={`slot-${index}-startTime`}
                   type="datetime-local"
-                  value={slot?.startTime || ""}
+                  value={slot?.startDateTime || ""}
                   onChange={(e) =>
                     setAvailibilitySlots(
                       availibilitySlots.map((s, i) => {
                         if (i === index) {
                           return {
                             ...s,
-                            startTime: e.target.value,
+                            startDateTime: e.target.value,
                             endTime: getNewEndTime(s, e.target.value),
                           };
                         }
@@ -84,7 +84,7 @@ export default function AvailibilityStep({
                 <TextInput
                   name={`slot-${index}-endTime`}
                   type="time"
-                  disabled={!slot.startTime}
+                  disabled={!slot.startDateTime}
                   value={slot?.endTime || ""}
                   onChange={(e) =>
                     setAvailibilitySlots(
@@ -119,11 +119,11 @@ export default function AvailibilityStep({
               <TextInput
                 name={`newSlot-startTime`}
                 type="datetime-local"
-                value={newSlot.startTime}
+                value={newSlot.startDateTime}
                 onChange={(e) =>
                   setNewSlot((slot) => ({
                     ...newSlot,
-                    startTime: e.target.value,
+                    startDateTime: e.target.value,
                     endTime: getNewEndTime(slot, e.target.value),
                   }))
                 }
@@ -132,7 +132,7 @@ export default function AvailibilityStep({
               <TextInput
                 name={`newSlot-endTime`}
                 type="time"
-                disabled={!newSlot.startTime}
+                disabled={!newSlot.startDateTime}
                 value={newSlot.endTime}
                 onChange={(e) =>
                   setNewSlot({ ...newSlot, endTime: e.target.value })
@@ -146,7 +146,7 @@ export default function AvailibilityStep({
                 onClick={() => {
                   setNewSlot((slot) => ({
                     ...slot,
-                    startTime: "",
+                    startDateTime: "",
                     endTime: "",
                   }));
                   setShowNewSlot(false);
@@ -162,13 +162,13 @@ export default function AvailibilityStep({
         <Button
           name="Add new slot"
           onClick={() => {
-            if (newSlot.startTime && newSlot.endTime) {
+            if (newSlot.startDateTime && newSlot.endTime) {
               setAvailibilitySlots((slots) => [...slots, newSlot]);
             }
-            setNewSlot({ id: newSlot.id + 1, startTime: "", endTime: "" });
+            setNewSlot({ id: newSlot.id + 1, startDateTime: "", endTime: "" });
             setShowNewSlot(true);
           }}
-          disabled={(!newSlot.startTime || !newSlot.endTime) && showNewSlot}
+          disabled={(!newSlot.startDateTime || !newSlot.endTime) && showNewSlot}
           className="bg-digitalent-blue text-white disabled:bg-digitalent-blue disabled:text-white hover:disabled:bg-digitalent-blue hover:disabled:text-white"
         >
           {dict.addSlot}
