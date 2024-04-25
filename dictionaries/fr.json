@@ -55,7 +55,7 @@
     "send": "Envoyer",
     "previous": "Précédent",
     "next": "Suivant",
-    "success": "Invitation envoyée avec succès"
+    "success": "Merci d'avoir fourni des créneaux horaires. Nous allons clarifier avec la personne qui postule quel créneau correspond le mieux et vous informerons rapidement."
   },
   "rejectModal": {
     "title": "Rejeter le candidat",
@@ -74,7 +74,7 @@
       "notBestQualifiedTooOld": "Pas le mieux qualifié - Trop vieux",
       "other": "Autre"
     },
-    "success": "Candidat rejeté"
+    "success": "C'est dommage que vous ne vouliez pas inviter le/la candidat/e. Nous les informerons en conséquence."
   },
   "toastMessages": {
     "somethingWrong": "Quelque chose a mal tourné. Veuillez réessayer plus tard.",

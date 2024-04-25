@@ -55,7 +55,7 @@
     "send": "Senden",
     "previous": "Zurück",
     "next": "Weiter",
-    "success": "Einladung gesendet"
+    "success": "Vielen Dank für die Zeitfenster. Wir werden mit der kandidierenden Person abklären, welcher Termin am besten passt, und dich zeitnah informieren."
   },
   "rejectModal": {
     "title": "Kandidat ablehnen",
@@ -74,7 +74,7 @@
       "notBestQualifiedTooOld": "Fehlende Qualifikation - zu alt",
       "other": "Andere"
     },
-    "success": "Kandidat abgelehnt"
+    "success": "Schade, dass du die kandidierende Person nicht einladen möchtest. Wir werden diese entsprechend informieren."
   },
   "toastMessages": {
     "somethingWrong": "Etwas ist schief gelaufen. Bitte versuche es später noch einmal.",

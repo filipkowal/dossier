@@ -55,7 +55,7 @@
     "send": "Send",
     "previous": "Previous",
     "next": "Next",
-    "success": "The invitation has been sent successfully."
+    "success": "Thank you for providing timeslots. We will clarify with the candidate which timeslot fits best and inform you promptly"
   },
   "rejectModal": {
     "title": "Reject Candidate",
@@ -74,7 +74,7 @@
       "notBestQualifiedTooOld": "Not Best Qualified - Too old",
       "other": "Other"
     },
-    "success": "The candidate has been rejected."
+    "success": "It's a pity that you don't want to invite the candidate. We will inform them accordingly."
   },
   "toastMessages": {
     "somethingWrong": "Something went wrong. Please try again later.",
