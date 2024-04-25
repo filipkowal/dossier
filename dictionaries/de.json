@@ -55,7 +55,10 @@
     "send": "Senden",
     "previous": "Zurück",
     "next": "Weiter",
-    "success": "Vielen Dank für die Zeitfenster. Wir werden mit der kandidierenden Person abklären, welcher Termin am besten passt, und dich zeitnah informieren."
+    "success": {
+      "male": "Vielen Dank für die Zeitfenster. Wir werden mit dem Kandidaten abklären, welcher Termin am besten passt, und dich zeitnah informieren.",
+      "female": "Vielen Dank für die Zeitfenster. Wir werden mit der Kandidatin abklären, welcher Termin am besten passt, und dich zeitnah informieren."
+    }
   },
   "rejectModal": {
     "title": "Kandidat ablehnen",
@@ -74,7 +77,10 @@
       "notBestQualifiedTooOld": "Fehlende Qualifikation - zu alt",
       "other": "Andere"
     },
-    "success": "Schade, dass du die kandidierende Person nicht einladen möchtest. Wir werden diese entsprechend informieren."
+    "success": {
+      "male": "Schade, dass du den Kandidaten nicht einladen möchtest. Wir werden ihn entsprechend informieren.",
+      "female": "Schade, dass du die Kandidatin nicht einladen möchtest. Wir werden sie entsprechend informieren."
+    }
   },
   "toastMessages": {
     "somethingWrong": "Etwas ist schief gelaufen. Bitte versuche es später noch einmal.",

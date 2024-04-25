@@ -55,7 +55,10 @@
     "send": "Envoyer",
     "previous": "Précédent",
     "next": "Suivant",
-    "success": "Merci d'avoir fourni des créneaux horaires. Nous allons clarifier avec le/la candidat/e quel créneau correspond le mieux et vous informerons rapidement."
+    "success": {
+      "male": "Merci d'avoir fourni des créneaux horaires. Nous allons clarifier avec le candidat quel créneau correspond le mieux et vous informerons rapidement.",
+      "female": "Merci d'avoir fourni des créneaux horaires. Nous allons clarifier avec la candidate quel créneau correspond le mieux et vous informerons rapidement."
+    }
   },
   "rejectModal": {
     "title": "Rejeter le candidat",
@@ -74,7 +77,10 @@
       "notBestQualifiedTooOld": "Pas le mieux qualifié - Trop vieux",
       "other": "Autre"
     },
-    "success": "C'est dommage que vous ne vouliez pas inviter le/la candidat/e. Nous les informerons en conséquence."
+    "success": {
+      "male": "C'est dommage que vous ne vouliez pas inviter le candidat. Nous les informerons en conséquence.",
+      "female": "C'est dommage que vous ne vouliez pas inviter la candidate. Nous l'informerons en conséquence."
+    }
   },
   "toastMessages": {
     "somethingWrong": "Quelque chose a mal tourné. Veuillez réessayer plus tard.",

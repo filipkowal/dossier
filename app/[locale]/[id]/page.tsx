@@ -242,6 +242,7 @@ export default async function Home({
           }}
           user={user}
           id={id}
+          candidateGender={candidate?.gender}
         />
         <RejectSection
           dict={{
@@ -250,6 +251,7 @@ export default async function Home({
             ...dict.toastMessages,
           }}
           id={id}
+          candidateGender={candidate?.gender}
         />
 
         {user.canDownloadPdf ? (

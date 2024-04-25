@@ -13,12 +13,14 @@ export default function InviteSection({
   dict,
   user,
   id,
+  candidateGender = "male",
 }: {
   dict: Dictionary["inviteModal"] &
     Dictionary["mainButtons"] &
     Dictionary["toastMessages"];
   user: User;
   id: string;
+  candidateGender?: "male" | "female";
 }) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -122,7 +124,7 @@ export default function InviteSection({
 
                 router.refresh();
                 setIsOpen(false);
-                toast.success(dict["success"]);
+                toast.success(dict["success"][candidateGender]);
               } catch (e) {
                 toast.error(dict["somethingWrong"]);
               } finally {
