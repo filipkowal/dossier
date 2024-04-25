@@ -167,6 +167,62 @@ components:
           $ref: "#/components/schemas/GeoCoordinate"
 
 paths:
+  /auth/sendCode:
+    post:
+      summary: Request a login code
+      operationId: requestLoginCode
+      responses:
+        "200":
+          description: Code sent to the user's phone and email
+        "400":
+          description: Bad request
+  /auth/login:
+    post:
+      summary: Login with a code
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+      responses:
+        "200":
+          description: Successful operation
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+                example: "token={tokenvalue}; HttpOnly"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "403":
+          description: Wrong code
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /auth/logout:
+    post:
+      summary: Logout
+      operationId: logout
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Bad request
   /{locale}/candidate/{id}:
     get:
       summary: Retrieve a candidate information
