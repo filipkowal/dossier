@@ -9,18 +9,16 @@ servers:
     url: https://virtserver.swaggerhub.com/FILIPKOWAL_1/Dossier/1.0
 
 security:
-  - OAuth2: []
+  - cookieAuth: []
 
 components:
   securitySchemes:
-    OAuth2:
-      type: oauth2
-      flows:
-        authorizationCode:
-          authorizationUrl: https://example.com/oauth/authorize
-          tokenUrl: https://example.com/oauth/token
-          scopes:
-            arranger: Access to /invite and /reject endpoints
+    cookieAuth: # arbitrary name for the security scheme
+      type: http
+      scheme: bearer # just for documentation puroses
+      bearerFormat: JWT
+      in: cookie # the JWT token will be sent in a cookie
+      name: token # the cookie name
   schemas:
     File:
       type: object
@@ -171,6 +169,7 @@ paths:
     post:
       summary: Request a login code
       operationId: requestLoginCode
+      security: [] # This endpoint doesn't require authentication
       responses:
         "200":
           description: Code sent to the user's phone and email
@@ -180,6 +179,7 @@ paths:
     post:
       summary: Login with a code
       operationId: login
+      security: []
       requestBody:
         content:
           application/json:
@@ -218,6 +218,7 @@ paths:
     post:
       summary: Logout
       operationId: logout
+      security: []
       responses:
         "200":
           description: Successful operation
