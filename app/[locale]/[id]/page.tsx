@@ -159,7 +159,7 @@ export default async function Home({
 
       <div className="flex flex-col">
         {/* Desktop */}
-        <div className="hidden xl:flex flex-col pt-16 sm:px-16 2xl:px-32 bg-digitalent-blue text-white justify-end h-[34vh] 3xl:h-[30vh]">
+        <div className="hidden xl:flex flex-col pt-16 sm:px-16 2xl:px-32 bg-digitalent-blue text-white justify-end min-h-[34vh] 3xl:h-[30vh]">
           <DossierStatus candidate={candidate} />
 
           <div className="max-w-[48rem] font-title flex text-3xl gap-12 mb-16">
