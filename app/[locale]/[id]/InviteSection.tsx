@@ -123,9 +123,10 @@ export default function InviteSection({
                 router.refresh();
                 setIsOpen(false);
                 toast.success(dict["success"]);
-                setInvitePending(false);
               } catch (e) {
                 toast.error(dict["somethingWrong"]);
+              } finally {
+                setInvitePending(false);
               }
             }}
           />

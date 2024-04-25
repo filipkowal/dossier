@@ -1,6 +1,7 @@
 "use client";
 
 import { Button, TextInput, Dialog } from "@/components";
+import LoadingEllipsis from "@/components/LoadingEllipsis";
 import { rejectCandidate } from "@/utils";
 import { Dictionary } from "@/utils";
 import { useRouter } from "next/navigation";
@@ -20,6 +21,7 @@ export default function RejectSection({
   const [isOpen, setIsOpen] = useState(false);
   const [reason, setReason] = useState("");
   const [message, setMessage] = useState("");
+  const [rejectionPending, setRejectionPending] = useState(false);
 
   const reasons = Object.entries(dict.reasons);
 
@@ -39,6 +41,7 @@ export default function RejectSection({
           className="flex flex-col gap-4"
           onSubmit={async (e) => {
             e.preventDefault();
+            setRejectionPending(true);
 
             try {
               await rejectCandidate(id, reason, message);
@@ -48,6 +51,8 @@ export default function RejectSection({
               toast.success(dict.success);
             } catch (e) {
               toast.error(dict["somethingWrong"]);
+            } finally {
+              setRejectionPending(false);
             }
           }}
         >
@@ -74,8 +79,14 @@ export default function RejectSection({
             onChange={(e) => setMessage(e.target.value)}
           />
 
-          <Button type="primary" name="Reject" submitType disabled={!reason}>
+          <Button
+            type="primary"
+            name="Reject"
+            submitType
+            disabled={!reason || rejectionPending}
+          >
             {dict.send}
+            <LoadingEllipsis isLoading={rejectionPending} />
           </Button>
         </form>
       </Dialog>
