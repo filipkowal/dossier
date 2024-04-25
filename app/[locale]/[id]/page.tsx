@@ -190,14 +190,14 @@ export default async function Home({
               {user.canViewSalary ? (
                 <p>
                   {dict.candidate.desiredSalary}:{" "}
-                  <b>{addHighComma(candidate.desiredSalary)}</b>
+                  <b>CHF {addHighComma(candidate.desiredSalary)}</b>
                 </p>
               ) : (
                 ""
               )}
               <p>
                 {dict.candidate.desiredWorkload}:{" "}
-                <b>{candidate.desiredWorkload}</b>
+                <b>{candidate.desiredWorkload}%</b>
               </p>
             </div>
 
@@ -216,11 +216,11 @@ export default async function Home({
                 <p>{candidate.currentPosition}</p>
                 <p>{candidate.noticePeriod}</p>
                 {user.canViewSalary ? (
-                  <p>{addHighComma(candidate.desiredSalary)}</p>
+                  <p>CHF {addHighComma(candidate.desiredSalary)}</p>
                 ) : (
                   ""
                 )}
-                <p>{candidate.desiredWorkload}</p>
+                <p>{candidate.desiredWorkload}%</p>
               </div>
             </div>
 
