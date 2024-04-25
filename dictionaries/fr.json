@@ -55,7 +55,7 @@
     "send": "Envoyer",
     "previous": "Précédent",
     "next": "Suivant",
-    "success": "Merci d'avoir fourni des créneaux horaires. Nous allons clarifier avec la personne qui postule quel créneau correspond le mieux et vous informerons rapidement."
+    "success": "Merci d'avoir fourni des créneaux horaires. Nous allons clarifier avec le/la candidat/e quel créneau correspond le mieux et vous informerons rapidement."
   },
   "rejectModal": {
     "title": "Rejeter le candidat",
