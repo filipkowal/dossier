@@ -48,6 +48,9 @@ components:
         lastName:
           type: string
           example: Kowalski
+        gender:
+          type: string
+          enum: ["male", "female"]
         candidateImage:
           $ref: "#/components/schemas/File"
         vacancyTitle:

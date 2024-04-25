@@ -52,6 +52,8 @@ export interface components {
       firstName?: string;
       /** @example Kowalski */
       lastName?: string;
+      /** @enum {string} */
+      gender?: "male" | "female";
       candidateImage?: components["schemas"]["File"];
       /** @example Senior Consultant (CIO Advisory) */
       vacancyTitle?: string;
@@ -235,8 +237,8 @@ export interface operations {
           url?: string;
           availibilitySlots?: {
               /** Format: date-time */
-              startTime?: string;
-              /** Format: date-time */
+              startDateTime?: string;
+              /** Format: time */
               endTime?: string;
             }[];
         };
