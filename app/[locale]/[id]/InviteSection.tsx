@@ -119,7 +119,7 @@ export default function InviteSection({
 
               try {
                 const formValues = {
-                  duration: interviewDuration,
+                  interviewDuration,
                   channel: isInterviewOnline
                     ? "online"
                     : ("onsite" as "online" | "onsite"),
