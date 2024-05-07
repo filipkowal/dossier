@@ -406,6 +406,11 @@ paths:
       responses:
         "200":
           description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Thank you for providing the time slots. We will check with the candidate to find the best suitable time and inform you soon.
         "400":
           description: Error
 
