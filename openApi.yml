@@ -409,8 +409,6 @@ paths:
           description: Success
         "400":
           description: Error
-      security:
-        - OAuth2: ["arranger"]
 
   /candidate/{id}/reject:
     post:
@@ -454,8 +452,6 @@ paths:
           description: Success
         "400":
           description: Error
-      security:
-        - OAuth2: [arranger]
 
   /contact/{id}:
     post:
