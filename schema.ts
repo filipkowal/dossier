@@ -5,6 +5,18 @@
 
 
 export interface paths {
+  "/auth/sendCode": {
+    /** Request a login code */
+    post: operations["requestLoginCode"];
+  };
+  "/auth/login": {
+    /** Login with a code */
+    post: operations["login"];
+  };
+  "/auth/logout": {
+    /** Logout */
+    post: operations["logout"];
+  };
   "/{locale}/candidate/{id}": {
     /** Retrieve a candidate information */
     get: operations["getResource"];
@@ -16,6 +28,10 @@ export interface paths {
   "/{locale}/user/{id}": {
     /** Retrieve user information */
     get: operations["getUser"];
+  };
+  "/{locale}/relationshipManager/{id}": {
+    /** Retrieve a relationship manager information */
+    get: operations["getRelationshipManager"];
   };
   "/candidate/{id}/invite": {
     /**
@@ -30,6 +46,10 @@ export interface paths {
      * @description Locale is not specified as a candidate might use a different language than the user
      */
     post: operations["rejectUser"];
+  };
+  "/contact/{id}": {
+    /** Send a message to DT to enquire about the candidacy */
+    post: operations["contactDT"];
   };
 }
 
@@ -46,6 +66,17 @@ export interface components {
       /** Format: int64 */
       size?: number;
       type?: string;
+    };
+    RelationshipManager: {
+      /** @example Christoph Kowalski */
+      name?: string;
+      /** @example +48 666 666 666 */
+      phoneNumber?: string;
+      /**
+       * Format: url
+       * @example https://www.example.com/photo.jpg
+       */
+      photo?: string;
     };
     Candidate: {
       /** @example Christoph */
@@ -140,6 +171,67 @@ export type external = Record<string, never>;
 
 export interface operations {
 
+  /** Request a login code */
+  requestLoginCode: {
+    responses: {
+      /** @description Code sent to the user's phone and email */
+      200: {
+        content: never;
+      };
+      /** @description Bad request */
+      400: {
+        content: never;
+      };
+    };
+  };
+  /** Login with a code */
+  login: {
+    requestBody?: {
+      content: {
+        "application/json": {
+          code?: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Successful operation */
+      200: {
+        headers: {
+          "Set-Cookie"?: string;
+        };
+        content: never;
+      };
+      /** @description Bad request */
+      400: {
+        content: {
+          "application/json": {
+            error?: string;
+          };
+        };
+      };
+      /** @description Wrong code */
+      403: {
+        content: {
+          "application/json": {
+            error?: string;
+          };
+        };
+      };
+    };
+  };
+  /** Logout */
+  logout: {
+    responses: {
+      /** @description Successful operation */
+      200: {
+        content: never;
+      };
+      /** @description Bad request */
+      400: {
+        content: never;
+      };
+    };
+  };
   /** Retrieve a candidate information */
   getResource: {
     parameters: {
@@ -215,6 +307,31 @@ export interface operations {
       };
     };
   };
+  /** Retrieve a relationship manager information */
+  getRelationshipManager: {
+    parameters: {
+      path: {
+        locale: string;
+        id: string;
+      };
+    };
+    responses: {
+      /** @description Successful operation */
+      200: {
+        content: {
+          "application/json": components["schemas"]["RelationshipManager"];
+        };
+      };
+      /** @description Bad request */
+      400: {
+        content: {
+          "application/json": {
+            error?: string;
+          };
+        };
+      };
+    };
+  };
   /**
    * Invite a candidate
    * @description Locale is not specified as a candidate might use a different language than the user
@@ -247,7 +364,9 @@ export interface operations {
     responses: {
       /** @description Success */
       200: {
-        content: never;
+        content: {
+          "text/plain": string;
+        };
       };
       /** @description Error */
       400: {
@@ -270,6 +389,32 @@ export interface operations {
         "application/json": {
           /** @enum {string} */
           reason?: "notEnoughExperience" | "notEnoughSkills" | "notEnoughEducation" | "notEnoughSalary" | "notEnoughLanguageSkills" | "notEnoughSoftSkills" | "notEnoughHardSkills" | "notEnoughDomainKnowledge" | "notEnoughAvailability" | "notEnoughMotivation" | "notEnoughCulturalFit" | "notEnoughPersonality" | "notEnoughTeamFit" | "notEnoughOther";
+          /** @example We are sorry to inform you that we will not proceed with candidate's application. We wish you all the best and can't wait for future candidates. */
+          message?: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Success */
+      200: {
+        content: never;
+      };
+      /** @description Error */
+      400: {
+        content: never;
+      };
+    };
+  };
+  /** Send a message to DT to enquire about the candidacy */
+  contactDT: {
+    parameters: {
+      path: {
+        id: string;
+      };
+    };
+    requestBody?: {
+      content: {
+        "application/json": {
           /** @example We are sorry to inform you that we will not proceed with candidate's application. We wish you all the best and can't wait for future candidates. */
           message?: string;
         };
