@@ -37,6 +37,19 @@ components:
           format: int64
         type:
           type: string
+    RelationshipManager:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Christoph Kowalski
+        phoneNumber:
+          type: string
+          example: +48 666 666 666
+        photo:
+          type: string
+          format: url
+          example: "https://www.example.com/photo.jpg"
     Candidate:
       type: object
       properties:
@@ -320,6 +333,38 @@ paths:
                   error:
                     type: string
 
+  /{locale}/relationshipManager/{id}:
+    get:
+      summary: Retrieve a relationship manager information
+      operationId: getRelationshipManager
+      parameters:
+        - name: locale
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RelationshipManager"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
   /candidate/{id}/invite:
     post:
       summary: Invite a candidate
@@ -411,3 +456,28 @@ paths:
           description: Error
       security:
         - OAuth2: [arranger]
+
+  /contact/{id}:
+    post:
+      summary: Send a message to DT to enquire about the candidacy
+      operationId: contactDT
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: "We are sorry to inform you that we will not proceed with candidate's application. We wish you all the best and can't wait for future candidates."
+      responses:
+        "200":
+          description: Success
+        "400":
+          description: Error
