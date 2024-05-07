@@ -17,8 +17,7 @@ components:
       type: http
       scheme: bearer # just for documentation puroses
       bearerFormat: JWT
-      in: cookie # the JWT token will be sent in a cookie
-      name: token # the cookie name
+      description: "JWT stored in cookie of name: token"
   schemas:
     File:
       type: object
