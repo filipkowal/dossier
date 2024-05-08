@@ -29,14 +29,14 @@ export default function ContactSection({
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         footer={
-          <Button name="Send" disabled={!message}>
+          <Button name="Send" disabled={!message} submitType type="primary">
             {dict.send}
           </Button>
         }
       >
         <form>
           <div className="flex flex-col gap-4">
-            <div className="flex gap-4">
+            <div className="flex gap-4 items-center">
               {relationshipManager?.photo ? (
                 <Image
                   src={relationshipManager.photo}
@@ -46,13 +46,14 @@ export default function ContactSection({
               ) : (
                 <div className="h-24 w-24 rounded-full bg-digitalent-yellow" />
               )}
-              <div className="flex">
+              <div className="flex gap-2">
                 <div className="flex flex-col">
                   <h2 className="text-xl font-title">
                     {relationshipManager?.name}
                   </h2>
                   <h2 className="text-xl">{relationshipManager.phoneNumber}</h2>
                 </div>
+                <h2>•</h2>
                 <h2 className="text-xl font-light">{dict.position}</h2>
               </div>
             </div>
@@ -61,6 +62,8 @@ export default function ContactSection({
               label={dict.messageLabel}
               name="message"
               type="textarea"
+              onChange={(e) => setMessage(e.target.value)}
+              rows={5}
               required
             />
           </div>
