@@ -31,7 +31,9 @@
     "notInterested": "Nicht einladen und absagen",
     "downloadAsPDF": "Als PDF herunterladen",
     "reject": "Ablehnen",
-    "invite": "Einladen"
+    "invite": "Einladen",
+    "contactDigitalent": "Kontaktiere Digitalent",
+    "contactDT": "Kontaktiere DT"
   },
   "inviteModal": {
     "title0": "Interviewort und Dauer",
@@ -81,6 +83,12 @@
       "male": "Schade, dass du den Kandidaten nicht einladen möchtest. Wir werden ihn entsprechend informieren.",
       "female": "Schade, dass du die Kandidatin nicht einladen möchtest. Wir werden sie entsprechend informieren."
     }
+  },
+  "contactModal": {
+    "position": "Beziehungsmanager",
+    "messageLabel": "Wie können wir dir helfen?",
+    "messagePlaceholder": "Deine Fragen oder Feedback zum Kandidaten oder zu jedem anderen Thema.",
+    "send": "Senden"
   },
   "toastMessages": {
     "somethingWrong": "Etwas ist schief gelaufen. Bitte versuche es später noch einmal.",

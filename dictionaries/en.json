@@ -31,7 +31,9 @@
     "notInterested": "Do not invite and reject",
     "downloadAsPDF": "Download as PDF",
     "reject": "Reject",
-    "invite": "Invite"
+    "invite": "Invite",
+    "contactDigitalent": "Contact Digitalent",
+    "contactDT": "Contact DT"
   },
   "inviteModal": {
     "title0": "Interview Location & Duration",
@@ -81,6 +83,12 @@
       "male": "It's a pity that you don't want to invite the candidate. We will inform them accordingly.",
       "female": "Its's a pity that you don't want to invite the candidate. We will inform them accordingly."
     }
+  },
+  "contactModal": {
+    "position": "Relationship Manager",
+    "messageLabel": "How can we help you?",
+    "messagePlaceholder": "Your questions or feedback regarding the candidate or any other case.",
+    "send": "Send"
   },
   "toastMessages": {
     "somethingWrong": "Something went wrong. Please try again later.",

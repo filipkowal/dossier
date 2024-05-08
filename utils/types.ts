@@ -11,3 +11,4 @@ export type GetPdfDossierResponse =
 
 export type Candidate = components["schemas"]["Candidate"];
 export type User = components["schemas"]["User"];
+export type RelationshipManager = components["schemas"]["RelationshipManager"];

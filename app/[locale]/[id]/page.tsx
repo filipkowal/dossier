@@ -14,6 +14,7 @@ import { CopyButton, Button } from "@/components";
 import PdfButton from "./PdfButton";
 import { notFound } from "next/navigation";
 import dynamic from "next/dynamic";
+import ContactSection from "./ContactSection";
 const LongCandidateInfo = dynamic(() => import("./LongCandidateInfo"), {
   ssr: false,
 });
@@ -252,6 +253,14 @@ export default async function Home({
           }}
           id={id}
           candidateGender={candidate?.gender}
+        />
+
+        <ContactSection
+          dict={{ ...dict.mainButtons, ...dict.contactModal }}
+          relationshipManager={{
+            name: "Andjela Zdravkovic",
+            phoneNumber: "+39 666 666 666",
+          }}
         />
 
         {user.canDownloadPdf ? (

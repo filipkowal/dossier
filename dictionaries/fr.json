@@ -31,7 +31,9 @@
     "notInterested": "Ne pas inviter et refuser",
     "downloadAsPDF": "Télécharger en PDF",
     "reject": "Rejeter",
-    "invite": "Inviter"
+    "invite": "Inviter",
+    "contactDigitalent": "Contacte Digitalent",
+    "contactDT": "Contacte DT"
   },
   "inviteModal": {
     "title0": "Lieu et durée de l'entretien",
@@ -81,6 +83,12 @@
       "male": "C'est dommage que vous ne vouliez pas inviter le candidat. Nous les informerons en conséquence.",
       "female": "C'est dommage que vous ne vouliez pas inviter la candidate. Nous l'informerons en conséquence."
     }
+  },
+  "contactModal": {
+    "position": "Gestionnaire de relations",
+    "messageLabel": "Comment pouvons-nous t'aider ?",
+    "messagePlaceholder": "Tes questions ou retours sur le candidat ou tout autre sujet.",
+    "send": "Envoyer"
   },
   "toastMessages": {
     "somethingWrong": "Quelque chose a mal tourné. Veuillez réessayer plus tard.",
