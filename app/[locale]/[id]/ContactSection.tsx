@@ -21,14 +21,30 @@ export default function ContactSection({
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
 
-  const Avatar = ({ size }: { size: string }) =>
-    relationshipManager?.photo ? (
-      <Image
-        src={relationshipManager.photo}
-        alt="avatar"
-        className={`h-${size} w-${size} rounded-full`}
-      />
-    ) : null;
+  const RelationshipManagerCard = () => (
+    <div className="flex gap-4 items-center bg-digitalent-blue text-white p-6">
+      {relationshipManager?.photo ? (
+        <Image
+          src={relationshipManager.photo}
+          alt="avatar"
+          className={`h-20 w-20 rounded-full`}
+        />
+      ) : (
+        <div className={`bg-digitalent-yellow h-20 w-20 rounded-full`} />
+      )}
+
+      <div className="flex gap-2 flex-col md:flex-row">
+        <div className="flex flex-col">
+          <h2 className="text-xl font-title">{relationshipManager?.name}</h2>
+          <h2 className="text-xl">{relationshipManager.phoneNumber}</h2>
+        </div>
+
+        <h2 className="hidden md:block">•</h2>
+
+        <h2 className="text-xl font-light">{dict.position}</h2>
+      </div>
+    </div>
+  );
 
   return (
     <>
@@ -38,7 +54,14 @@ export default function ContactSection({
         onClick={() => setIsOpen(true)}
       >
         <span className="flex gap-4 w-full justify-center">
-          <Avatar size="6" />
+          {relationshipManager?.photo ? (
+            <Image
+              src={relationshipManager.photo}
+              alt="avatar"
+              className={`h-6 w-6 rounded-full`}
+            />
+          ) : null}
+
           <span className="hidden sm:inline"> {dict.contactDigitalent}</span>
           <Image
             alt="contact digitalent"
@@ -76,22 +99,7 @@ export default function ContactSection({
       >
         <form>
           <div className="flex flex-col gap-4">
-            <div className="flex gap-4 items-center">
-              <Avatar size="24" />
-
-              <div className="flex gap-2 flex-col md:flex-row">
-                <div className="flex flex-col">
-                  <h2 className="text-xl font-title">
-                    {relationshipManager?.name}
-                  </h2>
-                  <h2 className="text-xl">{relationshipManager.phoneNumber}</h2>
-                </div>
-
-                <h2 className="hidden md:block">•</h2>
-
-                <h2 className="text-xl font-light">{dict.position}</h2>
-              </div>
-            </div>
+            <RelationshipManagerCard />
 
             <TextInput
               label={dict.messageLabel}
