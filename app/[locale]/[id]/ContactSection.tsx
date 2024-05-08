@@ -20,6 +20,15 @@ export default function ContactSection({
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
 
+  const Avatar = ({ size }: { size: string }) =>
+    relationshipManager?.photo ? (
+      <Image
+        src={relationshipManager.photo}
+        alt="avatar"
+        className={`h-${size} w-${size} rounded-full`}
+      />
+    ) : null;
+
   return (
     <>
       <Button
@@ -27,8 +36,12 @@ export default function ContactSection({
         className="sm:w-1/3 xl:w-1/4 max-w-[32rem] bg-digitalent-gray-light hidden sm:block  disabled:hover:bg-digitalent-gray-light"
         onClick={() => setIsOpen(true)}
       >
-        {dict.contactDigitalent}
+        <span className="flex gap-4 w-full justify-center">
+          <Avatar size="6" />
+          {dict.contactDigitalent}
+        </span>
       </Button>
+
       <Dialog
         title={dict.contactDigitalent}
         isOpen={isOpen}
@@ -58,15 +71,7 @@ export default function ContactSection({
         <form>
           <div className="flex flex-col gap-4">
             <div className="flex gap-4 items-center">
-              {relationshipManager?.photo ? (
-                <Image
-                  src={relationshipManager.photo}
-                  alt="avatar"
-                  className="h-24 w-24 rounded-full"
-                />
-              ) : (
-                <div className="h-24 w-24 rounded-full bg-digitalent-yellow" />
-              )}
+              <Avatar size="24" />
 
               <div className="flex gap-2 flex-col md:flex-row">
                 <div className="flex flex-col">
