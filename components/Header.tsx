@@ -57,11 +57,8 @@ export default async function Header({
           <NavLinks dict={dict.header} />
         </div>
         {user.canDownloadPdf ? (
-          <div className="sm:hidden">
-            <PdfButton
-              dict={dict.mainButtons}
-              pdfDossierPromise={pdfDossierPromise}
-            />
+          <div>
+            <PdfButton pdfDossierPromise={pdfDossierPromise} />
           </div>
         ) : (
           ""

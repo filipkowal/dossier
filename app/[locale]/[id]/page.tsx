@@ -32,9 +32,7 @@ export default async function Home({
   const dict = await dictPromise;
 
   const candidate = await candidatePromise;
-
   const user = await userPromise;
-  const pdfDossierPromise = getPdfDossier(locale, id);
 
   function addHighComma(value?: string) {
     if (!value) return "";
@@ -267,29 +265,6 @@ export default async function Home({
           }}
           id={id}
         />
-
-        {user.canDownloadPdf ? (
-          <Suspense
-            fallback={
-              <Button
-                name="Pdf"
-                className="sm:w-1/3 xl:w-1/4 max-w-[32rem] bg-digitalent-gray-light hidden sm:block  disabled:hover:bg-digitalent-gray-light"
-                disabled
-              >
-                {dict.mainButtons.downloadAsPDF}
-              </Button>
-            }
-          >
-            <div className="hidden sm:block">
-              <PdfButton
-                dict={dict.mainButtons}
-                pdfDossierPromise={pdfDossierPromise}
-              />
-            </div>
-          </Suspense>
-        ) : (
-          ""
-        )}
       </div>
     </div>
   );

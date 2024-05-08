@@ -1,14 +1,12 @@
 import { Button } from "@/components";
 import { GetPdfDossierResponse } from "@/utils";
-import { Dictionary } from "@/utils";
 import DownloadIcon from "@/public/download.png";
+import DownloadIconBlue from "@/public/download-blue.png";
 import Image from "next/image";
 
 export default async function PdfButton({
-  dict,
   pdfDossierPromise,
 }: {
-  dict: Dictionary["mainButtons"];
   pdfDossierPromise: Promise<GetPdfDossierResponse>;
 }) {
   const pdfDossier = await pdfDossierPromise;
@@ -19,18 +17,17 @@ export default async function PdfButton({
     <a
       href={pdfDossier.content}
       download="dossier.pdf"
-      className="sm:w-1/3 xl:w-1/4 max-w-[32rem]"
+      className="sm:w-1/3 xl:w-1/4 max-w-[32rem] group"
     >
-      <Button
-        name="PDF"
-        className="w-full h-full bg-digitalent-gray-light hidden sm:block disabled:hover:bg-digitalent-gray-light"
-      >
-        {dict.downloadAsPDF}
-      </Button>
-      <Button name={"PDF"} type="invert" className="flex gap-2 sm:hidden">
+      <Button name={"PDF"} type="invert" className="flex gap-2 ml-8">
         <Image
           src={DownloadIcon}
-          className="h-4 w-4 mt-1"
+          className="h-4 w-4 mt-1 group-hover:hidden"
+          alt="download as pdf"
+        />
+        <Image
+          src={DownloadIconBlue}
+          className="h-4 w-4 mt-1 hidden group-hover:block"
           alt="download as pdf"
         />{" "}
         PDF
