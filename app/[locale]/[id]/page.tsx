@@ -256,11 +256,16 @@ export default async function Home({
         />
 
         <ContactSection
-          dict={{ ...dict.mainButtons, ...dict.contactModal }}
+          dict={{
+            ...dict.mainButtons,
+            ...dict.contactModal,
+            ...dict.toastMessages,
+          }}
           relationshipManager={{
             name: "Andjela Zdravkovic",
             phoneNumber: "+39 666 666 666",
           }}
+          id={id}
         />
 
         {user.canDownloadPdf ? (

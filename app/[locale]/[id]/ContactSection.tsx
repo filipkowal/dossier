@@ -1,16 +1,21 @@
 "use client";
 
 import { Button, Dialog, TextInput } from "@/components";
-import { Dictionary, RelationshipManager } from "@/utils";
+import { Dictionary, RelationshipManager, contactDigitalent } from "@/utils";
 import Image from "next/image";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function ContactSection({
   dict,
   relationshipManager,
+  id,
 }: {
-  dict: Dictionary["mainButtons"] & Dictionary["contactModal"];
+  dict: Dictionary["mainButtons"] &
+    Dictionary["contactModal"] &
+    Dictionary["toastMessages"];
   relationshipManager: RelationshipManager;
+  id: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
@@ -29,7 +34,23 @@ export default function ContactSection({
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         footer={
-          <Button name="Send" disabled={!message} submitType type="primary">
+          <Button
+            name="Send"
+            disabled={!message}
+            submitType
+            type="primary"
+            onClick={async () => {
+              if (!message) return;
+
+              try {
+                await contactDigitalent(id, message);
+                // @fixme
+                toast.success("Message sent");
+              } catch (error) {
+                toast.error(dict.somethingWrong);
+              }
+            }}
+          >
             {dict.send}
           </Button>
         }
