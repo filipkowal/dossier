@@ -5,6 +5,7 @@ import { Dictionary, RelationshipManager, contactDigitalent } from "@/utils";
 import Image from "next/image";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import ChatIcon from "@/public/chat.png";
 
 export default function ContactSection({
   dict,
@@ -33,12 +34,17 @@ export default function ContactSection({
     <>
       <Button
         name="Contact"
-        className="sm:w-1/3 xl:w-1/4 max-w-[32rem] bg-digitalent-gray-light hidden sm:block  disabled:hover:bg-digitalent-gray-light"
+        className="sm:w-1/3 xl:w-1/4 max-w-[32rem] bg-digitalent-gray-light  disabled:hover:bg-digitalent-gray-light"
         onClick={() => setIsOpen(true)}
       >
         <span className="flex gap-4 w-full justify-center">
           <Avatar size="6" />
-          {dict.contactDigitalent}
+          <span className="hidden sm:inline"> {dict.contactDigitalent}</span>
+          <Image
+            alt="contact digitalent"
+            className="sm:hidden"
+            src={ChatIcon}
+          />
         </span>
       </Button>
 
