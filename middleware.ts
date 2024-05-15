@@ -31,6 +31,8 @@ export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const locale = getLocale(request.headers);
 
+  // Auth redirection
+
   if (!request.cookies.has("token") || (await isLoggedIn()) !== true)
     return NextResponse.redirect(new URL(`/${locale}/login`));
 
@@ -41,6 +43,8 @@ export async function middleware(request: NextRequest) {
   )
     return NextResponse.redirect(new URL(`/${locale}`));
 
+  // Skip file requests
+
   if (PUBLIC_FILE.test(pathname)) return;
 
   if (
@@ -49,6 +53,8 @@ export async function middleware(request: NextRequest) {
     pathname.includes("sentry")
   )
     return;
+
+  // Add locale to path if missing
 
   const pathnameIsMissingLocale = i18n.locales.every(
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
@@ -59,6 +65,8 @@ export async function middleware(request: NextRequest) {
       new URL(`/${locale}${pathname ? `/${pathname}` : ""}`, request.url)
     );
   }
+
+  // Otherwise, continue
 
   return NextResponse.next();
 }
