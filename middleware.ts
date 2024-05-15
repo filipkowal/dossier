@@ -31,18 +31,6 @@ export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const locale = getLocale(request.headers);
 
-  // Auth redirection
-
-  if (!request.cookies.has("token") || (await isLoggedIn()) !== true)
-    return NextResponse.redirect(new URL(`/${locale}/login`));
-
-  if (
-    pathname.startsWith(`/${locale}/login`) &&
-    request.cookies.has("token") &&
-    (await isLoggedIn()) === true
-  )
-    return NextResponse.redirect(new URL(`/${locale}`));
-
   // Skip file requests
 
   if (PUBLIC_FILE.test(pathname)) return;
@@ -65,6 +53,26 @@ export async function middleware(request: NextRequest) {
       new URL(`/${locale}${pathname ? `/${pathname}` : ""}`, request.url)
     );
   }
+
+  // Auth redirection
+
+  // if (
+  //   !pathname.startsWith(`/${locale}/login`) &&
+  //   (!request.cookies.has("token") || (await isLoggedIn()) !== true)
+  // ) {
+  //   console.log(pathname, " ", pathname.startsWith(`/${locale}/login`));
+  //   console.log("locale", locale);
+  //   const url = new URL(`/${locale}/login`, request.url);
+  //   console.log(url);
+  //   return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
+  // }
+
+  // if (
+  //   pathname.startsWith(`/${locale}/login`) &&
+  //   request.cookies.has("token") &&
+  //   (await isLoggedIn()) === true
+  // )
+  //   return NextResponse.redirect(new URL(`/${locale}`, request.url));
 
   // Otherwise, continue
 
