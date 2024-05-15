@@ -226,6 +226,29 @@ paths:
                 properties:
                   error:
                     type: string
+  /auth/isLoggedIn:
+    get:
+      summary: Check if the user is logged in (check token in cookie validity)
+      operationId: isLoggedIn
+      parameters:
+        - name: token
+          in: cookie
+          description: The JWT token used for authentication
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  isLoggedIn:
+                    type: boolean
+        "400":
+          description: Bad request
   /auth/logout:
     post:
       summary: Logout
