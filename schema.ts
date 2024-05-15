@@ -13,6 +13,10 @@ export interface paths {
     /** Login with a code */
     post: operations["login"];
   };
+  "/auth/isLoggedIn": {
+    /** Check if the user is logged in (check token in cookie validity) */
+    get: operations["isLoggedIn"];
+  };
   "/auth/logout": {
     /** Logout */
     post: operations["logout"];
@@ -216,6 +220,29 @@ export interface operations {
             error?: string;
           };
         };
+      };
+    };
+  };
+  /** Check if the user is logged in (check token in cookie validity) */
+  isLoggedIn: {
+    parameters: {
+      cookie: {
+        /** @description The JWT token used for authentication */
+        token: string;
+      };
+    };
+    responses: {
+      /** @description Successful operation */
+      200: {
+        content: {
+          "application/json": {
+            isLoggedIn?: boolean;
+          };
+        };
+      };
+      /** @description Bad request */
+      400: {
+        content: never;
       };
     };
   };

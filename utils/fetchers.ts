@@ -2,6 +2,7 @@ import { SERVER_URL } from "./constants";
 import { type Locale } from "../i18n-config";
 import {
   GetCandidateResponse,
+  GetIsLoggedInResponse,
   GetPdfDossierResponse,
   GetUserResponse,
 } from ".";
@@ -165,4 +166,16 @@ export async function contactDigitalent(id: string, message: string) {
   });
 
   return response;
+}
+
+export async function isLoggedIn(): Promise<boolean | undefined> {
+  try {
+    const response: GetIsLoggedInResponse = await getData({
+      endpoint: "isLoggedIn",
+    });
+
+    return response.isLoggedIn;
+  } catch {
+    return false;
+  }
 }

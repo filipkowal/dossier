@@ -5,6 +5,7 @@ import { i18n } from "./i18n-config";
 
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
+import { isLoggedIn } from "./utils";
 
 const PUBLIC_FILE = /\.(.*)$/;
 
@@ -26,8 +27,19 @@ export function getLocale(headers: Headers): string | undefined {
   );
 }
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+  const locale = getLocale(request.headers);
+
+  if (!request.cookies.has("token") || (await isLoggedIn()) !== true)
+    return NextResponse.redirect(new URL(`/${locale}/login`));
+
+  if (
+    pathname.startsWith(`/${locale}/login`) &&
+    request.cookies.has("token") &&
+    (await isLoggedIn()) === true
+  )
+    return NextResponse.redirect(new URL(`/${locale}`));
 
   if (PUBLIC_FILE.test(pathname)) return;
 
@@ -43,8 +55,6 @@ export function middleware(request: NextRequest) {
   );
 
   if (pathnameIsMissingLocale) {
-    const locale = getLocale(request.headers);
-
     return NextResponse.redirect(
       new URL(`/${locale}${pathname ? `/${pathname}` : ""}`, request.url)
     );
