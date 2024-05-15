@@ -24,10 +24,8 @@ const Button = forwardRef(
     ref: React.Ref<HTMLButtonElement>
   ) => {
     const typeClass = {
-      default: `border-digitalent-blue text-digitalent-blue hover:bg-digitalent-blue hover:text-white
-         disabled:hover:bg-transparent disabled:hover:text-digitalent-blue`,
-      invert: `text-white border-white hover:bg-white hover:text-digitalent-blue 
-      disabled:hover:bg-transparent disabled:hover:text-white`,
+      default: `border-digitalent-blue text-digitalent-blue`,
+      invert: `text-white border-white`,
       primary: `bg-digitalent-green text-white border-digitalent-green`,
     };
 
