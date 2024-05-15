@@ -58,7 +58,7 @@ export default function ContactSection({
             <Image
               src={relationshipManager.photo}
               alt="avatar"
-              className={`h-6 w-6 rounded-full`}
+              className={`h-6 w-6 rounded-full hidden sm:block`}
             />
           ) : null}
 
