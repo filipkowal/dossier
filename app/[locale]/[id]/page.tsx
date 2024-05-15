@@ -1,7 +1,7 @@
 import { Locale } from "@/i18n-config";
 import InviteSection from "./InviteSection";
 import { getDictionary } from "@/utils";
-import { getCandidate, getPdfDossier, getUser } from "@/utils";
+import { getCandidate, getUser } from "@/utils";
 import CvAndCertificates from "./CvAndCertificates";
 import RejectSection from "./RejectSection";
 import DossierStatus from "./DossierStatus";
@@ -9,12 +9,11 @@ import Link from "next/link";
 import LinkedInIcon from "@/public/linkedin.png";
 import ShareIcon from "@/public/share.png";
 import Image from "next/image";
-import { Suspense } from "react";
-import { CopyButton, Button } from "@/components";
-import PdfButton from "./PdfButton";
+import { CopyButton } from "@/components";
 import { notFound } from "next/navigation";
 import dynamic from "next/dynamic";
 import ContactSection from "./ContactSection";
+
 const LongCandidateInfo = dynamic(() => import("./LongCandidateInfo"), {
   ssr: false,
 });
