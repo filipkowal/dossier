@@ -16,20 +16,30 @@ export default function LoginForm({ locale }: { locale: Locale }) {
     updatedSmsCode[index] = value;
 
     setSmsCode(updatedSmsCode);
+    focusNextInput(index, value);
   };
+
+  function focusNextInput(index: number, value: string) {
+    if (value === "") return;
+    if (index === inputsRef.length - 1) return;
+
+    inputsRef[index + 1]?.current?.focus();
+  }
+
+  function focusPrevInput(index: number) {
+    if (index === 0) return;
+
+    inputsRef[index - 1]?.current?.focus();
+  }
 
   const isSmsCodeFilled = smsCode.every((value) => value !== "");
 
   const handleLogIn = async () => {
-    console.log(smsCode);
-    if (isSmsCodeFilled) {
-      const code = smsCode.join("");
-      try {
-        await logIn(code);
-      } catch {
-        // @fixme: handle error?
-      }
-    }
+    const code = smsCode.join("");
+    try {
+      await logIn(code);
+      // silently catch not to notify if the code is correct
+    } catch {}
   };
 
   useEffect(() => {
@@ -58,15 +68,21 @@ export default function LoginForm({ locale }: { locale: Locale }) {
             {smsCode.map((digit, index) => (
               <span key={index} className="flex">
                 <input
-                  key={index}
+                  key={`digit-${index + 1}`}
                   type="text"
                   name={`digit-${index + 1}`}
+                  id={index.toString()}
                   value={digit}
                   onChange={(e) => handleSmsCodeChange(index, e.target.value)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Backspace") {
+                      const target = event.target as HTMLInputElement;
+                      focusPrevInput(Number(target.id));
+                    }
+                  }}
                   className="w-12 ring-2 bg-digitalent-gray-light ring-digitalent-blue border-none mt-4 block h-10 text-xl text-center"
                   maxLength={1}
                   minLength={1}
-                  pattern="[0-9]"
                   ref={inputsRef[index]}
                 />
                 {index === 2 && (
