@@ -168,6 +168,18 @@ export async function contactDigitalent(id: string, message: string) {
   return response;
 }
 
+export async function sendCode() {
+  const response = await postData("auth/sendCode");
+
+  return response;
+}
+
+export async function logIn(code: string) {
+  const response = await postData("auth/login", code);
+
+  return response;
+}
+
 export async function isLoggedIn(): Promise<boolean | undefined> {
   try {
     const response: GetIsLoggedInResponse = await getData({
