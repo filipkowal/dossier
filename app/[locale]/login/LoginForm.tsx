@@ -11,13 +11,13 @@ export default function LoginForm({ locale }: { locale: Locale }) {
     createRef<HTMLInputElement>()
   );
 
-  const handleSmsCodeChange = (index: number, value: string) => {
+  function handleSmsCodeChange(index: number, value: string) {
     const updatedSmsCode = [...smsCode];
     updatedSmsCode[index] = value;
 
     setSmsCode(updatedSmsCode);
     focusNextInput(index, value);
-  };
+  }
 
   function focusNextInput(index: number, value: string) {
     if (value === "") return;
@@ -32,26 +32,26 @@ export default function LoginForm({ locale }: { locale: Locale }) {
     inputsRef[index - 1]?.current?.focus();
   }
 
-  const isSmsCodeFilled = smsCode.every((value) => value !== "");
-
-  const handleLogIn = async () => {
-    const code = smsCode.join("");
-    try {
-      await logIn(code);
-      // silently catch not to notify if the code is correct
-    } catch {}
-  };
-
   useEffect(() => {
+    const isSmsCodeFilled = smsCode.every((value) => value !== "");
+
     if (isSmsCodeFilled) {
       handleLogIn();
     }
-  }, [isSmsCodeFilled]);
+
+    async function handleLogIn() {
+      const code = smsCode.join("");
+      try {
+        await logIn(code);
+        // silently catch not to notify if the code is correct
+      } catch {}
+    }
+  }, [smsCode]);
 
   return (
     <div className="fixed z-10 bg-digitalent-gray-light text-digitalent-blue text-left p-12 align-middle shadow-xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full md:w-auto">
       <div className="text-2xl font-title font-medium uppercase pb-8 flex justify-between">
-        <span className="pr-10 max-w-[90%]">VERIFY IT'S YOU</span>
+        <span className="pr-10 max-w-[90%]">VERIFY ITS YOU</span>
       </div>
       <form className="flex flex-col gap-8">
         <div className="flex flex-col gap-4">

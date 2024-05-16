@@ -85,7 +85,7 @@ const SampleDossier = () => {
                 Notice Period: <b>3 months</b>
               </p>
               <p>
-                Desired Salary: <b>CHF 100'000</b>
+                Desired Salary: <b>CHF 100 000</b>
               </p>
               <p>
                 Desired Workload: <b>80%</b>
@@ -101,7 +101,7 @@ const SampleDossier = () => {
               <div>
                 <p>Software Engineer</p>
                 <p>3 months</p>
-                <p>CHF 100'000</p>
+                <p>CHF 100 000</p>
                 <p>80%</p>
               </div>
             </div>
@@ -155,7 +155,7 @@ const SampleDossier = () => {
               network. His academic journey not only deepened his understanding
               of CRM principles but also honed his critical thinking,
               problem-solving, and leadership abilities. Now equipped with a
-              solid foundation in CRM best practices and a Master's degree from
+              solid foundation in CRM best practices and a Master s degree from
               a renowned institution, he is poised to make meaningful
               contributions in driving customer-centric strategies and enhancing
               business outcomes in his future endeavors.
