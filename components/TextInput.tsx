@@ -14,7 +14,9 @@ export default function TextInput({
   pattern,
   rows,
   onChange,
-  autofocus,
+  autoFocus,
+  maxLength,
+  minLength,
 }: {
   name: string;
   dict?: { invalidEmail: string };
@@ -29,7 +31,9 @@ export default function TextInput({
   onChange?: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
-  autofocus?: boolean;
+  autoFocus?: boolean;
+  maxLength?: number;
+  minLength?: number;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -63,7 +67,7 @@ export default function TextInput({
           onChange={onChange}
           id={name}
           placeholder=" "
-          autoFocus={autofocus}
+          autoFocus={autoFocus}
         />
       ) : (
         <input
@@ -89,7 +93,9 @@ export default function TextInput({
           ref={inputRef}
           id={name}
           placeholder=" "
-          autoFocus={autofocus}
+          maxLength={maxLength}
+          minLength={minLength}
+          autoFocus={autoFocus}
         />
       )}
       {typeof label !== "undefined" ? (
