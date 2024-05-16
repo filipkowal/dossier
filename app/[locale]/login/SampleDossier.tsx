@@ -105,6 +105,61 @@ const SampleDossier = () => {
                 <p>80%</p>
               </div>
             </div>
+            <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">
+              Interview Summary
+            </h2>
+            <p>
+              In the interview for the position of Head of Customer Relations,
+              the candidate demonstrated a comprehensive understanding of
+              customer relationship management (CRM) principles, stemming from
+              his Master of Advanced Studies (MAS) in CRM from ZHAW Zürcher
+              Hochschule für Angewandte Wissenschaften, Winterthur. He
+              articulated his expertise in developing and implementing effective
+              CRM strategies to enhance customer satisfaction and loyalty.
+              Drawing from his academic background and practical experience, he
+              highlighted his proficiency in leveraging data analytics and
+              segmentation techniques to personalize customer interactions and
+              drive business growth. Moreover, the candidate emphasized his
+              ability to lead cross-functional teams and collaborate with
+              stakeholders to align CRM initiatives with organizational
+              objectives. His passion for delivering exceptional customer
+              experiences and his innovative approach to problem-solving were
+              evident throughout the discussion.
+            </p>
+            <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">
+              Reason for Change
+            </h2>
+            <ul>
+              <li>Seeking better work-life balance.</li>
+              <li>Desire for career advancement opportunities.</li>
+              <li>Wanting to work in a different industry or field.</li>
+              <li>Relocation to a new city or country.</li>
+            </ul>
+            <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">
+              Education Summary
+            </h2>
+            <div>
+              He completed a Master of Advanced Studies (MAS) in Customer
+              Relationship Management (CRM) at ZHAW Zürcher Hochschule für
+              Angewandte Wissenschaften, Winterthur. This specialized program
+              equipped him with advanced knowledge and practical skills in
+              effectively managing customer relationships within diverse
+              industries. During his studies, he delved into topics such as CRM
+              strategies, customer segmentation, data analytics, and customer
+              experience optimization. Through hands-on projects and case
+              studies, he gained valuable insights into the latest CRM
+              technologies and methodologies, preparing him to address complex
+              challenges in the field. Additionally, he had the opportunity to
+              collaborate with industry professionals and experts, further
+              enriching his learning experience and expanding his professional
+              network. His academic journey not only deepened his understanding
+              of CRM principles but also honed his critical thinking,
+              problem-solving, and leadership abilities. Now equipped with a
+              solid foundation in CRM best practices and a Master's degree from
+              a renowned institution, he is poised to make meaningful
+              contributions in driving customer-centric strategies and enhancing
+              business outcomes in his future endeavors.
+            </div>
           </div>
         </div>
       </div>
