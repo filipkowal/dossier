@@ -1,7 +1,8 @@
 import { Locale } from "@/i18n-config";
 import LoginForm from "./LoginForm";
+import SampleDossier from "./SampleDossier";
 
-export default function LoginPage({
+export default async function LoginPage({
   params,
 }: {
   params: { locale: Locale; id: string };
@@ -9,6 +10,7 @@ export default function LoginPage({
   return (
     <div>
       <LoginForm locale={params.locale} />
+      <SampleDossier />
     </div>
   );
 }
