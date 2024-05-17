@@ -14,7 +14,6 @@ export default function LoginForm({ locale }: { locale: Locale }) {
   function handleSmsCodeChange(index: number, value: string) {
     const updatedSmsCode = [...smsCode];
     updatedSmsCode[index] = value;
-
     setSmsCode(updatedSmsCode);
     focusNextInput(index, value);
   }
@@ -77,6 +76,7 @@ export default function LoginForm({ locale }: { locale: Locale }) {
                   onKeyDown={(event) => {
                     if (event.key === "Backspace") {
                       const target = event.target as HTMLInputElement;
+                      handleSmsCodeChange(Number(target.id), "");
                       focusPrevInput(Number(target.id));
                     }
                   }}
