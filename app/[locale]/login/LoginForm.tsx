@@ -4,6 +4,7 @@ import { Button } from "@/components";
 import { Locale } from "@/i18n-config";
 import { logIn, sendCode } from "@/utils";
 import { createRef, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function LoginForm({ locale }: { locale: Locale }) {
   const [smsCode, setSmsCode] = useState<string[]>(["", "", "", "", "", ""]);
@@ -47,6 +48,14 @@ export default function LoginForm({ locale }: { locale: Locale }) {
     }
   }, [smsCode]);
 
+  async function sendSMSCode() {
+    try {
+      await sendCode();
+    } catch {
+      toast.error("Failed to send SMS code");
+    }
+  }
+
   return (
     <div className="fixed z-10 bg-digitalent-gray-light text-digitalent-blue text-left p-12 align-middle shadow-xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full md:w-auto">
       <div className="text-2xl font-title font-medium uppercase pb-8 flex justify-between">
@@ -55,7 +64,7 @@ export default function LoginForm({ locale }: { locale: Locale }) {
       <form className="flex flex-col gap-8">
         <div className="flex flex-col gap-4">
           <p>Send the code to your phone to verify yourself.</p>
-          <Button name="resend" onClick={() => sendCode()}>
+          <Button name="resend" onClick={() => sendSMSCode()}>
             Send SMS With Code
           </Button>
         </div>
