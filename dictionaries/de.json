@@ -103,5 +103,12 @@
       "verify": "Bitte überprüfe die URL. Sie sollte die ID des Kandidaten enthalten.",
       "example": "Zum Beispiel: "
     }
+  },
+  "loginForm": {
+    "verifyItsYou": "VERIFIZIEREN SIE SICH",
+    "sendCodeInstruction": "Senden Sie den Code an Ihr Telefon, um sich zu verifizieren.",
+    "resendButton": "SMS mit Code senden",
+    "enterCodeInstruction": "Geben Sie den Code aus der SMS ein",
+    "toastError": "Fehler beim Senden des SMS-Codes"
   }
 }

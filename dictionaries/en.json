@@ -103,5 +103,12 @@
       "verify": "Please check the URL. It should contain the candidate's ID.",
       "example": "For example: "
     }
+  },
+  "loginForm": {
+    "verifyItsYou": "VERIFY ITS YOU",
+    "sendCodeInstruction": "Send the code to your phone to verify yourself.",
+    "resendButton": "Send SMS With Code",
+    "enterCodeInstruction": "Enter the code from SMS",
+    "toastError": "Failed to send SMS code"
   }
 }

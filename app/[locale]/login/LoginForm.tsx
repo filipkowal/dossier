@@ -1,12 +1,11 @@
 "use client";
 
 import { Button } from "@/components";
-import { Locale } from "@/i18n-config";
-import { logIn, sendCode } from "@/utils";
+import { Dictionary, logIn, sendCode } from "@/utils";
 import { createRef, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-export default function LoginForm({ locale }: { locale: Locale }) {
+export default function LoginForm({ dict }: { dict: Dictionary["loginForm"] }) {
   const [smsCode, setSmsCode] = useState<string[]>(["", "", "", "", "", ""]);
   const inputsRef = Array.from({ length: 6 }, () =>
     createRef<HTMLInputElement>()
@@ -52,25 +51,25 @@ export default function LoginForm({ locale }: { locale: Locale }) {
     try {
       await sendCode();
     } catch {
-      toast.error("Failed to send SMS code");
+      toast.error(dict.toastError);
     }
   }
 
   return (
     <div className="fixed z-10 bg-digitalent-gray-light text-digitalent-blue text-left p-12 align-middle shadow-xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full md:w-auto">
       <div className="text-2xl font-title font-medium uppercase pb-8 flex justify-between">
-        <span className="pr-10 max-w-[90%]">VERIFY ITS YOU</span>
+        <span className="pr-10 max-w-[90%]">{dict.verifyItsYou}</span>
       </div>
       <form className="flex flex-col gap-8">
         <div className="flex flex-col gap-4">
-          <p>Send the code to your phone to verify yourself.</p>
+          <p>{dict.sendCodeInstruction}</p>
           <Button name="resend" onClick={() => sendSMSCode()}>
-            Send SMS With Code
+            {dict.resendButton}
           </Button>
         </div>
 
         <div className="flex flex-col ">
-          <p>Enter the code from SMS</p>
+          <p>{dict.enterCodeInstruction}</p>
 
           <div className="flex gap-2 w-full">
             {smsCode.map((digit, index) => (
