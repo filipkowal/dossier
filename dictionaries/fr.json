@@ -112,7 +112,8 @@
     "toastError": "Échec de l'envoi du code SMS"
   },
   "dossierExpired": {
-    "title": "Le dossier du candidat a expiré",
+    "title": "Dossier expiré",
+    "heading": "Cette page n'est plus disponible",
     "message": "Veuillez contacter Digitalent pour plus d'informations."
   }
 }

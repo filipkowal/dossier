@@ -112,7 +112,8 @@
     "toastError": "Fehler beim Senden des SMS-Codes"
   },
   "dossierExpired": {
-    "title": "Das Dossier des Kandidaten ist abgelaufen",
+    "title": "Dossier abgelaufen",
+    "heading": "Diese Seite ist nicht mehr verfügbar",
     "message": "Bitte kontaktieren Sie Digitalent für weitere Informationen."
   }
 }
