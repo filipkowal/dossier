@@ -5,8 +5,10 @@ import Thumnbail from "@/public/thumbnail.png";
 
 export default function HeaderSimple({
   params,
+  children,
 }: {
   params: { locale: string; id: string };
+  children?: React.ReactNode;
 }) {
   return (
     <header
@@ -33,6 +35,8 @@ export default function HeaderSimple({
           </>
         </Link>
       </div>
+
+      {children}
     </header>
   );
 }
