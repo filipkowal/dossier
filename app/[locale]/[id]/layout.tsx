@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import type { Metadata } from "next";
 import { CookiePopup, Header, ToastProvider } from "@/components";
 import { getDictionary } from "@/utils";
+import TokenExpiryChecker from "@/components/TokenExpiryChecker";
 
 export const metadata: Metadata = {
   title: "Digitalent Dossier",
@@ -59,6 +60,7 @@ export default async function RootLayout({
       </main>
 
       <CookiePopup dict={dict.cookiePopup} />
+      <TokenExpiryChecker />
     </>
   );
 }
