@@ -110,5 +110,9 @@
     "resendButton": "Send SMS With Code",
     "enterCodeInstruction": "Enter the code from SMS",
     "toastError": "Failed to send SMS code"
+  },
+  "dossierExpired": {
+    "title": "The candidate's dossier has expired",
+    "message": "Please contact Digitalent for more information."
   }
 }

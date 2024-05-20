@@ -110,5 +110,9 @@
     "resendButton": "Envoyer le SMS avec le code",
     "enterCodeInstruction": "Entrez le code du SMS",
     "toastError": "Échec de l'envoi du code SMS"
+  },
+  "dossierExpired": {
+    "title": "Le dossier du candidat a expiré",
+    "message": "Veuillez contacter Digitalent pour plus d'informations."
   }
 }

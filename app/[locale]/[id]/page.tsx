@@ -1,6 +1,6 @@
 import { Locale } from "@/i18n-config";
 import InviteSection from "./InviteSection";
-import { getDictionary } from "@/utils";
+import { HttpError, getDictionary } from "@/utils";
 import { getCandidate, getUser } from "@/utils";
 import CvAndCertificates from "./CvAndCertificates";
 import RejectSection from "./RejectSection";
@@ -10,7 +10,7 @@ import LinkedInIcon from "@/public/linkedin.png";
 import ShareIcon from "@/public/share.png";
 import Image from "next/image";
 import { CopyButton } from "@/components";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import dynamic from "next/dynamic";
 import ContactSection from "./ContactSection";
 
@@ -24,24 +24,31 @@ export default async function Home({
   params: { locale: Locale; id: string };
 }) {
   const { id, locale } = params;
-  const dictPromise = getDictionary(params.locale);
-  const candidatePromise = getCandidate(locale, id);
-  const userPromise = getUser(locale, id);
 
-  const dict = await dictPromise;
+  let candidate, user, dict;
+  try {
+    [candidate, user, dict] = await Promise.all([
+      getCandidate(locale, id),
+      getUser(locale, id),
+      getDictionary(params.locale),
+    ]);
+  } catch (error) {
+    if (error instanceof HttpError && error.status === 410) {
+      redirect(`/${locale}/expired`);
+    } else {
+      notFound();
+    }
+  }
 
-  const candidate = await candidatePromise;
-  const user = await userPromise;
+  if (!candidate || !user) {
+    notFound();
+  }
 
   function addHighComma(value?: string) {
     if (!value) return "";
 
     let commaSeparated = value.replace(/\B(?=(\d{3})+(?!\d))/g, "'");
     return commaSeparated;
-  }
-
-  if (!candidate || !user) {
-    notFound();
   }
 
   return (

@@ -7,6 +7,15 @@ import {
   GetUserResponse,
 } from ".";
 
+export class HttpError extends Error {
+  status: number;
+
+  constructor(message: string, status: number) {
+    super(message);
+    this.status = status;
+  }
+}
+
 export async function postData(endpoint: string, data?: any) {
   const url = `${SERVER_URL}/${endpoint}`;
   const rawResponse = await fetch(url, {
@@ -40,8 +49,9 @@ async function getData({
   const res = await fetch(url, init);
 
   if (!res.ok) {
-    throw new Error(
-      `HTTP error! ${endpoint.toUpperCase()} status: ${res.status}`
+    throw new HttpError(
+      `HTTP error! ${endpoint.toUpperCase()} status: ${res.status}`,
+      res.status
     );
   }
 
