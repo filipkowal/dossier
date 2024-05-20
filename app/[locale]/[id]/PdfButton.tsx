@@ -2,13 +2,20 @@ import { Button } from "@/components";
 import { GetPdfDossierResponse } from "@/utils";
 import DownloadIcon from "@/public/download.png";
 import Image from "next/image";
+import toast from "react-hot-toast";
 
 export default async function PdfButton({
   pdfDossierPromise,
 }: {
   pdfDossierPromise: Promise<GetPdfDossierResponse>;
 }) {
-  const pdfDossier = await pdfDossierPromise;
+  let pdfDossier: GetPdfDossierResponse;
+  try {
+    pdfDossier = await pdfDossierPromise;
+  } catch (error) {
+    toast.error("Failed to get PDF dossier");
+    return null;
+  }
 
   if (!pdfDossier?.content) return null;
 

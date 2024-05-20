@@ -35,56 +35,22 @@ async function getData({
   locale?: Locale;
   init?: RequestInit;
 }) {
-  try {
-    const url = `${SERVER_URL}${locale ? `/${locale}` : ""}/${endpoint}`;
+  const url = `${SERVER_URL}${locale ? `/${locale}` : ""}/${endpoint}`;
 
-    const res = await fetch(url, init);
-    const contentType = res.headers.get("Content-Type");
+  const res = await fetch(url, init);
 
-    if (!res.ok) {
-      throw new Error(`HTTP error! status: ${res.status}`);
-    }
-
-    if (contentType?.includes("text/html")) {
-      throw new Error("HTML received instead of JSON");
-    }
-
-    const json = res.json();
-
-    return json;
-  } catch (e: any) {
-    const message = "Failed fetching " + endpoint + ": " + e.message;
-
-    console.error(message);
-
-    if (
-      typeof document === "undefined" &&
-      process.env.NODE_ENV === "production"
-    ) {
-      // throw only on server-side on production to prevent creating a new build and keep the old one
-      throw Error("Failed fetching " + endpoint + ": " + e.message);
-    }
-  }
-}
-
-function throwOnNoDataWhenBuilding(
-  response: Response,
-  responseContent: any,
-  responseName: string
-) {
-  // Stop server-side building if no data to display. Keep the previous build.
-
-  // Don't throw on client-side
-  if (typeof document !== "undefined" || process.env.NODE_ENV !== "production")
-    return;
-
-  if (!response) {
-    throw new Error("No response when building: " + responseName.toUpperCase());
-  }
-
-  if (!responseContent) {
+  if (!res.ok) {
     throw new Error(
-      "Response of 0 length when building: " + responseName.toUpperCase()
+      `HTTP error! ${endpoint.toUpperCase()} status: ${res.status}`
+    );
+  }
+
+  try {
+    const json = await res.json();
+    return json;
+  } catch (error) {
+    throw new Error(
+      `Failed to parse ${endpoint.toUpperCase()} response as JSON`
     );
   }
 }
@@ -99,8 +65,6 @@ export async function getCandidate(
     // @fixme: add real cache policies to the fetchers
     init: { cache: "no-cache" },
   });
-
-  throwOnNoDataWhenBuilding(response, response, "candidates");
 
   return response;
 }
