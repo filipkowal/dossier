@@ -6,7 +6,9 @@
   },
   "header": {
     "overview": "Übersicht",
-    "cvAndCertificates": "Lebenslauf und Zertifikate"
+    "cvAndCertificates": "Lebenslauf und Zertifikate",
+    "logoutError": "Fehler beim Abmelden. Bitte versuche es später noch einmal.",
+    "logoutSuccess": "Erfolgreich abgemeldet"
   },
   "candidate": {
     "candidate": "Bewerber",

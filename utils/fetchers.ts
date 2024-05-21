@@ -178,3 +178,9 @@ export async function isLoggedIn(): Promise<boolean | undefined> {
     return false;
   }
 }
+
+export async function logout() {
+  const response = await postData("auth/logout");
+
+  return response;
+}

@@ -6,7 +6,9 @@
   },
   "header": {
     "overview": "Aperçu",
-    "cvAndCertificates": "CV et Certificats"
+    "cvAndCertificates": "CV et Certificats",
+    "logoutError": "Échec de la déconnexion. Veuillez réessayer.",
+    "logoutSuccess": "Déconnecté avec succès"
   },
   "candidate": {
     "candidate": "Candidat",

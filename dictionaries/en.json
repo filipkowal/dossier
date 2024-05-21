@@ -6,7 +6,9 @@
   },
   "header": {
     "overview": "Overview",
-    "cvAndCertificates": "CV and Certificates"
+    "cvAndCertificates": "CV and Certificates",
+    "logoutError": "Failed to log out. Try again or wait a few minutes, please.",
+    "logoutSuccess": "Logged out successfully."
   },
   "candidate": {
     "candidate": "Candidate",
@@ -108,7 +110,7 @@
   "loginForm": {
     "verifyItsYou": "VERIFY ITS YOU",
     "sendCodeInstruction": "Send the code to your phone to verify yourself.",
-    "resendButton": "Send SMS With Code",
+    "resendButton": "Send an SMS With a Code",
     "enterCodeInstruction": "Enter the code from SMS",
     "toastError": "Failed to send SMS code"
   },

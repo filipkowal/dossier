@@ -7,13 +7,12 @@ import NavLinks from "./NavLinks";
 import PdfButton from "@/app/[locale]/[id]/PdfButton";
 import { getPdfDossier, getUser } from "@/utils";
 import HeaderSimple from "./HeaderSimple";
+import LogoutButton from "@/app/[locale]/login/LogoutButton";
 
 export default async function Header({
   params,
-  logo,
 }: {
   params: { locale: Locale; id: string };
-  logo?: string;
 }) {
   const pdfDossierPromise = getPdfDossier(params.locale, params.id);
 
@@ -49,6 +48,9 @@ export default async function Header({
           <Suspense fallback={<Spinner />}>
             <LanguageSelector params={params} />
           </Suspense>
+        </div>
+        <div className="ml-8">
+          <LogoutButton dict={dict.header} params={params} />
         </div>
       </div>
     </HeaderSimple>
