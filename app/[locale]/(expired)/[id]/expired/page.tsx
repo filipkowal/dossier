@@ -1,6 +1,6 @@
 import { Locale } from "@/i18n-config";
 import { getDictionary, getRelationshipManager } from "@/utils";
-import SampleDossier from "../../login/SampleDossier";
+import SampleDossier from "../../../login/SampleDossier";
 import ContactSection from "./ContactSection";
 
 export default async function Home({

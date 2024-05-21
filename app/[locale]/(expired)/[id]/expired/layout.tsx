@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 const loew = localFont({
   variable: "--font-loew",
-  src: "../../../../public/fonts/Loew-Heavy.otf",
+  src: "../../../../../public/fonts/Loew-Heavy.otf",
   preload: false,
 });
 
@@ -45,6 +45,7 @@ export default async function RootLayout({
     <>
       <main className="min-h-screen bg-digitalent-gray-light flex flex-col justify-between">
         <ToastProvider />
+        <HeaderSimple params={params} />
 
         {children}
 
