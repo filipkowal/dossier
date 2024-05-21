@@ -55,7 +55,7 @@ export default function ContactModal({
             />
           </div>
 
-          <Button name="Send" submitType type="primary" className="t-4">
+          <Button name="Send" submitType type="primary" className="mt-4 w-full">
             {dict.send}
           </Button>
         </form>
