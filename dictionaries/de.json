@@ -88,7 +88,8 @@
     "position": "Beziehungsmanager",
     "messageLabel": "Wie können wir dir helfen?",
     "messagePlaceholder": "Deine Fragen oder Feedback zum Kandidaten oder zu jedem anderen Thema.",
-    "send": "Senden"
+    "send": "Senden",
+    "success": "Nachricht erfolgreich gesendet. Wir werden uns so schnell wie möglich bei Ihnen melden."
   },
   "toastMessages": {
     "somethingWrong": "Etwas ist schief gelaufen. Bitte versuche es später noch einmal.",

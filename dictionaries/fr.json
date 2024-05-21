@@ -88,7 +88,8 @@
     "position": "Gestionnaire de relations",
     "messageLabel": "Comment pouvons-nous t'aider ?",
     "messagePlaceholder": "Tes questions ou retours sur le candidat ou tout autre sujet.",
-    "send": "Envoyer"
+    "send": "Envoyer",
+    "success": "Message envoyé avec succès. Nous vous répondrons dès que possible."
   },
   "toastMessages": {
     "somethingWrong": "Quelque chose a mal tourné. Veuillez réessayer plus tard.",

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import { getCookie } from "./helpers";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { isLoggedIn } from "./fetchers";

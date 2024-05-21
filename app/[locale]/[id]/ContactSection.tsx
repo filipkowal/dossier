@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import ChatIcon from "@/public/chat.png";
+import ContactModal from "./ContactModal";
 
 export default function ContactSection({
   dict,
@@ -19,9 +20,8 @@ export default function ContactSection({
   id: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [message, setMessage] = useState("");
 
-  const RelationshipManagerCard = () => (
+  const RelationshipManagerCard = (
     <div className="flex gap-4 items-center bg-digitalent-blue text-white p-6">
       {relationshipManager?.photo ? (
         <Image
@@ -71,47 +71,13 @@ export default function ContactSection({
         </span>
       </Button>
 
-      <Dialog
-        title={dict.contactDigitalent}
+      <ContactModal
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        footer={
-          <Button
-            name="Send"
-            disabled={!message}
-            submitType
-            type="primary"
-            onClick={async () => {
-              if (!message) return;
-
-              try {
-                await contactDigitalent(id, message);
-                // @fixme
-                toast.success("Message sent");
-              } catch (error) {
-                toast.error(dict.somethingWrong);
-              }
-            }}
-          >
-            {dict.send}
-          </Button>
-        }
-      >
-        <form>
-          <div className="flex flex-col gap-4">
-            <RelationshipManagerCard />
-
-            <TextInput
-              label={dict.messageLabel}
-              name="message"
-              type="textarea"
-              onChange={(e) => setMessage(e.target.value)}
-              rows={5}
-              required
-            />
-          </div>
-        </form>
-      </Dialog>
+        relationshipManagerCard={RelationshipManagerCard}
+        dict={dict}
+        id={id}
+      />
     </>
   );
 }
