@@ -45,7 +45,6 @@ export default async function RootLayout({
     <>
       <main className="min-h-screen bg-digitalent-gray-light flex flex-col justify-between">
         <ToastProvider />
-        <HeaderSimple params={params} />
 
         {children}
 
