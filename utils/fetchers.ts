@@ -134,8 +134,8 @@ export async function rejectCandidate(
   return response;
 }
 
-export async function contactDigitalent(id: string, message: string) {
-  const response = await postData(`contact/${id}`, {
+export async function sendMessage(id: string, message: string) {
+  const response = await postData(`sendMessage/${id}`, {
     message,
   });
 

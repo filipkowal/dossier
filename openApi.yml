@@ -480,10 +480,10 @@ paths:
         "400":
           description: Error
 
-  /contact/{id}:
+  /sendMessage/{id}:
     post:
       summary: Send a message to DT to enquire about the candidacy
-      operationId: contactDT
+      operationId: sendMessage
       parameters:
         - name: id
           in: path

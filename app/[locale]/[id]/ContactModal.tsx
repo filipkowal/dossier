@@ -1,5 +1,5 @@
 import { Button, Dialog, TextInput } from "@/components";
-import { Dictionary, contactDigitalent } from "@/utils";
+import { Dictionary, sendMessage } from "@/utils";
 import toast from "react-hot-toast";
 
 export default function ContactModal({
@@ -36,7 +36,7 @@ export default function ContactModal({
                 throw new Error();
               }
 
-              await contactDigitalent(id, message);
+              await sendMessage(id, message);
               toast.success(dict.success);
             } catch (error) {
               toast.error(dict.somethingWrong);

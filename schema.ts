@@ -51,9 +51,9 @@ export interface paths {
      */
     post: operations["rejectUser"];
   };
-  "/contact/{id}": {
+  "/sendMessage/{id}": {
     /** Send a message to DT to enquire about the candidacy */
-    post: operations["contactDT"];
+    post: operations["sendMessage"];
   };
 }
 
@@ -433,7 +433,7 @@ export interface operations {
     };
   };
   /** Send a message to DT to enquire about the candidacy */
-  contactDT: {
+  sendMessage: {
     parameters: {
       path: {
         id: string;
