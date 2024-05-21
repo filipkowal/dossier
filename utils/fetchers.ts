@@ -4,6 +4,7 @@ import {
   GetCandidateResponse,
   GetIsLoggedInResponse,
   GetPdfDossierResponse,
+  GetRelatnshipManagerResponse,
   GetUserResponse,
 } from ".";
 
@@ -97,6 +98,18 @@ export async function getPdfDossier(
 ): Promise<GetPdfDossierResponse> {
   const response = await getData({
     endpoint: `candidate/${id}/pdf`,
+    locale,
+  });
+
+  return response;
+}
+
+export async function getRelationshipManager(
+  locale: Locale,
+  id: string
+): Promise<GetRelatnshipManagerResponse> {
+  const response = await getData({
+    endpoint: `relationshipManager/${id}`,
     locale,
   });
 

@@ -1,5 +1,5 @@
 import { Locale } from "@/i18n-config";
-import { getDictionary } from "@/utils";
+import { getDictionary, getRelationshipManager } from "@/utils";
 import SampleDossier from "../login/SampleDossier";
 import ContactSection from "./ContactSection";
 
@@ -10,6 +10,16 @@ export default async function Home({
 }) {
   const dictionary = await getDictionary(params.locale);
   const dict = dictionary["dossierExpired"];
+
+  let relationshipManager;
+  try {
+    relationshipManager = await getRelationshipManager(
+      params.locale,
+      params.id
+    );
+  } catch (error) {
+    console.error(error);
+  }
 
   return (
     <div>
@@ -26,10 +36,12 @@ export default async function Home({
             ...dictionary["toastMessages"],
           }}
           // @fixme: relationshipManager is not from API
-          relationshipManager={{
-            name: "Andjela Zdravkovic",
-            phoneNumber: "+39 666 666 666",
-          }}
+          relationshipManager={
+            relationshipManager || {
+              name: "",
+              phoneNumber: "+41 56 511 03 03",
+            }
+          }
           id={params.id}
         />
       </div>

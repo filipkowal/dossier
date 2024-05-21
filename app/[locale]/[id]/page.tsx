@@ -1,6 +1,6 @@
 import { Locale } from "@/i18n-config";
 import InviteSection from "./InviteSection";
-import { HttpError, getDictionary } from "@/utils";
+import { HttpError, getDictionary, getRelationshipManager } from "@/utils";
 import { getCandidate, getUser } from "@/utils";
 import CvAndCertificates from "./CvAndCertificates";
 import RejectSection from "./RejectSection";
@@ -42,6 +42,16 @@ export default async function Home({
 
   if (!candidate || !user) {
     notFound();
+  }
+
+  let relationshipManager;
+  try {
+    relationshipManager = await getRelationshipManager(
+      params.locale,
+      params.id
+    );
+  } catch (error) {
+    console.error(error);
   }
 
   function addHighComma(value?: string) {
@@ -267,8 +277,8 @@ export default async function Home({
           }}
           // @fixme: relationshipManager is not from API
           relationshipManager={{
-            name: "Andjela Zdravkovic",
-            phoneNumber: "+39 666 666 666",
+            name: "",
+            phoneNumber: "+41 56 511 03 03",
           }}
           id={id}
         />

@@ -10,6 +10,8 @@ export type GetPdfDossierResponse =
   paths["/{locale}/candidate/{id}/pdf"]["get"]["responses"]["200"]["content"]["application/json"];
 export type GetIsLoggedInResponse =
   paths["/auth/isLoggedIn"]["get"]["responses"]["200"]["content"]["application/json"];
+export type GetRelatnshipManagerResponse =
+  paths["/{locale}/relationshipManager/{id}"]["get"]["responses"]["200"]["content"]["application/json"];
 
 export type Candidate = components["schemas"]["Candidate"];
 export type User = components["schemas"]["User"];
