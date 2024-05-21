@@ -4,8 +4,7 @@ import { Button } from "@/components";
 import { Dictionary, RelationshipManager } from "@/utils";
 import Image from "next/image";
 import { useState } from "react";
-import ChatIcon from "@/public/chat.png";
-import ContactModal from "./ContactModal";
+import ContactModal from "../[id]/ContactModal";
 
 export default function ContactSection({
   dict,
@@ -47,27 +46,8 @@ export default function ContactSection({
 
   return (
     <>
-      <Button
-        name="Contact"
-        className="sm:w-1/3 xl:w-1/4 max-w-[32rem] bg-digitalent-gray-light  disabled:hover:bg-digitalent-gray-light"
-        onClick={() => setIsOpen(true)}
-      >
-        <span className="flex gap-4 w-full justify-center">
-          {relationshipManager?.photo ? (
-            <Image
-              src={relationshipManager.photo}
-              alt="avatar"
-              className={`h-6 w-6 rounded-full hidden sm:block`}
-            />
-          ) : null}
-
-          <span className="hidden sm:inline"> {dict.contactDigitalent}</span>
-          <Image
-            alt="contact digitalent"
-            className="sm:hidden"
-            src={ChatIcon}
-          />
-        </span>
+      <Button name="Contact" className="mt-6" onClick={() => setIsOpen(true)}>
+        {dict.contactDigitalent}
       </Button>
 
       <ContactModal

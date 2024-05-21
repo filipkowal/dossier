@@ -1,6 +1,7 @@
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/utils";
 import SampleDossier from "../login/SampleDossier";
+import ContactSection from "./ContactSection";
 
 export default async function Home({
   params,
@@ -18,6 +19,19 @@ export default async function Home({
         </div>{" "}
         <p>{dict["heading"]}</p>
         <p>{dict["message"]}</p>
+        <ContactSection
+          dict={{
+            ...dictionary["mainButtons"],
+            ...dictionary["contactModal"],
+            ...dictionary["toastMessages"],
+          }}
+          // @fixme: relationshipManager is not from API
+          relationshipManager={{
+            name: "Andjela Zdravkovic",
+            phoneNumber: "+39 666 666 666",
+          }}
+          id={params.id}
+        />
       </div>
 
       <SampleDossier />
