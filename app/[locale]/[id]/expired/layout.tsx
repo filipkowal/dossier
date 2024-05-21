@@ -3,7 +3,7 @@ import Link from "next/link";
 import "@/app/globals.css";
 import localFont from "next/font/local";
 import type { Metadata } from "next";
-import { CookiePopup, Header, ToastProvider } from "@/components";
+import { CookiePopup, ToastProvider } from "@/components";
 import { getDictionary } from "@/utils";
 import HeaderSimple from "@/components/HeaderSimple";
 
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 const loew = localFont({
   variable: "--font-loew",
-  src: "../../../public/fonts/Loew-Heavy.otf",
+  src: "../../../../public/fonts/Loew-Heavy.otf",
   preload: false,
 });
 

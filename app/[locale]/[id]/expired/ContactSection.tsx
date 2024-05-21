@@ -4,7 +4,7 @@ import { Button } from "@/components";
 import { Dictionary, RelationshipManager } from "@/utils";
 import Image from "next/image";
 import { useState } from "react";
-import ContactModal from "../[id]/ContactModal";
+import ContactModal from "../ContactModal";
 
 export default function ContactSection({
   dict,
