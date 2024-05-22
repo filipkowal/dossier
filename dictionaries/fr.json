@@ -81,6 +81,7 @@
       "notBestQualifiedExperience": "Pas le mieux qualifié - Expérience",
       "notBestQualifiedOverqualified": "Pas le mieux qualifié - Trop qualifié",
       "notBestQualifiedTooOld": "Pas le mieux qualifié - Trop vieux",
+      "notEnoughCulturalFit": "Pas le mieux qualifié - Adaptation culturelle",
       "other": "Autre"
     },
     "success": {
