@@ -18,6 +18,7 @@ export default function ContactSection({
   id: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false);
 
   const RelationshipManagerCard = (
     <div className="flex gap-4 items-center bg-digitalent-blue text-white p-6">
@@ -56,6 +57,8 @@ export default function ContactSection({
         relationshipManagerCard={RelationshipManagerCard}
         dict={dict}
         id={id}
+        isSuccessDialogOpen={isSuccessDialogOpen}
+        setIsSuccessDialogOpen={setIsSuccessDialogOpen}
       />
     </>
   );
