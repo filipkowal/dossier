@@ -415,7 +415,7 @@ export interface operations {
       content: {
         "application/json": {
           /** @enum {string} */
-          reason?: "notEnoughExperience" | "notEnoughSkills" | "notEnoughEducation" | "notEnoughSalary" | "notEnoughLanguageSkills" | "notEnoughSoftSkills" | "notEnoughHardSkills" | "notEnoughDomainKnowledge" | "notEnoughAvailability" | "notEnoughMotivation" | "notEnoughCulturalFit" | "notEnoughPersonality" | "notEnoughTeamFit" | "notEnoughOther";
+          reason?: "wrongGeographicalArea" | "wrongJobFocus" | "salaryExpectations" | "qualifiedOtherCandidatesBetter" | "notBestQualifiedEducation" | "notBestQualifiedExperience" | "notBestQualifiedOverqualified" | "notBestQualifiedTooOld" | "notBestQualifiedCulturalFit" | "other";
           /** @example We are sorry to inform you that we will not proceed with candidate's application. We wish you all the best and can't wait for future candidates. */
           message?: string;
         };
