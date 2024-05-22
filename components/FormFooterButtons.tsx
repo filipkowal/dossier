@@ -11,6 +11,7 @@ export default function FormFooterButtons({
   onSubmit,
   submissionDisabled,
   isPending,
+  setIsOpen,
 }: {
   step: number;
   setStep: Dispatch<SetStateAction<number>>;
@@ -19,8 +20,15 @@ export default function FormFooterButtons({
   onSubmit: () => void;
   submissionDisabled?: boolean;
   isPending: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 }) {
-  if (step === 0 && stepsLength > 1) {
+  const isFirstStepOfMany = step === 0 && stepsLength > 2;
+  const isFirstAndSubmitStep = step === 0 && stepsLength === 2;
+  const isMiddleStep = step > 0 && step < stepsLength - 2;
+  const isSubmitStep = step > 0 && step === stepsLength - 2;
+  const isSuccessInfoStep = step > 0 && step === stepsLength - 1;
+
+  if (isFirstStepOfMany) {
     return (
       <Button
         type="primary"
@@ -33,7 +41,7 @@ export default function FormFooterButtons({
     );
   }
 
-  if (step === 0 && stepsLength === 1) {
+  if (isFirstAndSubmitStep) {
     return (
       <Button
         type="primary"
@@ -51,7 +59,7 @@ export default function FormFooterButtons({
     );
   }
 
-  if (step > 0 && step < stepsLength - 1) {
+  if (isMiddleStep) {
     return (
       <div className="w-full flex flex-row justify-between">
         <Button
@@ -72,7 +80,7 @@ export default function FormFooterButtons({
     );
   }
 
-  if (step > 0 && step === stepsLength - 1) {
+  if (isSubmitStep) {
     return (
       <div className="w-full flex flex-row justify-between">
         <Button
@@ -94,6 +102,22 @@ export default function FormFooterButtons({
         >
           {dict.send}
           <LoadingEllipsis isLoading={isPending} />
+        </Button>
+      </div>
+    );
+  }
+
+  if (isSuccessInfoStep) {
+    return (
+      <div className="w-full flex justify-end">
+        <Button
+          name={dict.close}
+          onClick={(e) => {
+            e.preventDefault();
+            setIsOpen(false);
+          }}
+        >
+          {dict.close}
         </Button>
       </div>
     );

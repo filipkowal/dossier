@@ -38,8 +38,9 @@
     "contactDT": "Contacte DT"
   },
   "inviteModal": {
-    "title0": "Lieu et durée de l'entretien",
-    "title1": "Votre disponibilité",
+    "locationStepTitle": "Lieu et durée de l'entretien",
+    "availabilityStepTitle": "Votre disponibilité",
+    "successStepTitle": "Invitation réussie",
     "location": "Lieu",
     "online": "Online",
     "inPerson": "En personne sur place",
@@ -62,7 +63,8 @@
     "success": {
       "male": "Merci d'avoir fourni des créneaux horaires. Nous allons clarifier avec le candidat quel créneau correspond le mieux et vous informerons rapidement.",
       "female": "Merci d'avoir fourni des créneaux horaires. Nous allons clarifier avec la candidate quel créneau correspond le mieux et vous informerons rapidement."
-    }
+    },
+    "close": "Fermer"
   },
   "rejectModal": {
     "title": "Rejeter le candidat",

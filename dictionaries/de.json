@@ -38,8 +38,9 @@
     "contactDT": "Kontaktiere DT"
   },
   "inviteModal": {
-    "title0": "Interviewort und Dauer",
-    "title1": "Ihre Verfügbarkeit",
+    "locationStepTitle": "Interviewort und Dauer",
+    "availabilityStepTitle": "Ihre Verfügbarkeit",
+    "successStepTitle": "Einladung erfolgreich",
     "location": "Ort",
     "online": "Online",
     "inPerson": "Persönlich Vor Ort",
@@ -62,7 +63,8 @@
     "success": {
       "male": "Vielen Dank für die Zeitfenster. Wir werden mit dem Kandidaten abklären, welcher Termin am besten passt, und dich zeitnah informieren.",
       "female": "Vielen Dank für die Zeitfenster. Wir werden mit der Kandidatin abklären, welcher Termin am besten passt, und dich zeitnah informieren."
-    }
+    },
+    "close": "Schließen"
   },
   "rejectModal": {
     "title": "Kandidat ablehnen",

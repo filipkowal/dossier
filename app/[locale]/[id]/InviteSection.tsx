@@ -1,11 +1,13 @@
 "use client";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { type Dictionary, User, inviteCandidate } from "@/utils";
 import { FormFooterButtons, Dialog, Button } from "@/components";
 import toast from "react-hot-toast";
 import AvailibilityStep from "./InviteSectionAvailibility";
 import LocationStep from "./InviteSectionLocation";
 import { useRouter } from "next/navigation";
+import SuccessIcon from "@/public/success.webp";
+import Image from "next/image";
 
 export type TimeSlots = {
   id: number;
@@ -45,38 +47,57 @@ export default function InviteSection({
   });
   const [invitePending, setInvitePending] = useState(false);
 
-  const steps = [];
+  const steps: {
+    content: ReactNode;
+    title: "locationStepTitle" | "availabilityStepTitle" | "successStepTitle";
+  }[] = [];
 
   if (user.isInterviewLocationInputVisible) {
-    steps.push(
-      <LocationStep
-        key="locationStep"
-        setStep={setStep}
-        setIsInterviewOnline={setIsInterviewOnline}
-        interviewLocation={inteviewLocation}
-        setInterviewLocation={setInterviewLocation}
-        interviewLink={interviewLink}
-        setInterviewLink={setInterviewLink}
-        isInterviewOnline={isInterviewOnline}
-        interviewDuration={interviewDuration}
-        setInterviewDuration={setInterviewDuration}
-        dict={dict}
-      />
-    );
+    steps.push({
+      content: (
+        <LocationStep
+          key="locationStep"
+          setStep={setStep}
+          setIsInterviewOnline={setIsInterviewOnline}
+          interviewLocation={inteviewLocation}
+          setInterviewLocation={setInterviewLocation}
+          interviewLink={interviewLink}
+          setInterviewLink={setInterviewLink}
+          isInterviewOnline={isInterviewOnline}
+          interviewDuration={interviewDuration}
+          setInterviewDuration={setInterviewDuration}
+          dict={dict}
+        />
+      ),
+      title: "locationStepTitle",
+    });
   }
 
   if (user.isInterviewAvailabilityInputVisible) {
-    steps.push(
-      <AvailibilityStep
-        key="availibilityStep"
-        newSlot={newSlot}
-        setNewSlot={setNewSlot}
-        availibilitySlots={availibilitySlots}
-        setAvailibilitySlots={setAvailibilitySlots}
-        dict={dict}
-      />
-    );
+    steps.push({
+      content: (
+        <AvailibilityStep
+          key="availibilityStep"
+          newSlot={newSlot}
+          setNewSlot={setNewSlot}
+          availibilitySlots={availibilitySlots}
+          setAvailibilitySlots={setAvailibilitySlots}
+          dict={dict}
+        />
+      ),
+      title: "availabilityStepTitle",
+    });
   }
+
+  steps.push({
+    content: (
+      <div className="flex flex-col gap-6 items-center">
+        <Image src={SuccessIcon} alt="success" width={96} height={96} />
+        <h1>{dict["success"][candidateGender]}</h1>
+      </div>
+    ),
+    title: "successStepTitle",
+  });
 
   return (
     <>
@@ -93,7 +114,7 @@ export default function InviteSection({
       <Dialog
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        title={dict[`title${step as 0 | 1}`]}
+        title={dict[steps[step].title]}
         footer={
           <FormFooterButtons
             step={step}
@@ -101,6 +122,7 @@ export default function InviteSection({
             stepsLength={steps.length}
             dict={dict}
             isPending={invitePending}
+            setIsOpen={setIsOpen}
             submissionDisabled={
               availibilitySlots.length === 0 &&
               !(newSlot.startDateTime && newSlot.endTime)
@@ -131,8 +153,7 @@ export default function InviteSection({
                 await inviteCandidate(id, formValues);
 
                 router.refresh();
-                setIsOpen(false);
-                toast.success(dict["success"][candidateGender]);
+                setStep((step) => step + 1);
               } catch (e) {
                 toast.error(dict["somethingWrong"]);
               } finally {
@@ -142,7 +163,7 @@ export default function InviteSection({
           />
         }
       >
-        <form className="flex flex-col gap-6">{steps[step]}</form>
+        <form className="flex flex-col gap-6">{steps[step].content}</form>
       </Dialog>
     </>
   );
