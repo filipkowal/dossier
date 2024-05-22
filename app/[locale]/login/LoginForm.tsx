@@ -88,7 +88,7 @@ export default function LoginForm({ dict }: { dict: Dictionary["loginForm"] }) {
                       focusPrevInput(Number(target.id));
                     }
                   }}
-                  className="w-12 ring-2 bg-digitalent-gray-light ring-digitalent-blue border-none mt-4 block h-10 text-xl text-center"
+                  className="w-8 sm:w-12 ring-2 bg-digitalent-gray-light ring-digitalent-blue border-none mt-4 block h-10 text-xl text-center"
                   maxLength={1}
                   minLength={1}
                   ref={inputsRef[index]}
