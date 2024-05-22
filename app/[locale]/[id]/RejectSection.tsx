@@ -24,6 +24,7 @@ export default function RejectSection({
   const [reason, setReason] = useState("");
   const [message, setMessage] = useState("");
   const [rejectionPending, setRejectionPending] = useState(false);
+  const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false);
 
   const reasons = Object.entries(dict.reasons);
 
@@ -50,7 +51,7 @@ export default function RejectSection({
 
               router.refresh();
               setIsOpen(false);
-              toast.success(dict["success"][candidateGender]);
+              setIsSuccessDialogOpen(true);
             } catch (e) {
               toast.error(dict["somethingWrong"]);
             } finally {
@@ -91,6 +92,23 @@ export default function RejectSection({
             <LoadingEllipsis isLoading={rejectionPending} />
           </Button>
         </form>
+      </Dialog>
+      <Dialog
+        isOpen={isSuccessDialogOpen}
+        title={dict["successTitle"]}
+        setIsOpen={setIsSuccessDialogOpen}
+        footer={
+          <Button
+            name={dict["close"]}
+            onClick={() => setIsSuccessDialogOpen(false)}
+          >
+            {dict["close"]}
+          </Button>
+        }
+      >
+        <div className="w-full flex flex-col gap-6 ">
+          <h1>{dict["success"][candidateGender]}</h1>
+        </div>
       </Dialog>
     </>
   );

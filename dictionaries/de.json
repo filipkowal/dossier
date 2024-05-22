@@ -86,7 +86,9 @@
     "success": {
       "male": "Schade, dass du den Kandidaten nicht einladen möchtest. Wir werden ihn entsprechend informieren.",
       "female": "Schade, dass du die Kandidatin nicht einladen möchtest. Wir werden sie entsprechend informieren."
-    }
+    },
+    "successTitle": "Ablehnung erfolgreich",
+    "close": "Schließen"
   },
   "contactModal": {
     "position": "Beziehungsmanager",

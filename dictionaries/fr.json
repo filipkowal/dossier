@@ -86,7 +86,9 @@
     "success": {
       "male": "C'est dommage que vous ne vouliez pas inviter le candidat. Nous les informerons en conséquence.",
       "female": "C'est dommage que vous ne vouliez pas inviter la candidate. Nous l'informerons en conséquence."
-    }
+    },
+    "successTitle": "Rejet réussi",
+    "close": "Fermer"
   },
   "contactModal": {
     "position": "Gestionnaire de relations",
