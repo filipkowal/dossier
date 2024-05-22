@@ -38,6 +38,7 @@ export default function ContactModal({
 
               await sendMessage(id, message);
               toast.success(dict.success);
+              setIsOpen(false);
             } catch (error) {
               toast.error(dict.somethingWrong);
             }
