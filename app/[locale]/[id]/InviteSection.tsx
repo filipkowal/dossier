@@ -46,6 +46,7 @@ export default function InviteSection({
     endTime: "",
   });
   const [invitePending, setInvitePending] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
   const steps: {
     content: ReactNode;
@@ -93,7 +94,9 @@ export default function InviteSection({
     content: (
       <div className="flex flex-col gap-6 items-center">
         <Image src={SuccessIcon} alt="success" width={96} height={96} />
-        <h1>{dict["success"][candidateGender]}</h1>
+        <h1>
+          {successMessage ? successMessage : dict["success"][candidateGender]}
+        </h1>
       </div>
     ),
     title: "successStepTitle",
@@ -150,7 +153,8 @@ export default function InviteSection({
                   availibilitySlots: slots,
                 };
 
-                await inviteCandidate(id, formValues);
+                const response = await inviteCandidate(id, formValues);
+                setSuccessMessage(response);
 
                 router.refresh();
                 setStep((step) => step + 1);
