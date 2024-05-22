@@ -23,6 +23,7 @@ export default function ToastProvider() {
             paddingRight: "20px",
             position: "sticky",
             top: "2rem",
+            zIndex: "100",
           }}
         >
           {({ icon, message }) => (
