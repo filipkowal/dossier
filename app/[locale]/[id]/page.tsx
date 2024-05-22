@@ -65,10 +65,11 @@ export default async function Home({
     <div className="w-full sm:pt-16 xl:grid xl:grid-cols-[minmax(450px,1fr),2fr] 2xl:grid-cols-[minmax(250px,1fr),2fr]">
       <div className="flex flex-col bg-digitalent-blue text-white sm:items-start xl:items-end md:px-8 lg:px-16 xl:px-0">
         <div className="flex flex-col justify-end items-center md:items-start xl:h-[34vh] 3xl:h-[30vh] pt-16 md:px-16 2xl:px-32 md:w-[27rem] 2xl:w-[35rem] w-full">
-          {candidate.candidateImage?.content ? (
+          {typeof candidate?.candidateImage === "string" &&
+          candidate.candidateImage.length ? (
             <Image
               alt="Candidate image"
-              src={candidate.candidateImage.content}
+              src={candidate.candidateImage}
               className="rounded-full sm:w-52 sm:h-52 h-40 w-40"
               width={160}
               height={160}

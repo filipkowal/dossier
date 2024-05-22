@@ -89,7 +89,8 @@ export interface components {
       lastName?: string;
       /** @enum {string} */
       gender?: "male" | "female";
-      candidateImage?: components["schemas"]["File"];
+      /** @example digitalent.cloud/images/123 */
+      candidateImage?: string;
       /** @example Senior Consultant (CIO Advisory) */
       vacancyTitle?: string;
       /** @example Gardener Senior Consultant @Google */

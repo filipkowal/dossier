@@ -62,7 +62,8 @@ components:
           type: string
           enum: ["male", "female"]
         candidateImage:
-          $ref: "#/components/schemas/File"
+          type: string
+          example: "digitalent.cloud/images/123"
         vacancyTitle:
           type: string
           example: Senior Consultant (CIO Advisory)
