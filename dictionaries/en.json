@@ -95,7 +95,8 @@
     "messageLabel": "How can we help you?",
     "messagePlaceholder": "Your questions or feedback regarding the candidate or any other case.",
     "send": "Send",
-    "success": "Message sent successfully. We will get back to you as soon as possible."
+    "success": "Message sent successfully. We will get back to you as soon as possible.",
+    "close": "Close"
   },
   "toastMessages": {
     "somethingWrong": "Something went wrong. Please try again later.",

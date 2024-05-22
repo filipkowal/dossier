@@ -1,5 +1,6 @@
 import { Button, Dialog, TextInput } from "@/components";
 import { Dictionary, sendMessage } from "@/utils";
+import React from "react";
 import toast from "react-hot-toast";
 
 export default function ContactModal({
@@ -8,6 +9,8 @@ export default function ContactModal({
   isOpen,
   setIsOpen,
   relationshipManagerCard,
+  isSuccessDialogOpen,
+  setIsSuccessDialogOpen,
 }: {
   dict: Dictionary["mainButtons"] &
     Dictionary["contactModal"] &
@@ -16,6 +19,8 @@ export default function ContactModal({
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   relationshipManagerCard?: JSX.Element;
+  isSuccessDialogOpen: boolean;
+  setIsSuccessDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   return (
     <>
@@ -37,8 +42,8 @@ export default function ContactModal({
               }
 
               await sendMessage(id, message);
-              toast.success(dict.success);
               setIsOpen(false);
+              setIsSuccessDialogOpen(true);
             } catch (error) {
               toast.error(dict.somethingWrong);
             }
@@ -60,6 +65,23 @@ export default function ContactModal({
             {dict.send}
           </Button>
         </form>
+      </Dialog>
+      <Dialog
+        title="Success"
+        isOpen={isSuccessDialogOpen}
+        setIsOpen={setIsSuccessDialogOpen}
+        footer={
+          <Button
+            name={dict["close"]}
+            onClick={() => setIsSuccessDialogOpen(false)}
+          >
+            {dict["close"]}
+          </Button>
+        }
+      >
+        <div className="w-full flex flex-col gap-6 ">
+          <h1>{dict["success"]}</h1>
+        </div>
       </Dialog>
     </>
   );
