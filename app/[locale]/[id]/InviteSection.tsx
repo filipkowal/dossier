@@ -167,7 +167,16 @@ export default function InviteSection({
           />
         }
       >
-        <form className="flex flex-col gap-6">{steps[step].content}</form>
+        <form className="flex flex-col gap-6">
+          {" "}
+          {/* // Don't autofocus the first input so that on mobile the form is visble workaround */}
+          <input
+            type="text"
+            style={{ position: "absolute", top: "-9999px" }}
+            autoFocus
+          />
+          {steps[step].content}
+        </form>
       </Dialog>
     </>
   );

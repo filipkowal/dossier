@@ -60,6 +60,12 @@ export default function RejectSection({
           }}
         >
           <p>{dict.reason}</p>
+          {/* // Don't autofocus the first input so that on mobile the form is visble workaround */}
+          <input
+            type="text"
+            style={{ position: "absolute", top: "-9999px" }}
+            autoFocus
+          />
           <select
             value={reason}
             required
