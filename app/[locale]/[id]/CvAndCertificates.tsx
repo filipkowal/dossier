@@ -23,7 +23,7 @@ const CvAndCertificates = ({
   useEffect(() => {
     function handleResize() {
       if (parentRef.current && parentRef.current.offsetWidth < 1000) {
-        setParentWidth(parentRef.current.offsetWidth);
+        setParentWidth(parentRef.current.offsetWidth - 1);
       }
     }
 
