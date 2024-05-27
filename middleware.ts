@@ -56,23 +56,25 @@ export async function middleware(request: NextRequest) {
 
   // Auth redirection
 
-  // if (
-  //   !pathname.startsWith(`/${locale}/login`) &&
-  //   (!request.cookies.has("token") || (await isLoggedIn()) !== true)
-  // ) {
-  //   console.log(pathname, " ", pathname.startsWith(`/${locale}/login`));
-  //   console.log("locale", locale);
-  //   const url = new URL(`/${locale}/login`, request.url);
-  //   console.log(url);
-  //   return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
+  const isLoginPage = i18n.locales.some((locale) =>
+    pathname.match(new RegExp(`\/${locale}\/[a-z0-9-]+\/login`))
+  );
+  const isAuthorized =
+    request.cookies.has("token") && (await isLoggedIn()) === true;
+  const reqUrlTrailingSlash = request.url.endsWith("/")
+    ? request.url
+    : `${request.url}/`;
+
+  // Redirect to login if not authorized
+  // if (!isLoginPage && !isAuthorized) {
+  //   const url = new URL(`login`, reqUrlTrailingSlash);
+  //   console.log(reqUrlTrailingSlash, url.pathname);
+  //   return NextResponse.redirect(url);
   // }
 
-  // if (
-  //   pathname.startsWith(`/${locale}/login`) &&
-  //   request.cookies.has("token") &&
-  //   (await isLoggedIn()) === true
-  // )
-  //   return NextResponse.redirect(new URL(`/${locale}`, request.url));
+  // Redirect to home if authorized and on login page
+  if (isLoginPage && isAuthorized)
+    return NextResponse.redirect(request.url.replace("/login", ""));
 
   // Otherwise, continue
 

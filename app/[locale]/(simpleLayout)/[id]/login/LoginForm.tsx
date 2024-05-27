@@ -2,10 +2,13 @@
 
 import { Button } from "@/components";
 import { Dictionary, logIn, sendCode } from "@/utils";
+import { useRouter } from "next/navigation";
 import { createRef, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function LoginForm({ dict }: { dict: Dictionary["loginForm"] }) {
+  const router = useRouter();
+
   const [smsCode, setSmsCode] = useState<string[]>(["", "", "", "", "", ""]);
   const inputsRef = Array.from({ length: 6 }, () =>
     createRef<HTMLInputElement>()
@@ -42,6 +45,7 @@ export default function LoginForm({ dict }: { dict: Dictionary["loginForm"] }) {
       const code = smsCode.join("");
       try {
         await logIn(code);
+        router.push("/dashboard");
         // silently catch not to notify if the code is correct
       } catch {}
     }

@@ -11,13 +11,15 @@ export default function LogoutButton({
   params,
 }: {
   dict: { logoutError: string; logoutSuccess: string };
-  params: { locale: string };
+  params: { locale: string; id: string };
 }) {
+  const { locale, id } = params;
+
   async function logUserOut() {
     try {
       await logout();
       toast.success(dict.logoutSuccess);
-      redirect(`/${params.locale}/login`);
+      redirect(`/${locale}/${id}/login`);
     } catch (error) {
       toast.error(dict.logoutError);
     }

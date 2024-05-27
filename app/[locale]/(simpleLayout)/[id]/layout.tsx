@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { CookiePopup, ToastProvider } from "@/components";
 import { getDictionary } from "@/utils";
 import HeaderSimple from "@/components/HeaderSimple";
+import SampleDossier from "./SampleDossier";
 
 export const metadata: Metadata = {
   title: "Digitalent Dossier",
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
 
 const loew = localFont({
   variable: "--font-loew",
-  src: "../../../../../public/fonts/Loew-Heavy.otf",
+  src: "../../../../public/fonts/Loew-Heavy.otf",
   preload: false,
 });
 
@@ -48,6 +49,7 @@ export default async function RootLayout({
         <HeaderSimple params={params} />
 
         {children}
+        <SampleDossier />
 
         <footer className={`self-bottom w-full ${loew.variable}`}>
           <div className="text-center py-2 max-w-full bg-digitalent-gray-dark text-white font-sans text-[11px]">

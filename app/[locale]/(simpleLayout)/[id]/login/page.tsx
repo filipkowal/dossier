@@ -1,6 +1,5 @@
 import { Locale } from "@/i18n-config";
 import LoginForm from "./LoginForm";
-import SampleDossier from "./SampleDossier";
 import { getDictionary } from "@/utils";
 
 export default async function LoginPage({
@@ -12,7 +11,6 @@ export default async function LoginPage({
   return (
     <div>
       <LoginForm dict={dict["loginForm"]} />
-      <SampleDossier />
     </div>
   );
 }

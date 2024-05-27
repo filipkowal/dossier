@@ -1,6 +1,5 @@
 import { Locale } from "@/i18n-config";
 import { getDictionary, getRelationshipManager } from "@/utils";
-import SampleDossier from "../../../login/SampleDossier";
 import ContactSection from "./ContactSection";
 
 export default async function Home({
@@ -45,8 +44,6 @@ export default async function Home({
           id={params.id}
         />
       </div>
-
-      <SampleDossier />
     </div>
   );
 }

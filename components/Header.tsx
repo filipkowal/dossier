@@ -7,7 +7,7 @@ import NavLinks from "./NavLinks";
 import PdfButton from "@/app/[locale]/[id]/PdfButton";
 import { getPdfDossier, getUser } from "@/utils";
 import HeaderSimple from "./HeaderSimple";
-import LogoutButton from "@/app/[locale]/login/LogoutButton";
+import LogoutButton from "@/app/[locale]/(simpleLayout)/[id]/login/LogoutButton";
 
 export default async function Header({
   params,
