@@ -12,7 +12,7 @@ const useTokenCheck = (locale: Locale, id: string) => {
   useEffect(() => {
     const checkToken = async () => {
       if (!(await isLoggedIn())) {
-        toast("Your token has expired. Please log in again.");
+        toast("Your token has expired. Please log in again.", { icon: "ℹ️" });
         router.push(`/${locale}/${id}/login`);
       }
     };
