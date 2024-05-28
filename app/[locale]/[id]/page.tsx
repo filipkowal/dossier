@@ -35,13 +35,12 @@ export default async function Home({
   } catch (error) {
     if (error instanceof HttpError && error.status === 410) {
       redirect(`/${locale}/${id}/expired`);
-    } else {
-      notFound();
     }
-  }
-
-  if (!candidate || !user) {
-    notFound();
+    if (error instanceof HttpError && error.status === 404) {
+      notFound();
+    } else {
+      throw error;
+    }
   }
 
   let relationshipManager;
