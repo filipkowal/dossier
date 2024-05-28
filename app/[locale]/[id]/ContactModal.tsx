@@ -1,6 +1,8 @@
+"use client";
+
 import { Button, Dialog, TextInput } from "@/components";
 import { Dictionary, sendMessage } from "@/utils";
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function ContactModal({
@@ -22,6 +24,9 @@ export default function ContactModal({
   isSuccessDialogOpen: boolean;
   setIsSuccessDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+  const [isSending, setIsSending] = useState(false);
+  const [message, setMessage] = useState("");
+
   return (
     <>
       <Dialog
@@ -34,6 +39,8 @@ export default function ContactModal({
             e.preventDefault();
 
             try {
+              setIsSending(true);
+
               const formData = new FormData(e.currentTarget);
               const message = formData.get("message");
 
@@ -46,6 +53,8 @@ export default function ContactModal({
               setIsSuccessDialogOpen(true);
             } catch (error) {
               toast.error(dict.somethingWrong);
+            } finally {
+              setIsSending(false);
             }
           }}
         >
@@ -58,10 +67,18 @@ export default function ContactModal({
               type="textarea"
               rows={5}
               required
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
             />
           </div>
 
-          <Button name="Send" submitType type="primary" className="mt-4 w-full">
+          <Button
+            name="Send"
+            submitType
+            type="primary"
+            className="mt-4 w-full"
+            disabled={isSending || !message}
+          >
             {dict.send}
           </Button>
         </form>
