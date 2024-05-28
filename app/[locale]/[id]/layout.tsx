@@ -3,7 +3,7 @@ import Link from "next/link";
 import "@/app/globals.css";
 import localFont from "next/font/local";
 import type { Metadata } from "next";
-import { CookiePopup, Header, ToastProvider } from "@/components";
+import { CookiePopup, Header } from "@/components";
 import { getDictionary } from "@/utils";
 import TokenExpiryChecker from "@/components/TokenExpiryChecker";
 
@@ -44,7 +44,6 @@ export default async function RootLayout({
   return (
     <>
       <main className="min-h-screen bg-digitalent-gray-light flex flex-col justify-between">
-        <ToastProvider />
         <Header params={params} />
         {children}
 

@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { Merriweather } from "next/font/google";
 import { headers } from "next/headers";
 import { getLocale } from "@/middleware";
+import { ToastProvider } from "@/components";
 
 export const metadata: Metadata = {
   title: "Digitalent Dossier",
@@ -53,7 +54,10 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/thumbnail.png" />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <ToastProvider />
+      </body>
     </html>
   );
 }
