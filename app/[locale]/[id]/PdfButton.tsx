@@ -17,11 +17,11 @@ export default async function PdfButton({
     return null;
   }
 
-  if (!pdfDossier?.content) return null;
+  if (typeof pdfDossier !== "string") return null;
 
   return (
     <a
-      href={pdfDossier.content}
+      href={pdfDossier}
       download="dossier.pdf"
       className="sm:w-1/3 xl:w-1/4 max-w-[32rem]"
     >

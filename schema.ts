@@ -3,7 +3,6 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
   "/auth/sendCode": {
     /** Request a login code */
@@ -61,16 +60,11 @@ export type webhooks = Record<string, never>;
 
 export interface components {
   schemas: {
-    File: {
-      content?: string;
-      id?: string;
-      /** Format: int64 */
-      lastModified?: number;
-      name?: string;
-      /** Format: int64 */
-      size?: number;
-      type?: string;
-    };
+    /**
+     * Format: url
+     * @example https://www.example.com/file.pdf
+     */
+    File: string;
     RelationshipManager: {
       /** @example Christoph Kowalski */
       name?: string;
@@ -118,7 +112,11 @@ export interface components {
       interviewSummary?: string;
       file?: components["schemas"]["File"];
       /** @enum {string} */
-      dossierPhase?: "candidateNotAssessed" | "candidateAccepted" | "interviewScheduled" | "candidateRejected";
+      dossierPhase?:
+        | "candidateNotAssessed"
+        | "candidateAccepted"
+        | "interviewScheduled"
+        | "candidateRejected";
       /** @example We will inform you which date Christoph has chosen so that you can send him the meeting invite. Please make sure to CC: atrete@digitalent.ch to the meeting */
       dossierMessage?: string;
       /** @example 100% */
@@ -175,7 +173,6 @@ export type $defs = Record<string, never>;
 export type external = Record<string, never>;
 
 export interface operations {
-
   /** Request a login code */
   requestLoginCode: {
     responses: {
@@ -381,11 +378,11 @@ export interface operations {
           /** @example https://meet.google.com/abc-def-ghi */
           url?: string;
           availibilitySlots?: {
-              /** Format: date-time */
-              startDateTime?: string;
-              /** Format: time */
-              endTime?: string;
-            }[];
+            /** Format: date-time */
+            startDateTime?: string;
+            /** Format: time */
+            endTime?: string;
+          }[];
         };
       };
     };
@@ -416,7 +413,17 @@ export interface operations {
       content: {
         "application/json": {
           /** @enum {string} */
-          reason?: "wrongGeographicalArea" | "wrongJobFocus" | "salaryExpectations" | "qualifiedOtherCandidatesBetter" | "notBestQualifiedEducation" | "notBestQualifiedExperience" | "notBestQualifiedOverqualified" | "notBestQualifiedTooOld" | "notBestQualifiedCulturalFit" | "other";
+          reason?:
+            | "wrongGeographicalArea"
+            | "wrongJobFocus"
+            | "salaryExpectations"
+            | "qualifiedOtherCandidatesBetter"
+            | "notBestQualifiedEducation"
+            | "notBestQualifiedExperience"
+            | "notBestQualifiedOverqualified"
+            | "notBestQualifiedTooOld"
+            | "notBestQualifiedCulturalFit"
+            | "other";
           /** @example We are sorry to inform you that we will not proceed with candidate's application. We wish you all the best and can't wait for future candidates. */
           message?: string;
         };

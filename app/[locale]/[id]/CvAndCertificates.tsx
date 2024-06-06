@@ -37,11 +37,10 @@ const CvAndCertificates = ({
 
   return (
     <div className="w-full" id="cvAndCertificates" ref={parentRef}>
-      {typeof cvAndCertificates?.content === "string" && (
+      {typeof cvAndCertificates === "string" && (
         <PdfDocument
-          fileContent={cvAndCertificates.content}
+          fileContent={cvAndCertificates}
           parentWidth={parentWidth}
-          aria-label={cvAndCertificates.name}
         />
       )}
     </div>

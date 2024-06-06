@@ -20,22 +20,9 @@ components:
       description: "JWT stored in cookie of name: token"
   schemas:
     File:
-      type: object
-      properties:
-        content:
-          type: string
-        id:
-          type: string
-        lastModified:
-          type: integer
-          format: int64
-        name:
-          type: string
-        size:
-          type: integer
-          format: int64
-        type:
-          type: string
+      type: string
+      format: url
+      example: "https://www.example.com/cv.pdf"
     RelationshipManager:
       type: object
       properties:
