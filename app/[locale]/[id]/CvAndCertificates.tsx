@@ -14,7 +14,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 const CvAndCertificates = ({
   cvAndCertificates,
 }: {
-  cvAndCertificates: Candidate["files"];
+  cvAndCertificates: Candidate["file"];
 }) => {
   const [parentWidth, setParentWidth] = useState<number>();
 
@@ -37,15 +37,12 @@ const CvAndCertificates = ({
 
   return (
     <div className="w-full" id="cvAndCertificates" ref={parentRef}>
-      {cvAndCertificates?.map(
-        (file, index) =>
-          typeof file.content === "string" && (
-            <PdfDocument
-              key={index}
-              fileContent={file.content}
-              parentWidth={parentWidth}
-            />
-          )
+      {typeof cvAndCertificates?.content === "string" && (
+        <PdfDocument
+          fileContent={cvAndCertificates.content}
+          parentWidth={parentWidth}
+          aria-label={cvAndCertificates.name}
+        />
       )}
     </div>
   );

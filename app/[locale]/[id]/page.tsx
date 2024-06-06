@@ -246,7 +246,7 @@ export default async function Home({
             <LongCandidateInfo candidate={candidate} dict={dict.candidate} />
           </div>
         </div>
-        <CvAndCertificates cvAndCertificates={candidate.files || []} />
+        <CvAndCertificates cvAndCertificates={candidate.file} />
       </div>
       <div className="flex fixed md:bottom-6 bottom-0 justify-center sm:gap-3 md:gap-6 w-full">
         <InviteSection
