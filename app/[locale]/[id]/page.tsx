@@ -153,21 +153,23 @@ export default async function Home({
                 </Link>
               )}
             </div>
-            <div className="md:w-1/2 xl:w-full">
-              <h2 className="text-xl font-title mb-4 mt-8 sm:mt-0 sm:mb-8 whitespace-nowrap">
-                {dict.candidate.personalDetails}
-              </h2>
-              <p className="whitespace-nowrap">
-                {candidate.birthDate} {"(" + candidate.candidateAge + ")"}
-              </p>
-              <p className="overflow-hidden text-ellipsis">
-                {candidate.address?.street}
-              </p>
-              <p className="overflow-hidden text-ellipsis">
-                {candidate.address?.city + " " + candidate.address?.zip}
-              </p>
-              <p>{candidate.address?.country}</p>
-            </div>
+            {candidate?.address && candidate?.birthDate && (
+              <div className="md:w-1/2 xl:w-full">
+                <h2 className="text-xl font-title mb-4 mt-8 sm:mt-0 sm:mb-8 whitespace-nowrap">
+                  {dict.candidate.personalDetails}
+                </h2>
+                <p className="whitespace-nowrap">
+                  {candidate.birthDate} {"(" + candidate.candidateAge + ")"}
+                </p>
+                <p className="overflow-hidden text-ellipsis">
+                  {candidate.address?.street}
+                </p>
+                <p className="overflow-hidden text-ellipsis">
+                  {candidate.address?.city + " " + candidate.address?.zip}
+                </p>
+                <p>{candidate.address?.country}</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
