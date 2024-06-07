@@ -19,14 +19,14 @@ export default function InviteSection({
   dict,
   user,
   id,
-  candidateGender = "male",
+  candidateGender = "m",
 }: {
   dict: Dictionary["inviteModal"] &
     Dictionary["mainButtons"] &
     Dictionary["toastMessages"];
   user: User;
   id: string;
-  candidateGender?: "male" | "female";
+  candidateGender?: "m" | "f";
 }) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -95,7 +95,9 @@ export default function InviteSection({
       <div className="flex flex-col gap-6 items-center">
         <Image src={SuccessIcon} alt="success" width={96} height={96} />
         <h1>
-          {successMessage ? successMessage : dict["success"][candidateGender]}
+          {successMessage
+            ? successMessage
+            : dict["success"][candidateGender === "m" ? "male" : "female"]}
         </h1>
       </div>
     ),

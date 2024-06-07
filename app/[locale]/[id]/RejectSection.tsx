@@ -11,13 +11,13 @@ import toast from "react-hot-toast";
 export default function RejectSection({
   dict,
   id,
-  candidateGender = "male",
+  candidateGender = "m",
 }: {
   dict: Dictionary["rejectModal"] &
     Dictionary["mainButtons"] &
     Dictionary["toastMessages"];
   id: string;
-  candidateGender?: "male" | "female";
+  candidateGender?: "m" | "f";
 }) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -113,7 +113,9 @@ export default function RejectSection({
         }
       >
         <div className="w-full flex flex-col gap-6 ">
-          <h1>{dict["success"][candidateGender]}</h1>
+          <h1>
+            {dict["success"][candidateGender === "m" ? "male" : "female"]}
+          </h1>
         </div>
       </Dialog>
     </>

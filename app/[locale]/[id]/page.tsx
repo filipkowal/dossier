@@ -76,7 +76,7 @@ export default async function Home({
               height={160}
               loading="eager"
             />
-          ) : candidate?.gender === "female" ? (
+          ) : candidate?.gender === "f" ? (
             <Image
               alt="Candidate image"
               src={AvatarFemale}

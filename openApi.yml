@@ -47,7 +47,7 @@ components:
           example: Kowalski
         gender:
           type: string
-          enum: ["male", "female"]
+          enum: ["m", "f"]
         candidateImage:
           type: string
           example: "digitalent.cloud/images/123"
