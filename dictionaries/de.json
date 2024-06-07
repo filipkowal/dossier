@@ -12,8 +12,8 @@
   },
   "candidate": {
     "candidate": "Bewerber",
-    "candidatesFor": "bewirbt sich für",
-    "vacancy": "Stellen",
+    "candidatesFor": "interessiert sich für",
+    "vacancy": "Vakanz",
     "contactDetails": "Kontaktdetails",
     "personalDetails": "Persönliche Details",
     "desiredSalary": "Gewünschtes Gehalt",
@@ -39,7 +39,7 @@
   },
   "inviteModal": {
     "locationStepTitle": "Interviewort und Dauer",
-    "availabilityStepTitle": "Ihre Verfügbarkeit",
+    "availabilityStepTitle": "Deine Verfügbarkeit",
     "successStepTitle": "Einladung erfolgreich",
     "location": "Ort",
     "online": "Online",
@@ -68,7 +68,7 @@
   },
   "rejectModal": {
     "title": "Kandidat ablehnen",
-    "reason": "Schade es nicht passt. Was ist der Hintergrund für deine Entscheidung?",
+    "reason": "Schade, dass es nicht passt. Was ist der Hintergrund für deine Entscheidung?",
     "select": "Bitte wähle einen Grund aus",
     "message": "Kommentare (optional)",
     "send": "Senden",
@@ -79,7 +79,7 @@
       "qualifiedOtherCandidatesBetter": "Qualifiziert - andere Kandidaten sind besser",
       "notBestQualifiedEducation": "Fehlende Qualifikation - Bildungsniveau",
       "notBestQualifiedExperience": "Fehlende Qualifikation -  Erfahrung",
-      "notBestQualifiedOverqualified": "Fehlende Qualifikation - Überqualifiziert",
+      "notBestQualifiedOverqualified": "Überqualifiziert",
       "notBestQualifiedTooOld": "Fehlende Qualifikation - zu alt",
       "notBestQualifiedCulturalFit": "Fehlende Qualifikation - Kulturelle Passung",
       "other": "Andere"
