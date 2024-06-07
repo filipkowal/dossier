@@ -10,30 +10,44 @@ export default function LongCandidateInfo({
 }) {
   return (
     <>
-      <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">
-        {dict.interviewSummary}
-      </h2>
+      <Section
+        dict={dict}
+        content={candidate.reasonForChange}
+        name="reasonForChange"
+      />
+      <Section
+        dict={dict}
+        content={candidate.interviewSummary}
+        name="interviewSummary"
+      />
+      <Section
+        dict={dict}
+        content={candidate.educationSummary}
+        name="educationSummary"
+      />
+    </>
+  );
+}
+
+function Section({
+  dict,
+  content,
+  name,
+}: {
+  dict: Dictionary["candidate"];
+  content?: string;
+  name: "reasonForChange" | "interviewSummary" | "educationSummary";
+}) {
+  if (!content) return null;
+
+  return (
+    <>
+      <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">{dict[name]}</h2>
       <p
         dangerouslySetInnerHTML={{
-          __html: candidate.interviewSummary || "",
+          __html: content || "",
         }}
       ></p>
-      <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">
-        {dict.reasonForChange}
-      </h2>
-      <p
-        dangerouslySetInnerHTML={{
-          __html: candidate.reasonForChange || "",
-        }}
-      ></p>
-      <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">
-        {dict.educationSummary}
-      </h2>
-      <div
-        dangerouslySetInnerHTML={{
-          __html: candidate.educationSummary || "",
-        }}
-      ></div>
     </>
   );
 }
