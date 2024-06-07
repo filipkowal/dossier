@@ -15,7 +15,7 @@ export default function ContactSection({
   dict: Dictionary["mainButtons"] &
     Dictionary["contactModal"] &
     Dictionary["toastMessages"];
-  relationshipManager: RelationshipManager;
+  relationshipManager?: RelationshipManager;
   id: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +27,9 @@ export default function ContactSection({
         <Image
           src={relationshipManager.photo}
           alt="avatar"
-          className={`h-20 w-20 rounded-full`}
+          className={`h-20 w-20 rounded-full object-cover`}
+          width={80}
+          height={80}
         />
       ) : (
         <div className={`bg-digitalent-yellow h-20 w-20 rounded-full`} />
@@ -36,7 +38,7 @@ export default function ContactSection({
       <div className="flex gap-2 flex-col md:flex-row">
         <div className="flex flex-col">
           <h2 className="text-xl font-title">{relationshipManager?.name}</h2>
-          <h2 className="text-xl">{relationshipManager.phoneNumber}</h2>
+          <h2 className="text-xl">{relationshipManager?.phoneNumber}</h2>
         </div>
 
         <h2 className="hidden md:block">•</h2>
@@ -58,7 +60,9 @@ export default function ContactSection({
             <Image
               src={relationshipManager.photo}
               alt="avatar"
-              className={`h-6 w-6 rounded-full hidden sm:block`}
+              className={`h-6 w-6 rounded-full hidden sm:block object-cover`}
+              width={24}
+              height={24}
             />
           ) : null}
 

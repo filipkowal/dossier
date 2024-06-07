@@ -275,11 +275,7 @@ export default async function Home({
             ...dict.contactModal,
             ...dict.toastMessages,
           }}
-          // @fixme: relationshipManager is not from API
-          relationshipManager={{
-            name: "",
-            phoneNumber: "+41 56 511 03 03",
-          }}
+          relationshipManager={relationshipManager}
           id={id}
         />
       </div>
