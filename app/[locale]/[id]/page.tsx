@@ -13,6 +13,8 @@ import { CopyButton } from "@/components";
 import { notFound, redirect } from "next/navigation";
 import dynamic from "next/dynamic";
 import ContactSection from "./ContactSection";
+import AvatarMale from "@/public/avatar-male.webp";
+import AvatarFemale from "@/public/avatar-female.png";
 
 const LongCandidateInfo = dynamic(() => import("./LongCandidateInfo"), {
   ssr: false,
@@ -74,8 +76,24 @@ export default async function Home({
               height={160}
               loading="eager"
             />
+          ) : candidate?.gender === "male" ? (
+            <Image
+              alt="Candidate image"
+              src={AvatarFemale}
+              className="rounded-full sm:w-52 sm:h-52 h-40 w-40"
+              width={160}
+              height={160}
+              loading="eager"
+            />
           ) : (
-            <div className="rounded-full sm:w-52 sm:h-52 h-40 w-40 bg-digitalent-yellow" />
+            <Image
+              alt="Candidate image"
+              src={AvatarMale}
+              className="rounded-full sm:w-52 sm:h-52 h-40 w-40"
+              width={160}
+              height={160}
+              loading="eager"
+            />
           )}
         </div>
         <div className="block xl:hidden mt-16 -mb-16 px-8 sm:px-16 w-full">
