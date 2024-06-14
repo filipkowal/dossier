@@ -5,19 +5,19 @@
 
 
 export interface paths {
-  "/auth/sendCode": {
+  "/auth/sendCode/{id}": {
     /** Request a login code */
     post: operations["requestLoginCode"];
   };
-  "/auth/login": {
+  "/auth/login/{id}": {
     /** Login with a code */
     post: operations["login"];
   };
-  "/auth/isLoggedIn": {
+  "/auth/isLoggedIn/{id}": {
     /** Check if the user is logged in (check token in cookie validity) */
     get: operations["isLoggedIn"];
   };
-  "/auth/logout": {
+  "/auth/logout/{id}": {
     /** Logout */
     post: operations["logout"];
   };
@@ -173,6 +173,11 @@ export interface operations {
 
   /** Request a login code */
   requestLoginCode: {
+    parameters: {
+      path: {
+        id: string;
+      };
+    };
     responses: {
       /** @description Code sent to the user's phone and email */
       200: {
@@ -186,6 +191,11 @@ export interface operations {
   };
   /** Login with a code */
   login: {
+    parameters: {
+      path: {
+        id: string;
+      };
+    };
     requestBody?: {
       content: {
         "application/json": {
@@ -222,6 +232,9 @@ export interface operations {
   /** Check if the user is logged in (check token in cookie validity) */
   isLoggedIn: {
     parameters: {
+      path: {
+        id: string;
+      };
       cookie: {
         /** @description The JWT token used for authentication */
         token: string;
@@ -244,6 +257,11 @@ export interface operations {
   };
   /** Logout */
   logout: {
+    parameters: {
+      path: {
+        id: string;
+      };
+    };
     responses: {
       /** @description Successful operation */
       200: {

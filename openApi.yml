@@ -163,21 +163,33 @@ components:
           $ref: "#/components/schemas/GeoCoordinate"
 
 paths:
-  /auth/sendCode:
+  /auth/sendCode/{id}:
     post:
       summary: Request a login code
       operationId: requestLoginCode
       security: [] # This endpoint doesn't require authentication
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Code sent to the user's phone and email
         "400":
           description: Bad request
-  /auth/login:
+  /auth/login/{id}:
     post:
       summary: Login with a code
       operationId: login
       security: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -212,7 +224,7 @@ paths:
                 properties:
                   error:
                     type: string
-  /auth/isLoggedIn:
+  /auth/isLoggedIn/{id}:
     get:
       summary: Check if the user is logged in (check token in cookie validity)
       operationId: isLoggedIn
@@ -220,6 +232,11 @@ paths:
         - name: token
           in: cookie
           description: The JWT token used for authentication
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
           required: true
           schema:
             type: string
@@ -235,11 +252,17 @@ paths:
                     type: boolean
         "400":
           description: Bad request
-  /auth/logout:
+  /auth/logout/{id}:
     post:
       summary: Logout
       operationId: logout
       security: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Successful operation
