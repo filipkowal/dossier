@@ -278,6 +278,14 @@ export interface operations {
           };
         };
       };
+      /** @description Gone */
+      410: {
+        content: {
+          "application/json": {
+            error?: string;
+          };
+        };
+      };
     };
   };
   /** Download a candidate's dossier as a PDF */
@@ -303,6 +311,14 @@ export interface operations {
           };
         };
       };
+      /** @description Gone */
+      410: {
+        content: {
+          "application/json": {
+            error?: string;
+          };
+        };
+      };
     };
   };
   /** Retrieve user information */
@@ -322,6 +338,14 @@ export interface operations {
       };
       /** @description Bad request */
       400: {
+        content: {
+          "application/json": {
+            error?: string;
+          };
+        };
+      };
+      /** @description Gone */
+      410: {
         content: {
           "application/json": {
             error?: string;
@@ -395,6 +419,14 @@ export interface operations {
       400: {
         content: never;
       };
+      /** @description Gone */
+      410: {
+        content: {
+          "application/json": {
+            error?: string;
+          };
+        };
+      };
     };
   };
   /**
@@ -425,6 +457,14 @@ export interface operations {
       /** @description Error */
       400: {
         content: never;
+      };
+      /** @description Gone */
+      410: {
+        content: {
+          "application/json": {
+            error?: string;
+          };
+        };
       };
     };
   };

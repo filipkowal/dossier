@@ -276,6 +276,15 @@ paths:
                 properties:
                   error:
                     type: string
+        "410":
+          description: Gone
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
 
   /{locale}/candidate/{id}/pdf:
     get:
@@ -308,6 +317,15 @@ paths:
                 properties:
                   error:
                     type: string
+        "410":
+          description: Gone
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
 
   /{locale}/user/{id}:
     get:
@@ -333,6 +351,15 @@ paths:
                 $ref: "#/components/schemas/User"
         "400":
           description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "410":
+          description: Gone
           content:
             application/json:
               schema:
@@ -422,6 +449,15 @@ paths:
                 example: Thank you for providing the time slots. We will check with the candidate to find the best suitable time and inform you soon.
         "400":
           description: Error
+        "410":
+          description: Gone
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
 
   /candidate/{id}/reject:
     post:
@@ -461,6 +497,15 @@ paths:
           description: Success
         "400":
           description: Error
+        "410":
+          description: Gone
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
 
   /sendMessage/{id}:
     post:
