@@ -10,7 +10,7 @@ export default async function LoginPage({
   const dict = await getDictionary(params.locale);
   return (
     <div>
-      <LoginForm dict={dict["loginForm"]} />
+      <LoginForm dict={dict["loginForm"]} id={params.id} />
     </div>
   );
 }

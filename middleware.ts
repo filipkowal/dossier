@@ -59,11 +59,16 @@ export async function middleware(request: NextRequest) {
   const isLoginPage = i18n.locales.some((locale) =>
     pathname.match(new RegExp(`\/${locale}\/[a-z0-9-]+\/login`))
   );
+  const id = pathname
+    .match(new RegExp(`\/${locale}\/[a-z0-9-]+`))?.[0]
+    .replace(`/${locale}/`, "");
+
   const isAuthorized =
-    request.cookies.has("token") && (await isLoggedIn()) === true;
-  const reqUrlTrailingSlash = request.url.endsWith("/")
-    ? request.url
-    : `${request.url}/`;
+    request.cookies.has("token") && id && (await isLoggedIn(id)) === true;
+
+  // const reqUrlTrailingSlash = request.url.endsWith("/")
+  //   ? request.url
+  //   : `${request.url}/`;
 
   // Redirect to login if not authorized
   // if (!isLoginPage && !isAuthorized) {

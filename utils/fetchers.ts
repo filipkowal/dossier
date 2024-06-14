@@ -51,7 +51,7 @@ async function getData({
 
   if (!res.ok) {
     throw new HttpError(
-      `HTTP error! ${endpoint.toUpperCase()} status: ${res.status}`,
+      `HTTP ERROR! ${endpoint} status: ${res.status}`,
       res.status
     );
   }
@@ -60,9 +60,7 @@ async function getData({
     const json = await res.json();
     return json;
   } catch (error) {
-    throw new Error(
-      `Failed to parse ${endpoint.toUpperCase()} response as JSON`
-    );
+    throw new Error(`Failed to parse ${endpoint} response as JSON`);
   }
 }
 
@@ -155,22 +153,22 @@ export async function sendMessage(id: string, message: string) {
   return response;
 }
 
-export async function sendCode() {
-  const response = await postData("auth/sendCode");
+export async function sendCode(id: string) {
+  const response = await postData(`auth/sendCode/${id}`);
 
   return response;
 }
 
-export async function logIn(code: string) {
-  const response = await postData("auth/login", code);
+export async function logIn({ id, code }: { id: string; code: string }) {
+  const response = await postData(`auth/login/${id}`, code);
 
   return response;
 }
 
-export async function isLoggedIn(): Promise<boolean | undefined> {
+export async function isLoggedIn(id: string): Promise<boolean | undefined> {
   try {
     const response: GetIsLoggedInResponse = await getData({
-      endpoint: "isLoggedIn",
+      endpoint: `auth/isLoggedIn/${id}`,
     });
 
     return response.isLoggedIn;
@@ -179,8 +177,8 @@ export async function isLoggedIn(): Promise<boolean | undefined> {
   }
 }
 
-export async function logout() {
-  const response = await postData("auth/logout");
+export async function logout(id: string) {
+  const response = await postData(`auth/logout/${id}`);
 
   return response;
 }

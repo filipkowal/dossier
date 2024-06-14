@@ -17,7 +17,7 @@ export default function LogoutButton({
 
   async function logUserOut() {
     try {
-      await logout();
+      await logout(params.id);
       toast.success(dict.logoutSuccess);
       redirect(`/${locale}/${id}/login`);
     } catch (error) {

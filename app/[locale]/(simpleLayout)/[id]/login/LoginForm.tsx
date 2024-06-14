@@ -6,7 +6,13 @@ import { useRouter } from "next/navigation";
 import { createRef, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-export default function LoginForm({ dict }: { dict: Dictionary["loginForm"] }) {
+export default function LoginForm({
+  dict,
+  id,
+}: {
+  dict: Dictionary["loginForm"];
+  id: string;
+}) {
   const router = useRouter();
 
   const [smsCode, setSmsCode] = useState<string[]>(["", "", "", "", "", ""]);
@@ -44,7 +50,7 @@ export default function LoginForm({ dict }: { dict: Dictionary["loginForm"] }) {
     async function handleLogIn() {
       const code = smsCode.join("");
       try {
-        await logIn(code);
+        await logIn({ id, code });
         router.push("/dashboard");
         // silently catch not to notify if the code is correct
       } catch {}
@@ -53,7 +59,7 @@ export default function LoginForm({ dict }: { dict: Dictionary["loginForm"] }) {
 
   async function sendSMSCode() {
     try {
-      await sendCode();
+      await sendCode(id);
     } catch {
       toast.error(dict.toastError);
     }
