@@ -276,6 +276,8 @@ paths:
                 properties:
                   error:
                     type: string
+        "401":
+          description: Unauthorized
         "410":
           description: Gone
           content:
@@ -317,6 +319,8 @@ paths:
                 properties:
                   error:
                     type: string
+        "401":
+          description: Unauthorized
         "410":
           description: Gone
           content:
@@ -358,6 +362,8 @@ paths:
                 properties:
                   error:
                     type: string
+        "401":
+          description: Unauthorized
         "410":
           description: Gone
           content:
@@ -390,6 +396,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RelationshipManager"
+        "401":
+          description: Unauthorized
         "400":
           description: Bad request
           content:
@@ -449,6 +457,8 @@ paths:
                 example: Thank you for providing the time slots. We will check with the candidate to find the best suitable time and inform you soon.
         "400":
           description: Error
+        "401":
+          description: Unauthorized
         "410":
           description: Gone
           content:
@@ -497,6 +507,8 @@ paths:
           description: Success
         "400":
           description: Error
+        "401":
+          description: Unauthorized
         "410":
           description: Gone
           content:
@@ -531,3 +543,5 @@ paths:
           description: Success
         "400":
           description: Error
+        "401":
+          description: Unauthorized

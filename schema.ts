@@ -278,6 +278,10 @@ export interface operations {
           };
         };
       };
+      /** @description Unauthorized */
+      401: {
+        content: never;
+      };
       /** @description Gone */
       410: {
         content: {
@@ -310,6 +314,10 @@ export interface operations {
             error?: string;
           };
         };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: never;
       };
       /** @description Gone */
       410: {
@@ -344,6 +352,10 @@ export interface operations {
           };
         };
       };
+      /** @description Unauthorized */
+      401: {
+        content: never;
+      };
       /** @description Gone */
       410: {
         content: {
@@ -376,6 +388,10 @@ export interface operations {
             error?: string;
           };
         };
+      };
+      /** @description Unauthorized */
+      401: {
+        content: never;
       };
     };
   };
@@ -419,6 +435,10 @@ export interface operations {
       400: {
         content: never;
       };
+      /** @description Unauthorized */
+      401: {
+        content: never;
+      };
       /** @description Gone */
       410: {
         content: {
@@ -458,6 +478,10 @@ export interface operations {
       400: {
         content: never;
       };
+      /** @description Unauthorized */
+      401: {
+        content: never;
+      };
       /** @description Gone */
       410: {
         content: {
@@ -490,6 +514,10 @@ export interface operations {
       };
       /** @description Error */
       400: {
+        content: never;
+      };
+      /** @description Unauthorized */
+      401: {
         content: never;
       };
     };
