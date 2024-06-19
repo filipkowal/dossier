@@ -53,6 +53,8 @@ export default function InviteSection({
     title: "locationStepTitle" | "availabilityStepTitle" | "successStepTitle";
   }[] = [];
 
+  if (user.isInviteButtonVisible === false) return null;
+
   if (user.isInterviewLocationInputVisible) {
     steps.push({
       content: (

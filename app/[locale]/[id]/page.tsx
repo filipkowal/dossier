@@ -288,6 +288,7 @@ export default async function Home({
           }}
           id={id}
           candidateGender={candidate?.gender}
+          isRejectButtonVisible={user.isRejectButtonVisible}
         />
 
         <ContactSection

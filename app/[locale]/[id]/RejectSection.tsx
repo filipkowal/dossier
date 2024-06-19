@@ -12,11 +12,13 @@ export default function RejectSection({
   dict,
   id,
   candidateGender = "m",
+  isRejectButtonVisible,
 }: {
   dict: Dictionary["rejectModal"] &
     Dictionary["mainButtons"] &
     Dictionary["toastMessages"];
   id: string;
+  isRejectButtonVisible: boolean | undefined;
   candidateGender?: "m" | "f";
 }) {
   const router = useRouter();
@@ -27,6 +29,8 @@ export default function RejectSection({
   const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false);
 
   const reasons = Object.entries(dict.reasons);
+
+  if (isRejectButtonVisible === false) return null;
 
   return (
     <>
