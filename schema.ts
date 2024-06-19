@@ -112,8 +112,6 @@ export interface components {
       /** @example Christoph Pfister ist seit vielen Jahren in verschiedenen Rollen im Bereich Informationstechnik unterwegs und würde sein Wissen und seine Erfahrung sehr gerne als Berater einbringen. Es reizt ihn spannende sowie komplexe Problemstellungen zu lösen und er kann dank seiner Erfahrung eine holistische Betrachtung auf Challenges einnehmen. In seiner aktuellen Rolle als CIO der PEAX AG verantwortet er die Produktentwicklung und den Betrieb einer SaaS-Plattform für digitale Services. In seiner zusätzlichen Gruppen-Rolle durfte er in der Base-Net Unternehmensgruppe verschiedene große Projekte erfolgreich umsetzen. Er ist sich gewohnt mit einer 360 Grad Sicht zu agieren und dazu die verschiedenen Sachverhalte und Themen für unterschiedliche Ziel- und Anspruchsgruppen verständlich und nachvollziehbar aufzubereiten und zu präsentieren. Als Mitglied des Enterprise Architektur Boards ist er zudem verantwortlich für die Identifikation sowie Einführung von neuen Technologien und für regulatorische und IT-rechtliche Themen. */
       interviewSummary?: string;
       file?: components["schemas"]["File"];
-      /** @enum {string} */
-      dossierPhase?: "candidateNotAssessed" | "candidateAccepted" | "interviewScheduled" | "candidateRejected";
       /** @example We will inform you which date Christoph has chosen so that you can send him the meeting invite. Please make sure to CC: atrete@digitalent.ch to the meeting */
       dossierMessage?: string;
       /** @example 100% */
@@ -134,6 +132,8 @@ export interface components {
       isInterviewLocationInputVisible?: boolean;
       /** @description Invitation form should show availability slots input if true */
       isInterviewAvailabilityInputVisible?: boolean;
+      isInviteButtonVisible?: boolean;
+      isRejectButtonVisible?: boolean;
       address?: components["schemas"]["Address"];
     };
     Address: {

@@ -55,7 +55,7 @@ export default function LoginForm({
         // silently catch not to notify if the code is correct
       } catch {}
     }
-  }, [smsCode]);
+  }, [smsCode, id, router]);
 
   async function sendSMSCode() {
     try {
