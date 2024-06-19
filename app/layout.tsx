@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import localFont from "next/font/local";
 import { Merriweather } from "next/font/google";
 import { headers } from "next/headers";
-import { getLocale } from "@/middleware";
 import { ToastProvider } from "@/components";
+import { getLocale } from "@/utils";
 
 export const metadata: Metadata = {
   title: "Digitalent Dossier",

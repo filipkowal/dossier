@@ -3,9 +3,8 @@ import Link from "next/link";
 import "@/app/globals.css";
 import localFont from "next/font/local";
 import { CookiePopup, NotFound } from "@/components";
-import { getDictionary } from "@/utils";
+import { getDictionary, getLocale } from "@/utils";
 import { headers } from "next/headers";
-import { getLocale } from "@/middleware";
 import HeaderSimple from "@/components/HeaderSimple";
 
 const loew = localFont({
