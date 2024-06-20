@@ -60,7 +60,6 @@ export default function LoginForm({
         // silently catch not to notify if the code is correct
       } catch (e) {
         console.log("ERROR: " + e);
-        toast.error(e?.message);
       }
     }
   }, [smsCode, id, router, locale]);
