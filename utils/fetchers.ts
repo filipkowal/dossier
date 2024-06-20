@@ -25,6 +25,7 @@ export async function postData(endpoint: string, data?: any) {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
+    credentials: "include",
     body: JSON.stringify(data),
   });
 
@@ -32,7 +33,13 @@ export async function postData(endpoint: string, data?: any) {
     throw new Error(rawResponse.statusText);
   }
 
-  const content = await rawResponse.json();
+  let content;
+  try {
+    content = await rawResponse.json();
+  } catch (e) {
+    content = {};
+  }
+
   return content;
 }
 
@@ -47,7 +54,7 @@ async function getData({
 }) {
   const url = `${SERVER_URL}${locale ? `/${locale}` : ""}/${endpoint}`;
 
-  const res = await fetch(url, init);
+  const res = await fetch(url, { credentials: "include", ...init });
 
   if (!res.ok) {
     throw new HttpError(
