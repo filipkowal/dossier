@@ -8,11 +8,12 @@ import toast from "react-hot-toast";
 
 export default function LoginForm({
   dict,
-  id,
+  params,
 }: {
   dict: Dictionary["loginForm"];
-  id: string;
+  params: { id: string; locale: string };
 }) {
+  const { id, locale } = params;
   const router = useRouter();
 
   const [smsCode, setSmsCode] = useState<string[]>(["", "", "", "", "", ""]);
@@ -50,12 +51,19 @@ export default function LoginForm({
     async function handleLogIn() {
       const code = smsCode.join("");
       try {
+        console.log("try to log in with code: " + code, " id: " + id);
         await logIn({ id, code });
-        router.push("/dashboard");
+
+        console.log("redirect to /" + locale + "/" + id);
+        router.push(`/${locale}/${id}`);
+        console.log("SUCCESSFUL REDIRECT");
         // silently catch not to notify if the code is correct
-      } catch {}
+      } catch (e) {
+        console.log("ERROR: " + e);
+        toast.error(e?.message);
+      }
     }
-  }, [smsCode, id, router]);
+  }, [smsCode, id, router, locale]);
 
   async function sendSMSCode() {
     try {
