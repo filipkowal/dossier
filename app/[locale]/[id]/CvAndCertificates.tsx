@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
-import { Candidate } from "@/utils";
+import { Candidate, HttpError } from "@/utils";
 import { PdfDocument } from "@/components";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
@@ -17,6 +17,7 @@ const CvAndCertificates = ({
   cvAndCertificates: Candidate["file"];
 }) => {
   const [parentWidth, setParentWidth] = useState<number>();
+  const [cvContent, setCvContent] = useState<string>("");
 
   const parentRef = useRef<HTMLDivElement>(null);
 
@@ -35,13 +36,41 @@ const CvAndCertificates = ({
     };
   }, []);
 
+  useEffect(() => {
+    async function getCvContent() {
+      console.log(cvAndCertificates);
+      if (!cvAndCertificates) return;
+      const res = await fetch(cvAndCertificates, { credentials: "include" });
+
+      console.log("res.body", res?.body);
+
+      if (!res.ok) {
+        throw new HttpError(
+          `HTTP ERROR! ${cvAndCertificates} status: ${res.status},
+          res.status`,
+          res.status
+        );
+      }
+
+      try {
+        const json = await res.json();
+
+        console.log("json", json);
+        setCvContent(json);
+      } catch (error) {
+        throw new Error(
+          `Failed to parse ${cvAndCertificates} response as JSON`
+        );
+      }
+    }
+
+    getCvContent();
+  }, [cvAndCertificates]);
+
   return (
     <div className="w-full" id="cvAndCertificates" ref={parentRef}>
       {typeof cvAndCertificates === "string" && (
-        <PdfDocument
-          fileContent={cvAndCertificates}
-          parentWidth={parentWidth}
-        />
+        <PdfDocument fileContent={cvContent} parentWidth={parentWidth} />
       )}
     </div>
   );
