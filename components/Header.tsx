@@ -8,19 +8,22 @@ import PdfButton from "@/app/[locale]/[id]/PdfButton";
 import { getPdfDossier, getUser } from "@/utils";
 import HeaderSimple from "./HeaderSimple";
 import LogoutButton from "@/app/[locale]/(simpleLayout)/[id]/login/LogoutButton";
+import { cookies } from "next/headers";
 
 export default async function Header({
   params,
 }: {
   params: { locale: Locale; id: string };
 }) {
-  const pdfDossierPromise = getPdfDossier(params.locale, params.id);
+  const cookieStore = cookies();
+  const cookie = cookieStore.get("token");
+  const pdfDossierPromise = getPdfDossier(params.locale, params.id, cookie);
 
   let dict, user;
   try {
     [dict, user] = await Promise.all([
       getDictionary(params.locale),
-      getUser(params.locale, params.id),
+      getUser(params.locale, params.id, cookie),
     ]);
   } catch (error) {
     console.error(error);

@@ -7,6 +7,7 @@ import {
   GetRelatnshipManagerResponse,
   GetUserResponse,
 } from ".";
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 export class HttpError extends Error {
   status: number;
@@ -47,14 +48,22 @@ async function getData({
   endpoint,
   locale,
   init = {},
+  cookie,
 }: {
   endpoint: string;
+  cookie?: RequestCookie;
   locale?: Locale;
   init?: RequestInit;
 }) {
   const url = `${SERVER_URL}${locale ? `/${locale}` : ""}/${endpoint}`;
 
-  const res = await fetch(url, { credentials: "include", ...init });
+  const res = await fetch(url, {
+    credentials: "include",
+    ...init,
+    headers: {
+      Cookie: cookie ? `${cookie.name}=${cookie.value}` : "", // Forward the token cookie
+    },
+  });
 
   if (!res.ok) {
     throw new HttpError(
@@ -73,13 +82,15 @@ async function getData({
 
 export async function getCandidate(
   locale: Locale,
-  id: string
+  id: string,
+  cookie?: RequestCookie
 ): Promise<GetCandidateResponse> {
   const response = await getData({
     endpoint: `candidate/${id}`,
     locale,
     // @fixme: add real cache policies to the fetchers
     init: { cache: "no-cache" },
+    cookie,
   });
 
   return response;
@@ -87,11 +98,13 @@ export async function getCandidate(
 
 export async function getUser(
   locale: Locale,
-  id: string
+  id: string,
+  cookie?: RequestCookie
 ): Promise<GetUserResponse> {
   const response = await getData({
     endpoint: `user/${id}`,
     locale,
+    cookie,
   });
 
   return response;
@@ -99,11 +112,13 @@ export async function getUser(
 
 export async function getPdfDossier(
   locale: Locale,
-  id: string
+  id: string,
+  cookie?: RequestCookie
 ): Promise<GetPdfDossierResponse> {
   const response = await getData({
     endpoint: `candidate/${id}/pdf`,
     locale,
+    cookie,
   });
 
   return response;
@@ -111,11 +126,13 @@ export async function getPdfDossier(
 
 export async function getRelationshipManager(
   locale: Locale,
-  id: string
+  id: string,
+  cookie?: RequestCookie
 ): Promise<GetRelatnshipManagerResponse> {
   const response = await getData({
     endpoint: `relationshipManager/${id}`,
     locale,
+    cookie,
   });
 
   return response;
@@ -172,10 +189,14 @@ export async function logIn({ id, code }: { id: string; code: string }) {
   return response;
 }
 
-export async function isLoggedIn(id: string): Promise<boolean | undefined> {
+export async function isLoggedIn(
+  id: string,
+  cookie?: RequestCookie
+): Promise<boolean | undefined> {
   try {
     const response: GetIsLoggedInResponse = await getData({
       endpoint: `auth/isLoggedIn/${id}`,
+      cookie,
     });
 
     return response.isLoggedIn;

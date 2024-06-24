@@ -15,6 +15,7 @@ import dynamic from "next/dynamic";
 import ContactSection from "./ContactSection";
 import AvatarMale from "@/public/avatar-male.webp";
 import AvatarFemale from "@/public/avatar-female.png";
+import { cookies } from "next/headers";
 
 const LongCandidateInfo = dynamic(() => import("./LongCandidateInfo"), {
   ssr: false,
@@ -26,12 +27,14 @@ export default async function Home({
   params: { locale: Locale; id: string };
 }) {
   const { id, locale } = params;
+  const cookieStore = cookies();
+  const cookie = cookieStore.get("token");
 
   let candidate, user, dict;
   try {
     [candidate, user, dict] = await Promise.all([
-      getCandidate(locale, id),
-      getUser(locale, id),
+      getCandidate(locale, id, cookie),
+      getUser(locale, id, cookie),
       getDictionary(params.locale),
     ]);
   } catch (error) {
@@ -49,7 +52,8 @@ export default async function Home({
   try {
     relationshipManager = await getRelationshipManager(
       params.locale,
-      params.id
+      params.id,
+      cookie
     );
   } catch (error) {
     console.error(error);

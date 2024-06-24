@@ -1,6 +1,7 @@
 import { Locale } from "@/i18n-config";
 import { getDictionary, getRelationshipManager } from "@/utils";
 import ContactSection from "./ContactSection";
+import { cookies } from "next/headers";
 
 export default async function Home({
   params,
@@ -9,12 +10,15 @@ export default async function Home({
 }) {
   const dictionary = await getDictionary(params.locale);
   const dict = dictionary["dossierExpired"];
+  const cookieStore = cookies();
+  const cookie = cookieStore.get("token");
 
   let relationshipManager;
   try {
     relationshipManager = await getRelationshipManager(
       params.locale,
-      params.id
+      params.id,
+      cookie
     );
   } catch (error) {
     console.error(error);
