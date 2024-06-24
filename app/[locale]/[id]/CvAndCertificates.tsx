@@ -17,7 +17,7 @@ const CvAndCertificates = ({
   cvAndCertificates: Candidate["file"];
 }) => {
   const [parentWidth, setParentWidth] = useState<number>();
-  const [cvContent, setCvContent] = useState<Uint8Array>();
+  const [cvContent, setCvContent] = useState<ArrayBuffer>();
 
   const parentRef = useRef<HTMLDivElement>(null);
 
@@ -54,8 +54,8 @@ const CvAndCertificates = ({
       }
 
       const arrayBuffer = await res.arrayBuffer();
-      const uint8Array = new Uint8Array(arrayBuffer);
-      setCvContent(uint8Array);
+      // const uint8Array = new Uint8Array(arrayBuffer);
+      setCvContent(arrayBuffer);
     }
 
     getCvContent();

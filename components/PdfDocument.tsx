@@ -8,7 +8,7 @@ export default function PdfDocument({
   fileContent,
   parentWidth,
 }: {
-  fileContent: Uint8Array;
+  fileContent: ArrayBuffer;
   parentWidth?: number;
 }) {
   const [numPages, setNumPages] = useState(0);
