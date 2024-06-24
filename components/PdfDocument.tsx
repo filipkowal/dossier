@@ -8,7 +8,7 @@ export default function PdfDocument({
   fileContent,
   parentWidth,
 }: {
-  fileContent: string;
+  fileContent: Uint8Array;
   parentWidth?: number;
 }) {
   const [numPages, setNumPages] = useState(0);
@@ -19,7 +19,10 @@ export default function PdfDocument({
   };
 
   return (
-    <Document file={fileContent} onLoadSuccess={onDocumentLoadSuccess}>
+    <Document
+      file={{ data: fileContent }}
+      onLoadSuccess={onDocumentLoadSuccess}
+    >
       {Array.from(new Array(numPages), (el, index) => (
         <Page
           key={`page_${index + 1}`}
