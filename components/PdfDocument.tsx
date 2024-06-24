@@ -21,6 +21,7 @@ export default function PdfDocument({
   return (
     <Document
       file={{ data: fileContent }}
+      onLoadError={(error) => console.error("Error loading document:", error)}
       onLoadSuccess={onDocumentLoadSuccess}
     >
       {Array.from(new Array(numPages), (el, index) => (
