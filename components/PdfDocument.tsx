@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Document, Page } from "react-pdf";
 import "react-pdf/dist/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
@@ -17,6 +17,10 @@ export default function PdfDocument({
     setNumPages(numPages);
     // set parentWidth here based on your logic
   };
+
+  useEffect(() => {
+    console.log("Received ArrayBuffer in PdfDocument:", fileContent); // Debugging
+  }, [fileContent]);
 
   return (
     <Document

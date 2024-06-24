@@ -4,7 +4,7 @@ import { pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import { Candidate, HttpError } from "@/utils";
-import { PdfDocument } from "@/components";
+import PdfDocument from "@/components/PdfDocument";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
@@ -17,7 +17,7 @@ const CvAndCertificates = ({
   cvAndCertificates: Candidate["file"];
 }) => {
   const [parentWidth, setParentWidth] = useState<number>();
-  const [cvContent, setCvContent] = useState<ArrayBuffer>();
+  const [cvContent, setCvContent] = useState<ArrayBuffer | null>(null);
 
   const parentRef = useRef<HTMLDivElement>(null);
 
@@ -40,22 +40,26 @@ const CvAndCertificates = ({
     async function getCvContent() {
       if (!cvAndCertificates) return;
 
-      const res = await fetch(cvAndCertificates, { credentials: "include" });
+      try {
+        const res = await fetch(cvAndCertificates, { credentials: "include" });
 
-      if (!res.ok) {
-        throw new HttpError(
-          `HTTP ERROR! ${cvAndCertificates} status: ${res.status}`,
-          res.status
-        );
+        if (!res.ok) {
+          throw new HttpError(
+            `HTTP ERROR! ${cvAndCertificates} status: ${res.status}`,
+            res.status
+          );
+        }
+
+        if (!res.body) {
+          throw new Error(`Failed to fetch ${cvAndCertificates}, no body`);
+        }
+
+        const arrayBuffer = await res.arrayBuffer();
+        console.log("Fetched ArrayBuffer:", arrayBuffer); // Debugging
+        setCvContent(arrayBuffer);
+      } catch (error) {
+        console.error(error);
       }
-
-      if (!res?.body) {
-        throw new Error(`Failed to fetch ${cvAndCertificates}, no body`);
-      }
-
-      const arrayBuffer = await res.arrayBuffer();
-      // const uint8Array = new Uint8Array(arrayBuffer);
-      setCvContent(arrayBuffer);
     }
 
     getCvContent();
