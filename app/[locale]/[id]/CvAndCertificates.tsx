@@ -17,7 +17,7 @@ const CvAndCertificates = ({
   cvAndCertificates: Candidate["file"];
 }) => {
   const [parentWidth, setParentWidth] = useState<number>();
-  const [cvContent, setCvContent] = useState<string>("");
+  const [cvContent, setCvContent] = useState<Uint8Array>();
 
   const parentRef = useRef<HTMLDivElement>(null);
 
@@ -38,30 +38,24 @@ const CvAndCertificates = ({
 
   useEffect(() => {
     async function getCvContent() {
-      console.log(cvAndCertificates);
       if (!cvAndCertificates) return;
-      const res = await fetch(cvAndCertificates, { credentials: "include" });
 
-      console.log("res.body", res?.body);
+      const res = await fetch(cvAndCertificates, { credentials: "include" });
 
       if (!res.ok) {
         throw new HttpError(
-          `HTTP ERROR! ${cvAndCertificates} status: ${res.status},
-          res.status`,
+          `HTTP ERROR! ${cvAndCertificates} status: ${res.status}`,
           res.status
         );
       }
 
-      try {
-        const json = await res.json();
-
-        console.log("json", json);
-        setCvContent(json);
-      } catch (error) {
-        throw new Error(
-          `Failed to parse ${cvAndCertificates} response as JSON`
-        );
+      if (!res?.body) {
+        throw new Error(`Failed to fetch ${cvAndCertificates}, no body`);
       }
+
+      const arrayBuffer = await res.arrayBuffer();
+      const uint8Array = new Uint8Array(arrayBuffer);
+      setCvContent(uint8Array);
     }
 
     getCvContent();
@@ -69,7 +63,7 @@ const CvAndCertificates = ({
 
   return (
     <div className="w-full" id="cvAndCertificates" ref={parentRef}>
-      {typeof cvAndCertificates === "string" && (
+      {cvContent && (
         <PdfDocument fileContent={cvContent} parentWidth={parentWidth} />
       )}
     </div>
