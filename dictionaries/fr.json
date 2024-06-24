@@ -118,7 +118,8 @@
     "sendCodeInstruction": "Envoyez le code à votre téléphone pour vous vérifier.",
     "resendButton": "Envoyer le SMS avec le code",
     "enterCodeInstruction": "Entrez le code du SMS",
-    "toastError": "Échec de l'envoi du code SMS"
+    "toastError": "Échec de l'envoi du code SMS",
+    "toastSuccess": "Code SMS envoyé à votre numéro"
   },
   "dossierExpired": {
     "title": "Dossier expiré",

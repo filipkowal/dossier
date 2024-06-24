@@ -51,12 +51,9 @@ export default function LoginForm({
     async function handleLogIn() {
       const code = smsCode.join("");
       try {
-        console.log("try to log in with code: " + code, " id: " + id);
         await logIn({ id, code });
 
-        console.log("redirect to /" + locale + "/" + id);
         router.push(`/${locale}/${id}`);
-        console.log("SUCCESSFUL REDIRECT");
         // silently catch not to notify if the code is correct
       } catch (e) {
         console.log("ERROR: " + e);
@@ -67,6 +64,7 @@ export default function LoginForm({
   async function sendSMSCode() {
     try {
       await sendCode(id);
+      toast.success(dict.toastSuccess);
     } catch {
       toast.error(dict.toastError);
     }

@@ -118,7 +118,8 @@
     "sendCodeInstruction": "Send the code to your phone to verify yourself.",
     "resendButton": "Send an SMS With a Code",
     "enterCodeInstruction": "Enter the code from SMS",
-    "toastError": "Failed to send SMS code"
+    "toastError": "Failed to send SMS code",
+    "toastSuccess": "SMS code has been sent to your phone"
   },
   "dossierExpired": {
     "title": "Dossier expired",
