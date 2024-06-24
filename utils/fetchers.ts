@@ -57,6 +57,8 @@ async function getData({
 }) {
   const url = `${SERVER_URL}${locale ? `/${locale}` : ""}/${endpoint}`;
 
+  console.log(endpoint, cookie?.name, cookie?.value);
+
   const res = await fetch(url, {
     credentials: "include",
     ...init,
@@ -67,7 +69,7 @@ async function getData({
 
   if (!res.ok) {
     throw new HttpError(
-      `HTTP ERROR! ${endpoint} status: ${res.status}`,
+      `HTTP ERROR! ${endpoint} status: ${res.status} cookie: ${cookie?.name} ${cookie?.value}`,
       res.status
     );
   }
