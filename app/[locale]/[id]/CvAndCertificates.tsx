@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
-import { Candidate, HttpError } from "@/utils";
+import { Candidate } from "@/utils";
 import PdfDocument from "@/components/PdfDocument";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
@@ -17,8 +17,6 @@ const CvAndCertificates = ({
   cvAndCertificates: Candidate["file"];
 }) => {
   const [parentWidth, setParentWidth] = useState<number>();
-  const [cvContent, setCvContent] = useState<ArrayBuffer | null>(null);
-
   const parentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -36,40 +34,10 @@ const CvAndCertificates = ({
     };
   }, []);
 
-  useEffect(() => {
-    async function getCvContent() {
-      if (!cvAndCertificates) return;
-
-      try {
-        const res = await fetch(cvAndCertificates, { credentials: "include" });
-
-        if (!res.ok) {
-          throw new HttpError(
-            `HTTP ERROR! ${cvAndCertificates} status: ${res.status}`,
-            res.status
-          );
-        }
-
-        if (!res.body) {
-          throw new Error(`Failed to fetch ${cvAndCertificates}, no body`);
-        }
-
-        const blob = await res.blob();
-        const arrayBuffer = await blob.arrayBuffer();
-        console.log("Fetched ArrayBuffer Length:", arrayBuffer.byteLength); // Debugging
-        setCvContent(arrayBuffer);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    getCvContent();
-  }, [cvAndCertificates]);
-
   return (
     <div className="w-full" id="cvAndCertificates" ref={parentRef}>
-      {cvContent && (
-        <PdfDocument fileContent={cvContent} parentWidth={parentWidth} />
+      {cvAndCertificates && (
+        <PdfDocument fileUrl={cvAndCertificates} parentWidth={parentWidth} />
       )}
     </div>
   );
