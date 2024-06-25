@@ -6,17 +6,21 @@ import Image from "next/image";
 import { useState } from "react";
 import ChatIcon from "@/public/chat.png";
 import ContactModal from "./ContactModal";
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import ImageAuthorized from "@/components/ImageAuthorized";
 
 export default function ContactSection({
   dict,
   relationshipManager,
   id,
+  cookie,
 }: {
   dict: Dictionary["mainButtons"] &
     Dictionary["contactModal"] &
     Dictionary["toastMessages"];
   relationshipManager?: RelationshipManager;
   id: string;
+  cookie: string | RequestCookie | undefined;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false);
@@ -24,12 +28,13 @@ export default function ContactSection({
   const RelationshipManagerCard = (
     <div className="flex gap-4 items-center bg-digitalent-blue text-white p-6">
       {relationshipManager?.photo ? (
-        <Image
+        <ImageAuthorized
           src={relationshipManager.photo}
           alt="avatar"
           className={`h-20 w-20 rounded-full object-cover`}
           width={80}
           height={80}
+          cookie={cookie}
         />
       ) : (
         <div className={`bg-digitalent-yellow h-20 w-20 rounded-full`} />
@@ -57,12 +62,13 @@ export default function ContactSection({
       >
         <span className="flex gap-4 w-full justify-center">
           {relationshipManager?.photo ? (
-            <Image
+            <ImageAuthorized
               src={relationshipManager.photo}
               alt="avatar"
               className={`h-6 w-6 rounded-full hidden sm:block object-cover`}
               width={24}
               height={24}
+              cookie={cookie}
             />
           ) : null}
 

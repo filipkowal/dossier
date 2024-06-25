@@ -5,17 +5,21 @@ import { Dictionary, RelationshipManager } from "@/utils";
 import Image from "next/image";
 import { useState } from "react";
 import ContactModal from "../../../[id]/ContactModal";
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import ImageAuthorized from "@/components/ImageAuthorized";
 
 export default function ContactSection({
   dict,
   relationshipManager,
   id,
+  cookie,
 }: {
   dict: Dictionary["mainButtons"] &
     Dictionary["contactModal"] &
     Dictionary["toastMessages"];
   relationshipManager: RelationshipManager;
   id: string;
+  cookie: string | RequestCookie | undefined;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false);
@@ -23,10 +27,11 @@ export default function ContactSection({
   const RelationshipManagerCard = (
     <div className="flex gap-4 items-center bg-digitalent-blue text-white p-6">
       {relationshipManager?.photo ? (
-        <Image
+        <ImageAuthorized
           src={relationshipManager.photo}
           alt="avatar"
           className={`h-20 w-20 rounded-full`}
+          cookie={cookie}
         />
       ) : (
         <div className={`bg-digitalent-yellow h-20 w-20 rounded-full`} />

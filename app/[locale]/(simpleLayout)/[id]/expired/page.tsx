@@ -38,7 +38,7 @@ export default async function Home({
             ...dictionary["contactModal"],
             ...dictionary["toastMessages"],
           }}
-          // @fixme: relationshipManager is not from API
+          cookie={cookie}
           relationshipManager={
             relationshipManager || {
               name: "",
