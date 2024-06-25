@@ -67,6 +67,8 @@ async function getData({
     },
   });
 
+  console.log(endpoint, res.status);
+
   if (!res.ok) {
     throw new HttpError(
       `HTTP ERROR! ${endpoint} status: ${res.status} cookie: ${cookie?.name} ${cookie?.value}`,
@@ -208,6 +210,8 @@ export async function isLoggedIn(
       endpoint: `auth/isLoggedIn/${id}`,
       cookie,
     });
+
+    console.log("isLoggedIn", response);
 
     return response.isLoggedIn;
   } catch {
