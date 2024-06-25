@@ -54,8 +54,9 @@ const CvAndCertificates = ({
           throw new Error(`Failed to fetch ${cvAndCertificates}, no body`);
         }
 
-        const arrayBuffer = await res.arrayBuffer();
-        console.log("Fetched ArrayBuffer:", arrayBuffer); // Debugging
+        const blob = await res.blob();
+        const arrayBuffer = await blob.arrayBuffer();
+        console.log("Fetched ArrayBuffer Length:", arrayBuffer.byteLength); // Debugging
         setCvContent(arrayBuffer);
       } catch (error) {
         console.error(error);
