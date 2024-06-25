@@ -51,7 +51,7 @@ export default function LoginForm({
     async function handleLogIn() {
       const code = smsCode.join("");
       try {
-        await logIn({ id, code, locale: params.locale });
+        await logIn({ id, code });
 
         console.log("LOGGED IN");
         // Wait for the cookie to be set
