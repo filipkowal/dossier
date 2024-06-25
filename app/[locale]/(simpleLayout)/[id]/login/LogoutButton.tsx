@@ -4,7 +4,7 @@ import { logout } from "@/utils";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import LogoutIcon from "@/public/logout.png";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 export default function LogoutButton({
   dict,
@@ -14,15 +14,14 @@ export default function LogoutButton({
   params: { locale: string; id: string };
 }) {
   const { locale, id } = params;
+  const router = useRouter();
 
   async function logUserOut() {
     try {
       await logout(params.id);
 
-      setTimeout(() => {
-        toast.success(dict.logoutSuccess);
-        redirect(`/${locale}/${id}/login`);
-      }, 300);
+      toast.success(dict.logoutSuccess);
+      router.push(`/${locale}/${id}/login`);
     } catch (error) {
       toast.error(dict.logoutError);
       console.error(error);
