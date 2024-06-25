@@ -109,13 +109,15 @@ export default function LoginForm({
                       focusPrevInput(Number(target.id));
                     }
                   }}
-                  className="w-8 sm:w-12 ring-2 bg-digitalent-gray-light ring-digitalent-blue border-none mt-4 block h-10 text-xl text-center"
+                  className="w-10 sm:w-12 ring-2 bg-digitalent-gray-light ring-digitalent-blue border-none mt-4 block h-10 text-xl text-center"
                   maxLength={1}
                   minLength={1}
                   ref={inputsRef[index]}
                 />
                 {index === 2 && (
-                  <span className="text-5xl ml-4 mr-[0.35rem] mt-2">-</span>
+                  <span className="hidden sm:inline text-5xl ml-4 mr-[0.35rem] mt-2">
+                    -
+                  </span>
                 )}
               </span>
             ))}
