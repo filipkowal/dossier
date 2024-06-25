@@ -18,10 +18,14 @@ export default function LogoutButton({
   async function logUserOut() {
     try {
       await logout(params.id);
-      toast.success(dict.logoutSuccess);
-      redirect(`/${locale}/${id}/login`);
+
+      setTimeout(() => {
+        toast.success(dict.logoutSuccess);
+        redirect(`/${locale}/${id}/login`);
+      }, 300);
     } catch (error) {
       toast.error(dict.logoutError);
+      console.error(error);
     }
   }
 
