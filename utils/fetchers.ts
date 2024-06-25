@@ -185,8 +185,16 @@ export async function sendCode(id: string) {
   return response;
 }
 
-export async function logIn({ id, code }: { id: string; code: string }) {
-  const response = await postData(`auth/login/${id}`, { code });
+export async function logIn({
+  id,
+  code,
+  locale,
+}: {
+  id: string;
+  code: string;
+  locale: Locale;
+}) {
+  const response = await postData(`${locale}/auth/login/${id}`, { code });
 
   return response;
 }

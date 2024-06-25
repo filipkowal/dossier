@@ -5,7 +5,7 @@ import { getDictionary } from "@/utils";
 export default async function LoginPage({
   params,
 }: {
-  params: { locale: Locale; id: string };
+  params: { locale: Locale; id: Locale };
 }) {
   const dict = await getDictionary(params.locale);
   return (

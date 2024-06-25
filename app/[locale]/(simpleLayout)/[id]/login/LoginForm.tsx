@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components";
-import { Dictionary, logIn, sendCode } from "@/utils";
+import { Dictionary, Locale, logIn, sendCode } from "@/utils";
 import { useRouter } from "next/navigation";
 import { createRef, useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -11,7 +11,7 @@ export default function LoginForm({
   params,
 }: {
   dict: Dictionary["loginForm"];
-  params: { id: string; locale: string };
+  params: { id: string; locale: Locale };
 }) {
   const { id, locale } = params;
   const router = useRouter();
@@ -51,7 +51,7 @@ export default function LoginForm({
     async function handleLogIn() {
       const code = smsCode.join("");
       try {
-        await logIn({ id, code });
+        await logIn({ id, code, locale: params.locale });
 
         console.log("LOGGED IN");
         // Wait for the cookie to be set
