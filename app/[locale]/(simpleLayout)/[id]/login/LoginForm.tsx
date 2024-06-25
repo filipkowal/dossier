@@ -58,7 +58,7 @@ export default function LoginForm({
         const checkCookieSet = () => {
           const cookie = document.cookie
             .split(";")
-            .find((c) => c.trim().startsWith("your_cookie_name="));
+            .find((c) => c.trim().startsWith("token="));
           if (cookie) {
             router.push(`/${locale}/${id}`);
             console.log("redirected to /" + locale + "/" + id);
