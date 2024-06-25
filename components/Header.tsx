@@ -8,22 +8,22 @@ import PdfButton from "@/app/[locale]/[id]/PdfButton";
 import { getPdfDossier, getUser } from "@/utils";
 import HeaderSimple from "./HeaderSimple";
 import LogoutButton from "@/app/[locale]/(simpleLayout)/[id]/login/LogoutButton";
-// import { cookies } from "next/headers";
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 export default async function Header({
   params,
+  cookie,
 }: {
   params: { locale: Locale; id: string };
+  cookie: undefined | RequestCookie;
 }) {
-  // const cookieStore = cookies();
-  // const cookie = cookieStore.get(`token-${params.id}`);
-  // const pdfDossierPromise = getPdfDossier(params.locale, params.id, cookie);
+  const pdfDossierPromise = getPdfDossier(params.locale, params.id, cookie);
 
   let dict, user;
   try {
-    [dict] = await Promise.all([
+    [dict, user] = await Promise.all([
       getDictionary(params.locale),
-      // getUser(params.locale, params.id, cookie),
+      getUser(params.locale, params.id, cookie),
     ]);
   } catch (error) {
     console.error(error);
@@ -40,13 +40,13 @@ export default async function Header({
         <div className="hidden sm:block">
           <NavLinks dict={dict.header} />
         </div>
-        {/* {user.canDownloadPdf ? (
+        {user.canDownloadPdf ? (
           <div>
             <PdfButton pdfDossierPromise={pdfDossierPromise} />
           </div>
         ) : (
           ""
-        )} */}
+        )}
         <div className="ml-8">
           <Suspense fallback={<Spinner />}>
             <LanguageSelector params={params} />

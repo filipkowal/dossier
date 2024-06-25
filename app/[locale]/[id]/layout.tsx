@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { CookiePopup, Header } from "@/components";
 import { getDictionary } from "@/utils";
 import TokenExpiryChecker from "@/components/TokenExpiryChecker";
+import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
   title: "Digitalent Dossier",
@@ -40,11 +41,13 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const dict = await getDictionary(params.locale);
+  const cookieStore = cookies();
+  const cookie = cookieStore.get(`token-${params.id}`);
 
   return (
     <>
       <main className="min-h-screen bg-digitalent-gray-light flex flex-col justify-between">
-        <Header params={params} />
+        <Header params={params} cookie={cookie} />
         {children}
 
         <footer className={`self-bottom w-full ${loew.variable}`}>
