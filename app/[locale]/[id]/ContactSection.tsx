@@ -22,20 +22,22 @@ export default function ContactSection({
   id: string;
   cookie: string | RequestCookie | undefined;
 }) {
+  console.log("contact section cookie for images: ", cookie);
   const [isOpen, setIsOpen] = useState(false);
   const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false);
 
   const RelationshipManagerCard = (
     <div className="flex gap-4 items-center bg-digitalent-blue text-white p-6">
       {relationshipManager?.photo ? (
-        <ImageAuthorized
-          src={relationshipManager.photo}
-          alt="avatar"
-          className={`h-20 w-20 rounded-full object-cover`}
-          width={80}
-          height={80}
-          cookie={cookie}
-        />
+        // <ImageAuthorized
+        //   src={relationshipManager.photo}
+        //   alt="avatar"
+        //   className={`h-20 w-20 rounded-full object-cover`}
+        //   width={80}
+        //   height={80}
+        //   cookie={cookie}
+        // />
+        <div />
       ) : (
         <div className={`bg-digitalent-yellow h-20 w-20 rounded-full`} />
       )}
@@ -62,14 +64,15 @@ export default function ContactSection({
       >
         <span className="flex gap-4 w-full justify-center">
           {relationshipManager?.photo ? (
-            <ImageAuthorized
-              src={relationshipManager.photo}
-              alt="avatar"
-              className={`h-6 w-6 rounded-full hidden sm:block object-cover`}
-              width={24}
-              height={24}
-              cookie={cookie}
-            />
+            // <ImageAuthorized
+            //   src={relationshipManager.photo}
+            //   alt="avatar"
+            //   className={`h-6 w-6 rounded-full hidden sm:block object-cover`}
+            //   width={24}
+            //   height={24}
+            //   cookie={cookie}
+            // />
+            <div />
           ) : null}
 
           <span className="hidden sm:inline"> {dict.contactDigitalent}</span>
