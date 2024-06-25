@@ -1,10 +1,7 @@
-import { NextRequest } from "next/server";
 import type { Locale } from "../i18n-config";
 import { i18n } from "../i18n-config";
-import { isLoggedIn } from "./fetchers";
 import Negotiator from "negotiator";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
-import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 // We enumerate all dictionaries here for better linting and typescript support
 // We also get the default import for cleaner types

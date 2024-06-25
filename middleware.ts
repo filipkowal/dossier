@@ -5,7 +5,6 @@ import {
   addTrailingSlash,
   getIdFromPathname,
   getLocale,
-  isReqAuthorized,
   isLoginPage,
   pathnameIsMissingLocale,
   isLoggedIn,
