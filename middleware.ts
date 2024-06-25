@@ -42,6 +42,7 @@ export async function middleware(request: NextRequest) {
 
   // Redirect to login if not authorized
   if (!isLoginPage(pathname) && !isAuthorized) {
+    console.log("redirecting back to LOGIN");
     const url = new URL(`login`, addTrailingSlash(request.url));
     return NextResponse.redirect(url);
   }
