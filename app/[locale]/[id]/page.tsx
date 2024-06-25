@@ -29,7 +29,7 @@ export default async function Home({
 }) {
   const { id, locale } = params;
   const cookieStore = cookies();
-  const cookie = cookieStore.get("token");
+  const cookie = cookieStore.get(`token-${params.id}`);
 
   let candidate, user, dict;
   try {

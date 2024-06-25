@@ -39,7 +39,7 @@ export async function middleware(request: NextRequest) {
   // Auth redirection
 
   const id = getIdFromPathname(pathname, locale) || "";
-  const isAuthorized = await isLoggedIn(id, request.cookies.get("token"));
+  const isAuthorized = await isLoggedIn(id, request.cookies.get(`token-${id}`));
 
   // Redirect to login if not authorized
   if (!isLoginPage(pathname) && !isAuthorized) {
@@ -49,7 +49,7 @@ export async function middleware(request: NextRequest) {
       ", isLoggedIn:",
       isAuthorized,
       ", token: ",
-      request.cookies.get("token")
+      request.cookies.get(`token-${id}`)
     );
 
     const url = new URL(`login`, addTrailingSlash(request.url));

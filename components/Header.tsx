@@ -16,7 +16,7 @@ export default async function Header({
   params: { locale: Locale; id: string };
 }) {
   // const cookieStore = cookies();
-  // const cookie = cookieStore.get("token");
+  // const cookie = cookieStore.get(`token-${params.id}`);
   // const pdfDossierPromise = getPdfDossier(params.locale, params.id, cookie);
 
   let dict, user;

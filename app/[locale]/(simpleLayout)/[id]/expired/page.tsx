@@ -11,7 +11,7 @@ export default async function Home({
   const dictionary = await getDictionary(params.locale);
   const dict = dictionary["dossierExpired"];
   const cookieStore = cookies();
-  const cookie = cookieStore.get("token");
+  const cookie = cookieStore.get(`token-${params.id}`);
 
   let relationshipManager;
   try {
