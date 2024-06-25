@@ -27,14 +27,19 @@ export function addTrailingSlash(url: string) {
   return url.endsWith("/") ? url : `${url}/`;
 }
 
-export async function isReqAuthorized(id?: string, cookie?: RequestCookie) {
-  return cookie && id && (await isLoggedIn(id, cookie)) === true;
-}
+export function getIdFromPathname(pathname: string) {
+  const localePattern = i18n.locales.map((locale) => `\/${locale}\/`).join("|");
+  const regex = new RegExp(`(${localePattern})[a-z0-9-]+`);
 
-export function getIdFromPathname(pathname: string, locale?: string) {
-  return pathname
-    .match(new RegExp(`\/${locale}\/[a-z0-9-]+`))?.[0]
-    .replace(`/${locale}/`, "");
+  const id = pathname
+    .match(regex)?.[0]
+    .replace(new RegExp(`\/(${i18n.locales.join("|")})\/`), "");
+
+  if (!id) {
+    throw new Error("No id found in pathname: " + pathname);
+  }
+
+  return id;
 }
 
 export function getLocale(headers: Headers): string | undefined {

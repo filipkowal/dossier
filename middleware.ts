@@ -38,7 +38,7 @@ export async function middleware(request: NextRequest) {
 
   // Auth redirection
 
-  const id = getIdFromPathname(pathname, locale) || "";
+  const id = getIdFromPathname(pathname);
   const isAuthorized = await isLoggedIn(id, request.cookies.get(`token-${id}`));
 
   // Redirect to login if not authorized
