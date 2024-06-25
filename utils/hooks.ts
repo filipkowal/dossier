@@ -5,14 +5,29 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { isLoggedIn } from "./fetchers";
 import { Locale } from "./types";
+import { Dictionary } from "./helpers";
 
-const useTokenCheck = (locale: Locale, id: string) => {
+const useTokenCheck = (
+  locale: Locale,
+  id: string,
+  dict: Dictionary["tokenExpiry"]
+) => {
   const router = useRouter();
 
   useEffect(() => {
     const checkToken = async () => {
-      if (!(await isLoggedIn(id))) {
-        toast("Your token has expired. Please log in again.", { icon: "ℹ️" });
+      let isAuthorized;
+
+      try {
+        isAuthorized = await isLoggedIn(id);
+
+        if (!isAuthorized) {
+          toast(dict.expiredMessage, { icon: "ℹ️" });
+          router.push(`/${locale}/${id}/login`);
+        }
+      } catch (e) {
+        console.log(e);
+        toast.error(dict.expiredError);
         router.push(`/${locale}/${id}/login`);
       }
     };

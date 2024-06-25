@@ -125,5 +125,9 @@
     "title": "Dossier abgelaufen",
     "heading": "Diese Seite ist nicht mehr verfügbar",
     "message": "Bitte kontaktieren Sie Digitalent für weitere Informationen."
+  },
+  "tokenExpiry": {
+    "expiredMessage": "Your token has expired. Please log in again.",
+    "expiredError": "There was an error when checking validity of your token. Please log in again."
   }
 }

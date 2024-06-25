@@ -62,7 +62,7 @@ export default async function RootLayout({
       </main>
 
       <CookiePopup dict={dict.cookiePopup} />
-      <TokenExpiryChecker params={params} />
+      <TokenExpiryChecker params={params} dict={dict.tokenExpiry} />
     </>
   );
 }
