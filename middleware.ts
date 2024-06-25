@@ -38,7 +38,7 @@ export async function middleware(request: NextRequest) {
   // Auth redirection
 
   const id = getIdFromPathname(pathname, locale);
-  const isAuthorized = await isReqAuthorized(request, id);
+  const isAuthorized = await isReqAuthorized(id, request.cookies.get("token"));
 
   // Redirect to login if not authorized
   if (!isLoginPage(pathname) && !isAuthorized) {

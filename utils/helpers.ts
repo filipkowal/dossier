@@ -4,6 +4,7 @@ import { i18n } from "../i18n-config";
 import { isLoggedIn } from "./fetchers";
 import Negotiator from "negotiator";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 // We enumerate all dictionaries here for better linting and typescript support
 // We also get the default import for cleaner types
@@ -26,8 +27,8 @@ export function addTrailingSlash(url: string) {
   return url.endsWith("/") ? url : `${url}/`;
 }
 
-export async function isReqAuthorized(request: NextRequest, id?: string) {
-  return request.cookies.has("token") && id && (await isLoggedIn(id)) === true;
+export async function isReqAuthorized(id?: string, cookie?: RequestCookie) {
+  return cookie && id && (await isLoggedIn(id, cookie)) === true;
 }
 
 export function getIdFromPathname(pathname: string, locale?: string) {
