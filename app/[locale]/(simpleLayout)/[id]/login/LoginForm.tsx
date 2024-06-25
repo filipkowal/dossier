@@ -54,8 +54,20 @@ export default function LoginForm({
         await logIn({ id, code });
 
         console.log("LOGGED IN");
-        router.push(`/${locale}/${id}`);
-        console.log("redirected to /" + locale + "/" + id);
+        // Check if the cookie is set before redirecting
+        const checkCookieSet = () => {
+          const cookie = document.cookie
+            .split(";")
+            .find((c) => c.trim().startsWith("your_cookie_name="));
+          if (cookie) {
+            router.push(`/${locale}/${id}`);
+            console.log("redirected to /" + locale + "/" + id);
+          } else {
+            setTimeout(checkCookieSet, 50); // Check every 50ms
+          }
+        };
+
+        checkCookieSet();
         // silently catch not to notify if the code is correct
       } catch (e) {
         console.log("ERROR: " + e);
