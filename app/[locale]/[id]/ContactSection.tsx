@@ -78,6 +78,8 @@ export default function ContactSection({
             alt="contact digitalent"
             className="sm:hidden"
             src={ChatIcon}
+            width={24}
+            height={24}
           />
         </span>
       </Button>
