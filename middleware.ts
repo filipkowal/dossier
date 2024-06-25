@@ -48,9 +48,10 @@ export async function middleware(request: NextRequest) {
   }
 
   // Redirect to home if authorized and on login page
-  if (isLoginPage(pathname) && isAuthorized)
+  if (isLoginPage(pathname) && isAuthorized) {
+    console.log('redirecting further to "/"');
     return NextResponse.redirect(request.url.replace("/login", ""));
-
+  }
   // Otherwise, continue
 
   return NextResponse.next();
