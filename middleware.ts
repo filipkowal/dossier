@@ -8,6 +8,7 @@ import {
   isReqAuthorized,
   isLoginPage,
   pathnameIsMissingLocale,
+  isLoggedIn,
 } from "./utils";
 
 const PUBLIC_FILE = /\.(.*)$/;
@@ -37,8 +38,8 @@ export async function middleware(request: NextRequest) {
 
   // Auth redirection
 
-  const id = getIdFromPathname(pathname, locale);
-  const isAuthorized = await isReqAuthorized(id, request.cookies.get("token"));
+  const id = getIdFromPathname(pathname, locale) || "";
+  const isAuthorized = await isLoggedIn(id, request.cookies.get("token"));
 
   // Redirect to login if not authorized
   if (!isLoginPage(pathname) && !isAuthorized) {
