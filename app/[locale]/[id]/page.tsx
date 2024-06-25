@@ -16,6 +16,7 @@ import ContactSection from "./ContactSection";
 import AvatarMale from "@/public/avatar-male.webp";
 import AvatarFemale from "@/public/avatar-female.png";
 import { cookies } from "next/headers";
+import ImageAuthorized from "@/components/ImageAuthorized";
 
 const LongCandidateInfo = dynamic(() => import("./LongCandidateInfo"), {
   ssr: false,
@@ -72,7 +73,8 @@ export default async function Home({
         <div className="flex flex-col justify-end items-center md:items-start xl:h-[34vh] 3xl:h-[30vh] pt-16 md:px-16 2xl:px-32 md:w-[27rem] 2xl:w-[35rem] w-full">
           {typeof candidate?.candidateImage === "string" &&
           candidate.candidateImage.length ? (
-            <Image
+            <ImageAuthorized
+              cookie={cookie}
               alt="Candidate image"
               src={candidate.candidateImage}
               className="rounded-full sm:w-52 sm:h-52 h-40 w-40"
