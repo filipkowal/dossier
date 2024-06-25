@@ -41,10 +41,10 @@ export async function middleware(request: NextRequest) {
   const isAuthorized = await isReqAuthorized(request, id);
 
   // Redirect to login if not authorized
-  // if (!isLoginPage(pathname) && !isAuthorized) {
-  //   const url = new URL(`login`, addTrailingSlash(request.url));
-  //   return NextResponse.redirect(url);
-  // }
+  if (!isLoginPage(pathname) && !isAuthorized) {
+    const url = new URL(`login`, addTrailingSlash(request.url));
+    return NextResponse.redirect(url);
+  }
 
   // Redirect to home if authorized and on login page
   if (isLoginPage(pathname) && isAuthorized)

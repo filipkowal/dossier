@@ -23,7 +23,6 @@ const PdfDocument: React.FC<PdfDocumentProps> = ({ fileUrl, parentWidth }) => {
         }
 
         const blob = await res.blob();
-        console.log("Fetched Blob:", blob); // Debugging
         setFileContent(blob);
       } catch (error) {
         console.error("Error fetching PDF:", error);
