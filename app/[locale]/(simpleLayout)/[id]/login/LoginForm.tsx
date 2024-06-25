@@ -58,6 +58,8 @@ export default function LoginForm({
         setTimeout(() => {
           router.push(`/${locale}/${id}`);
           console.log("redirected to /" + locale + "/" + id);
+          router.refresh();
+          console.log("refreshed");
         }, 300);
 
         // silently catch not to notify if the code is correct
