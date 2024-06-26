@@ -40,6 +40,10 @@ export async function middleware(request: NextRequest) {
   const id = getIdFromPathname(pathname);
   const isAuthorized = await isLoggedIn(id, request.cookies.get(`token-${id}`));
 
+  if (isAuthorized === 404) {
+    return NextResponse.rewrite(new URL(`/not-found`, request.url));
+  }
+
   // Redirect to login if not authorized
   if (!isLoginPage(pathname) && !isAuthorized) {
     console.log(

@@ -198,7 +198,7 @@ export async function logIn({ id, code }: { id: string; code: string }) {
 export async function isLoggedIn(
   id: string,
   cookie?: RequestCookie
-): Promise<boolean | undefined> {
+): Promise<boolean | number | undefined> {
   try {
     const response: GetIsLoggedInResponse = await getData({
       endpoint: `auth/isLoggedIn/${id}`,
@@ -208,7 +208,12 @@ export async function isLoggedIn(
     console.log("isLoggedIn", response);
 
     return response.isLoggedIn;
-  } catch {
+  } catch (e) {
+    console.log(e);
+    if (e instanceof HttpError && e.status === 404) {
+      return 404;
+    }
+
     return false;
   }
 }
