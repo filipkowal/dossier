@@ -21,37 +21,10 @@ export default function ContactSection({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false);
-  const [photo, setPhoto] = useState<string>();
-
-  useEffect(() => {
-    async function getImage() {
-      if (relationshipManager?.photo) {
-        const image = await fetchImage(relationshipManager?.photo);
-        setPhoto(image);
-      }
-    }
-    getImage();
-  }, [relationshipManager?.photo]);
 
   const RelationshipManagerCard = (
     <div className="flex gap-4 items-center bg-digitalent-blue text-white p-6">
-      {photo ? (
-        <Image
-          src={photo}
-          alt="avatar"
-          className={`h-20 w-20 rounded-full object-cover`}
-          width={80}
-          height={80}
-        />
-      ) : (
-        <Image
-          src={sampleAvatar}
-          alt="avatar"
-          className={`h-20 w-20 rounded-full object-cover blur-md`}
-          width={80}
-          height={80}
-        />
-      )}
+      <RelManagerImage relationshipManager={relationshipManager} />
 
       <div className="flex gap-2 flex-col md:flex-row">
         <div className="flex flex-col">
@@ -95,5 +68,45 @@ export default function ContactSection({
         setIsSuccessDialogOpen={setIsSuccessDialogOpen}
       />
     </>
+  );
+}
+
+function RelManagerImage({
+  relationshipManager,
+}: {
+  relationshipManager?: RelationshipManager;
+}) {
+  const [photo, setPhoto] = useState<string>();
+
+  useEffect(() => {
+    async function getImage() {
+      if (relationshipManager?.photo) {
+        const image = await fetchImage(relationshipManager?.photo);
+        setPhoto(image);
+      }
+    }
+    getImage();
+  }, [relationshipManager?.photo]);
+
+  if (!relationshipManager?.photo) {
+    return null;
+  }
+
+  return photo ? (
+    <Image
+      src={photo}
+      alt="avatar"
+      className={`h-20 w-20 rounded-full object-cover`}
+      width={80}
+      height={80}
+    />
+  ) : (
+    <Image
+      src={sampleAvatar}
+      alt="avatar"
+      className={`h-20 w-20 rounded-full object-cover blur-md`}
+      width={80}
+      height={80}
+    />
   );
 }
