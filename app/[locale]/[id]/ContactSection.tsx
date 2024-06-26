@@ -3,10 +3,11 @@
 import { Button } from "@/components";
 import { Dictionary, RelationshipManager, fetchImage } from "@/utils";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ChatIcon from "@/public/chat.png";
 import ContactModal from "./ContactModal";
 import sampleAvatar from "@/public/sampleAvatar.webp";
+import ImageWithPlaceholder from "@/components/ImageWithPlaceholder";
 
 export default function ContactSection({
   dict,
@@ -24,7 +25,10 @@ export default function ContactSection({
 
   const RelationshipManagerCard = (
     <div className="flex gap-4 items-center bg-digitalent-blue text-white p-6">
-      <RelManagerImage relationshipManager={relationshipManager} />
+      <ImageWithPlaceholder
+        src={relationshipManager?.photo}
+        loadingPlaceholder={sampleAvatar}
+      />
 
       <div className="flex gap-2 flex-col md:flex-row">
         <div className="flex flex-col">
@@ -68,45 +72,5 @@ export default function ContactSection({
         setIsSuccessDialogOpen={setIsSuccessDialogOpen}
       />
     </>
-  );
-}
-
-function RelManagerImage({
-  relationshipManager,
-}: {
-  relationshipManager?: RelationshipManager;
-}) {
-  const [photo, setPhoto] = useState<string>();
-
-  useEffect(() => {
-    async function getImage() {
-      if (relationshipManager?.photo) {
-        const image = await fetchImage(relationshipManager?.photo);
-        setPhoto(image);
-      }
-    }
-    getImage();
-  }, [relationshipManager?.photo]);
-
-  if (!relationshipManager?.photo) {
-    return null;
-  }
-
-  return photo ? (
-    <Image
-      src={photo}
-      alt="avatar"
-      className={`h-20 w-20 rounded-full object-cover`}
-      width={80}
-      height={80}
-    />
-  ) : (
-    <Image
-      src={sampleAvatar}
-      alt="avatar"
-      className={`h-20 w-20 rounded-full object-cover blur-md`}
-      width={80}
-      height={80}
-    />
   );
 }

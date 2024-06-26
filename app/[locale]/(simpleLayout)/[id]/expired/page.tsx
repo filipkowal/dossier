@@ -38,13 +38,7 @@ export default async function Home({
             ...dictionary["contactModal"],
             ...dictionary["toastMessages"],
           }}
-          cookie={cookie}
-          relationshipManager={
-            relationshipManager || {
-              name: "",
-              phoneNumber: "+41 56 511 03 03",
-            }
-          }
+          relationshipManager={relationshipManager}
           id={params.id}
         />
       </div>

@@ -16,7 +16,8 @@ import ContactSection from "./ContactSection";
 import AvatarMale from "@/public/avatar-male.webp";
 import AvatarFemale from "@/public/avatar-female.png";
 import { cookies } from "next/headers";
-import ImageAuthorized from "@/components/ImageAuthorized";
+import ImageWithPlaceholder from "@/components/ImageWithPlaceholder";
+import sampleAvatar from "@/public/sampleAvatar.webp";
 
 const LongCandidateInfo = dynamic(() => import("./LongCandidateInfo"), {
   ssr: false,
@@ -71,36 +72,15 @@ export default async function Home({
     <div className="w-full sm:pt-16 xl:grid xl:grid-cols-[minmax(450px,1fr),2fr] 2xl:grid-cols-[minmax(250px,1fr),2fr]">
       <div className="flex flex-col bg-digitalent-blue text-white sm:items-start xl:items-end md:px-8 lg:px-16 xl:px-0">
         <div className="flex flex-col justify-end items-center md:items-start xl:h-[34vh] 3xl:h-[30vh] pt-16 md:px-16 2xl:px-32 md:w-[27rem] 2xl:w-[35rem] w-full">
-          {typeof candidate?.candidateImage === "string" &&
-          candidate.candidateImage.length ? (
-            <ImageAuthorized
-              cookie={cookie}
-              alt="Candidate image"
-              src={candidate.candidateImage}
-              className="rounded-full sm:w-52 sm:h-52 h-40 w-40"
-              width={160}
-              height={160}
-              loading="eager"
-            />
-          ) : candidate?.gender === "f" ? (
-            <Image
-              alt="Candidate image"
-              src={AvatarFemale}
-              className="rounded-full sm:w-52 sm:h-52 h-40 w-40"
-              width={160}
-              height={160}
-              loading="eager"
-            />
-          ) : (
-            <Image
-              alt="Candidate image"
-              src={AvatarMale}
-              className="rounded-full sm:w-52 sm:h-52 h-40 w-40"
-              width={160}
-              height={160}
-              loading="eager"
-            />
-          )}
+          <ImageWithPlaceholder
+            alt="Candidate image"
+            src={candidate.candidateImage}
+            className="rounded-full sm:w-52 sm:h-52 h-40 w-40"
+            width={160}
+            height={160}
+            loadingPlaceholder={sampleAvatar}
+            placeholder={candidate?.gender === "f" ? AvatarFemale : AvatarMale}
+          />
         </div>
         <div className="block xl:hidden mt-16 -mb-16 px-8 sm:px-16 w-full">
           <DossierStatus candidate={candidate} />
