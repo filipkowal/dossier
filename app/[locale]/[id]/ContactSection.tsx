@@ -1,44 +1,56 @@
 "use client";
 
 import { Button } from "@/components";
-import { Dictionary, RelationshipManager } from "@/utils";
+import { Dictionary, RelationshipManager, fetchImage } from "@/utils";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ChatIcon from "@/public/chat.png";
 import ContactModal from "./ContactModal";
-import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
-import ImageAuthorized from "@/components/ImageAuthorized";
+import sampleAvatar from "@/public/sampleAvatar.webp";
 
 export default function ContactSection({
   dict,
   relationshipManager,
   id,
-  cookie,
 }: {
   dict: Dictionary["mainButtons"] &
     Dictionary["contactModal"] &
     Dictionary["toastMessages"];
   relationshipManager?: RelationshipManager;
   id: string;
-  cookie: string | RequestCookie | undefined;
 }) {
-  console.log("contact section cookie for images: ", cookie);
   const [isOpen, setIsOpen] = useState(false);
   const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false);
+  const [photo, setPhoto] = useState<string>();
+
+  useEffect(() => {
+    async function getImage() {
+      if (relationshipManager?.photo) {
+        const image = await fetchImage(relationshipManager?.photo);
+        setPhoto(image);
+      }
+    }
+    getImage();
+  }, [relationshipManager?.photo]);
 
   const RelationshipManagerCard = (
     <div className="flex gap-4 items-center bg-digitalent-blue text-white p-6">
-      {relationshipManager?.photo ? (
-        <ImageAuthorized
-          src={relationshipManager.photo}
+      {photo ? (
+        <Image
+          src={photo}
           alt="avatar"
           className={`h-20 w-20 rounded-full object-cover`}
           width={80}
           height={80}
-          cookie={cookie}
         />
       ) : (
-        <div className={`bg-digitalent-yellow h-20 w-20 rounded-full`} />
+        <Image
+          src={sampleAvatar}
+          alt="avatar"
+          className={`h-20 w-20 rounded-full object-cover blur-md`}
+          width={80}
+          height={80}
+        />
       )}
 
       <div className="flex gap-2 flex-col md:flex-row">
@@ -62,17 +74,6 @@ export default function ContactSection({
         onClick={() => setIsOpen(true)}
       >
         <span className="flex gap-4 w-full justify-center">
-          {relationshipManager?.photo ? (
-            <ImageAuthorized
-              src={relationshipManager.photo}
-              alt="avatar"
-              className={`h-6 w-6 rounded-full hidden sm:block object-cover`}
-              width={24}
-              height={24}
-              cookie={cookie}
-            />
-          ) : null}
-
           <span className="hidden sm:inline"> {dict.contactDigitalent}</span>
           <Image
             alt="contact digitalent"

@@ -218,3 +218,39 @@ export async function logout(id: string) {
 
   return response;
 }
+
+export async function fetchImage(
+  imageUrl: string,
+  cookie?: string | RequestCookie
+) {
+  let headers;
+
+  if (!cookie) {
+    headers = {};
+  } else {
+    headers = {
+      headers: {
+        Cookie:
+          typeof cookie === "string"
+            ? cookie
+            : `${cookie.name}=${cookie.value}`,
+      },
+    };
+  }
+
+  const response = await fetch(imageUrl, {
+    credentials: "include",
+    ...headers,
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch image", { cause: response });
+  }
+
+  const blob = await response.blob();
+  const arrayBuffer = await blob.arrayBuffer();
+  const base64String = Buffer.from(arrayBuffer).toString("base64");
+  const mimeType = blob.type; // Get the MIME type of the image
+
+  return `data:${mimeType};base64,${base64String}`;
+}

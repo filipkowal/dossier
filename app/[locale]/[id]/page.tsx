@@ -305,7 +305,6 @@ export default async function Home({
           }}
           relationshipManager={relationshipManager}
           id={id}
-          cookie={cookie}
         />
       </div>
     </div>
