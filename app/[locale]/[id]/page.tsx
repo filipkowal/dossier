@@ -263,7 +263,7 @@ export default async function Home({
             ...dict.toastMessages,
           }}
           user={user}
-          id={id}
+          params={params}
           candidateGender={candidate?.gender}
         />
         <RejectSection

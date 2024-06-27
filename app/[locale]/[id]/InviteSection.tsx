@@ -1,6 +1,6 @@
 "use client";
 import { ReactNode, useState } from "react";
-import { type Dictionary, User, inviteCandidate } from "@/utils";
+import { type Dictionary, User, inviteCandidate, Locale } from "@/utils";
 import { FormFooterButtons, Dialog, Button } from "@/components";
 import toast from "react-hot-toast";
 import AvailibilityStep from "./InviteSectionAvailibility";
@@ -18,16 +18,17 @@ export type TimeSlots = {
 export default function InviteSection({
   dict,
   user,
-  id,
+  params,
   candidateGender = "m",
 }: {
   dict: Dictionary["inviteModal"] &
     Dictionary["mainButtons"] &
     Dictionary["toastMessages"];
   user: User;
-  id: string;
+  params: { locale: Locale; id: string };
   candidateGender?: "m" | "f";
 }) {
+  const { locale, id } = params;
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState<number>(0);
@@ -157,7 +158,7 @@ export default function InviteSection({
                   availibilitySlots: slots,
                 };
 
-                const response = await inviteCandidate(id, formValues);
+                const response = await inviteCandidate(locale, id, formValues);
                 setSuccessMessage(response);
 
                 router.refresh();

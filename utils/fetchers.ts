@@ -145,6 +145,7 @@ export async function getRelationshipManager(
 }
 
 export async function inviteCandidate(
+  locale: Locale,
   id: string,
   data: {
     interviewDuration?: number;
@@ -157,7 +158,7 @@ export async function inviteCandidate(
     }[];
   }
 ) {
-  const response = await postData(`candidate/${id}/invite`, data);
+  const response = await postData(`${locale}/candidate/${id}/invite`, data);
 
   return response;
 }
