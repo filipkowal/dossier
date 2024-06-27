@@ -16,7 +16,7 @@ import ShareIcon from "@/public/share.png";
 import Image from "next/image";
 import { CopyButton } from "@/components";
 import { notFound, redirect } from "next/navigation";
-import dynamic from "next/dynamic";
+import dynamicImport from "next/dynamic";
 import ContactSection from "./ContactSection";
 import AvatarMale from "@/public/avatar-male.webp";
 import AvatarFemale from "@/public/avatar-female.png";
@@ -24,7 +24,9 @@ import { cookies } from "next/headers";
 import ImageWithPlaceholder from "@/components/ImageWithPlaceholder";
 import sampleAvatar from "@/public/sampleAvatar.webp";
 
-const LongCandidateInfo = dynamic(() => import("./LongCandidateInfo"), {
+export const dynamic = "force-dynamic";
+
+const LongCandidateInfo = dynamicImport(() => import("./LongCandidateInfo"), {
   ssr: false,
 });
 
