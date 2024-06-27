@@ -119,7 +119,8 @@
     "resendButton": "SMS mit Code senden",
     "enterCodeInstruction": "Geben Sie den Code aus der SMS ein",
     "toastError": "Fehler beim Senden des SMS-Codes",
-    "toastSuccess": "SMS mit Code gesendet"
+    "toastSuccess": "SMS mit Code gesendet",
+    "authError": "Die Authentifizierung ist fehlgeschlagen. Bitte melden Sie sich erneut an."
   },
   "dossierExpired": {
     "title": "Dossier abgelaufen",

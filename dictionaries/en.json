@@ -119,7 +119,8 @@
     "resendButton": "Send an SMS With a Code",
     "enterCodeInstruction": "Enter the code from SMS",
     "toastError": "Failed to send SMS code",
-    "toastSuccess": "SMS code has been sent to your phone"
+    "toastSuccess": "SMS code has been sent to your phone",
+    "authError": "Authentication error. Please try again later."
   },
   "dossierExpired": {
     "title": "Dossier expired",
