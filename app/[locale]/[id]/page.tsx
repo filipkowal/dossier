@@ -23,7 +23,6 @@ import AvatarFemale from "@/public/avatar-female.png";
 import { cookies } from "next/headers";
 import ImageWithPlaceholder from "@/components/ImageWithPlaceholder";
 import sampleAvatar from "@/public/sampleAvatar.webp";
-import { revalidatePath } from "next/cache";
 
 const LongCandidateInfo = dynamic(() => import("./LongCandidateInfo"), {
   ssr: false,
@@ -48,7 +47,6 @@ export default async function Home({
     ]);
   } catch (error) {
     if (error instanceof HttpError && error.status === 410) {
-      revalidatePath(`/${locale}/${id}`);
       redirect(`/${locale}/${id}/expired`);
     }
     if (error instanceof HttpError && error.status === 404) {

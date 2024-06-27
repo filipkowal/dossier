@@ -61,6 +61,7 @@ async function getData({
 
   const res = await fetch(url, {
     credentials: "include",
+    cache: "no-store",
     ...init,
     headers: {
       Cookie: cookie ? `${cookie.name}=${cookie.value}` : "", // Forward the token cookie
@@ -94,8 +95,6 @@ export async function getCandidate(
   const response = await getData({
     endpoint: `candidate/${id}`,
     locale,
-    // @fixme: add real cache policies to the fetchers
-    init: { cache: "no-cache" },
     cookie,
   });
 
