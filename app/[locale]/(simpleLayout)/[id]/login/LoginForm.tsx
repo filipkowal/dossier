@@ -17,6 +17,8 @@ export default function LoginForm({
   const router = useRouter();
 
   const [smsCode, setSmsCode] = useState<string>("");
+  const [isLoadingCode, setIsLoadingCode] = useState<boolean>(false);
+  const [isLoadingLogin, setIsLoadingLogin] = useState<boolean>(false);
 
   const handleSmsCodeChange = (value: string) => {
     const updatedSmsCode = value.slice(0, 6); // Ensure max length of 6
@@ -29,21 +31,27 @@ export default function LoginForm({
 
   const handleLogIn = async (code: string) => {
     try {
+      setIsLoadingLogin(true);
       await logIn({ id, code });
       router.push(`/${locale}/${id}`);
       router.refresh();
     } catch (e) {
       console.log(e);
       toast.error(dict["authError"]);
+    } finally {
+      setIsLoadingLogin(false);
     }
   };
 
   const sendSMSCode = async () => {
     try {
+      setIsLoadingCode(true);
       await sendCode(id);
       toast.success(dict.toastSuccess);
     } catch {
       toast.error(dict.toastError);
+    } finally {
+      setIsLoadingCode(false);
     }
   };
 
@@ -55,13 +63,20 @@ export default function LoginForm({
       <form className="flex flex-col gap-8">
         <div className="flex flex-col gap-4">
           <p>{dict.sendCodeInstruction}</p>
-          <Button name="resend" onClick={() => sendSMSCode()}>
-            {dict.resendButton}
+          <Button
+            name="resend"
+            onClick={() => sendSMSCode()}
+            className="flex justify-center"
+          >
+            {isLoadingCode ? <div className="loader" /> : dict.resendButton}
           </Button>
         </div>
 
         <div className="flex flex-col ">
-          <p>{dict.enterCodeInstruction}</p>
+          <div className="flex">
+            <p>{dict.enterCodeInstruction}</p>
+            {isLoadingLogin && <span className="loader ml-2" />}
+          </div>
 
           <div className="flex gap-2 w-full">
             <input
