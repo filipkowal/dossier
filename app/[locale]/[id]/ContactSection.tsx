@@ -54,7 +54,7 @@ export default function ContactSection({
           <span className="hidden sm:inline"> {dict.contactDigitalent}</span>
           <Image
             alt="contact digitalent"
-            className="sm:hidden"
+            className="sm:hidden max-w-24"
             src={ChatIcon}
             width={24}
             height={24}
