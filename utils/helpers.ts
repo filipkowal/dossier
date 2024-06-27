@@ -24,6 +24,13 @@ export function addTrailingSlash(url: string) {
   return url.endsWith("/") ? url : `${url}/`;
 }
 
+export function addHighComma(value?: string) {
+  if (!value) return "";
+
+  let commaSeparated = value.replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+  return commaSeparated;
+}
+
 export function getIdFromPathname(pathname: string) {
   const localePattern = i18n.locales.map((locale) => `\/${locale}\/`).join("|");
   const regex = new RegExp(`(${localePattern})[a-z0-9-]+`);

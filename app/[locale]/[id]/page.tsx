@@ -1,6 +1,11 @@
 import { Locale } from "@/i18n-config";
 import InviteSection from "./InviteSection";
-import { HttpError, getDictionary, getRelationshipManager } from "@/utils";
+import {
+  HttpError,
+  addHighComma,
+  getDictionary,
+  getRelationshipManager,
+} from "@/utils";
 import { getCandidate, getUser } from "@/utils";
 import CvAndCertificates from "./CvAndCertificates";
 import RejectSection from "./RejectSection";
@@ -32,12 +37,13 @@ export default async function Home({
   const cookieStore = cookies();
   const cookie = cookieStore.get(`token-${params.id}`);
 
-  let candidate, user, dict;
+  let candidate, user, dict, relationshipManager;
   try {
-    [candidate, user, dict] = await Promise.all([
+    [candidate, user, dict, relationshipManager] = await Promise.all([
       getCandidate(locale, id, cookie),
       getUser(locale, id, cookie),
       getDictionary(params.locale),
+      getRelationshipManager(params.locale, params.id, cookie),
     ]);
   } catch (error) {
     if (error instanceof HttpError && error.status === 410) {
@@ -48,24 +54,6 @@ export default async function Home({
     } else {
       throw error;
     }
-  }
-
-  let relationshipManager;
-  try {
-    relationshipManager = await getRelationshipManager(
-      params.locale,
-      params.id,
-      cookie
-    );
-  } catch (error) {
-    console.error(error);
-  }
-
-  function addHighComma(value?: string) {
-    if (!value) return "";
-
-    let commaSeparated = value.replace(/\B(?=(\d{3})+(?!\d))/g, "'");
-    return commaSeparated;
   }
 
   return (
