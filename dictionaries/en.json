@@ -73,16 +73,16 @@
     "message": "Comments (optional)",
     "send": "Send",
     "reasons": {
-      "wrongGeographicalArea": "Wrong geographical area",
-      "wrongJobFocus": "Wrong job focus",
-      "salaryExpectations": "Salary expectations",
-      "qualifiedOtherCandidatesBetter": "Qualified - other candidates are better",
-      "notBestQualifiedEducation": "Not Best Qualified - Education",
-      "notBestQualifiedExperience": "Not Best Qualified - Experience",
-      "notBestQualifiedOverqualified": "Overqualified",
-      "notBestQualifiedTooOld": "Not Best Qualified - Too old",
-      "notBestQualifiedCulturalFit": "Not Best Qualified - Cultural fit",
-      "other": "Other"
+      "Wrong geographical area": "Wrong geographical area",
+      "Wrong job focus": "Wrong job focus",
+      "Salary expectations": "Salary expectations",
+      "Qualified - other CANDs are better": "Qualified - other candidates are better",
+      "Not Best Qualified - Education": "Not Best Qualified - Education",
+      "Not Best Qualified - Experience": "Not Best Qualified - Experience",
+      "Not best qualified - Overqualified": "Overqualified",
+      "Not Best Qualified - Too old": "Not Best Qualified - Too old",
+      "Not Best Qualified - Cultural fit": "Not Best Qualified - Cultural fit",
+      "Other": "Other"
     },
     "success": {
       "male": "It's a pity that you don't want to invite the candidate. We will inform them accordingly.",

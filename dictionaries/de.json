@@ -73,16 +73,16 @@
     "message": "Kommentare (optional)",
     "send": "Senden",
     "reasons": {
-      "wrongGeographicalArea": "Wohnort ist zu weit weg",
-      "wrongJobFocus": "Falscher Jobfokus",
-      "salaryExpectations": "Gehaltserwartungen",
-      "qualifiedOtherCandidatesBetter": "Qualifiziert - andere Kandidaten sind besser",
-      "notBestQualifiedEducation": "Fehlende Qualifikation - Bildungsniveau",
-      "notBestQualifiedExperience": "Fehlende Qualifikation -  Erfahrung",
-      "notBestQualifiedOverqualified": "Überqualifiziert",
-      "notBestQualifiedTooOld": "Fehlende Qualifikation - zu alt",
-      "notBestQualifiedCulturalFit": "Fehlende Qualifikation - Kulturelle Passung",
-      "other": "Andere"
+      "Wrong geographical area": "Wohnort ist zu weit weg",
+      "Wrong job focus": "Falscher Jobfokus",
+      "Salary expectations": "Gehaltserwartungen",
+      "Qualified - other CANDs are better": "Qualifiziert - andere Kandidaten sind besser",
+      "Not Best Qualified - Education": "Fehlende Qualifikation - Bildungsniveau",
+      "Not Best Qualified - Experience": "Fehlende Qualifikation -  Erfahrung",
+      "Not best qualified - Overqualified": "Überqualifiziert",
+      "Not Best Qualified - Too old": "Fehlende Qualifikation - zu alt",
+      "Not Best Qualified - Cultural fit": "Fehlende Qualifikation - Kulturelle Passung",
+      "Other": "Andere"
     },
     "success": {
       "male": "Schade, dass du den Kandidaten nicht einladen möchtest. Wir werden ihn entsprechend informieren.",

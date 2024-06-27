@@ -73,16 +73,16 @@
     "message": "Commentaires (facultatif)",
     "send": "Envoyer",
     "reasons": {
-      "wrongGeographicalArea": "Zone géographique incorrecte",
-      "wrongJobFocus": "Mauvais focus de travail",
-      "salaryExpectations": "Attentes salariales",
-      "qualifiedOtherCandidatesBetter": "Qualifié - d'autres candidats sont meilleurs",
-      "notBestQualifiedEducation": "Pas le mieux qualifié - Éducation",
-      "notBestQualifiedExperience": "Pas le mieux qualifié - Expérience",
-      "notBestQualifiedOverqualified": "Trop qualifié",
-      "notBestQualifiedTooOld": "Pas le mieux qualifié - Trop vieux",
-      "notBestQualifiedCulturalFit": "Pas le mieux qualifié - Adaptation culturelle",
-      "other": "Autre"
+      "Wrong geographical area": "Zone géographique incorrecte",
+      "Wrong job focus": "Mauvais focus de travail",
+      "Salary expectations": "Attentes salariales",
+      "Qualified - other CANDs are better": "Qualifié - d'autres candidats sont meilleurs",
+      "Not Best Qualified - Education": "Pas le mieux qualifié - Éducation",
+      "Not Best Qualified - Experience": "Pas le mieux qualifié - Expérience",
+      "Not best qualified - Overqualified": "Trop qualifié",
+      "Not Best Qualified - Too old": "Pas le mieux qualifié - Trop vieux",
+      "Not Best Qualified - Cultural fit": "Pas le mieux qualifié - Adaptation culturelle",
+      "Other": "Autre"
     },
     "success": {
       "male": "C'est dommage que vous ne vouliez pas inviter le candidat. Nous les informerons en conséquence.",
