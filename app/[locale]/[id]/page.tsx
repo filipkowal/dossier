@@ -23,6 +23,7 @@ import AvatarFemale from "@/public/avatar-female.png";
 import { cookies } from "next/headers";
 import ImageWithPlaceholder from "@/components/ImageWithPlaceholder";
 import sampleAvatar from "@/public/sampleAvatar.webp";
+import { revalidatePath } from "next/cache";
 
 export const dynamic = "force-dynamic";
 
@@ -38,6 +39,12 @@ export default async function Home({
   const { id, locale } = params;
   const cookieStore = cookies();
   const cookie = cookieStore.get(`token-${params.id}`);
+  async function revalidateCache() {
+    "use server";
+
+    console.log("revalidating: ", `/${locale}/${id}`);
+    revalidatePath(`/${locale}/${id}`);
+  }
 
   let candidate, user, dict, relationshipManager;
   try {
@@ -49,6 +56,7 @@ export default async function Home({
     ]);
   } catch (error) {
     if (error instanceof HttpError && error.status === 410) {
+      revalidateCache();
       redirect(`/${locale}/${id}/expired`);
     }
     if (error instanceof HttpError && error.status === 404) {
