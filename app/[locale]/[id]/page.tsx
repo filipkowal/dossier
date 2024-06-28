@@ -43,7 +43,7 @@ export default async function Home({
     "use server";
 
     console.log("revalidating: ", `/${locale}/${id}`);
-    revalidatePath(`/${locale}/${id}`);
+    revalidatePath(`/${locale}/${id}`, "layout");
   }
 
   let candidate, user, dict, relationshipManager;
