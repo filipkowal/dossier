@@ -17,10 +17,9 @@ export default async function Header({
   params: { locale: Locale; id: string };
   cookie: undefined | RequestCookie;
 }) {
-  const pdfDossierPromise = getPdfDossier(params.locale, params.id, cookie);
-
-  let dict, user;
+  let dict, user, pdfDossierPromise;
   try {
+    pdfDossierPromise = getPdfDossier(params.locale, params.id, cookie);
     [dict, user] = await Promise.all([
       getDictionary(params.locale),
       getUser(params.locale, params.id, cookie),
