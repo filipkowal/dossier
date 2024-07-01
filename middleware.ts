@@ -37,7 +37,13 @@ export async function middleware(request: NextRequest) {
 
   // Auth redirection
 
-  const id = getIdFromPathname(pathname);
+  let id;
+  try {
+    id = getIdFromPathname(pathname);
+  } catch (error) {
+    return NextResponse.rewrite(new URL(`/not-found`, request.url));
+  }
+
   const isAuthorized = await isLoggedIn(id, request.cookies.get(`token-${id}`));
 
   if (isAuthorized === 404) {
