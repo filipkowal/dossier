@@ -55,13 +55,9 @@ export async function middleware(request: NextRequest) {
     const pathSegments = pathname.split("/");
 
     console.log("pathSegments: ", pathSegments);
-    // Redirect to /login if not on login or expired page
-    if (pathSegments.length < 4) {
-      return NextResponse.redirect(new URL("/login", request.url));
-    }
 
     const newPath = `/${pathSegments[1]}/${pathSegments[2]}/login/`;
-    const url = new URL(newPath, request.nextUrl.origin);
+    const url = new URL(newPath, request.url);
 
     console.log(
       `redirecting back to ${url}, isLoginPage:`,
