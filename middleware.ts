@@ -48,9 +48,13 @@ export async function middleware(request: NextRequest) {
   if (!isLoginPage(pathname) && !isAuthorized) {
     const pathSegments = pathname.split("/");
 
-    // Construct the new URL with only /locale/id
-    const newPath = `/${pathSegments[1]}/${pathSegments[2]}/login/`;
+    console.log("pathSegments: ", pathSegments);
+    // Redirect to /login if not on login or expired page
+    if (pathSegments.length < 4) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
 
+    const newPath = `/${pathSegments[1]}/${pathSegments[2]}/login/`;
     const url = new URL(newPath, request.nextUrl.origin);
 
     console.log(
