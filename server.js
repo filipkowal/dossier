@@ -1,4 +1,3 @@
-// server.js
 const { createServer } = require("https");
 const { parse } = require("url");
 const next = require("next");
@@ -18,8 +17,8 @@ app.prepare().then(() => {
   createServer(httpsOptions, (req, res) => {
     const parsedUrl = parse(req.url, true);
     handle(req, res, parsedUrl);
-  }).listen(3000, (err) => {
+  }).listen(3000, "digitalent.cloud", (err) => {
     if (err) throw err;
-    console.log("> Server listening on https://localhost:3000");
+    console.log("> Server listening on https://digitalent.cloud:3000");
   });
 });
