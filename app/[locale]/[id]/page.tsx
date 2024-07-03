@@ -252,7 +252,7 @@ export default async function Home({
         </div>
         <CvAndCertificates cvAndCertificates={candidate.file} />
       </div>
-      <div className="flex fixed md:bottom-6 bottom-0 justify-center sm:gap-3 md:gap-6 w-full">
+      <div className="z-10 flex fixed md:bottom-6 bottom-0 justify-center sm:gap-3 md:gap-6 w-full">
         <InviteSection
           dict={{
             ...dict.inviteModal,
