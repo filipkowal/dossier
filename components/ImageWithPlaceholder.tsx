@@ -14,7 +14,7 @@ export default function ImageWithPlaceholder({
   alt = "avatar",
 }: {
   src?: string;
-  loadingPlaceholder: StaticImageData;
+  loadingPlaceholder?: StaticImageData;
   placeholder?: StaticImageData;
   width?: number;
   height?: number;
@@ -56,13 +56,18 @@ export default function ImageWithPlaceholder({
       width={width}
       height={height}
     />
-  ) : (
+  ) : loadingPlaceholder ? (
     <Image
       src={loadingPlaceholder}
       alt={alt}
       className={`${className} blur-md`}
       width={width}
       height={height}
+    />
+  ) : (
+    <div
+      className={`${className} w-${width}px h-${height}px bg-digitalent-blue`}
+      style={{ filter: "brightness(1.25)" }}
     />
   );
 }

@@ -76,7 +76,6 @@ export default async function Home({
             className="rounded-full sm:w-52 sm:h-52 h-40 w-40"
             width={160}
             height={160}
-            loadingPlaceholder={sampleAvatar}
             placeholder={candidate?.gender === "f" ? AvatarFemale : AvatarMale}
           />
         </div>

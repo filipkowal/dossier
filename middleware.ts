@@ -54,19 +54,8 @@ export async function middleware(request: NextRequest) {
   if (!isLoginPage(pathname) && !isAuthorized) {
     const pathSegments = pathname.split("/");
 
-    console.log("pathSegments: ", pathSegments);
-
     const newPath = `/${pathSegments[1]}/${pathSegments[2]}/login/`;
     const url = new URL(newPath, request.url);
-
-    console.log(
-      `redirecting back to ${url}, isLoginPage:`,
-      isLoginPage(pathname),
-      ", isLoggedIn:",
-      isAuthorized,
-      ", token: ",
-      request.cookies.get(`token-${id}`)
-    );
 
     return NextResponse.redirect(url);
   }
