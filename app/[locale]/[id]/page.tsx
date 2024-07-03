@@ -166,9 +166,9 @@ export default async function Home({
                 {candidate.address?.street || ""}
               </p>
               <p className="overflow-hidden text-ellipsis">
-                {(candidate.address?.city || "") +
+                {(candidate.address?.zip || "") +
                   " " +
-                  (candidate.address?.zip || "")}
+                  (candidate.address?.city || "")}
               </p>
               <p>{candidate.address?.country || ""}</p>
             </div>
