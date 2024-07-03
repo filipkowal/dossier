@@ -38,8 +38,6 @@ export default function LoginForm({
     } catch (e) {
       console.log(e);
       toast.error(dict["authError"]);
-    } finally {
-      setIsLoadingLogin(false);
     }
   };
 
