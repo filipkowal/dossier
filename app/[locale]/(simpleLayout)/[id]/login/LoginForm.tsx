@@ -3,7 +3,7 @@
 import { Button } from "@/components";
 import { Dictionary, Locale, logIn, sendCode } from "@/utils";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function LoginForm({
@@ -15,6 +15,7 @@ export default function LoginForm({
 }) {
   const { id, locale } = params;
   const router = useRouter();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const [smsCode, setSmsCode] = useState<string>("");
   const [isLoadingCode, setIsLoadingCode] = useState<boolean>(false);
@@ -45,6 +46,8 @@ export default function LoginForm({
     try {
       setIsLoadingCode(true);
       await sendCode(id);
+
+      inputRef.current?.focus();
       toast.success(dict.toastSuccess);
     } catch {
       toast.error(dict.toastError);
@@ -87,6 +90,7 @@ export default function LoginForm({
               onChange={(e) => handleSmsCodeChange(e.target.value)}
               className="w-full sm:w-48 ring-2 bg-digitalent-gray-light ring-digitalent-blue border-none mt-4 block h-10 text-xl text-center"
               maxLength={6}
+              ref={inputRef}
             />
           </div>
         </div>
