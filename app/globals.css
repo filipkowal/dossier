@@ -163,3 +163,19 @@ input[type="number"] {
     background-size: calc(100% / 3) 100%, calc(100% / 3) 100%, calc(100% / 3) 0%;
   }
 }
+
+@keyframes pulsate {
+  0% {
+    filter: brightness(1.25);
+  }
+  50% {
+    filter: brightness(1.1);
+  }
+  100% {
+    filter: brightness(1.25);
+  }
+}
+
+.pulse-brightness {
+  animation: pulsate 2s ease-in-out infinite;
+}

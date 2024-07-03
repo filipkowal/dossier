@@ -66,8 +66,7 @@ export default function ImageWithPlaceholder({
     />
   ) : (
     <div
-      className={`${className} w-${width}px h-${height}px bg-digitalent-blue`}
-      style={{ filter: "brightness(1.25)" }}
+      className={`${className} w-${width}px h-${height}px bg-digitalent-blue pulse-brightness`}
     />
   );
 }
