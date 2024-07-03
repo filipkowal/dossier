@@ -51,7 +51,7 @@ export default function InviteSection({
 
   const steps: {
     content: ReactNode;
-    title: "locationStepTitle" | "availabilityStepTitle" | "successStepTitle";
+    title?: "locationStepTitle" | "availabilityStepTitle";
   }[] = [];
 
   if (user.isInviteButtonVisible === false) return null;
@@ -104,7 +104,6 @@ export default function InviteSection({
         </h1>
       </div>
     ),
-    title: "successStepTitle",
   });
 
   return (
@@ -121,55 +120,73 @@ export default function InviteSection({
 
       <Dialog
         isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        title={dict[steps[step].title]}
+        setIsOpen={(isOpen) => {
+          setIsOpen(isOpen);
+
+          if (isOpen === false && step === steps.length - 1) {
+            router.refresh();
+          }
+        }}
+        title={
+          steps[step].title &&
+          dict[
+            steps[step].title as NonNullable<(typeof steps)[number]["title"]>
+          ]
+        }
         footer={
-          <FormFooterButtons
-            step={step}
-            setStep={setStep}
-            stepsLength={steps.length}
-            dict={dict}
-            isPending={invitePending}
-            setIsOpen={setIsOpen}
-            submissionDisabled={
-              availibilitySlots.length === 0 &&
-              !(newSlot.startDateTime && newSlot.endTime)
-            }
-            onSubmit={async () => {
-              setInvitePending(true);
-              const slots = [...availibilitySlots];
-              if (newSlot.startDateTime && newSlot.endTime) {
-                slots.push(newSlot);
+          step < steps.length - 1 ? (
+            <FormFooterButtons
+              step={step}
+              setStep={setStep}
+              stepsLength={steps.length}
+              dict={dict}
+              isPending={invitePending}
+              setIsOpen={setIsOpen}
+              submissionDisabled={
+                availibilitySlots.length === 0 &&
+                !(newSlot.startDateTime && newSlot.endTime)
               }
+              onSubmit={async () => {
+                setInvitePending(true);
+                const slots = [...availibilitySlots];
+                if (newSlot.startDateTime && newSlot.endTime) {
+                  slots.push(newSlot);
+                }
 
-              if (slots.length === 0) {
-                toast.error(dict["noSlots"]);
-                return;
-              }
+                if (slots.length === 0) {
+                  toast.error(dict["noSlots"]);
+                  return;
+                }
 
-              try {
-                const formValues = {
-                  interviewDuration,
-                  channel: isInterviewOnline
-                    ? "online"
-                    : ("onsite" as "online" | "onsite"),
-                  address: inteviewLocation,
-                  url: interviewLink,
-                  availibilitySlots: slots,
-                };
+                try {
+                  const formValues = {
+                    interviewDuration,
+                    channel: isInterviewOnline
+                      ? "online"
+                      : ("onsite" as "online" | "onsite"),
+                    address: inteviewLocation,
+                    url: interviewLink,
+                    availibilitySlots: slots,
+                  };
 
-                const response = await inviteCandidate(locale, id, formValues);
-                setSuccessMessage(response);
+                  const response = await inviteCandidate(
+                    locale,
+                    id,
+                    formValues
+                  );
+                  setSuccessMessage(response);
 
-                router.refresh();
-                setStep((step) => step + 1);
-              } catch (e) {
-                toast.error(dict["somethingWrong"]);
-              } finally {
-                setInvitePending(false);
-              }
-            }}
-          />
+                  setStep((step) => step + 1);
+                } catch (e) {
+                  toast.error(dict["somethingWrong"]);
+                } finally {
+                  setInvitePending(false);
+                }
+              }}
+            />
+          ) : (
+            <div />
+          )
         }
       >
         <form className="flex flex-col gap-6">

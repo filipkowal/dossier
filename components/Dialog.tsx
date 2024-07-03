@@ -11,8 +11,8 @@ export default function Dialog({
   setIsOpen,
 }: {
   isOpen: boolean;
-  title: string;
   children: React.ReactNode;
+  title?: string;
   footer?: React.ReactElement<any, string | JSXElementConstructor<any>>;
   setIsOpen: (isOpen: boolean) => void;
 }) {

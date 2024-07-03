@@ -79,10 +79,8 @@ async function getData({
 
   try {
     const json = await res.json();
-    console.log("json", endpoint, json);
     return json;
   } catch (error) {
-    console.error("Error parsing JSON:", endpoint, error);
     throw new Error(`Failed to parse ${endpoint} response as JSON`);
   }
 }
