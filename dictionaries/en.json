@@ -92,7 +92,6 @@
     "close": "Close"
   },
   "contactModal": {
-    "position": "Relationship Manager",
     "messageLabel": "How can we help you?",
     "messagePlaceholder": "Your questions or feedback regarding the candidate or any other case.",
     "send": "Send",

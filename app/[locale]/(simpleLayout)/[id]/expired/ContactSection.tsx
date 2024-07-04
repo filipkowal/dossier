@@ -37,7 +37,7 @@ export default function ContactSection({
 
         <h2 className="hidden md:block">•</h2>
 
-        <h2 className="text-xl font-light">{dict.position}</h2>
+        <h2 className="text-xl font-light">Relationship Manager</h2>
       </div>
     </div>
   );
