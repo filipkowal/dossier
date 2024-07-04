@@ -53,7 +53,6 @@ export default function RejectSection({
             try {
               await rejectCandidate(id, reason, message);
 
-              router.refresh();
               setIsOpen(false);
               setIsSuccessDialogOpen(true);
             } catch (e) {
@@ -106,7 +105,11 @@ export default function RejectSection({
       <Dialog
         isOpen={isSuccessDialogOpen}
         title={dict["successTitle"]}
-        setIsOpen={setIsSuccessDialogOpen}
+        setIsOpen={(isOpen) => {
+          setIsSuccessDialogOpen(isOpen);
+
+          if (!isOpen) router.refresh();
+        }}
         footer={
           <Button
             name={dict["close"]}
