@@ -110,14 +110,6 @@ export default function RejectSection({
 
           if (!isOpen) router.refresh();
         }}
-        footer={
-          <Button
-            name={dict["close"]}
-            onClick={() => setIsSuccessDialogOpen(false)}
-          >
-            {dict["close"]}
-          </Button>
-        }
       >
         <div className="w-full flex flex-col gap-6 ">
           <h1>
