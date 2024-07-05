@@ -113,10 +113,10 @@
     }
   },
   "loginForm": {
-    "verifyItsYou": "VERIFIZIEREN SIE SICH",
+    "verifyItsYou": "SMS VERIFIZIERUNG",
     "sendCodeInstruction": "Senden Sie den Code an Ihr Telefon, um sich zu verifizieren.",
-    "resendButton": "SMS mit Code senden",
-    "enterCodeInstruction": "Geben Sie den Code aus der SMS ein",
+    "resendButton": "CODE ANFORDERN",
+    "enterCodeInstruction": "Bitte SMS Code eingeben",
     "toastError": "Fehler beim Senden des SMS-Codes",
     "toastSuccess": "SMS mit Code gesendet",
     "authError": "Die Authentifizierung ist fehlgeschlagen. Bitte melden Sie sich erneut an."
