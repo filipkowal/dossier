@@ -45,10 +45,10 @@ export default function LoginForm({
   const sendSMSCode = async () => {
     try {
       setIsLoadingCode(true);
-      await sendCode(id);
+      const successText = await sendCode(id);
 
       inputRef.current?.focus();
-      toast.success(dict.toastSuccess);
+      toast.success(successText || dict.toastSuccess);
     } catch {
       toast.error(dict.toastError);
     } finally {
