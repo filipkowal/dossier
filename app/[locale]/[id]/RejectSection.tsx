@@ -55,6 +55,7 @@ export default function RejectSection({
 
               setIsOpen(false);
               setIsSuccessDialogOpen(true);
+              setTimeout(() => setIsSuccessDialogOpen(false), 10000);
             } catch (e) {
               toast.error(dict["somethingWrong"]);
             } finally {
