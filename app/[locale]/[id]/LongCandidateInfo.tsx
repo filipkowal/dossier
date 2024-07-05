@@ -12,18 +12,13 @@ export default function LongCandidateInfo({
     <>
       <Section
         dict={dict}
-        content={candidate.reasonForChange}
-        name="reasonForChange"
-      />
-      <Section
-        dict={dict}
         content={candidate.interviewSummary}
         name="interviewSummary"
       />
       <Section
         dict={dict}
-        content={candidate.educationSummary}
-        name="educationSummary"
+        content={candidate.reasonForChange}
+        name="reasonForChange"
       />
     </>
   );

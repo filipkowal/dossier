@@ -6,9 +6,9 @@ import Image from "next/image";
 export default async function PdfButton({
   pdfDossierPromise,
 }: {
-  pdfDossierPromise: Promise<GetPdfDossierResponse>;
+  pdfDossierPromise?: Promise<GetPdfDossierResponse>;
 }) {
-  let pdfDossier: GetPdfDossierResponse;
+  let pdfDossier: GetPdfDossierResponse | undefined;
   try {
     pdfDossier = await pdfDossierPromise;
   } catch (error) {
