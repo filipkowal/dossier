@@ -56,7 +56,7 @@
     "slotStart": "Verfügbarkeits Startzeit",
     "slotEnd": "Endzeit",
     "removeSlot": "Slot entfernen",
-    "addSlot": "Neuen Verfügbarkeits-Slot",
+    "addSlot": "WEITERES ZEITFENSTER HINZUFÜGEN",
     "send": "Senden",
     "previous": "Zurück",
     "next": "Weiter",
@@ -88,7 +88,7 @@
       "male": "Schade, dass du den Kandidaten nicht einladen möchtest. Wir werden ihn entsprechend informieren.",
       "female": "Schade, dass du die Kandidatin nicht einladen möchtest. Wir werden sie entsprechend informieren."
     },
-    "successTitle": "Ablehnung erfolgreich",
+    "successTitle": "KANDIDAT ABGELEHNT",
     "close": "Schließen"
   },
   "contactModal": {
