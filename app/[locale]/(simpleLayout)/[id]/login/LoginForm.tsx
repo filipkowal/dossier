@@ -45,7 +45,7 @@ export default function LoginForm({
   const sendSMSCode = async () => {
     try {
       setIsLoadingCode(true);
-      const successText = await sendCode(id);
+      const successText = await sendCode(id, locale);
 
       inputRef.current?.focus();
       toast.success(successText || dict.toastSuccess);

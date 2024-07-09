@@ -181,8 +181,8 @@ export async function sendMessage(id: string, message: string) {
   return response;
 }
 
-export async function sendCode(id: string) {
-  const response = await postData(`auth/sendCode/${id}`);
+export async function sendCode(id: string, locale: Locale) {
+  const response = await postData(`${locale}/auth/sendCode/${id}`);
 
   return response;
 }
