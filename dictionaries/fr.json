@@ -53,8 +53,9 @@
       "1": "2 - 3 créneaux horaires disponibles",
       "2": "Les créneaux peuvent être plus longs que la durée de l'entretien."
     },
-    "slotStart": "Disponibilité début",
-    "slotEnd": "Fin",
+    "slotDate": "Disponibilité date",
+    "slotStartTime": "Début",
+    "slotEndTime": "Fin",
     "removeSlot": "Supprimer",
     "addSlot": "Un nouveau créneau",
     "send": "Envoyer",

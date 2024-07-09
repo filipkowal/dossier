@@ -53,8 +53,9 @@
       "1": "2 - 3 verfügbare Zeitfenster",
       "2": "Die Zeitfenster können länger sein als die Dauer des Interviews."
     },
-    "slotStart": "Verfügbarkeits Startzeit",
-    "slotEnd": "Endzeit",
+    "slotDate": "Datum",
+    "slotStartTime": "Zeitfenster Start",
+    "slotEndTime": "Zeitfenster Ende",
     "removeSlot": "Slot entfernen",
     "addSlot": "WEITERES ZEITFENSTER HINZUFÜGEN",
     "send": "Senden",

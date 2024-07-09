@@ -53,8 +53,9 @@
       "1": "2 - 3 availability time slots",
       "2": "The slots can be longer than the interview meeting duration."
     },
-    "slotStart": "Availibility Start Time",
-    "slotEnd": "End Time",
+    "slotDate": "Availibility Date",
+    "slotStartTime": "Start",
+    "slotEndTime": "End",
     "removeSlot": "Remove Slot",
     "addSlot": "Add new availibility slot",
     "send": "Send",

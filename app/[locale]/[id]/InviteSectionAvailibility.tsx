@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { type TimeSlots } from "./InviteSection";
 import { Dictionary } from "@/utils";
 import { TextInput, Button } from "@/components";
@@ -18,34 +18,58 @@ export default function AvailibilityStep({
 }) {
   const [showNewSlot, setShowNewSlot] = useState(true);
 
-  function getNewEndTime(slot: TimeSlots[0], newStartTime: string) {
+  function getNewEndTime(
+    newStartTime: string,
+    currentStartTime: string,
+    currentEndTime: string
+  ) {
     if (!newStartTime) return "";
 
-    // If there's no endTime, calculate the it by adding 1 hour to the startTime.
-    if (!slot.endTime) {
-      const endTime = new Date(
-        new Date(newStartTime).getTime() + 60 * 60 * 1000
+    const [newHours, newMinutes] = newStartTime.split(":");
+    const newStartTimeDate = new Date();
+    newStartTimeDate.setHours(parseInt(newHours), parseInt(newMinutes), 0, 0);
+
+    let endTime;
+    if (currentStartTime && currentEndTime) {
+      // Calculate slot length and preserve it
+      const [currentStartHours, currentStartMinutes] =
+        currentStartTime.split(":");
+      const currentStartTimeDate = new Date();
+      currentStartTimeDate.setHours(
+        parseInt(currentStartHours),
+        parseInt(currentStartMinutes),
+        0,
+        0
       );
 
-      const newEndTime = formatTimeToInputString(endTime);
-      return newEndTime;
+      const [currentEndHours, currentEndMinutes] = currentEndTime.split(":");
+      const currentEndTimeDate = new Date();
+      currentEndTimeDate.setHours(
+        parseInt(currentEndHours),
+        parseInt(currentEndMinutes),
+        0,
+        0
+      );
+
+      const slotLength =
+        currentEndTimeDate.getTime() - currentStartTimeDate.getTime();
+      endTime = new Date(newStartTimeDate.getTime() + slotLength);
+    } else if (currentEndTime && !currentStartTime) {
+      // Preserve current end time if no start time is provided
+      return currentEndTime;
+    } else {
+      // Default to adding 1 hour if no current times are provided
+      endTime = new Date(newStartTimeDate.getTime() + 60 * 60 * 1000); // Add 1 hour
     }
 
-    // If the startTime changes, calculate the slot length and update endTime to preserve the length.
-    const now = new Date();
-    const startDateTime = new Date(newSlot.startDateTime);
-    const startTime = now.setTime(startDateTime.getTime());
-    const [endHour, endMinute] = newSlot.endTime.split(":");
-    const endTime = now.setHours(Number(endHour), Number(endMinute), 0, 0);
+    const formattedEndTime = formatTimeToInputString(endTime);
 
-    return formatTimeToInputString(
-      new Date(new Date(newStartTime).getTime() + (endTime - startTime))
-    );
+    return formattedEndTime;
 
     function formatTimeToInputString(date: Date) {
-      return new Date(date.getTime() - date.getTimezoneOffset() * 60000)
-        .toISOString()
-        .slice(11, 16);
+      const hours = date.getHours().toString().padStart(2, "0");
+      const minutes = date.getMinutes().toString().padStart(2, "0");
+      return `${hours}:${minutes}`;
     }
   }
 
@@ -57,96 +81,121 @@ export default function AvailibilityStep({
       </p>
 
       <div className="flex flex-col gap-10">
-        {availibilitySlots.map((slot, index) => {
-          return (
-            <div key={slot.id} className="flex flex-col sm:flex-row sm:gap-6">
-              <div className="flex items-center gap-2 sm:gap-6">
-                <TextInput
-                  name={`slot-${index}-startTime`}
-                  type="datetime-local"
-                  value={slot?.startDateTime || ""}
-                  onChange={(e) =>
-                    setAvailibilitySlots(
-                      availibilitySlots.map((s, i) => {
-                        if (i === index) {
-                          return {
-                            ...s,
-                            startDateTime: e.target.value,
-                            endTime: getNewEndTime(s, e.target.value),
-                          };
-                        }
-                        return s;
-                      })
+        {availibilitySlots.map((slot, index) => (
+          <div key={slot.id} className="flex flex-col sm:flex-row sm:gap-6">
+            <div className="flex items-center gap-2 sm:gap-6">
+              <TextInput
+                name={`slot-${index}-date`}
+                type="date"
+                value={slot.date}
+                onChange={(e) =>
+                  setAvailibilitySlots(
+                    availibilitySlots.map((s, i) =>
+                      i === index ? { ...s, date: e.target.value } : s
                     )
-                  }
-                  label={dict.slotStart}
-                />
-                <TextInput
-                  name={`slot-${index}-endTime`}
-                  type="time"
-                  disabled={!slot.startDateTime}
-                  value={slot?.endTime || ""}
-                  onChange={(e) =>
-                    setAvailibilitySlots(
-                      availibilitySlots.map((s, i) => {
-                        if (i === index) {
-                          return { ...s, endTime: e.target.value };
-                        }
-                        return s;
-                      })
-                    )
-                  }
-                  label={dict.slotEnd}
-                />
-              </div>
-              <Button
-                onClick={() =>
-                  setAvailibilitySlots((slots) =>
-                    slots.filter((s) => s.id !== slot.id)
                   )
                 }
-                className="h-[2.75rem] mt-[0.9rem] flex items-center justify-center"
-              >
-                <div>{dict.removeSlot}</div>
-              </Button>
+                label={dict.slotDate}
+              />
+              <TextInput
+                name={`slot-${index}-startTime`}
+                type="time"
+                value={slot.startTime}
+                onChange={(e) =>
+                  setAvailibilitySlots(
+                    availibilitySlots.map((s, i) =>
+                      i === index
+                        ? {
+                            ...s,
+                            startTime: e.target.value,
+                            endTime: getNewEndTime(
+                              e.target.value,
+                              slot.startTime,
+                              slot.endTime
+                            ),
+                          }
+                        : s
+                    )
+                  )
+                }
+                label={dict.slotStartTime}
+              />
+              <TextInput
+                name={`slot-${index}-endTime`}
+                type="time"
+                value={slot.endTime}
+                onChange={(e) =>
+                  setAvailibilitySlots(
+                    availibilitySlots.map((s, i) =>
+                      i === index ? { ...s, endTime: e.target.value } : s
+                    )
+                  )
+                }
+                label={dict.slotEndTime}
+              />
             </div>
-          );
-        })}
+            <Button
+              onClick={() =>
+                setAvailibilitySlots((slots) =>
+                  slots.filter((s) => s.id !== slot.id)
+                )
+              }
+              className="h-[2.75rem] mt-[0.9rem] flex items-center justify-center"
+            >
+              <div>{dict.removeSlot}</div>
+            </Button>
+          </div>
+        ))}
 
         {showNewSlot && (
           <div className="flex flex-col sm:flex-row sm:gap-6">
             <div className="flex items-center gap-2 sm:gap-6">
               <TextInput
-                name={`newSlot-startTime`}
-                type="datetime-local"
-                value={newSlot.startDateTime}
+                name={`newSlot-date`}
+                type="date"
+                value={newSlot.date || ""}
                 onChange={(e) =>
                   setNewSlot((slot) => ({
-                    ...newSlot,
-                    startDateTime: e.target.value,
-                    endTime: getNewEndTime(slot, e.target.value),
+                    ...slot,
+                    date: e.target.value,
                   }))
                 }
-                label={dict.slotStart}
+                label={dict.slotDate}
+              />
+              <TextInput
+                name={`newSlot-startTime`}
+                type="time"
+                value={newSlot.startTime || ""}
+                onChange={(e) =>
+                  setNewSlot((slot) => ({
+                    ...slot,
+                    startTime: e.target.value,
+                    endTime: getNewEndTime(
+                      e.target.value,
+                      slot.startTime,
+                      slot.endTime
+                    ),
+                  }))
+                }
+                label={dict.slotStartTime}
               />
               <TextInput
                 name={`newSlot-endTime`}
                 type="time"
-                disabled={!newSlot.startDateTime}
                 value={newSlot.endTime}
                 onChange={(e) =>
                   setNewSlot({ ...newSlot, endTime: e.target.value })
                 }
-                label={dict.slotEnd}
+                label={dict.slotEndTime}
               />
             </div>
-
-            {availibilitySlots.length > 0 ? (
+            {availibilitySlots.length > 0 && (
               <Button
                 onClick={() => {
                   setNewSlot((slot) => ({
                     ...slot,
-                    startDateTime: "",
+                    date: "",
+                    startTime: "",
                     endTime: "",
                   }));
                   setShowNewSlot(false);
@@ -155,20 +204,28 @@ export default function AvailibilityStep({
               >
                 <div>{dict.removeSlot}</div>
               </Button>
-            ) : null}
+            )}
           </div>
         )}
 
         <Button
           name="Add new slot"
           onClick={() => {
-            if (newSlot.startDateTime && newSlot.endTime) {
+            if (newSlot.date && newSlot.startTime && newSlot.endTime) {
               setAvailibilitySlots((slots) => [...slots, newSlot]);
+              setNewSlot({
+                id: newSlot.id + 1,
+                date: "",
+                startTime: "",
+                endTime: "",
+              });
             }
-            setNewSlot({ id: newSlot.id + 1, startDateTime: "", endTime: "" });
             setShowNewSlot(true);
           }}
-          disabled={(!newSlot.startDateTime || !newSlot.endTime) && showNewSlot}
+          disabled={
+            (!newSlot.date || !newSlot.startTime || !newSlot.endTime) &&
+            showNewSlot
+          }
           className="bg-digitalent-blue text-white disabled:bg-digitalent-blue disabled:text-white hover:disabled:bg-digitalent-blue hover:disabled:text-white"
         >
           {dict.addSlot}

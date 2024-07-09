@@ -11,7 +11,8 @@ import Image from "next/image";
 
 export type TimeSlots = {
   id: number;
-  startDateTime: string;
+  date: string;
+  startTime: string;
   endTime: string;
 }[];
 
@@ -43,11 +44,17 @@ export default function InviteSection({
   const [interviewDuration, setInterviewDuration] = useState(30);
   const [newSlot, setNewSlot] = useState({
     id: 0,
-    startDateTime: "",
+    date: "",
+    startTime: "",
     endTime: "",
   });
   const [invitePending, setInvitePending] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+
+  const isSlotSet = (slot: TimeSlots[number]) =>
+    slot.date && slot.startTime && slot.endTime;
+  const isSlotEmpty = (slot: TimeSlots[number]) =>
+    slot.date === "" && slot.startTime === "" && slot.endTime === "";
 
   const steps: {
     content: ReactNode;
@@ -143,13 +150,13 @@ export default function InviteSection({
               isPending={invitePending}
               setIsOpen={setIsOpen}
               submissionDisabled={
-                availibilitySlots.length === 0 &&
-                !(newSlot.startDateTime && newSlot.endTime)
+                (availibilitySlots.length === 0 && !isSlotSet(newSlot)) ||
+                (!isSlotSet(newSlot) && !isSlotEmpty(newSlot))
               }
               onSubmit={async () => {
                 setInvitePending(true);
                 const slots = [...availibilitySlots];
-                if (newSlot.startDateTime && newSlot.endTime) {
+                if (isSlotSet(newSlot)) {
                   slots.push(newSlot);
                 }
 
