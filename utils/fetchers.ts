@@ -144,7 +144,7 @@ export async function getRelationshipManager(
 export async function inviteCandidate(
   locale: Locale,
   id: string,
-  data: {
+  data?: {
     interviewDuration?: number;
     channel?: "online" | "onsite";
     address?: string;

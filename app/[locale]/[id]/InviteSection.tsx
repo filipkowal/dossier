@@ -113,13 +113,31 @@ export default function InviteSection({
     ),
   });
 
+  const isUC3 =
+    user?.isInterviewAvailabilityInputVisible === false &&
+    user?.isInterviewLocationInputVisible === false;
+
   return (
     <>
       <Button
         type="primary"
         name={dict.inviteToInterview}
         className="w-full sm:w-1/3 xl:w-1/4 max-w-[32rem]"
-        onClick={() => setIsOpen(true)}
+        onClick={async () => {
+          if (isUC3) {
+            try {
+              const response = await inviteCandidate(locale, id);
+              setSuccessMessage(response);
+              setIsOpen(true);
+            } catch (error) {
+              toast.error(dict.somethingWrong);
+            }
+
+            return;
+          }
+
+          setIsOpen(true);
+        }}
       >
         <span className="hidden sm:block">{dict.inviteToInterview}</span>
         <span className="sm:hidden">{dict.invite}</span>
