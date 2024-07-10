@@ -68,6 +68,7 @@ export default function TextInput({
           id={name}
           placeholder=" "
           autoFocus={autoFocus}
+          autoComplete="off"
         />
       ) : (
         <input
