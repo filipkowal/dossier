@@ -18,61 +18,6 @@ export default function AvailibilityStep({
 }) {
   const [showNewSlot, setShowNewSlot] = useState(true);
 
-  function getNewEndTime(
-    newStartTime: string,
-    currentStartTime: string,
-    currentEndTime: string
-  ) {
-    if (!newStartTime) return "";
-
-    const [newHours, newMinutes] = newStartTime.split(":");
-    const newStartTimeDate = new Date();
-    newStartTimeDate.setHours(parseInt(newHours), parseInt(newMinutes), 0, 0);
-
-    let endTime;
-    if (currentStartTime && currentEndTime) {
-      // Calculate slot length and preserve it
-      const [currentStartHours, currentStartMinutes] =
-        currentStartTime.split(":");
-      const currentStartTimeDate = new Date();
-      currentStartTimeDate.setHours(
-        parseInt(currentStartHours),
-        parseInt(currentStartMinutes),
-        0,
-        0
-      );
-
-      const [currentEndHours, currentEndMinutes] = currentEndTime.split(":");
-      const currentEndTimeDate = new Date();
-      currentEndTimeDate.setHours(
-        parseInt(currentEndHours),
-        parseInt(currentEndMinutes),
-        0,
-        0
-      );
-
-      const slotLength =
-        currentEndTimeDate.getTime() - currentStartTimeDate.getTime();
-      endTime = new Date(newStartTimeDate.getTime() + slotLength);
-    } else if (currentEndTime && !currentStartTime) {
-      // Preserve current end time if no start time is provided
-      return currentEndTime;
-    } else {
-      // Default to adding 1 hour if no current times are provided
-      endTime = new Date(newStartTimeDate.getTime() + 60 * 60 * 1000); // Add 1 hour
-    }
-
-    const formattedEndTime = formatTimeToInputString(endTime);
-
-    return formattedEndTime;
-
-    function formatTimeToInputString(date: Date) {
-      const hours = date.getHours().toString().padStart(2, "0");
-      const minutes = date.getMinutes().toString().padStart(2, "0");
-      return `${hours}:${minutes}`;
-    }
-  }
-
   return (
     <>
       <p>
@@ -108,11 +53,6 @@ export default function AvailibilityStep({
                         ? {
                             ...s,
                             startTime: e.target.value,
-                            endTime: getNewEndTime(
-                              e.target.value,
-                              slot.startTime,
-                              slot.endTime
-                            ),
                           }
                         : s
                     )
@@ -170,11 +110,6 @@ export default function AvailibilityStep({
                   setNewSlot((slot) => ({
                     ...slot,
                     startTime: e.target.value,
-                    endTime: getNewEndTime(
-                      e.target.value,
-                      slot.startTime,
-                      slot.endTime
-                    ),
                   }))
                 }
                 label={dict.slotStartTime}
