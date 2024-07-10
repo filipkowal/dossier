@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { type TimeSlots } from "./InviteSection";
 import { Dictionary } from "@/utils";
 import { TextInput, Button } from "@/components";
@@ -18,6 +18,16 @@ export default function AvailibilityStep({
 }) {
   const [showNewSlot, setShowNewSlot] = useState(true);
 
+  const setSlotEntry =
+    (name: keyof TimeSlots[0], index: number) =>
+    (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setAvailibilitySlots(
+        availibilitySlots.map((s, i) =>
+          i === index ? { ...s, [name]: e.target.value } : s
+        )
+      );
+    };
+
   return (
     <>
       <p>
@@ -33,44 +43,21 @@ export default function AvailibilityStep({
                 name={`slot-${index}-date`}
                 type="date"
                 value={slot.date}
-                onChange={(e) =>
-                  setAvailibilitySlots(
-                    availibilitySlots.map((s, i) =>
-                      i === index ? { ...s, date: e.target.value } : s
-                    )
-                  )
-                }
+                onChange={setSlotEntry("date", index)}
                 label={dict.slotDate}
               />
               <TextInput
                 name={`slot-${index}-startTime`}
                 type="time"
                 value={slot.startTime}
-                onChange={(e) =>
-                  setAvailibilitySlots(
-                    availibilitySlots.map((s, i) =>
-                      i === index
-                        ? {
-                            ...s,
-                            startTime: e.target.value,
-                          }
-                        : s
-                    )
-                  )
-                }
+                onChange={setSlotEntry("startTime", index)}
                 label={dict.slotStartTime}
               />
               <TextInput
                 name={`slot-${index}-endTime`}
                 type="time"
                 value={slot.endTime}
-                onChange={(e) =>
-                  setAvailibilitySlots(
-                    availibilitySlots.map((s, i) =>
-                      i === index ? { ...s, endTime: e.target.value } : s
-                    )
-                  )
-                }
+                onChange={setSlotEntry("endTime", index)}
                 label={dict.slotEndTime}
               />
             </div>
