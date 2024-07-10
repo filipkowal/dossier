@@ -1,6 +1,7 @@
 "use client";
 import { ReactNode, useState } from "react";
-import { type Dictionary, User, inviteCandidate, Locale } from "@/utils";
+import { inviteCandidate } from "@/utils";
+import type { Dictionary, User, Locale, TimeSlots } from "@/utils";
 import { FormFooterButtons, Dialog, Button } from "@/components";
 import toast from "react-hot-toast";
 import AvailibilityStep from "./InviteSectionAvailibility";
@@ -8,13 +9,6 @@ import LocationStep from "./InviteSectionLocation";
 import { useRouter } from "next/navigation";
 import SuccessIcon from "@/public/success.webp";
 import Image from "next/image";
-
-export type TimeSlots = {
-  id: number;
-  date: string;
-  startTime: string;
-  endTime: string;
-}[];
 
 export default function InviteSection({
   dict,

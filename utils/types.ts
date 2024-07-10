@@ -16,3 +16,10 @@ export type GetRelatnshipManagerResponse =
 export type Candidate = components["schemas"]["Candidate"];
 export type User = components["schemas"]["User"];
 export type RelationshipManager = components["schemas"]["RelationshipManager"];
+
+export type TimeSlots = {
+  id: number;
+  date: string;
+  startTime: string;
+  endTime: string;
+}[];

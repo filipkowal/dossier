@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
-import { type TimeSlots } from "./InviteSection";
-import { Dictionary } from "@/utils";
-import { TextInput, Button } from "@/components";
+import type { Dictionary, TimeSlots } from "@/utils";
+import { Button } from "@/components";
+import TimeSlotInputs from "@/components/TimeSlotInputs";
 
 export default function AvailibilityStep({
   newSlot,
@@ -28,6 +28,12 @@ export default function AvailibilityStep({
       );
     };
 
+  const setNewSlotEntry =
+    (name: keyof TimeSlots[0], index: number) =>
+    (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setNewSlot({ ...newSlot, [name]: e.target.value });
+    };
+
   return (
     <>
       <p>
@@ -39,26 +45,11 @@ export default function AvailibilityStep({
         {availibilitySlots.map((slot, index) => (
           <div key={slot.id} className="flex flex-col sm:flex-row sm:gap-6">
             <div className="flex items-center gap-2 sm:gap-6">
-              <TextInput
-                name={`slot-${index}-date`}
-                type="date"
-                value={slot.date}
-                onChange={setSlotEntry("date", index)}
-                label={dict.slotDate}
-              />
-              <TextInput
-                name={`slot-${index}-startTime`}
-                type="time"
-                value={slot.startTime}
-                onChange={setSlotEntry("startTime", index)}
-                label={dict.slotStartTime}
-              />
-              <TextInput
-                name={`slot-${index}-endTime`}
-                type="time"
-                value={slot.endTime}
-                onChange={setSlotEntry("endTime", index)}
-                label={dict.slotEndTime}
+              <TimeSlotInputs
+                slot={slot}
+                setSlotEntry={setSlotEntry}
+                index={index}
+                dict={dict}
               />
             </div>
             <Button
@@ -77,38 +68,11 @@ export default function AvailibilityStep({
         {showNewSlot && (
           <div className="flex flex-col sm:flex-row sm:gap-6">
             <div className="flex items-center gap-2 sm:gap-6">
-              <TextInput
-                name={`newSlot-date`}
-                type="date"
-                value={newSlot.date || ""}
-                onChange={(e) =>
-                  setNewSlot((slot) => ({
-                    ...slot,
-                    date: e.target.value,
-                  }))
-                }
-                label={dict.slotDate}
-              />
-              <TextInput
-                name={`newSlot-startTime`}
-                type="time"
-                value={newSlot.startTime || ""}
-                onChange={(e) =>
-                  setNewSlot((slot) => ({
-                    ...slot,
-                    startTime: e.target.value,
-                  }))
-                }
-                label={dict.slotStartTime}
-              />
-              <TextInput
-                name={`newSlot-endTime`}
-                type="time"
-                value={newSlot.endTime}
-                onChange={(e) =>
-                  setNewSlot({ ...newSlot, endTime: e.target.value })
-                }
-                label={dict.slotEndTime}
+              <TimeSlotInputs
+                slot={newSlot}
+                setSlotEntry={setNewSlotEntry}
+                index={availibilitySlots.length}
+                dict={dict}
               />
             </div>
             {availibilitySlots.length > 0 && (
