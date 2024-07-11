@@ -28,7 +28,7 @@ export default function Dialog({
   }
 
   useEffect(() => {
-    if (isOpen) ref.current?.showModal();
+    if (isOpen) ref.current?.show();
     else ref.current?.close();
   }, [isOpen]);
 
