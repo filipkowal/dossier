@@ -1,12 +1,8 @@
-import { ChangeEvent } from "react";
-import TextInput from "./TextInput";
 import { type Dictionary, type Locale, type TimeSlots } from "@/utils";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
 
-type EventType = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 type SetSlotEntry = (
   name: keyof TimeSlots[0],
   index: number
@@ -25,39 +21,51 @@ export default function TimeSlotInputs({
   locale: Locale;
   setSlotEntry: SetSlotEntry;
 }) {
-  const handleChange = (selectedDate: Dayjs | null) => {
+  const onDateChange = (selectedDate: Dayjs | null) => {
     const date = selectedDate ? selectedDate.format("YYYY-MM-DD") : "";
-    console.log("date", date);
 
     setSlotEntry("date", index)(date);
   };
 
+  const onTimeChange = (
+    selectedTime: Dayjs | null,
+    key: "startTime" | "endTime"
+  ) => {
+    const time = selectedTime ? selectedTime.format("HH:mm") : "";
+
+    setSlotEntry(key, index)(time);
+  };
+
+  function timeToDayJs(time: string) {
+    if (!time) return null;
+    return dayjs()
+      .hour(Number(time.split(":")[0]))
+      .minute(Number(time.split(":")[1]));
+  }
+
   return (
     <>
-      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={locale}>
-        <DatePicker
-          name={`slot-${index}-date`}
-          value={dayjs(slot.date)}
-          onChange={handleChange}
-          label={dict.slotDate}
-        />
-        <TimePicker label="Start" />
-        <TimePicker label="End" />
-        <TextInput
-          name={`slot-${index}-startTime`}
-          type="time"
-          value={slot.startTime}
-          onChange={setSlotEntry("startTime", index)}
-          label={dict.slotStartTime}
-        />
-        <TextInput
-          name={`slot-${index}-endTime`}
-          type="time"
-          value={slot.endTime}
-          onChange={setSlotEntry("endTime", index)}
-          label={dict.slotEndTime}
-        />
-      </LocalizationProvider>
+      <DatePicker
+        key={"slot-" + index + "-date"}
+        name={`slot-${index}-date`}
+        value={dayjs(slot.date)}
+        onChange={onDateChange}
+        label={dict.slotDate}
+      />
+      <TimePicker
+        key={"slot-" + index + "-startTime"}
+        value={timeToDayJs(slot.startTime)}
+        onChange={(v) => onTimeChange(v, "startTime")}
+        label={dict.slotStartTime}
+        name={`slot-${index}-startTime`}
+      />
+      <TimePicker
+        key={"slot-" + index + "-endTime"}
+        value={timeToDayJs(slot.endTime)}
+        onChange={(v) => onTimeChange(v, "endTime")}
+        name={`slot-${index}-endTime`}
+        label={dict.slotEndTime}
+      />
     </>
   );
 }

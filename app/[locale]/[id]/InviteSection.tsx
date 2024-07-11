@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { inviteCandidate } from "@/utils";
 import type { Dictionary, User, Locale, TimeSlots } from "@/utils";
 import { FormFooterButtons, Dialog, Button } from "@/components";
@@ -111,6 +111,10 @@ export default function InviteSection({
   const isUC3 =
     user?.isInterviewAvailabilityInputVisible === false &&
     user?.isInterviewLocationInputVisible === false;
+
+  useEffect(() => {
+    console.log("slots", [...availibilitySlots, newSlot]);
+  }, [newSlot, availibilitySlots]);
 
   return (
     <>

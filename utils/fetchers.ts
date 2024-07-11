@@ -57,8 +57,6 @@ async function getData({
 }) {
   const url = `${SERVER_URL}${locale ? `/${locale}` : ""}/${endpoint}`;
 
-  console.log(endpoint, cookie?.name, cookie?.value);
-
   const res = await fetch(url, {
     credentials: "include",
     cache: "no-store",
@@ -67,8 +65,6 @@ async function getData({
       Cookie: cookie ? `${cookie.name}=${cookie.value}` : "", // Forward the token cookie
     },
   });
-
-  console.log(endpoint, res.status, ", res.ok:", res.ok);
 
   if (!res.ok) {
     throw new HttpError(
