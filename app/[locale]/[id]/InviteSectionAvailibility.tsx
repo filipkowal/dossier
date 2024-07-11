@@ -21,19 +21,17 @@ export default function AvailibilityStep({
   const [showNewSlot, setShowNewSlot] = useState(true);
 
   const setSlotEntry =
-    (name: keyof TimeSlots[0], index: number) =>
-    (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    (name: keyof TimeSlots[0], index: number) => (value: string) => {
       setAvailibilitySlots(
         availibilitySlots.map((s, i) =>
-          i === index ? { ...s, [name]: e.target.value } : s
+          i === index ? { ...s, [name]: value } : s
         )
       );
     };
 
   const setNewSlotEntry =
-    (name: keyof TimeSlots[0], index: number) =>
-    (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      setNewSlot({ ...newSlot, [name]: e.target.value });
+    (name: keyof TimeSlots[0], index: number) => (value: string) => {
+      setNewSlot({ ...newSlot, [name]: value });
     };
 
   return (
