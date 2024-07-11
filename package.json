@@ -10,9 +10,14 @@
     "schema": "npx openapi-typescript openApi.yml --output schema.ts"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
     "@formatjs/intl-localematcher": "^0.5.2",
     "@heroicons/react": "^2.1.1",
+    "@mui/material": "^5.16.0",
+    "@mui/x-date-pickers": "^7.10.0",
     "@tailwindcss/forms": "^0.5.7",
+    "dayjs": "^1.11.11",
     "negotiator": "^0.6.3",
     "next": "14.1.4",
     "react": "^18",

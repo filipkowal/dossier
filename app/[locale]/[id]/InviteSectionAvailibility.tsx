@@ -1,5 +1,5 @@
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
-import type { Dictionary, TimeSlots } from "@/utils";
+import type { Dictionary, Locale, TimeSlots } from "@/utils";
 import { Button } from "@/components";
 import TimeSlotInputs from "@/components/TimeSlotInputs";
 
@@ -9,12 +9,14 @@ export default function AvailibilityStep({
   availibilitySlots,
   setAvailibilitySlots,
   dict,
+  locale,
 }: {
   newSlot: TimeSlots[0];
   setNewSlot: Dispatch<SetStateAction<TimeSlots[0]>>;
   availibilitySlots: TimeSlots;
   setAvailibilitySlots: Dispatch<SetStateAction<TimeSlots>>;
   dict: Dictionary["inviteModal"];
+  locale: Locale;
 }) {
   const [showNewSlot, setShowNewSlot] = useState(true);
 
@@ -50,6 +52,7 @@ export default function AvailibilityStep({
                 setSlotEntry={setSlotEntry}
                 index={index}
                 dict={dict}
+                locale={locale}
               />
             </div>
             <Button
@@ -73,6 +76,7 @@ export default function AvailibilityStep({
                 setSlotEntry={setNewSlotEntry}
                 index={availibilitySlots.length}
                 dict={dict}
+                locale={locale}
               />
             </div>
             {availibilitySlots.length > 0 && (
