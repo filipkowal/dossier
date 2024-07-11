@@ -98,7 +98,13 @@ export default function InviteSection({
   steps.push({
     content: (
       <div className="flex flex-col gap-6 items-center">
-        <Image src={SuccessIcon} alt="success" width={96} height={96} />
+        <Image
+          src={SuccessIcon}
+          alt="success"
+          width={96}
+          height={96}
+          unoptimized
+        />
         <h1>
           {successMessage
             ? successMessage
@@ -111,10 +117,6 @@ export default function InviteSection({
   const isUC3 =
     user?.isInterviewAvailabilityInputVisible === false &&
     user?.isInterviewLocationInputVisible === false;
-
-  useEffect(() => {
-    console.log("slots", [...availibilitySlots, newSlot]);
-  }, [newSlot, availibilitySlots]);
 
   return (
     <>
