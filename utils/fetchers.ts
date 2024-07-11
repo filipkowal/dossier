@@ -203,11 +203,8 @@ export async function isLoggedIn(
       cookie,
     });
 
-    console.log("isLoggedIn", response);
-
     return response.isLoggedIn;
   } catch (e) {
-    console.log(e);
     if (e instanceof HttpError && e.status === 404) {
       return 404;
     }
