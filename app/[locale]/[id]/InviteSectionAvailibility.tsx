@@ -46,27 +46,22 @@ export default function AvailibilityStep({
         </p>
 
         <div className="flex flex-col gap-10">
-          {availibilitySlots.map((slot, index) => (
+          {availibilitySlots.map((slot) => (
             <div
               key={slot.id}
-              className="flex flex-col lg:flex-row lg:gap-6 w-fit sm:w-auto"
+              className="border-digitalent-blue border-2 py-2 px-8 flex flex-col sm:flex-row gap-2 lg:gap-6 w-fit sm:w-auto items-center justify-between"
             >
-              <div className="flex flex-col sm:flex-row items-center gap-2 md:gap-6">
-                <TimeSlotInputs
-                  slot={slot}
-                  setSlotEntry={setSlotEntry}
-                  index={index}
-                  dict={dict}
-                  interviewDuration={interviewDuration}
-                />
-              </div>
+              <span className="w-fit items-center">
+                {slot.date + ", " + slot.startTime + " - " + slot.endTime}
+              </span>
               <Button
+                type="invert"
                 onClick={() =>
                   setAvailibilitySlots((slots) =>
                     slots.filter((s) => s.id !== slot.id)
                   )
                 }
-                className="h-[2.75rem] mt-[0.9rem] flex items-center justify-center"
+                className="flex items-center justify-center bg-digitalent-blue"
               >
                 <div>{dict.removeSlot}</div>
               </Button>
@@ -74,7 +69,7 @@ export default function AvailibilityStep({
           ))}
 
           {showNewSlot && (
-            <div className="flex flex-col lg:flex-row lg:gap-6 w-fit sm:w-auto">
+            <div className="flex flex-col lg:flex-row gap-2 lg:gap-6 w-fit sm:w-auto">
               <div className="flex flex-col sm:flex-row items-center gap-2 md:gap-6">
                 <TimeSlotInputs
                   slot={newSlot}
@@ -95,7 +90,8 @@ export default function AvailibilityStep({
                     }));
                     setShowNewSlot(false);
                   }}
-                  className="h-[2.75rem] mt-[0.9rem] flex items-center justify-center"
+                  type="invert"
+                  className="flex items-center justify-center bg-digitalent-blue whitespace-nowrap"
                 >
                   <div>{dict.removeSlot}</div>
                 </Button>

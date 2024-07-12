@@ -22,7 +22,7 @@ export default function TimeSlotInputs({
   setSlotEntry: SetSlotEntry;
 }) {
   const onDateChange = (selectedDate: Dayjs | null) => {
-    const date = selectedDate ? selectedDate.format("YYYY-MM-DD") : "";
+    const date = selectedDate ? selectedDate.format("DD.MM.YYYY") : "";
 
     setSlotEntry("date", index)(date);
   };
