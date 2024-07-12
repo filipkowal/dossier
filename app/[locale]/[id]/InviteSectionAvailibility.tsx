@@ -1,9 +1,10 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import type { Dictionary, Locale, TimeSlots } from "@/utils";
 import { Button } from "@/components";
 import TimeSlotInputs from "@/components/TimeSlotInputs";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import "dayjs/locale/de";
 
 export default function AvailibilityStep({
   newSlot,
@@ -38,7 +39,7 @@ export default function AvailibilityStep({
 
   return (
     <>
-      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={locale}>
+      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={"de"}>
         <p>
           {dict.slotsDescription[0]} <b>{dict.slotsDescription[1]}</b>.{" "}
           {dict.slotsDescription[2]}
