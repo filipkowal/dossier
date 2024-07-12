@@ -88,7 +88,7 @@ export default function InviteSection({
           availibilitySlots={availibilitySlots}
           setAvailibilitySlots={setAvailibilitySlots}
           dict={dict}
-          locale={locale}
+          interviewDuration={interviewDuration}
         />
       ),
       title: "availabilityStepTitle",

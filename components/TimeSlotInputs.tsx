@@ -12,13 +12,13 @@ export default function TimeSlotInputs({
   slot,
   index,
   dict,
-  locale,
+  interviewDuration,
   setSlotEntry,
 }: {
   slot: TimeSlots[number];
   index: number;
   dict: Dictionary["inviteModal"];
-  locale: Locale;
+  interviewDuration: number;
   setSlotEntry: SetSlotEntry;
 }) {
   const onDateChange = (selectedDate: Dayjs | null) => {
@@ -51,6 +51,7 @@ export default function TimeSlotInputs({
         value={dayjs(slot.date)}
         onChange={onDateChange}
         label={dict.slotDate}
+        disablePast
       />
       <TimePicker
         key={"slot-" + index + "-startTime"}
@@ -65,6 +66,10 @@ export default function TimeSlotInputs({
         onChange={(v) => onTimeChange(v, "endTime")}
         name={`slot-${index}-endTime`}
         label={dict.slotEndTime}
+        minTime={
+          timeToDayJs(slot.startTime)?.add(interviewDuration, "minute") ||
+          undefined
+        }
       />
     </>
   );

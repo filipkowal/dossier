@@ -12,14 +12,14 @@ export default function AvailibilityStep({
   availibilitySlots,
   setAvailibilitySlots,
   dict,
-  locale,
+  interviewDuration,
 }: {
   newSlot: TimeSlots[0];
   setNewSlot: Dispatch<SetStateAction<TimeSlots[0]>>;
   availibilitySlots: TimeSlots;
   setAvailibilitySlots: Dispatch<SetStateAction<TimeSlots>>;
   dict: Dictionary["inviteModal"];
-  locale: Locale;
+  interviewDuration: number;
 }) {
   const [showNewSlot, setShowNewSlot] = useState(true);
 
@@ -54,7 +54,7 @@ export default function AvailibilityStep({
                   setSlotEntry={setSlotEntry}
                   index={index}
                   dict={dict}
-                  locale={locale}
+                  interviewDuration={interviewDuration}
                 />
               </div>
               <Button
@@ -78,7 +78,7 @@ export default function AvailibilityStep({
                   setSlotEntry={setNewSlotEntry}
                   index={availibilitySlots.length}
                   dict={dict}
-                  locale={locale}
+                  interviewDuration={interviewDuration}
                 />
               </div>
               {availibilitySlots.length > 0 && (
