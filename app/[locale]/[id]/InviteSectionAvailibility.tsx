@@ -47,8 +47,11 @@ export default function AvailibilityStep({
 
         <div className="flex flex-col gap-10">
           {availibilitySlots.map((slot, index) => (
-            <div key={slot.id} className="flex flex-col sm:flex-row sm:gap-6">
-              <div className="flex items-center gap-2 sm:gap-6">
+            <div
+              key={slot.id}
+              className="flex flex-col lg:flex-row lg:gap-6 w-fit sm:w-auto"
+            >
+              <div className="flex flex-col sm:flex-row items-center gap-2 md:gap-6">
                 <TimeSlotInputs
                   slot={slot}
                   setSlotEntry={setSlotEntry}
@@ -71,8 +74,8 @@ export default function AvailibilityStep({
           ))}
 
           {showNewSlot && (
-            <div className="flex flex-col sm:flex-row sm:gap-6">
-              <div className="flex items-center gap-2 sm:gap-6">
+            <div className="flex flex-col lg:flex-row lg:gap-6 w-fit sm:w-auto">
+              <div className="flex flex-col sm:flex-row items-center gap-2 md:gap-6">
                 <TimeSlotInputs
                   slot={newSlot}
                   setSlotEntry={setNewSlotEntry}
