@@ -21,17 +21,6 @@ export default function AvailibilityStep({
   dict: Dictionary["inviteModal"];
   interviewDuration: number;
 }) {
-  const [showNewSlot, setShowNewSlot] = useState(true);
-
-  const setSlotEntry =
-    (name: keyof TimeSlots[0], index: number) => (value: string) => {
-      setAvailibilitySlots(
-        availibilitySlots.map((s, i) =>
-          i === index ? { ...s, [name]: value } : s
-        )
-      );
-    };
-
   const setNewSlotEntry =
     (name: keyof TimeSlots[0], index: number) => (value: string) => {
       setNewSlot({ ...newSlot, [name]: value });
@@ -46,10 +35,41 @@ export default function AvailibilityStep({
         </p>
 
         <div className="flex flex-col gap-10">
+          <div className="flex flex-col lg:flex-row gap-2 lg:gap-6 w-fit sm:w-auto">
+            <div className="flex flex-col sm:flex-row items-center gap-2 md:gap-6">
+              <TimeSlotInputs
+                slot={newSlot}
+                setSlotEntry={setNewSlotEntry}
+                index={availibilitySlots.length}
+                dict={dict}
+                interviewDuration={interviewDuration}
+              />
+            </div>
+            <Button
+              name="Add new slot"
+              onClick={() => {
+                if (newSlot.date && newSlot.startTime && newSlot.endTime) {
+                  setAvailibilitySlots((slots) => [...slots, newSlot]);
+                  setNewSlot({
+                    id: newSlot.id + 1,
+                    date: "",
+                    startTime: "",
+                    endTime: "",
+                  });
+                }
+              }}
+              disabled={!newSlot.date || !newSlot.startTime || !newSlot.endTime}
+              className="bg-digitalent-blue text-white disabled:bg-digitalent-blue disabled:text-white hover:disabled:bg-digitalent-blue hover:disabled:text-white"
+            >
+              {dict.addSlot}
+            </Button>
+          </div>
+
+          <h2>{dict.slots}:</h2>
           {availibilitySlots.map((slot) => (
             <div
               key={slot.id}
-              className="border-digitalent-blue border-2 py-2 px-8 flex flex-col sm:flex-row gap-2 lg:gap-6 w-fit sm:w-auto items-center justify-between"
+              className="border-digitalent-blue border-2 px-8 flex flex-col sm:flex-row gap-2 lg:gap-6 w-fit sm:w-auto items-center justify-between"
             >
               <span className="w-fit items-center">
                 {slot.date + ", " + slot.startTime + " - " + slot.endTime}
@@ -67,60 +87,6 @@ export default function AvailibilityStep({
               </Button>
             </div>
           ))}
-
-          {showNewSlot && (
-            <div className="flex flex-col lg:flex-row gap-2 lg:gap-6 w-fit sm:w-auto">
-              <div className="flex flex-col sm:flex-row items-center gap-2 md:gap-6">
-                <TimeSlotInputs
-                  slot={newSlot}
-                  setSlotEntry={setNewSlotEntry}
-                  index={availibilitySlots.length}
-                  dict={dict}
-                  interviewDuration={interviewDuration}
-                />
-              </div>
-              {availibilitySlots.length > 0 && (
-                <Button
-                  onClick={() => {
-                    setNewSlot((slot) => ({
-                      ...slot,
-                      date: "",
-                      startTime: "",
-                      endTime: "",
-                    }));
-                    setShowNewSlot(false);
-                  }}
-                  type="invert"
-                  className="flex items-center justify-center bg-digitalent-blue whitespace-nowrap"
-                >
-                  <div>{dict.removeSlot}</div>
-                </Button>
-              )}
-            </div>
-          )}
-
-          <Button
-            name="Add new slot"
-            onClick={() => {
-              if (newSlot.date && newSlot.startTime && newSlot.endTime) {
-                setAvailibilitySlots((slots) => [...slots, newSlot]);
-                setNewSlot({
-                  id: newSlot.id + 1,
-                  date: "",
-                  startTime: "",
-                  endTime: "",
-                });
-              }
-              setShowNewSlot(true);
-            }}
-            disabled={
-              (!newSlot.date || !newSlot.startTime || !newSlot.endTime) &&
-              showNewSlot
-            }
-            className="bg-digitalent-blue text-white disabled:bg-digitalent-blue disabled:text-white hover:disabled:bg-digitalent-blue hover:disabled:text-white"
-          >
-            {dict.addSlot}
-          </Button>
         </div>
       </LocalizationProvider>
     </>

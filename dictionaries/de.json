@@ -57,7 +57,7 @@
     "slotStartTime": "Zeitfenster Start",
     "slotEndTime": "Zeitfenster Ende",
     "removeSlot": "Slot entfernen",
-    "addSlot": "ZEITFENSTER HINZUFÜGEN",
+    "addSlot": "Slot HINZUFÜGEN",
     "send": "Senden",
     "previous": "Zurück",
     "next": "Weiter",
@@ -65,7 +65,8 @@
       "male": "Vielen Dank für die Zeitfenster. Wir werden mit dem Kandidaten abklären, welcher Termin am besten passt, und dich zeitnah informieren.",
       "female": "Vielen Dank für die Zeitfenster. Wir werden mit der Kandidatin abklären, welcher Termin am besten passt, und dich zeitnah informieren."
     },
-    "close": "Schließen"
+    "close": "Schließen",
+    "slots": "Slots"
   },
   "rejectModal": {
     "title": "Kandidat ablehnen",

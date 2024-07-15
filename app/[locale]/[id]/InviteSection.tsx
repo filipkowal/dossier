@@ -168,10 +168,7 @@ export default function InviteSection({
               dict={dict}
               isPending={invitePending}
               setIsOpen={setIsOpen}
-              submissionDisabled={
-                (availibilitySlots.length === 0 && !isSlotSet(newSlot)) ||
-                (!isSlotSet(newSlot) && !isSlotEmpty(newSlot))
-              }
+              submissionDisabled={availibilitySlots.length < 1}
               onSubmit={async () => {
                 setInvitePending(true);
                 const slots = [...availibilitySlots];

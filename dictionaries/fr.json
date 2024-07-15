@@ -65,7 +65,8 @@
       "male": "Merci d'avoir fourni des créneaux horaires. Nous allons clarifier avec le candidat quel créneau correspond le mieux et vous informerons rapidement.",
       "female": "Merci d'avoir fourni des créneaux horaires. Nous allons clarifier avec la candidate quel créneau correspond le mieux et vous informerons rapidement."
     },
-    "close": "Fermer"
+    "close": "Fermer",
+    "slots": "Disponibilité"
   },
   "rejectModal": {
     "title": "Rejeter le candidat",
