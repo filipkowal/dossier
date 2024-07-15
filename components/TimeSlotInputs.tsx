@@ -1,76 +1,76 @@
-import { type Dictionary, type Locale, type TimeSlots } from "@/utils";
-
+import { type Dictionary, type TimeSlots } from "@/utils";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
-import dayjs, { Dayjs } from "dayjs";
-
-type SetSlotEntry = (
-  name: keyof TimeSlots[0],
-  index: number
-) => (value: string) => void;
+import type { Dayjs } from "dayjs";
+import Button from "./Button";
+import { Dispatch, SetStateAction, useState } from "react";
 
 export default function TimeSlotInputs({
-  slot,
-  index,
   dict,
   interviewDuration,
-  setSlotEntry,
+  setAvailibilitySlots,
 }: {
-  slot: TimeSlots[number];
-  index: number;
   dict: Dictionary["inviteModal"];
   interviewDuration: number;
-  setSlotEntry: SetSlotEntry;
+  setAvailibilitySlots: Dispatch<SetStateAction<TimeSlots>>;
 }) {
-  const onDateChange = (selectedDate: Dayjs | null) => {
-    const date = selectedDate ? selectedDate.format("DD.MM.YYYY") : "";
+  const [date, setDate] = useState<Dayjs | null>(null);
+  const [startTime, setStartTime] = useState<Dayjs | null>(null);
+  const [endTime, setEndTime] = useState<Dayjs | null>(null);
 
-    setSlotEntry("date", index)(date);
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!date || !startTime || !endTime) return;
+
+    const slot = {
+      id: Date.now(),
+      date: date.format("DD.MM.YYYY"),
+      startTime: startTime.format("HH:mm"),
+      endTime: endTime.format("HH:mm"),
+    };
+
+    setAvailibilitySlots((slots) => [...slots, slot]);
+
+    setDate(null);
+    setStartTime(null);
+    setEndTime(null);
   };
-
-  const onTimeChange = (
-    selectedTime: Dayjs | null,
-    key: "startTime" | "endTime"
-  ) => {
-    const time = selectedTime ? selectedTime.format("HH:mm") : "";
-
-    setSlotEntry(key, index)(time);
-  };
-
-  function timeToDayJs(time: string) {
-    if (!time) return null;
-    return dayjs()
-      .hour(Number(time.split(":")[0]))
-      .minute(Number(time.split(":")[1]));
-  }
 
   return (
-    <>
+    <form
+      className="flex flex-col sm:flex-row items-center gap-2 md:gap-6"
+      onSubmit={handleSubmit}
+    >
       <DatePicker
-        key={"slot-" + index + "-date"}
-        name={`slot-${index}-date`}
-        value={dayjs(slot.date)}
-        onChange={onDateChange}
+        name="date"
         label={dict.slotDate}
+        value={date}
+        onChange={(newValue) => setDate(newValue)}
         disablePast
       />
       <TimePicker
-        key={"slot-" + index + "-startTime"}
-        value={timeToDayJs(slot.startTime)}
-        onChange={(v) => onTimeChange(v, "startTime")}
+        name="startTime"
         label={dict.slotStartTime}
-        name={`slot-${index}-startTime`}
+        value={startTime}
+        onChange={(newValue) => setStartTime(newValue)}
       />
       <TimePicker
-        key={"slot-" + index + "-endTime"}
-        value={timeToDayJs(slot.endTime)}
-        onChange={(v) => onTimeChange(v, "endTime")}
-        name={`slot-${index}-endTime`}
+        name="endTime"
         label={dict.slotEndTime}
+        value={endTime}
+        onChange={(newValue) => setEndTime(newValue)}
         minTime={
-          timeToDayJs(slot.startTime)?.add(interviewDuration, "minute") ||
-          undefined
+          startTime ? startTime.add(interviewDuration, "minute") : undefined
         }
       />
-    </>
+      <Button
+        name="Add slot"
+        submitType
+        disabled={!date || !startTime || !endTime}
+        className="bg-digitalent-blue text-white disabled:bg-digitalent-blue disabled:text-white hover:disabled:bg-digitalent-blue hover:disabled:text-white"
+      >
+        {dict.addSlot}
+      </Button>
+    </form>
   );
 }

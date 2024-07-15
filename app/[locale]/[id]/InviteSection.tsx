@@ -36,12 +36,6 @@ export default function InviteSection({
   const [interviewLink, setInterviewLink] = useState("");
   const [availibilitySlots, setAvailibilitySlots] = useState<TimeSlots>([]);
   const [interviewDuration, setInterviewDuration] = useState(30);
-  const [newSlot, setNewSlot] = useState({
-    id: 0,
-    date: "",
-    startTime: "",
-    endTime: "",
-  });
   const [invitePending, setInvitePending] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -78,8 +72,6 @@ export default function InviteSection({
       content: (
         <AvailibilityStep
           key="availibilityStep"
-          newSlot={newSlot}
-          setNewSlot={setNewSlot}
           availibilitySlots={availibilitySlots}
           setAvailibilitySlots={setAvailibilitySlots}
           dict={dict}
@@ -203,7 +195,7 @@ export default function InviteSection({
           )
         }
       >
-        <form className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6">
           {" "}
           {/* // Don't autofocus the first input so that on mobile the form is visble workaround */}
           <input
@@ -212,7 +204,7 @@ export default function InviteSection({
             autoFocus
           />
           {steps[step].content}
-        </form>
+        </div>
       </Dialog>
     </>
   );
