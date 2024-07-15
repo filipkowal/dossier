@@ -45,11 +45,6 @@ export default function InviteSection({
   const [invitePending, setInvitePending] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
-  const isSlotSet = (slot: TimeSlots[number]) =>
-    slot.date && slot.startTime && slot.endTime;
-  const isSlotEmpty = (slot: TimeSlots[number]) =>
-    slot.date === "" && slot.startTime === "" && slot.endTime === "";
-
   const steps: {
     content: ReactNode;
     title?: "locationStepTitle" | "availabilityStepTitle";
@@ -171,12 +166,8 @@ export default function InviteSection({
               submissionDisabled={availibilitySlots.length < 1}
               onSubmit={async () => {
                 setInvitePending(true);
-                const slots = [...availibilitySlots];
-                if (isSlotSet(newSlot)) {
-                  slots.push(newSlot);
-                }
 
-                if (slots.length === 0) {
+                if (availibilitySlots.length === 0) {
                   toast.error(dict["noSlots"]);
                   return;
                 }
@@ -189,7 +180,7 @@ export default function InviteSection({
                       : ("onsite" as "online" | "onsite"),
                     address: inteviewLocation,
                     url: interviewLink,
-                    availibilitySlots: slots,
+                    availibilitySlots,
                   };
 
                   const response = await inviteCandidate(

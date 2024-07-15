@@ -46,7 +46,7 @@ export default function AvailibilityStep({
               />
             </div>
             <Button
-              name="Add new slot"
+              name="Add slot"
               onClick={() => {
                 if (newSlot.date && newSlot.startTime && newSlot.endTime) {
                   setAvailibilitySlots((slots) => [...slots, newSlot]);
@@ -65,28 +65,41 @@ export default function AvailibilityStep({
             </Button>
           </div>
 
-          <h2>{dict.slots}:</h2>
-          {availibilitySlots.map((slot) => (
-            <div
-              key={slot.id}
-              className="border-digitalent-blue border-2 px-8 flex flex-col sm:flex-row gap-2 lg:gap-6 w-fit sm:w-auto items-center justify-between"
-            >
-              <span className="w-fit items-center">
-                {slot.date + ", " + slot.startTime + " - " + slot.endTime}
-              </span>
-              <Button
-                type="invert"
-                onClick={() =>
-                  setAvailibilitySlots((slots) =>
-                    slots.filter((s) => s.id !== slot.id)
-                  )
-                }
-                className="flex items-center justify-center bg-digitalent-blue"
-              >
-                <div>{dict.removeSlot}</div>
-              </Button>
-            </div>
-          ))}
+          <p>{dict.slots}:</p>
+          <div className="flex gap-2 flex-wrap">
+            {availibilitySlots.length > 0 ? (
+              availibilitySlots.map((slot) => (
+                <div
+                  key={slot.id}
+                  className="border-digitalent-blue border-2 px-4 py-2 flex gap-4 w-fit items-center rounded-md"
+                >
+                  <div className="flex flex-col">
+                    <span className="font-bold">{slot.date}</span>
+                    <span>{slot.startTime + " - " + slot.endTime}</span>
+                  </div>
+                  <svg
+                    className="w-6 h-6 float-right  cursor-pointer"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                    onClick={() =>
+                      setAvailibilitySlots((slots) =>
+                        slots.filter((s) => s.id !== slot.id)
+                      )
+                    }
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              ))
+            ) : (
+              <p className="opacity-50">Added slots will appear here</p>
+            )}
+          </div>
         </div>
       </LocalizationProvider>
     </>

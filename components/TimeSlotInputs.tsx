@@ -52,12 +52,6 @@ export default function TimeSlotInputs({
         onChange={onDateChange}
         label={dict.slotDate}
         disablePast
-        slotProps={{
-          field: {
-            clearable: true,
-            onClear: () => setSlotEntry("date", index)(""),
-          },
-        }}
       />
       <TimePicker
         key={"slot-" + index + "-startTime"}
@@ -65,12 +59,6 @@ export default function TimeSlotInputs({
         onChange={(v) => onTimeChange(v, "startTime")}
         label={dict.slotStartTime}
         name={`slot-${index}-startTime`}
-        slotProps={{
-          field: {
-            clearable: true,
-            onClear: () => setSlotEntry("startTime", index)(""),
-          },
-        }}
       />
       <TimePicker
         key={"slot-" + index + "-endTime"}
@@ -82,12 +70,6 @@ export default function TimeSlotInputs({
           timeToDayJs(slot.startTime)?.add(interviewDuration, "minute") ||
           undefined
         }
-        slotProps={{
-          field: {
-            clearable: true,
-            onClear: () => setSlotEntry("endTime", index)(""),
-          },
-        }}
       />
     </>
   );
