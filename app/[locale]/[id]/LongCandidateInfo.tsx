@@ -35,14 +35,16 @@ function Section({
 }) {
   if (!content) return null;
 
+  console.log(name, content);
+
   return (
     <>
       <h2 className="text-xl font-title mb-4 mt-8 sm:my-8">{dict[name]}</h2>
-      <p
+      <div
         dangerouslySetInnerHTML={{
           __html: content || "",
         }}
-      ></p>
+      ></div>
     </>
   );
 }
