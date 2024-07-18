@@ -4,6 +4,8 @@ import { Button, Dialog, TextInput } from "@/components";
 import { Dictionary, sendMessage } from "@/utils";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import SuccessIcon from "@/public/success.webp";
+import Image from "next/image";
 
 export default function ContactModal({
   dict,
@@ -83,20 +85,16 @@ export default function ContactModal({
           </Button>
         </form>
       </Dialog>
-      <Dialog
-        title="Success"
-        isOpen={isSuccessDialogOpen}
-        setIsOpen={setIsSuccessDialogOpen}
-        footer={
-          <Button
-            name={dict["close"]}
-            onClick={() => setIsSuccessDialogOpen(false)}
-          >
-            {dict["close"]}
-          </Button>
-        }
-      >
+      <Dialog isOpen={isSuccessDialogOpen} setIsOpen={setIsSuccessDialogOpen}>
         <div className="w-full flex flex-col gap-6 ">
+          <div className="flex justify-center">
+            <Image
+              src={SuccessIcon}
+              alt="Success Icon"
+              width={80}
+              height={80}
+            />
+          </div>
           <h1>{dict["success"]}</h1>
         </div>
       </Dialog>

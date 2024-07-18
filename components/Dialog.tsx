@@ -12,7 +12,7 @@ export default function Dialog({
 }: {
   isOpen: boolean;
   children: React.ReactNode;
-  title?: string;
+  title?: string | React.ReactNode;
   footer?: React.ReactElement<any, string | JSXElementConstructor<any>>;
   setIsOpen: (isOpen: boolean) => void;
 }) {
