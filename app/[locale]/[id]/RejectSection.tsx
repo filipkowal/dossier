@@ -43,7 +43,19 @@ export default function RejectSection({
         <span className="sm:hidden">{dict.reject}</span>
       </Button>
 
-      <Dialog isOpen={isOpen} setIsOpen={setIsOpen} title={dict.title}>
+      <Dialog
+        isOpen={isOpen}
+        setIsOpen={(value) => {
+          setIsOpen(value);
+
+          if (value === false) {
+            setReason("");
+            setMessage("");
+            router.refresh();
+          }
+        }}
+        title={dict.title}
+      >
         <form
           className="flex flex-col gap-4"
           onSubmit={async (e) => {
@@ -55,7 +67,6 @@ export default function RejectSection({
 
               setIsOpen(false);
               setIsSuccessDialogOpen(true);
-              setTimeout(() => setIsSuccessDialogOpen(false), 10000);
             } catch (e) {
               toast.error(dict["somethingWrong"]);
             } finally {
