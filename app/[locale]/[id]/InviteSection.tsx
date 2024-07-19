@@ -30,8 +30,9 @@ export default function InviteSection({
 
   const [isInterviewOnline, setIsInterviewOnline] = useState(true);
   const [inteviewLocation, setInterviewLocation] = useState(
-    `${user.address?.street}, ${user.address?.city}, ${user.address?.country}` ||
-      ""
+    user.address
+      ? `${user.address?.street}, ${user.address?.city}, ${user.address?.country}`
+      : ""
   );
   const [interviewLink, setInterviewLink] = useState("");
   const [availibilitySlots, setAvailibilitySlots] = useState<TimeSlots>([]);
@@ -106,6 +107,20 @@ export default function InviteSection({
     user?.isInterviewAvailabilityInputVisible === false &&
     user?.isInterviewLocationInputVisible === false;
 
+  function resetData() {
+    setStep(0);
+    setSuccessMessage("");
+    setAvailibilitySlots([]);
+    setInterviewDuration(30);
+    setIsInterviewOnline(true);
+    setInterviewLocation(
+      user.address
+        ? `${user.address?.street}, ${user.address?.city}, ${user.address?.country}`
+        : ""
+    );
+    setInterviewLink("");
+  }
+
   return (
     <>
       <Button
@@ -137,8 +152,12 @@ export default function InviteSection({
         setIsOpen={(isOpen) => {
           setIsOpen(isOpen);
 
-          if (isOpen === false && step === steps.length - 1) {
-            router.refresh();
+          if (isOpen === false) {
+            resetData();
+
+            if (step === steps.length - 1) {
+              router.refresh();
+            }
           }
         }}
         title={
