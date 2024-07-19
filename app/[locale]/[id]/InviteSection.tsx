@@ -155,14 +155,13 @@ export default function InviteSection({
               dict={dict}
               isPending={invitePending}
               setIsOpen={setIsOpen}
-              submissionDisabled={availibilitySlots.length < 1}
               onSubmit={async () => {
-                setInvitePending(true);
-
-                if (availibilitySlots.length === 0) {
+                if (availibilitySlots.length < 1) {
                   toast.error(dict["noSlots"]);
                   return;
                 }
+
+                setInvitePending(true);
 
                 try {
                   const formValues = {

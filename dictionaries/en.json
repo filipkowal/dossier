@@ -66,7 +66,10 @@
       "female": "Thank you for providing timeslots. We will clarify with the candidate which timeslot fits best and inform you promptly"
     },
     "close": "Close",
-    "slots": "Slots"
+    "slots": "Slots",
+    "noDate": "Please provide your availibility date",
+    "noStartTime": "Please provide your availibility start time",
+    "noEndTime": "Please provide your availibility end time"
   },
   "rejectModal": {
     "title": "Reject Candidate",

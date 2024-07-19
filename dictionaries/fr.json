@@ -66,7 +66,10 @@
       "female": "Merci d'avoir fourni des créneaux horaires. Nous allons clarifier avec la candidate quel créneau correspond le mieux et vous informerons rapidement."
     },
     "close": "Fermer",
-    "slots": "Disponibilité"
+    "slots": "Disponibilité",
+    "noDate": "Merci de donner ta date de disponibilité",
+    "noStartTime": "Merci de donner ton heure de début de disponibilité",
+    "noEndTime": "Merci de donner ton heure de fin de disponibilité"
   },
   "rejectModal": {
     "title": "Rejeter le candidat",

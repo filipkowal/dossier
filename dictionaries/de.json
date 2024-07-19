@@ -66,7 +66,10 @@
       "female": "Vielen Dank für die Zeitfenster. Wir werden mit der Kandidatin abklären, welcher Termin am besten passt, und dich zeitnah informieren."
     },
     "close": "Schließen",
-    "slots": "Slots"
+    "slots": "Slots",
+    "noDate": "Bitte gib dein Verfügbarkeitsdatum an",
+    "noStartTime": "Bitte gib deine Verfügbarkeitsstartzeit an",
+    "noEndTime": "Bitte gib deine Verfügbarkeitsendzeit an"
   },
   "rejectModal": {
     "title": "Kandidat ablehnen",

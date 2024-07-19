@@ -3,6 +3,7 @@ import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import type { Dayjs } from "dayjs";
 import Button from "./Button";
 import { Dispatch, SetStateAction, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function TimeSlotInputs({
   dict,
@@ -17,10 +18,23 @@ export default function TimeSlotInputs({
   const [startTime, setStartTime] = useState<Dayjs | null>(null);
   const [endTime, setEndTime] = useState<Dayjs | null>(null);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const addSlot = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!date || !startTime || !endTime) return;
+    if (!date) {
+      toast.error(dict.noDate);
+      return;
+    }
+
+    if (!startTime) {
+      toast.error(dict.noStartTime);
+      return;
+    }
+
+    if (!endTime) {
+      toast.error(dict.noEndTime);
+      return;
+    }
 
     const slot = {
       id: Date.now(),
@@ -39,7 +53,7 @@ export default function TimeSlotInputs({
   return (
     <form
       className="flex flex-col sm:flex-row items-center gap-2 md:gap-6"
-      onSubmit={handleSubmit}
+      onSubmit={addSlot}
     >
       <DatePicker
         name="date"
@@ -66,7 +80,6 @@ export default function TimeSlotInputs({
       <Button
         name="Add slot"
         submitType
-        disabled={!date || !startTime || !endTime}
         className="bg-digitalent-blue text-white disabled:bg-digitalent-blue disabled:text-white hover:disabled:bg-digitalent-blue hover:disabled:text-white"
       >
         {dict.addSlot}
