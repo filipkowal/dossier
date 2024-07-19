@@ -96,6 +96,7 @@ export default function InviteSection({
           {successMessage
             ? successMessage
             : dict["success"][candidateGender === "m" ? "male" : "female"]}
+          .
         </h1>
       </div>
     ),

@@ -56,7 +56,7 @@ export default function Dialog({
       id="dialog"
       ref={ref}
       style={{ overflowY: "auto", maxHeight: "100vh" }}
-      className="fixed inset-0 z-50 bg-digitalent-gray-light transform overflow-hidden text-digitalent-blue text-left align-middle shadow-xl transition-all w-[60rem] max-w-full"
+      className="fixed inset-0 z-50 bg-digitalent-gray-light transform overflow-hidden text-digitalent-blue text-left align-middle shadow-all-sides transition-all w-[60rem] max-w-full"
     >
       <div className="px-4 pt-4 pb-7 md:py-10 md:px-16">
         <div className="text-2xl font-title font-medium uppercase pb-8 flex justify-between">

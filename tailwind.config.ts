@@ -34,6 +34,10 @@ const config: Config = {
       height: {
         initial: "initial",
       },
+      boxShadow: {
+        "all-sides":
+          "0 10px 25px 0 rgba(0, 0, 0, 0.17), 0 4px 7px 0 rgba(0, 0, 0, 0.0)",
+      },
     },
     fontFamily: {
       sans: ["var(--font-inter)", "sans-serif"],
