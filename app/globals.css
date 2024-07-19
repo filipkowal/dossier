@@ -63,30 +63,30 @@ select:-webkit-autofill:focus {
   --tw-ring-offset-width: 2px;
 }
 
-input:focus,
-textarea:focus,
-select:focus,
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible,
-[type="text"]:focus,
-[type="email"]:focus,
-[type="url"]:focus,
-[type="password"]:focus,
-[type="number"]:focus,
-[type="date"]:focus,
-[type="datetime-local"]:focus,
-[type="month"]:focus,
-[type="search"]:focus,
-[type="tel"]:focus,
-[type="time"]:focus,
-[type="week"]:focus,
-[multiple]:focus,
-[role="button"]:focus,
-[type="button"]:focus,
-[type="reset"]:focus,
-[type="submit"]:focus,
-[type="file"]:focus {
+input:focus:not([class^="MuiInput"]),
+textarea:focus:not([class^="MuiInput"]),
+select:focus:not([class^="MuiInput"]),
+input:focus-visible:not([class^="MuiInput"]),
+textarea:focus-visible:not([class^="MuiInput"]),
+select:focus-visible:not([class^="MuiInput"]),
+[type="text"]:focus:not([class^="MuiInput"]),
+[type="email"]:focus:not([class^="MuiInput"]),
+[type="url"]:focus:not([class^="MuiInput"]),
+[type="password"]:focus:not([class^="MuiInput"]),
+[type="number"]:focus:not([class^="MuiInput"]),
+[type="date"]:focus:not([class^="MuiInput"]),
+[type="datetime-local"]:focus:not([class^="MuiInput"]),
+[type="month"]:focus:not([class^="MuiInput"]),
+[type="search"]:focus:not([class^="MuiInput"]),
+[type="tel"]:focus:not([class^="MuiInput"]),
+[type="time"]:focus:not([class^="MuiInput"]),
+[type="week"]:focus:not([class^="MuiInput"]),
+[multiple]:focus:not([class^="MuiInput"]),
+[role="button"]:focus:not([class^="MuiInput"]),
+[type="button"]:focus:not([class^="MuiInput"]),
+[type="reset"]:focus:not([class^="MuiInput"]),
+[type="submit"]:focus:not([class^="MuiInput"]),
+[type="file"]:focus:not([class^="MuiInput"]) {
   outline: none;
   --tw-ring-offset-width: 1px;
   --tw-ring-offset-color: var(--digitalent-blue);
@@ -97,6 +97,10 @@ select:focus-visible,
     calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
     var(--tw-shadow);
+}
+
+input[class^="MuiInput"]:focus {
+  box-shadow: none;
 }
 
 button:focus {
