@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useContext, useState } from "react";
 import { inviteCandidate } from "@/utils";
 import type { Dictionary, User, Locale, TimeSlots } from "@/utils";
 import { FormFooterButtons, Dialog, Button } from "@/components";
@@ -9,6 +9,7 @@ import LocationStep from "./InviteSectionLocation";
 import { useRouter } from "next/navigation";
 import SuccessIcon from "@/public/success.webp";
 import Image from "next/image";
+import { RefetchProvider, useRefetch } from "./RefetchContext";
 
 export default function InviteSection({
   dict,
@@ -25,6 +26,8 @@ export default function InviteSection({
 }) {
   const { locale, id } = params;
   const router = useRouter();
+  const { isRefetching, startRefetch, endRefetch } = useRefetch();
+
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState<number>(0);
 
@@ -123,29 +126,34 @@ export default function InviteSection({
 
   return (
     <>
-      <Button
-        type="primary"
-        name={dict.inviteToInterview}
-        className="w-full sm:w-1/3 xl:w-1/4 max-w-[32rem]"
-        onClick={async () => {
-          if (isUC3) {
-            try {
-              const response = await inviteCandidate(locale, id);
-              setSuccessMessage(response);
-              setIsOpen(true);
-            } catch (error) {
-              toast.error(dict.somethingWrong);
+      {!isRefetching && (
+        <Button
+          type="primary"
+          name={dict.inviteToInterview}
+          className="w-full sm:w-1/3 xl:w-1/4 max-w-[32rem]"
+          onClick={async () => {
+            if (isUC3) {
+              try {
+                startRefetch();
+
+                const response = await inviteCandidate(locale, id);
+                setSuccessMessage(response);
+                setIsOpen(true);
+              } catch (error) {
+                toast.error(dict.somethingWrong);
+                endRefetch();
+              }
+
+              return;
             }
 
-            return;
-          }
-
-          setIsOpen(true);
-        }}
-      >
-        <span className="hidden sm:block">{dict.inviteToInterview}</span>
-        <span className="sm:hidden">{dict.invite}</span>
-      </Button>
+            setIsOpen(true);
+          }}
+        >
+          <span className="hidden sm:block">{dict.inviteToInterview}</span>
+          <span className="sm:hidden">{dict.invite}</span>
+        </Button>
+      )}
 
       <Dialog
         isOpen={isOpen}
@@ -201,9 +209,12 @@ export default function InviteSection({
                   );
                   setSuccessMessage(response);
 
+                  startRefetch();
+
                   setStep((step) => step + 1);
                 } catch (e) {
                   toast.error(dict["somethingWrong"]);
+                  endRefetch();
                 } finally {
                   setInvitePending(false);
                 }

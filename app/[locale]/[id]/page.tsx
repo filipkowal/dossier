@@ -22,8 +22,8 @@ import AvatarMale from "@/public/avatar-male.webp";
 import AvatarFemale from "@/public/avatar-female.png";
 import { cookies } from "next/headers";
 import ImageWithPlaceholder from "@/components/ImageWithPlaceholder";
-import sampleAvatar from "@/public/sampleAvatar.webp";
 import { revalidatePath } from "next/cache";
+import { RefetchProvider } from "./RefetchContext";
 
 export const dynamic = "force-dynamic";
 
@@ -80,7 +80,9 @@ export default async function Home({
           />
         </div>
         <div className="block xl:hidden mt-16 -mb-16 px-8 sm:px-16 w-full">
-          <DossierStatus candidate={candidate} />
+          <RefetchProvider>
+            <DossierStatus candidate={candidate} />
+          </RefetchProvider>
         </div>
         <div className="flex flex-col mt-20 xl:mt-8 sm:px-16 2xl:px-32 px-8 mb-12 min-h-[70vh]">
           {/* Mobile */}
@@ -179,7 +181,9 @@ export default async function Home({
       <div className="flex flex-col">
         {/* Desktop */}
         <div className="hidden xl:flex flex-col pt-16 sm:px-16 2xl:px-32 bg-digitalent-blue text-white justify-end min-h-[34vh] 3xl:h-[30vh]">
-          <DossierStatus candidate={candidate} />
+          <RefetchProvider>
+            <DossierStatus candidate={candidate} />
+          </RefetchProvider>
 
           <div className="max-w-[48rem] font-title flex text-3xl gap-12 mb-16">
             <div className="text-digitalent-green">
@@ -253,36 +257,38 @@ export default async function Home({
         <CvAndCertificates cvAndCertificates={candidate.file} />
       </div>
       <div className="z-10 flex fixed md:bottom-6 bottom-0 justify-center sm:gap-3 md:gap-6 w-full">
-        <InviteSection
-          dict={{
-            ...dict.inviteModal,
-            ...dict.mainButtons,
-            ...dict.toastMessages,
-          }}
-          user={user}
-          params={params}
-          candidateGender={candidate?.gender}
-        />
-        <RejectSection
-          dict={{
-            ...dict.rejectModal,
-            ...dict.mainButtons,
-            ...dict.toastMessages,
-          }}
-          id={id}
-          candidateGender={candidate?.gender}
-          isRejectButtonVisible={user.isRejectButtonVisible}
-        />
+        <RefetchProvider>
+          <InviteSection
+            dict={{
+              ...dict.inviteModal,
+              ...dict.mainButtons,
+              ...dict.toastMessages,
+            }}
+            user={user}
+            params={params}
+            candidateGender={candidate?.gender}
+          />
+          <RejectSection
+            dict={{
+              ...dict.rejectModal,
+              ...dict.mainButtons,
+              ...dict.toastMessages,
+            }}
+            id={id}
+            candidateGender={candidate?.gender}
+            isRejectButtonVisible={user.isRejectButtonVisible}
+          />
 
-        <ContactSection
-          dict={{
-            ...dict.mainButtons,
-            ...dict.contactModal,
-            ...dict.toastMessages,
-          }}
-          relationshipManager={relationshipManager}
-          id={id}
-        />
+          <ContactSection
+            dict={{
+              ...dict.mainButtons,
+              ...dict.contactModal,
+              ...dict.toastMessages,
+            }}
+            relationshipManager={relationshipManager}
+            id={id}
+          />
+        </RefetchProvider>
       </div>
     </div>
   );

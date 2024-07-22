@@ -7,6 +7,7 @@ import { Dictionary } from "@/utils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useRefetch } from "./RefetchContext";
 
 export default function RejectSection({
   dict,
@@ -21,6 +22,8 @@ export default function RejectSection({
   isRejectButtonVisible: boolean | undefined;
   candidateGender?: "m" | "f";
 }) {
+  const { isRefetching, startRefetch, endRefetch } = useRefetch();
+
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [reason, setReason] = useState("");
@@ -34,14 +37,16 @@ export default function RejectSection({
 
   return (
     <>
-      <Button
-        name="Reject"
-        onClick={() => setIsOpen(true)}
-        className="w-full sm:w-1/3 xl:w-1/4 max-w-[32rem] text-white bg-digitalent-blue"
-      >
-        <span className="hidden sm:block">{dict.notInterested}</span>
-        <span className="sm:hidden">{dict.reject}</span>
-      </Button>
+      {!isRefetching && (
+        <Button
+          name="Reject"
+          onClick={() => setIsOpen(true)}
+          className="w-full sm:w-1/3 xl:w-1/4 max-w-[32rem] text-white bg-digitalent-blue"
+        >
+          <span className="hidden sm:block">{dict.notInterested}</span>
+          <span className="sm:hidden">{dict.reject}</span>
+        </Button>
+      )}
 
       <Dialog
         isOpen={isOpen}
@@ -61,6 +66,7 @@ export default function RejectSection({
           onSubmit={async (e) => {
             e.preventDefault();
             setRejectionPending(true);
+            startRefetch();
 
             try {
               await rejectCandidate(id, reason, message);
@@ -69,6 +75,7 @@ export default function RejectSection({
               setIsSuccessDialogOpen(true);
             } catch (e) {
               toast.error(dict["somethingWrong"]);
+              endRefetch();
             } finally {
               setRejectionPending(false);
             }
