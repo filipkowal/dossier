@@ -67,9 +67,9 @@
     },
     "close": "Schließen",
     "slots": "Slots",
-    "noDate": "Bitte gib dein Verfügbarkeitsdatum an",
-    "noStartTime": "Bitte gib deine Verfügbarkeitsstartzeit an",
-    "noEndTime": "Bitte gib deine Verfügbarkeitsendzeit an"
+    "noDate": "Bitte gib ein Datum an",
+    "noStartTime": "Bitte gib an, wann dein Zeitfenster startet",
+    "noEndTime": "Bitte gib an, wann dein Zeitfenster endet"
   },
   "rejectModal": {
     "title": "Kandidat ablehnen",
