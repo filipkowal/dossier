@@ -33,7 +33,7 @@ export default function NavLinks({ dict }: { dict: any }) {
     };
   });
 
-  const handleClick = (id: string) => {
+  const scrollTo = (id: string) => {
     if (id === "top") return window.scrollTo({ top: 0, behavior: "smooth" });
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: "smooth" });
@@ -42,7 +42,7 @@ export default function NavLinks({ dict }: { dict: any }) {
   return (
     <>
       <a
-        onClick={() => handleClick("top")}
+        onClick={() => scrollTo("top")}
         className={`text-white border-b-2 cursor-pointer ${
           !isScrolledToCv ? "border-digitalent-white" : "border-transparent"
         }`}
@@ -50,7 +50,7 @@ export default function NavLinks({ dict }: { dict: any }) {
         {dict.overview}
       </a>
       <a
-        onClick={() => handleClick("cvAndCertificates")}
+        onClick={() => scrollTo("cvAndCertificates")}
         className={`ml-8 text-white border-b-2 cursor-pointer ${
           isScrolledToCv ? "border-digitalent-white" : "border-transparent"
         }`}

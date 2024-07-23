@@ -35,7 +35,11 @@ const CvAndCertificates = ({
   }, []);
 
   return (
-    <div className="w-full" id="cvAndCertificates" ref={parentRef}>
+    <div className="w-full" ref={parentRef}>
+      <div
+        className="relative top-0 left-0 -translate-y-[62px] w-full h-[1px] bg-transparent"
+        id="cvAndCertificates"
+      />
       {cvAndCertificates && (
         <PdfDocument fileUrl={cvAndCertificates} parentWidth={parentWidth} />
       )}
