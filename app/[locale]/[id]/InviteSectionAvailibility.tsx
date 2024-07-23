@@ -39,7 +39,7 @@ export default function AvailibilityStep({
               availibilitySlots.map((slot) => (
                 <div
                   key={slot.id}
-                  className="border-digitalent-blue border-2 px-4 py-2 flex gap-4 w-fit items-center rounded-md"
+                  className="border-digitalent-blue border-2 px-4 py-2 flex gap-4 w-fit items-center "
                 >
                   <div className="flex flex-col">
                     <span className="font-bold">{slot.date}</span>
