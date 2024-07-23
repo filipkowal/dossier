@@ -125,7 +125,8 @@
     "toastError": "Échec de l'envoi du code SMS",
     "toastSuccess": "Code SMS envoyé à votre numéro",
     "authError": "Échec de l'authentification. Veuillez rafraîchir la page.",
-    "wrongCode": "Code erroné. Veuillez réessayer"
+    "wrongCode": "Code erroné. Veuillez réessayer",
+    "resendCode": "Renvoyer le code"
   },
   "dossierExpired": {
     "title": "Dossier expiré",

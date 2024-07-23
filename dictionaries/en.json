@@ -125,7 +125,8 @@
     "toastError": "Failed to send SMS code",
     "toastSuccess": "SMS code has been sent to your phone",
     "authError": "Authentication error. Please try again later.",
-    "wrongCode": "Wrong code. Please try again."
+    "wrongCode": "Wrong code. Please try again.",
+    "resendCode": "Resend code"
   },
   "dossierExpired": {
     "title": "Dossier expired",

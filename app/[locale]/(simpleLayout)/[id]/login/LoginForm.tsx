@@ -20,6 +20,7 @@ export default function LoginForm({
   const [smsCode, setSmsCode] = useState<string>("");
   const [isLoadingCode, setIsLoadingCode] = useState<boolean>(false);
   const [isLoadingLogin, setIsLoadingLogin] = useState<boolean>(false);
+  const [isCodeSent, setIsCodeSent] = useState<boolean>(false);
 
   const handleSmsCodeChange = (value: string) => {
     const updatedSmsCode = value.slice(0, 6); // Ensure max length of 6
@@ -56,6 +57,8 @@ export default function LoginForm({
 
       inputRef.current?.focus();
       toast.success(successText || dict.toastSuccess);
+
+      setIsCodeSent(true);
     } catch {
       toast.error(dict.toastError);
     } finally {
@@ -75,9 +78,20 @@ export default function LoginForm({
             name="resend"
             onClick={() => sendSMSCode()}
             className="flex justify-center"
+            disabled={isLoadingCode || isCodeSent}
           >
             {isLoadingCode ? <div className="loader" /> : dict.resendButton}
           </Button>
+          {isCodeSent && (
+            <div className="w-full text-right">
+              <span
+                className="text-sm text-right underline cursor-pointer"
+                onClick={() => sendSMSCode()}
+              >
+                {dict.resendCode} ↻
+              </span>
+            </div>
+          )}
         </div>
 
         <div className="flex flex-col ">

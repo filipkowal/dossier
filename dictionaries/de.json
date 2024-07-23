@@ -125,7 +125,8 @@
     "toastError": "Fehler beim Senden des SMS-Codes",
     "toastSuccess": "SMS mit Code gesendet",
     "authError": "Die Authentifizierung ist fehlgeschlagen. Bitte melden Sie sich erneut an.",
-    "wrongCode": "Falscher Code. Bitte versuchen Sie es erneut."
+    "wrongCode": "Falscher Code. Bitte versuchen Sie es erneut.",
+    "resendCode": "Code erneut senden"
   },
   "dossierExpired": {
     "title": "Dossier abgelaufen",
