@@ -124,7 +124,8 @@
     "enterCodeInstruction": "Enter the code from SMS",
     "toastError": "Failed to send SMS code",
     "toastSuccess": "SMS code has been sent to your phone",
-    "authError": "Authentication error. Please try again later."
+    "authError": "Authentication error. Please try again later.",
+    "wrongCode": "Wrong code. Please try again."
   },
   "dossierExpired": {
     "title": "Dossier expired",

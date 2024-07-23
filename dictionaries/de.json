@@ -124,7 +124,8 @@
     "enterCodeInstruction": "Bitte SMS Code eingeben",
     "toastError": "Fehler beim Senden des SMS-Codes",
     "toastSuccess": "SMS mit Code gesendet",
-    "authError": "Die Authentifizierung ist fehlgeschlagen. Bitte melden Sie sich erneut an."
+    "authError": "Die Authentifizierung ist fehlgeschlagen. Bitte melden Sie sich erneut an.",
+    "wrongCode": "Falscher Code. Bitte versuchen Sie es erneut."
   },
   "dossierExpired": {
     "title": "Dossier abgelaufen",

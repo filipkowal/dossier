@@ -38,7 +38,14 @@ export default function LoginForm({
       router.refresh();
     } catch (e) {
       console.log(e);
+
+      if (e instanceof Error && e.message === "wrongCode") {
+        toast.error(dict["wrongCode"]);
+        return;
+      }
+
       toast.error(dict["authError"]);
+      setIsLoadingLogin(false);
     }
   };
 
