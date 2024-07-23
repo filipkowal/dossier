@@ -112,11 +112,7 @@
   "utilityPages": {
     "refreshPage": "Rafraîchir la page",
     "somethingWrong": "Quelque chose a mal tourné!",
-    "notFound": {
-      "noCandidateId": "Aucun ID de candidat trouvé",
-      "verify": "Veuillez vérifier l'URL. Elle devrait contenir l'ID du candidat.",
-      "example": "Par exemple: "
-    }
+    "notFound": "Il y a un problème ici. Nous n'avons pas trouvé de page pour ce lien."
   },
   "loginForm": {
     "verifyItsYou": "VÉRIFIEZ QUE C'EST VOUS",
@@ -126,13 +122,13 @@
     "toastError": "Échec de l'envoi du code SMS",
     "toastSuccess": "Code SMS envoyé à votre numéro",
     "authError": "Échec de l'authentification. Veuillez rafraîchir la page.",
-    "wrongCode": "Code erroné. Veuillez réessayer",
+    "wrongCode": "Le code que tu as saisi semble être erroné. Merci de réessayer ou de demander un nouveau code.",
     "resendCode": "Renvoyer le code"
   },
   "dossierExpired": {
     "title": "Dossier expiré",
-    "heading": "Cette page n'est plus disponible",
-    "message": "Veuillez contacter Digitalent pour plus d'informations."
+    "heading": "Ce dossier n'est plus disponible.",
+    "message": "Veuillez nous contacter pour plus d'informations."
   },
   "tokenExpiry": {
     "expiredMessage": "Votre jeton a expiré. Veuillez vous reconnecter.",

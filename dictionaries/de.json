@@ -112,11 +112,7 @@
   "utilityPages": {
     "refreshPage": "Seite neu laden",
     "somethingWrong": "Etwas ist schief gelaufen!",
-    "notFound": {
-      "noCandidateId": "Keine Kandidaten-ID gefunden",
-      "verify": "Bitte überprüfe die URL. Sie sollte die ID des Kandidaten enthalten.",
-      "example": "Zum Beispiel: "
-    }
+    "notFound": "Hier stimmt etwas nicht. Wir konnten keine Seite für diesen Link finden."
   },
   "loginForm": {
     "verifyItsYou": "SMS VERIFIZIERUNG",
@@ -126,13 +122,13 @@
     "toastError": "Fehler beim Senden des SMS-Codes",
     "toastSuccess": "SMS mit Code gesendet",
     "authError": "Die Authentifizierung ist fehlgeschlagen. Bitte melden Sie sich erneut an.",
-    "wrongCode": "Falscher Code. Bitte versuchen Sie es erneut.",
+    "wrongCode": "Der eingegebene Code scheint fehlerhaft zu sein. Bitte versuche es nochmals oder fordere einen neuen Code an.",
     "resendCode": "Code erneut senden"
   },
   "dossierExpired": {
-    "title": "Dossier abgelaufen",
-    "heading": "Diese Seite ist nicht mehr verfügbar",
-    "message": "Bitte kontaktieren Sie Digitalent für weitere Informationen."
+    "title": "Dossier geschlossen",
+    "heading": "Dieses Dossier ist nicht mehr verfügbar.",
+    "message": "Bitte kontaktiere uns für weitere Informationen."
   },
   "tokenExpiry": {
     "expiredMessage": "Your token has expired. Please log in again.",
