@@ -69,7 +69,8 @@
     "slots": "Slots",
     "noDate": "Please provide your availibility date",
     "noStartTime": "Please provide your availibility start time",
-    "noEndTime": "Please provide your availibility end time"
+    "noEndTime": "Please provide your availibility end time",
+    "slotsPlaceholder": "Added slots will appear here"
   },
   "rejectModal": {
     "title": "Reject Candidate",

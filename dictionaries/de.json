@@ -69,7 +69,8 @@
     "slots": "Slots",
     "noDate": "Bitte gib ein Datum an",
     "noStartTime": "Bitte gib an, wann dein Zeitfenster startet",
-    "noEndTime": "Bitte gib an, wann dein Zeitfenster endet"
+    "noEndTime": "Bitte gib an, wann dein Zeitfenster endet",
+    "slotsPlaceholder": "Hinzugefügliche Slots werden hier angezeigt"
   },
   "rejectModal": {
     "title": "Kandidat ablehnen",

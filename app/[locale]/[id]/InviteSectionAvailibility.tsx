@@ -65,7 +65,7 @@ export default function AvailibilityStep({
                 </div>
               ))
             ) : (
-              <p className="opacity-50">Added slots will appear here</p>
+              <p className="opacity-50">{dict.slotsPlaceholder}</p>
             )}
           </div>
         </div>

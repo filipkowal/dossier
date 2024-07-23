@@ -53,7 +53,7 @@
       "1": "2 - 3 créneaux horaires disponibles",
       "2": "Les créneaux peuvent être plus longs que la durée de l'entretien."
     },
-    "slotDate": "Disponibilité date",
+    "slotDate": "Date",
     "slotStartTime": "Début",
     "slotEndTime": "Fin",
     "removeSlot": "Supprimer",
@@ -69,7 +69,8 @@
     "slots": "Disponibilité",
     "noDate": "Merci de donner ta date de disponibilité",
     "noStartTime": "Merci de donner ton heure de début de disponibilité",
-    "noEndTime": "Merci de donner ton heure de fin de disponibilité"
+    "noEndTime": "Merci de donner ton heure de fin de disponibilité",
+    "slotsPlaceholder": "Les disponibilités ajoutées s'affichent ici"
   },
   "rejectModal": {
     "title": "Rejeter le candidat",
