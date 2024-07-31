@@ -2,7 +2,7 @@
 
 import { Locale } from "@/i18n-config";
 import { Dictionary } from "@/utils";
-import useTokenCheck from "@/utils/hooks";
+import { useAutoLogout, useTokenCheck } from "@/utils/hooks";
 
 const TokenExpiryChecker = ({
   params,
@@ -14,6 +14,7 @@ const TokenExpiryChecker = ({
   const { locale, id } = params;
 
   useTokenCheck(locale, id, dict);
+  useAutoLogout(locale, id, dict);
 
   return null;
 };

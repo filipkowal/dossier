@@ -3,11 +3,11 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { isLoggedIn } from "./fetchers";
+import { isLoggedIn, logout } from "./fetchers";
 import { Locale } from "./types";
 import { Dictionary } from "./helpers";
 
-const useTokenCheck = (
+export const useTokenCheck = (
   locale: Locale,
   id: string,
   dict: Dictionary["tokenExpiry"]
@@ -40,4 +40,45 @@ const useTokenCheck = (
   }, [router]);
 };
 
-export default useTokenCheck;
+export const useAutoLogout = (
+  locale: Locale,
+  id: string,
+  dict: Dictionary["tokenExpiry"]
+) => {
+  const router = useRouter();
+  const FIVE_MINUTES = 5 * 60 * 1000;
+
+  const logoutUser = async () => {
+    try {
+      await logout(id);
+    } finally {
+      toast(dict.expiredMessage, { icon: "ℹ️" });
+      sessionStorage.clear();
+      router.push(`/${locale}/${id}/login`);
+    }
+  };
+
+  useEffect(() => {
+    let timeout = setTimeout(logoutUser, FIVE_MINUTES);
+
+    const resetInactivityTimeout = () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(logoutUser, FIVE_MINUTES);
+    };
+
+    const events = ["mousemove", "keydown", "click", "scroll"];
+
+    events.forEach((event) =>
+      window.addEventListener(event, resetInactivityTimeout)
+    );
+
+    return () => {
+      events.forEach((event) =>
+        window.removeEventListener(event, resetInactivityTimeout)
+      );
+      clearTimeout(timeout);
+    };
+  }, []);
+
+  return null;
+};
