@@ -7,6 +7,7 @@ import { isLoggedIn, logout } from "./fetchers";
 import { Locale } from "./types";
 import { Dictionary } from "./helpers";
 
+// Check for token every minute and redirect if it's expired
 export const useTokenCheck = (
   locale: Locale,
   id: string,
@@ -40,6 +41,9 @@ export const useTokenCheck = (
   }, [router]);
 };
 
+//
+// Log user out after 5 minutes of inactivity
+//
 export const useAutoLogout = (
   locale: Locale,
   id: string,
@@ -55,6 +59,7 @@ export const useAutoLogout = (
       toast(dict.expiredMessage, { icon: "ℹ️" });
       sessionStorage.clear();
       router.push(`/${locale}/${id}/login`);
+      router.refresh();
     }
   };
 
