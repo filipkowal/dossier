@@ -3,9 +3,9 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { isLoggedIn, logout } from "./fetchers";
+import { isLoggedIn } from "./fetchers";
 import { Locale } from "./types";
-import { Dictionary } from "./helpers";
+import { Dictionary, logoutAndRedirect } from "./helpers";
 
 // Check for token every minute and redirect if it's expired
 export const useTokenCheck = (
@@ -25,11 +25,13 @@ export const useTokenCheck = (
         if (!isAuthorized) {
           toast(dict.expiredMessage, { icon: "ℹ️" });
           router.push(`/${locale}/${id}/login`);
+          router.refresh();
         }
       } catch (e) {
         console.log(e);
         toast.error(dict.expiredError);
         router.push(`/${locale}/${id}/login`);
+        router.refresh();
       }
     };
 
@@ -54,12 +56,9 @@ export const useAutoLogout = (
 
   const logoutUser = async () => {
     try {
-      await logout(id);
+      await logoutAndRedirect(id, locale, router);
     } finally {
-      toast(dict.expiredMessage, { icon: "ℹ️" });
-      sessionStorage.clear();
-      router.push(`/${locale}/${id}/login`);
-      router.refresh();
+      toast(dict.inactivity, { icon: "ℹ️" });
     }
   };
 

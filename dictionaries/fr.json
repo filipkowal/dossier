@@ -132,6 +132,7 @@
   },
   "tokenExpiry": {
     "expiredMessage": "Votre jeton a expiré. Veuillez vous reconnecter.",
-    "expiredError": "Une erreur s'est produite lors de la vérification de la validité de votre jeton. Veuillez vous reconnecter."
+    "expiredError": "Une erreur s'est produite lors de la vérification de la validité de votre jeton. Veuillez vous reconnecter.",
+    "inactivity": "Vous avez été déconnecté à cause de l'inactivité."
   }
 }

@@ -2,6 +2,8 @@ import type { Locale } from "../i18n-config";
 import { i18n } from "../i18n-config";
 import Negotiator from "negotiator";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { logout } from "./fetchers";
 
 // We enumerate all dictionaries here for better linting and typescript support
 // We also get the default import for cleaner types
@@ -74,4 +76,19 @@ export function pathnameIsMissingLocale(pathname: string) {
   return i18n.locales.every(
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   );
+}
+
+export async function logoutAndRedirect(
+  id: string,
+  locale: Locale,
+  router: AppRouterInstance
+) {
+  try {
+    await logout(id);
+  } catch (error) {
+    throw error;
+  }
+
+  router.push(`/${locale}/${id}/login`);
+  router.refresh();
 }
