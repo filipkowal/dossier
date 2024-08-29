@@ -1,6 +1,5 @@
 import { Locale } from "@/i18n-config";
 import { getDictionary, getRelationshipManager } from "@/utils";
-import ContactSection from "./ContactSection";
 import { cookies } from "next/headers";
 
 export default async function Home({
@@ -32,15 +31,6 @@ export default async function Home({
         </div>{" "}
         <p>{dict["heading"]}</p>
         <p>{dict["message"]}</p>
-        <ContactSection
-          dict={{
-            ...dictionary["mainButtons"],
-            ...dictionary["contactModal"],
-            ...dictionary["toastMessages"],
-          }}
-          relationshipManager={relationshipManager}
-          id={params.id}
-        />
       </div>
     </div>
   );
