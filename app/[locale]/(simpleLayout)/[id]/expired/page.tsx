@@ -30,7 +30,7 @@ export default async function Home({
           <span className="pr-10 max-w-[90%]">{dict.title}</span>
         </div>{" "}
         <p>{dict["heading"]}</p>
-        <p>{dict["message"]}</p>
+        <p className="pt-4">{dict["message"]}</p>
       </div>
     </div>
   );
