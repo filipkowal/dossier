@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useContext, useState } from "react";
+import { ReactNode, useState } from "react";
 import { inviteCandidate } from "@/utils";
 import type { Dictionary, User, Locale, TimeSlots } from "@/utils";
 import { FormFooterButtons, Dialog, Button } from "@/components";
@@ -9,7 +9,8 @@ import LocationStep from "./InviteSectionLocation";
 import { useRouter } from "next/navigation";
 import SuccessIcon from "@/public/success.webp";
 import Image from "next/image";
-import { RefetchProvider, useRefetch } from "./RefetchContext";
+import { useRefetch } from "./RefetchContext";
+import dayjs from "dayjs";
 
 export default function InviteSection({
   dict,
@@ -198,7 +199,10 @@ export default function InviteSection({
                       : ("onsite" as "online" | "onsite"),
                     address: inteviewLocation,
                     url: interviewLink,
-                    availibilitySlots,
+                    availibilitySlots: availibilitySlots.map((slot) => ({
+                      ...slot,
+                      date: dayjs(slot.date).format("YYYY-MM-DD"),
+                    })),
                   };
 
                   const response = await inviteCandidate(

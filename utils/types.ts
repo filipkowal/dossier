@@ -1,4 +1,5 @@
 import { components, paths } from "@/schema";
+import { Dayjs } from "dayjs";
 
 export { type Locale } from "../i18n-config";
 
@@ -19,7 +20,7 @@ export type RelationshipManager = components["schemas"]["RelationshipManager"];
 
 export type TimeSlots = {
   id: number;
-  date: string;
+  date: Dayjs;
   startTime: string;
   endTime: string;
 }[];

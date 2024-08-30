@@ -4,6 +4,7 @@ import TimeSlotInputs from "@/components/TimeSlotInputs";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "dayjs/locale/de";
+import dayjs from "dayjs";
 
 export default function AvailibilityStep({
   availibilitySlots,
@@ -42,7 +43,9 @@ export default function AvailibilityStep({
                   className="border-digitalent-blue border-2 px-4 py-2 flex gap-4 w-fit items-center "
                 >
                   <div className="flex flex-col">
-                    <span className="font-bold">{slot.date}</span>
+                    <span className="font-bold">
+                      {dayjs(slot.date).format("DD.MM.YYYY")}
+                    </span>
                     <span>{slot.startTime + " - " + slot.endTime}</span>
                   </div>
                   <svg

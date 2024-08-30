@@ -38,7 +38,7 @@ export default function TimeSlotInputs({
 
     const slot = {
       id: Date.now(),
-      date: date.format("DD.MM.YYYY"),
+      date,
       startTime: startTime.format("HH:mm"),
       endTime: endTime.format("HH:mm"),
     };
