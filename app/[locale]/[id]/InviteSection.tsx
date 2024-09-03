@@ -6,7 +6,6 @@ import { FormFooterButtons, Dialog, Button } from "@/components";
 import toast from "react-hot-toast";
 import AvailibilityStep from "./InviteSectionAvailibility";
 import LocationStep from "./InviteSectionLocation";
-import { useRouter } from "next/navigation";
 import SuccessIcon from "@/public/success.webp";
 import Image from "next/image";
 import { useRefetch } from "./RefetchContext";
@@ -17,16 +16,17 @@ export default function InviteSection({
   user,
   params,
   candidateGender = "m",
+  revalidateCache,
 }: {
   dict: Dictionary["inviteModal"] &
     Dictionary["mainButtons"] &
     Dictionary["toastMessages"];
   user: User;
   params: { locale: Locale; id: string };
+  revalidateCache: () => Promise<void>;
   candidateGender?: "m" | "f";
 }) {
   const { locale, id } = params;
-  const router = useRouter();
   const { isRefetching, startRefetch, endRefetch } = useRefetch();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -137,6 +137,9 @@ export default function InviteSection({
                 startRefetch();
 
                 const response = await inviteCandidate(locale, id);
+
+                revalidateCache();
+
                 setSuccessMessage(response);
                 setIsOpen(true);
               } catch (error) {
@@ -162,10 +165,6 @@ export default function InviteSection({
 
           if (isOpen === false) {
             resetData();
-
-            if (step === steps.length - 1) {
-              router.refresh();
-            }
           }
         }}
         title={
@@ -210,6 +209,9 @@ export default function InviteSection({
                     id,
                     formValues
                   );
+
+                  revalidateCache();
+
                   setSuccessMessage(response);
 
                   startRefetch();
