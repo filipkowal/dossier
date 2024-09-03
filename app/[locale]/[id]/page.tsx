@@ -39,6 +39,7 @@ export default async function Home({
   const { id, locale } = params;
   const cookieStore = cookies();
   const cookie = cookieStore.get(`token-${params.id}`);
+
   async function revalidateCache() {
     "use server";
 
@@ -56,7 +57,7 @@ export default async function Home({
     ]);
   } catch (error) {
     if (error instanceof HttpError && error.status === 410) {
-      revalidateCache();
+      await revalidateCache();
       redirect(`/${locale}/${id}/expired`);
     }
     if (error instanceof HttpError && error.status === 404) {
@@ -267,6 +268,7 @@ export default async function Home({
             user={user}
             params={params}
             candidateGender={candidate?.gender}
+            revalidateCache={revalidateCache}
           />
           <RejectSection
             dict={{
