@@ -4,6 +4,7 @@ import Negotiator from "negotiator";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { logout } from "./fetchers";
+import { ReadonlyURLSearchParams } from "next/navigation";
 
 // We enumerate all dictionaries here for better linting and typescript support
 // We also get the default import for cleaner types
@@ -91,4 +92,25 @@ export async function logoutAndRedirect(
 
   router.push(`/${locale}/${id}/login`);
   router.refresh();
+}
+
+export function updateSearchParams(
+  key: string,
+  value: string | null,
+  searchParams: ReadonlyURLSearchParams | null,
+  router: AppRouterInstance
+) {
+  // Create a new URLSearchParams object based on the current searchParams
+  const params = new URLSearchParams(searchParams?.toString());
+
+  if (value) {
+    // If a value is provided, set or update the parameter
+    params.set(key, value);
+  } else {
+    // If value is null, remove the parameter
+    params.delete(key);
+  }
+
+  // Update the URL with the new search parameters
+  router.push(`?${params.toString()}`, { scroll: false });
 }
