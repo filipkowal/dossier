@@ -105,6 +105,8 @@ input[class^="MuiInput"]:focus {
 
 input[class^="MuiInput"] {
   font-family: var(--font-merriweather) !important;
+  background: transparent;
+  padding: 1rem;
 }
 
 .MuiFormLabel-root {
