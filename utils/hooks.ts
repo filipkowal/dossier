@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import { isLoggedIn } from "./fetchers";
 import { Locale } from "./types";
-import { Dictionary, logoutAndRedirect } from "./helpers";
+import { Dictionary, logoutAndRedirect, updateSearchParams } from "./helpers";
 
 // Check for token every minute and redirect if it's expired
 export const useTokenCheck = (
@@ -86,3 +86,31 @@ export const useAutoLogout = (
 
   return null;
 };
+
+export function useDialog(name: string) {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const [isOpen, setIsOpenInternal] = useState(
+    searchParams?.get("modal") === name
+  );
+
+  useEffect(() => {
+    if (searchParams?.get("modal") === name) {
+      setIsOpenInternal(true);
+    } else {
+      setIsOpenInternal(false);
+    }
+  }, [searchParams]);
+
+  function setIsOpen(value: boolean) {
+    if (value) {
+      updateSearchParams("modal", name, searchParams, router);
+    } else {
+      updateSearchParams("modal", null, searchParams, router);
+    }
+    setIsOpenInternal(value);
+  }
+
+  return { isOpen, setIsOpen };
+}
