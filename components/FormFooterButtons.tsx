@@ -20,7 +20,7 @@ export default function FormFooterButtons({
   onSubmit: () => void;
   submissionDisabled?: boolean;
   isPending: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  setIsOpen: (value: boolean) => void;
 }) {
   const isFirstStepOfMany = step === 0 && stepsLength > 2;
   const isFirstAndSubmitStep = step === 0 && stepsLength === 2;

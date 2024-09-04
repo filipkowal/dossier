@@ -24,3 +24,5 @@ export type TimeSlots = {
   startTime: string;
   endTime: string;
 }[];
+
+export type SearchParams = { [key: string]: string | string[] | undefined };

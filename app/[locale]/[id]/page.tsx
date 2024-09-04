@@ -2,6 +2,7 @@ import { Locale } from "@/i18n-config";
 import InviteSection from "./InviteSection";
 import {
   HttpError,
+  SearchParams,
   addHighComma,
   getDictionary,
   getRelationshipManager,
@@ -33,8 +34,10 @@ const LongCandidateInfo = dynamicImport(() => import("./LongCandidateInfo"), {
 
 export default async function Home({
   params,
+  searchParams,
 }: {
   params: { locale: Locale; id: string };
+  searchParams?: SearchParams;
 }) {
   const { id, locale } = params;
   const cookieStore = cookies();
@@ -269,6 +272,7 @@ export default async function Home({
             params={params}
             candidateGender={candidate?.gender}
             revalidateCache={revalidateCache}
+            searchParams={searchParams}
           />
           <RejectSection
             dict={{
