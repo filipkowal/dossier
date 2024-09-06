@@ -7,13 +7,13 @@ export default function LocationStep({
   setIsInterviewOnline,
   interviewLocation,
   setInterviewLocation,
+  interviewLink,
   setInterviewLink,
   isInterviewOnline,
   interviewDuration,
   setInterviewDuration,
   dict,
 }: {
-  setStep: Dispatch<SetStateAction<number>>;
   setIsInterviewOnline: Dispatch<SetStateAction<boolean>>;
   interviewLocation: string;
   setInterviewLocation: Dispatch<SetStateAction<string>>;
@@ -56,6 +56,7 @@ export default function LocationStep({
           label={dict.meetingLink}
           onChange={(e) => setInterviewLink(e.target.value)}
           className="max-w-3/4 w-[28rem] mr-4"
+          value={interviewLink}
         />
         <div className="relative">
           <Tooltip
