@@ -130,11 +130,7 @@ export default function RejectSection({
           if (!isOpen) router.refresh();
         }}
       >
-        <div className="w-full flex flex-col gap-6 ">
-          <h1>
-            {dict["success"][candidateGender === "m" ? "male" : "female"]}
-          </h1>
-        </div>
+        <h1>{dict["success"][candidateGender === "m" ? "male" : "female"]}</h1>
       </Dialog>
     </>
   );

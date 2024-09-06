@@ -86,17 +86,10 @@ export default function ContactModal({
         </form>
       </Dialog>
       <Dialog isOpen={isSuccessDialogOpen} setIsOpen={setIsSuccessDialogOpen}>
-        <div className="w-full flex flex-col gap-6 ">
-          <div className="flex justify-center">
-            <Image
-              src={SuccessIcon}
-              alt="Success Icon"
-              width={80}
-              height={80}
-            />
-          </div>
-          <h1>{dict["success"]}</h1>
+        <div className="flex justify-center">
+          <Image src={SuccessIcon} alt="Success Icon" width={80} height={80} />
         </div>
+        <h1>{dict["success"]}</h1>
       </Dialog>
     </>
   );

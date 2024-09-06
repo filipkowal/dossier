@@ -12,7 +12,7 @@ export default function SuccessStep({
   candidateGender: "m" | "f";
 }) {
   return (
-    <div className="flex flex-col gap-6 items-center">
+    <>
       <Image
         src={SuccessIcon}
         alt="success"
@@ -25,6 +25,6 @@ export default function SuccessStep({
           ? successMessage
           : dict["success"][candidateGender === "m" ? "male" : "female"]}
       </h1>
-    </div>
+    </>
   );
 }
