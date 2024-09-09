@@ -1,39 +1,42 @@
 import { Dictionary } from "@/utils";
-import { Dispatch, SetStateAction } from "react";
 import Button from "./Button";
 import LoadingEllipsis from "./LoadingEllipsis";
 
 export default function FormFooterButtons({
-  step,
-  setStep,
-  stepsLength,
+  currentStepName,
+  incrStep,
+  decrStep,
+  steps,
   dict,
   onSubmit,
   submissionDisabled,
   isPending,
   setIsOpen,
 }: {
-  step: number;
-  setStep: Dispatch<SetStateAction<number>>;
-  stepsLength: number;
+  currentStepName: string;
+  incrStep: () => void;
+  decrStep: () => void;
+  steps: string[];
   dict: Dictionary["inviteModal"];
   onSubmit: () => void;
   submissionDisabled?: boolean;
   isPending: boolean;
   setIsOpen: (value: boolean) => void;
 }) {
-  const isFirstStepOfMany = step === 0 && stepsLength > 2;
-  const isFirstAndSubmitStep = step === 0 && stepsLength === 2;
-  const isMiddleStep = step > 0 && step < stepsLength - 2;
-  const isSubmitStep = step > 0 && step === stepsLength - 2;
-  const isSuccessInfoStep = step > 0 && step === stepsLength - 1;
+  const i = steps.indexOf(currentStepName);
+
+  const isFirstStepOfMany = i === 0 && steps.length > 2;
+  const isFirstAndSubmitStep = i === 0 && steps.length === 2;
+  const isMiddleStep = i > 0 && i < steps.length - 2;
+  const isSubmitStep = i > 0 && i === steps.length - 2;
+  const isSuccessInfoStep = i > 0 && i === steps.length - 1;
 
   if (isFirstStepOfMany) {
     return (
       <Button
         type="primary"
         name={dict.next}
-        onClick={() => setStep((step: number) => step + 1)}
+        onClick={() => incrStep()}
         disabled={isPending}
       >
         {dict.next}
@@ -62,18 +65,10 @@ export default function FormFooterButtons({
   if (isMiddleStep) {
     return (
       <div className="w-full flex flex-row justify-between">
-        <Button
-          type="default"
-          name={dict.previous}
-          onClick={() => setStep((step: number) => step - 1)}
-        >
+        <Button type="default" name={dict.previous} onClick={() => decrStep()}>
           {dict.previous}
         </Button>
-        <Button
-          type="primary"
-          name={dict.next}
-          onClick={() => setStep((step: number) => step + 1)}
-        >
+        <Button type="primary" name={dict.next} onClick={() => incrStep()}>
           {dict.next}
         </Button>
       </div>
@@ -83,11 +78,7 @@ export default function FormFooterButtons({
   if (isSubmitStep) {
     return (
       <div className="w-full flex flex-row justify-between">
-        <Button
-          type="default"
-          name={dict.previous}
-          onClick={() => setStep((step: number) => step - 1)}
-        >
+        <Button type="default" name={dict.previous} onClick={() => decrStep()}>
           {dict.previous}
         </Button>
         <Button

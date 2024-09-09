@@ -271,7 +271,6 @@ export default async function Home({
             user={user}
             params={params}
             candidateGender={candidate?.gender}
-            revalidateCache={revalidateCache}
             searchParams={searchParams}
           />
           <RejectSection
