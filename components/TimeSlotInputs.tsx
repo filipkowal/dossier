@@ -8,11 +8,11 @@ import toast from "react-hot-toast";
 export default function TimeSlotInputs({
   dict,
   interviewDuration,
-  setAvailibilitySlots,
+  setAvailabilitySlots,
 }: {
   dict: Dictionary["inviteModal"];
   interviewDuration: number;
-  setAvailibilitySlots: Dispatch<SetStateAction<TimeSlots>>;
+  setAvailabilitySlots: Dispatch<SetStateAction<TimeSlots>>;
 }) {
   const [date, setDate] = useState<Dayjs | null>(null);
   const [startTime, setStartTime] = useState<Dayjs | null>(null);
@@ -43,7 +43,7 @@ export default function TimeSlotInputs({
       endTime: endTime.format("HH:mm"),
     };
 
-    setAvailibilitySlots((slots) => [...slots, slot]);
+    setAvailabilitySlots((slots) => [...slots, slot]);
 
     setDate(null);
     setStartTime(null);

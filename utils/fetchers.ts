@@ -145,7 +145,7 @@ export async function inviteCandidate(
     channel?: "online" | "onsite";
     address?: string;
     url?: string;
-    availibilitySlots?: {
+    availabilitySlots?: {
       startTime?: string;
       endTime?: string;
     }[];

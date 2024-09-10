@@ -6,14 +6,14 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "dayjs/locale/de";
 import dayjs from "dayjs";
 
-export default function AvailibilityStep({
-  availibilitySlots,
-  setAvailibilitySlots,
+export default function AvailabilityStep({
+  availabilitySlots,
+  setAvailabilitySlots,
   dict,
   interviewDuration,
 }: {
-  availibilitySlots: TimeSlots;
-  setAvailibilitySlots: Dispatch<SetStateAction<TimeSlots>>;
+  availabilitySlots: TimeSlots;
+  setAvailabilitySlots: Dispatch<SetStateAction<TimeSlots>>;
   dict: Dictionary["inviteModal"];
   interviewDuration: number;
 }) {
@@ -29,14 +29,14 @@ export default function AvailibilityStep({
           <TimeSlotInputs
             dict={dict}
             interviewDuration={interviewDuration}
-            setAvailibilitySlots={setAvailibilitySlots}
+            setAvailabilitySlots={setAvailabilitySlots}
           />
         </div>
 
         <p>{dict.slots}:</p>
         <div className="flex gap-2 flex-wrap">
-          {availibilitySlots.length > 0 ? (
-            availibilitySlots.map((slot) => (
+          {availabilitySlots.length > 0 ? (
+            availabilitySlots.map((slot) => (
               <div
                 key={slot.id}
                 className="border-digitalent-blue border-2 px-4 py-2 flex gap-4 w-fit items-center "
@@ -53,7 +53,7 @@ export default function AvailibilityStep({
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
                   onClick={() =>
-                    setAvailibilitySlots((slots) =>
+                    setAvailabilitySlots((slots) =>
                       slots.filter((s) => s.id !== slot.id)
                     )
                   }

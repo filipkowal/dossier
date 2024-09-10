@@ -158,7 +158,12 @@ export function useSteps(steps: string[]) {
     }
   }
 
-  return { currentStepName, incrStep, decrStep };
+  return {
+    currentStepName,
+    currentStepTitle: `${currentStepName}StepTitle`,
+    incrStep,
+    decrStep,
+  };
 }
 
 export const useInviteForm = ({
@@ -179,25 +184,32 @@ export const useInviteForm = ({
       : ""
   );
   const [interviewLink, setInterviewLink] = useState("");
-  const [availibilitySlots, setAvailibilitySlots] = useState<TimeSlots>([]);
+  const [availabilitySlots, setAvailabilitySlots] = useState<TimeSlots>([]);
   const [interviewDuration, setInterviewDuration] = useState(30);
   const [invitePending, setInvitePending] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
-  const stepsObject = {
+  const stepsObject: {
+    location: boolean | undefined;
+    availability: boolean | undefined;
+    success: boolean;
+  } = {
     location: user.isInterviewLocationInputVisible,
-    availibility: user.isInterviewAvailabilityInputVisible,
+    availability: user.isInterviewAvailabilityInputVisible,
     success: true,
   };
+
   const steps = Object.entries(stepsObject)
     .filter(([, value]) => value)
-    .map(([key, _]) => key);
+    .map(([key, _]) => key as keyof typeof stepsObject);
 
-  const showNoForm = !stepsObject.location && !stepsObject.availibility;
+  const stepTitles = steps.map((step) => `${step}StepTitle` as const);
+
+  const showNoForm = !stepsObject.location && !stepsObject.availability;
 
   function resetInviteData() {
     setSuccessMessage("");
-    setAvailibilitySlots([]);
+    setAvailabilitySlots([]);
     setInterviewDuration(30);
     setIsInterviewOnline(true);
     setInterviewLocation(
@@ -214,7 +226,7 @@ export const useInviteForm = ({
       channel: isInterviewOnline ? "online" : ("onsite" as "online" | "onsite"),
       address: interviewLocation,
       url: interviewLink,
-      availibilitySlots: availibilitySlots.map((slot) => ({
+      availabilitySlots: availabilitySlots.map((slot) => ({
         ...slot,
         date: dayjs(slot.date).format("YYYY-MM-DD"),
       })),
@@ -253,14 +265,15 @@ export const useInviteForm = ({
 
   return {
     steps,
+    stepTitles,
     isInterviewOnline,
     setIsInterviewOnline,
     interviewLocation,
     setInterviewLocation,
     interviewLink,
     setInterviewLink,
-    availibilitySlots,
-    setAvailibilitySlots,
+    availabilitySlots,
+    setAvailabilitySlots,
     interviewDuration,
     setInterviewDuration,
     invitePending,

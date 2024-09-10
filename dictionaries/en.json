@@ -53,7 +53,7 @@
       "1": "2 - 3 availability time slots",
       "2": "The slots can be longer than the interview meeting duration."
     },
-    "slotDate": "Availibility Date",
+    "slotDate": "Availability Date",
     "slotStartTime": "Start",
     "slotEndTime": "End",
     "removeSlot": "Remove Slot",
@@ -67,9 +67,9 @@
     },
     "close": "Close",
     "slots": "Slots",
-    "noDate": "Please provide your availibility date",
-    "noStartTime": "Please provide your availibility start time",
-    "noEndTime": "Please provide your availibility end time",
+    "noDate": "Please provide your availability date",
+    "noStartTime": "Please provide your availability start time",
+    "noEndTime": "Please provide your availability end time",
     "slotsPlaceholder": "Added slots will appear here"
   },
   "rejectModal": {
@@ -106,7 +106,7 @@
   },
   "toastMessages": {
     "somethingWrong": "Something went wrong. Please try again later.",
-    "noSlots": "Please add at least one availibility time slot.",
+    "noSlots": "Please add at least one availability time slot.",
     "copied": "Copied to clipboard"
   },
   "utilityPages": {

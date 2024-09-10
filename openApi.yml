@@ -462,7 +462,7 @@ paths:
                 url:
                   type: string
                   example: "https://meet.google.com/abc-def-ghi"
-                availibilitySlots:
+                availabilitySlots:
                   type: array
                   items:
                     type: object

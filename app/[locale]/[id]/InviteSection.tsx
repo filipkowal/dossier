@@ -3,7 +3,7 @@ import { useDialog, useInviteForm, useSteps } from "@/utils";
 import type { Dictionary, User, Locale, SearchParams } from "@/utils";
 import { FormFooterButtons, Dialog, Button } from "@/components";
 import toast from "react-hot-toast";
-import AvailibilityStep from "./InviteSectionAvailibility";
+import AvailabilityStep from "./InviteSectionAvailability";
 import LocationStep from "./InviteSectionLocation";
 import SuccessStep from "./InviteSectionSuccess";
 
@@ -30,8 +30,8 @@ export default function InviteSection({
     setInterviewLocation,
     interviewLink,
     setInterviewLink,
-    availibilitySlots,
-    setAvailibilitySlots,
+    availabilitySlots,
+    setAvailabilitySlots,
     interviewDuration,
     setInterviewDuration,
     invitePending,
@@ -43,7 +43,8 @@ export default function InviteSection({
   } = useInviteForm({ user, locale, id, dict });
 
   const { isOpen, setIsOpen } = useDialog("invite");
-  const { currentStepName, incrStep, decrStep } = useSteps(steps);
+  const { currentStepName, currentStepTitle, incrStep, decrStep } =
+    useSteps(steps);
 
   const stepComponents = {
     location: (
@@ -60,11 +61,11 @@ export default function InviteSection({
         dict={dict}
       />
     ),
-    availibility: (
-      <AvailibilityStep
-        key={"availibility"}
-        availibilitySlots={availibilitySlots}
-        setAvailibilitySlots={setAvailibilitySlots}
+    availability: (
+      <AvailabilityStep
+        key={"availability"}
+        availabilitySlots={availabilitySlots}
+        setAvailabilitySlots={setAvailabilitySlots}
         dict={dict}
         interviewDuration={interviewDuration}
       />
@@ -103,7 +104,7 @@ export default function InviteSection({
       <Dialog
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        title={dict.availabilityStepTitle}
+        title={dict[currentStepTitle as keyof typeof dict] as string}
         footer={
           currentStepName !== "success" ? (
             <FormFooterButtons
@@ -115,7 +116,7 @@ export default function InviteSection({
               isPending={invitePending}
               setIsOpen={setIsOpen}
               onSubmit={async () => {
-                if (availibilitySlots.length < 1) {
+                if (availabilitySlots.length < 1) {
                   toast.error(dict["noSlots"]);
                   return;
                 }
