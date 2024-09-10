@@ -7,7 +7,7 @@ import { inviteCandidate, isLoggedIn } from "./fetchers";
 import { Locale, TimeSlots, User } from "./types";
 import { Dictionary, logoutAndRedirect, updateSearchParams } from "./helpers";
 import dayjs from "dayjs";
-import { revalidatePath } from "next/cache";
+import { revalidateMainPathAction } from "./actions";
 
 // Check for token every minute and redirect if it's expired
 export const useTokenCheck = (
@@ -235,7 +235,7 @@ export const useInviteForm = ({
     try {
       const response = await inviteCandidate(locale, id, formValues);
 
-      revalidatePath(`/${locale}/${id}`, "layout");
+      revalidateMainPathAction({ locale, id });
 
       setSuccessMessage(response);
 

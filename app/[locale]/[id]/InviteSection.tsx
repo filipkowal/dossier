@@ -105,27 +105,29 @@ export default function InviteSection({
         setIsOpen={setIsOpen}
         title={dict.availabilityStepTitle}
         footer={
-          <FormFooterButtons
-            currentStepName={currentStepName}
-            incrStep={incrStep}
-            decrStep={decrStep}
-            steps={steps}
-            dict={dict}
-            isPending={invitePending}
-            setIsOpen={setIsOpen}
-            onSubmit={async () => {
-              if (availibilitySlots.length < 1) {
-                toast.error(dict["noSlots"]);
-                return;
-              }
+          currentStepName !== "success" ? (
+            <FormFooterButtons
+              currentStepName={currentStepName}
+              incrStep={incrStep}
+              decrStep={decrStep}
+              steps={steps}
+              dict={dict}
+              isPending={invitePending}
+              setIsOpen={setIsOpen}
+              onSubmit={async () => {
+                if (availibilitySlots.length < 1) {
+                  toast.error(dict["noSlots"]);
+                  return;
+                }
 
-              onSubmit({
-                formValues: getFormValues(),
-                setIsOpen,
-                incrStep,
-              });
-            }}
-          />
+                onSubmit({
+                  formValues: getFormValues(),
+                  setIsOpen,
+                  incrStep,
+                });
+              }}
+            />
+          ) : undefined
         }
       >
         {stepComponents[currentStepName as keyof typeof stepComponents]}
