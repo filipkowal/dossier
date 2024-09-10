@@ -13,14 +13,16 @@ export default function SuccessStep({
 }) {
   return (
     <>
-      <Image
-        src={SuccessIcon}
-        alt="success"
-        width={96}
-        height={96}
-        unoptimized
-      />
-      <h1>
+      <div className="w-full justify-center flex">
+        <Image
+          src={SuccessIcon}
+          alt="success"
+          width={96}
+          height={96}
+          unoptimized
+        />
+      </div>
+      <h1 className="mt-4">
         {successMessage
           ? successMessage
           : dict["success"][candidateGender === "m" ? "male" : "female"]}
