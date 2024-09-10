@@ -58,21 +58,21 @@ export default function Dialog({
       style={{ overflowY: "auto", maxHeight: "100vh" }}
       className="fixed inset-0 z-50 bg-digitalent-gray-light transform overflow-hidden text-digitalent-blue text-left align-middle shadow-all-sides transition-all w-[60rem] max-w-full"
     >
-      <div className="flex flex-col gap-6">
-        {/* // Don't autofocus the first input so that on mobile the form is visble workaround */}
-        <input
-          type="text"
-          style={{ position: "absolute", top: "-9999px" }}
-          autoFocus
-        />
-        <div className="px-4 pt-4 pb-7 md:py-10 md:px-16">
-          <div className="text-2xl font-title font-medium uppercase pb-8 flex justify-between">
-            <span className="pr-10 max-w-[90%]">{title}</span>
+      <div className="px-4 pt-4 pb-7 md:py-10 md:px-16">
+        <div className="text-2xl font-title font-medium uppercase pb-8 flex justify-between">
+          <span className="pr-10 max-w-[90%]">{title}</span>
 
-            <XButton />
-          </div>
+          <XButton />
+        </div>
 
-          <div className="px-1 -mx-1 sm:mx-0 max-w-full" autoFocus>
+        <div className="px-1 -mx-1 sm:mx-0 max-w-full" autoFocus>
+          <div className="flex flex-col gap-6">
+            {/* // Don't autofocus the first input so that on mobile the form is visble workaround */}
+            <input
+              type="text"
+              style={{ position: "absolute", top: "-9999px" }}
+              autoFocus
+            />
             {children}
           </div>
 
