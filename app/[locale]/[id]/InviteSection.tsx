@@ -37,7 +37,6 @@ export default function InviteSection({
     invitePending,
     successMessage,
     showNoForm,
-    resetInviteData,
     getFormValues,
     steps,
     onSubmit,
@@ -68,7 +67,6 @@ export default function InviteSection({
         setAvailibilitySlots={setAvailibilitySlots}
         dict={dict}
         interviewDuration={interviewDuration}
-        resetData={resetInviteData}
       />
     ),
     success: (
@@ -104,13 +102,7 @@ export default function InviteSection({
 
       <Dialog
         isOpen={isOpen}
-        setIsOpen={(isOpen) => {
-          setIsOpen(isOpen);
-
-          if (isOpen === false) {
-            resetInviteData();
-          }
-        }}
+        setIsOpen={setIsOpen}
         title={dict.availabilityStepTitle}
         footer={
           <FormFooterButtons

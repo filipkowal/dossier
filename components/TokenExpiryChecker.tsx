@@ -14,7 +14,7 @@ const TokenExpiryChecker = ({
   const { locale, id } = params;
 
   useTokenCheck(locale, id, dict);
-  useAutoLogout(locale, id, dict);
+  // useAutoLogout(locale, id, dict);
 
   return null;
 };
