@@ -3,7 +3,6 @@ import InviteSection from "./InviteSection";
 import {
   HttpError,
   SearchParams,
-  addHighComma,
   getDictionary,
   getRelationshipManager,
 } from "@/utils";
@@ -23,7 +22,6 @@ import AvatarMale from "@/public/avatar-male.webp";
 import AvatarFemale from "@/public/avatar-female.webp";
 import { cookies } from "next/headers";
 import ImageWithPlaceholder from "@/components/ImageWithPlaceholder";
-import { RefetchProvider } from "./RefetchContext";
 import { revalidateMainPathAction } from "@/utils/actions";
 import ProfessionalDetails from "./ProfessionalDetails";
 
@@ -78,9 +76,7 @@ export default async function Home({
           />
         </div>
         <div className="block xl:hidden mt-16 -mb-16 px-8 sm:px-16 w-full">
-          <RefetchProvider>
-            <DossierStatus candidate={candidate} />
-          </RefetchProvider>
+          <DossierStatus candidate={candidate} />
         </div>
         <div className="flex flex-col mt-20 xl:mt-8 sm:px-16 2xl:px-32 px-8 mb-12 min-h-[70vh]">
           {/* Mobile */}
@@ -179,9 +175,7 @@ export default async function Home({
       <div className="flex flex-col">
         {/* Desktop */}
         <div className="hidden xl:flex flex-col pt-16 sm:px-16 2xl:px-32 bg-digitalent-blue text-white justify-end min-h-[34vh] 3xl:h-[30vh]">
-          <RefetchProvider>
-            <DossierStatus candidate={candidate} />
-          </RefetchProvider>
+          <DossierStatus candidate={candidate} />
 
           <div className="max-w-[48rem] font-title flex text-3xl gap-12 mb-16">
             <div className="text-digitalent-green">
@@ -216,41 +210,39 @@ export default async function Home({
         <CvAndCertificates cvAndCertificates={candidate.file} />
       </div>
       <div className="z-10 flex fixed md:bottom-6 bottom-0 justify-center sm:gap-3 md:gap-6 w-full">
-        <RefetchProvider>
-          <InviteSection
-            dict={{
-              ...dict.inviteModal,
-              ...dict.mainButtons,
-              ...dict.toastMessages,
-            }}
-            user={user}
-            params={params}
-            candidateGender={candidate?.gender}
-            searchParams={searchParams}
-          />
+        <InviteSection
+          dict={{
+            ...dict.inviteModal,
+            ...dict.mainButtons,
+            ...dict.toastMessages,
+          }}
+          user={user}
+          params={params}
+          candidateGender={candidate?.gender}
+          searchParams={searchParams}
+        />
 
-          <RejectSection
-            dict={{
-              ...dict.rejectModal,
-              ...dict.mainButtons,
-              ...dict.toastMessages,
-            }}
-            id={id}
-            locale={locale}
-            candidateGender={candidate?.gender}
-            isRejectButtonVisible={user.isRejectButtonVisible}
-          />
+        <RejectSection
+          dict={{
+            ...dict.rejectModal,
+            ...dict.mainButtons,
+            ...dict.toastMessages,
+          }}
+          id={id}
+          locale={locale}
+          candidateGender={candidate?.gender}
+          isRejectButtonVisible={user.isRejectButtonVisible}
+        />
 
-          <ContactSection
-            dict={{
-              ...dict.mainButtons,
-              ...dict.contactModal,
-              ...dict.toastMessages,
-            }}
-            relationshipManager={relationshipManager}
-            id={id}
-          />
-        </RefetchProvider>
+        <ContactSection
+          dict={{
+            ...dict.mainButtons,
+            ...dict.contactModal,
+            ...dict.toastMessages,
+          }}
+          relationshipManager={relationshipManager}
+          id={id}
+        />
       </div>
     </div>
   );
