@@ -117,30 +117,8 @@ export function useDialog(name: string) {
   return { isOpen, setIsOpen };
 }
 
-export function useSteps(steps: string[]) {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-
-  const [currentStepName, setCurrentStepNameInternal] = useState<
-    (typeof steps)[number]
-  >(searchParams?.get("step") || steps[0]);
-
-  useEffect(() => {
-    if (searchParams?.get("step")) {
-      setCurrentStepNameInternal(searchParams?.get("step") || steps[0]);
-    } else {
-      setCurrentStepNameInternal(steps[0]);
-    }
-  }, [searchParams]);
-
-  function setCurrentStepName(value: string) {
-    if (value) {
-      updateSearchParams("step", value, searchParams, router);
-    } else {
-      updateSearchParams("step", null, searchParams, router);
-    }
-    setCurrentStepNameInternal(value);
-  }
+export function useSteps<T extends readonly string[]>(steps: T) {
+  const [currentStepName, setCurrentStepName] = useState<T[number]>(steps[0]);
 
   function incrStep() {
     const index = steps.indexOf(currentStepName);
@@ -158,9 +136,11 @@ export function useSteps(steps: string[]) {
     }
   }
 
+  const currentStepTitle: `${T[number]}StepTitle` = `${currentStepName}StepTitle`;
+
   return {
     currentStepName,
-    currentStepTitle: `${currentStepName}StepTitle`,
+    currentStepTitle,
     incrStep,
     decrStep,
   };

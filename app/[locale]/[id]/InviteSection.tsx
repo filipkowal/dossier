@@ -104,7 +104,7 @@ export default function InviteSection({
       <Dialog
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        title={dict[currentStepTitle as keyof typeof dict] as string}
+        title={dict[currentStepTitle]}
         footer={
           currentStepName !== "success" ? (
             <FormFooterButtons
@@ -131,7 +131,7 @@ export default function InviteSection({
           ) : undefined
         }
       >
-        {stepComponents[currentStepName as keyof typeof stepComponents]}
+        {stepComponents[currentStepName]}
       </Dialog>
     </>
   );
