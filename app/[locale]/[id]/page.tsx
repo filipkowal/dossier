@@ -25,6 +25,7 @@ import { cookies } from "next/headers";
 import ImageWithPlaceholder from "@/components/ImageWithPlaceholder";
 import { RefetchProvider } from "./RefetchContext";
 import { revalidateMainPathAction } from "@/utils/actions";
+import ProfessionalDetails from "./ProfessionalDetails";
 
 export const dynamic = "force-dynamic";
 
@@ -203,50 +204,11 @@ export default async function Home({
               {dict.candidate.professionalDetails}
             </h2>
 
-            <div className="block sm:hidden">
-              <p>
-                {dict.candidate.currentPosition}:{" "}
-                <b>{candidate.currentPosition}</b>
-              </p>
-              <p>
-                {dict.candidate.noticePeriod}: <b>{candidate.noticePeriod}</b>
-              </p>
-              {user.canViewSalary ? (
-                <p>
-                  {dict.candidate.desiredSalary}:{" "}
-                  <b>CHF {addHighComma(candidate.desiredSalary)}</b>
-                </p>
-              ) : (
-                ""
-              )}
-              <p>
-                {dict.candidate.desiredWorkload}:{" "}
-                <b>{candidate.desiredWorkload}%</b>
-              </p>
-            </div>
-
-            <div className="hidden sm:grid grid-cols-[300px,1fr]">
-              <div>
-                <p>{dict.candidate.currentPosition}:</p>
-                <p>{dict.candidate.noticePeriod}:</p>
-                {user.canViewSalary ? (
-                  <p>{dict.candidate.desiredSalary}:</p>
-                ) : (
-                  ""
-                )}
-                <p>{dict.candidate.desiredWorkload}:</p>
-              </div>
-              <div>
-                <p>{candidate.currentPosition}</p>
-                <p>{candidate.noticePeriod}</p>
-                {user.canViewSalary ? (
-                  <p>CHF {addHighComma(candidate.desiredSalary)}</p>
-                ) : (
-                  ""
-                )}
-                <p>{candidate.desiredWorkload}%</p>
-              </div>
-            </div>
+            <ProfessionalDetails
+              candidate={candidate}
+              user={user}
+              dict={dict}
+            />
 
             <LongCandidateInfo candidate={candidate} dict={dict.candidate} />
           </div>
@@ -266,6 +228,7 @@ export default async function Home({
             candidateGender={candidate?.gender}
             searchParams={searchParams}
           />
+
           <RejectSection
             dict={{
               ...dict.rejectModal,
