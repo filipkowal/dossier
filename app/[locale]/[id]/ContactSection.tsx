@@ -1,13 +1,11 @@
 "use client";
 
-import { Button } from "@/components";
-import { Dictionary, RelationshipManager, fetchImage } from "@/utils";
+import { Button, Dialog } from "@/components";
+import { Dictionary, RelationshipManager, useDialog, useSteps } from "@/utils";
 import Image from "next/image";
-import { useState } from "react";
 import ChatIcon from "@/public/chat.png";
-import ContactModal from "./ContactModal";
-import sampleAvatar from "@/public/sampleAvatar.webp";
-import ImageWithPlaceholder from "@/components/ImageWithPlaceholder";
+import ContactForm from "./ContactForm";
+import SuccessIcon from "@/public/success.webp";
 
 export default function ContactSection({
   dict,
@@ -20,28 +18,29 @@ export default function ContactSection({
   relationshipManager?: RelationshipManager;
   id: string;
 }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false);
+  const stepNames = ["form", "success"] as const;
 
-  const RelationshipManagerCard = (
-    <div className="flex gap-4 items-center bg-digitalent-blue text-white p-6">
-      <ImageWithPlaceholder
-        src={relationshipManager?.photo}
-        loadingPlaceholder={sampleAvatar}
+  const { isOpen, setIsOpen } = useDialog("contact");
+  const { currentStepName, incrStep, decrStep } = useSteps(stepNames);
+
+  const steps = {
+    form: (
+      <ContactForm
+        dict={dict}
+        id={id}
+        relationshipManager={relationshipManager}
+        incrStep={incrStep}
       />
-
-      <div className="flex gap-2 flex-col md:flex-row">
-        <div className="flex flex-col">
-          <h2 className="text-xl font-title">{relationshipManager?.name}</h2>
-          <h2 className="text-xl">{relationshipManager?.phoneNumber}</h2>
+    ),
+    success: (
+      <>
+        <div className="flex justify-center">
+          <Image src={SuccessIcon} alt="Success Icon" width={80} height={80} />
         </div>
-
-        <h2 className="hidden md:block">•</h2>
-
-        <h2 className="text-xl font-light">Relationship Manager</h2>
-      </div>
-    </div>
-  );
+        <h1>{dict["success"]}</h1>
+      </>
+    ),
+  };
 
   return (
     <>
@@ -62,15 +61,16 @@ export default function ContactSection({
         </span>
       </Button>
 
-      <ContactModal
+      <Dialog
+        title={currentStepName === "success" ? "" : dict.contactDigitalent}
         isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        relationshipManagerCard={RelationshipManagerCard}
-        dict={dict}
-        id={id}
-        isSuccessDialogOpen={isSuccessDialogOpen}
-        setIsSuccessDialogOpen={setIsSuccessDialogOpen}
-      />
+        setIsOpen={(v) => {
+          setIsOpen(v);
+          decrStep();
+        }}
+      >
+        {steps[currentStepName]}
+      </Dialog>
     </>
   );
 }

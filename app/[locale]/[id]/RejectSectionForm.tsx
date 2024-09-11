@@ -10,7 +10,6 @@ export default function RejectSectionForm({
   dict,
   id,
   incrStep,
-  setIsOpen,
   locale,
 }: {
   dict: Dictionary["rejectModal"] &
@@ -18,7 +17,6 @@ export default function RejectSectionForm({
     Dictionary["toastMessages"];
   id: string;
   incrStep: () => void;
-  setIsOpen: (value: boolean) => void;
   locale: Locale;
 }) {
   const [rejectionPending, setRejectionPending] = useState(false);

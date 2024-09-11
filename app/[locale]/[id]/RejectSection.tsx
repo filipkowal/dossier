@@ -32,7 +32,6 @@ export default function RejectSection({
         id={id}
         locale={locale}
         incrStep={incrStep}
-        setIsOpen={setIsOpen}
       />
     ),
     success: (
