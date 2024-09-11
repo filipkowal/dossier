@@ -20,7 +20,7 @@ import { notFound, redirect } from "next/navigation";
 import dynamicImport from "next/dynamic";
 import ContactSection from "./ContactSection";
 import AvatarMale from "@/public/avatar-male.webp";
-import AvatarFemale from "@/public/avatar-female.png";
+import AvatarFemale from "@/public/avatar-female.webp";
 import { cookies } from "next/headers";
 import ImageWithPlaceholder from "@/components/ImageWithPlaceholder";
 import { RefetchProvider } from "./RefetchContext";
