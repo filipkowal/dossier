@@ -73,7 +73,7 @@
     "slotsPlaceholder": "Added slots will appear here"
   },
   "rejectModal": {
-    "title": "Reject Candidate",
+    "formStepTitle": "Reject Candidate",
     "reason": "Too bad. What is the reason for your decision?",
     "select": "Select a reason",
     "message": "Comments (optional)",
@@ -94,7 +94,7 @@
       "male": "It's a pity that you don't want to invite the candidate. We will inform them accordingly.",
       "female": "Its's a pity that you don't want to invite the candidate. We will inform them accordingly."
     },
-    "successTitle": "Rejection successfull",
+    "successStepTitle": "Rejection successfull",
     "close": "Close"
   },
   "contactModal": {

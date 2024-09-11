@@ -1,17 +1,14 @@
 "use client";
 
-import { Button, TextInput, Dialog } from "@/components";
-import LoadingEllipsis from "@/components/LoadingEllipsis";
-import { rejectCandidate } from "@/utils";
+import { Button, Dialog } from "@/components";
+import { Locale, useDialog, useSteps } from "@/utils";
 import { Dictionary } from "@/utils";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import toast from "react-hot-toast";
-import { useRefetch } from "./RefetchContext";
+import RejectSectionForm from "./RejectSectionForm";
 
 export default function RejectSection({
   dict,
   id,
+  locale,
   candidateGender = "m",
   isRejectButtonVisible,
 }: {
@@ -19,25 +16,33 @@ export default function RejectSection({
     Dictionary["mainButtons"] &
     Dictionary["toastMessages"];
   id: string;
+  locale: Locale;
   isRejectButtonVisible: boolean | undefined;
   candidateGender?: "m" | "f";
 }) {
-  const { isRefetching, startRefetch, endRefetch } = useRefetch();
+  const stepNames = ["form", "success"] as const;
 
-  const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
-  const [reason, setReason] = useState("");
-  const [message, setMessage] = useState("");
-  const [rejectionPending, setRejectionPending] = useState(false);
-  const [isSuccessDialogOpen, setIsSuccessDialogOpen] = useState(false);
+  const { isOpen, setIsOpen } = useDialog("reject");
+  const { currentStepName, currentStepTitle, incrStep } = useSteps(stepNames);
 
-  const reasons = Object.entries(dict.reasons);
-
-  if (isRejectButtonVisible === false) return null;
+  const steps = {
+    form: (
+      <RejectSectionForm
+        dict={dict}
+        id={id}
+        locale={locale}
+        incrStep={incrStep}
+        setIsOpen={setIsOpen}
+      />
+    ),
+    success: (
+      <h1>{dict["success"][candidateGender === "m" ? "male" : "female"]}</h1>
+    ),
+  };
 
   return (
     <>
-      {!isRefetching && (
+      {isRejectButtonVisible && (
         <Button
           name="Reject"
           onClick={() => setIsOpen(true)}
@@ -50,87 +55,10 @@ export default function RejectSection({
 
       <Dialog
         isOpen={isOpen}
-        setIsOpen={(value) => {
-          setIsOpen(value);
-
-          if (value === false) {
-            setReason("");
-            setMessage("");
-            router.refresh();
-          }
-        }}
-        title={dict.title}
+        setIsOpen={setIsOpen}
+        title={dict[currentStepTitle]}
       >
-        <form
-          className="flex flex-col gap-4"
-          onSubmit={async (e) => {
-            e.preventDefault();
-            setRejectionPending(true);
-            startRefetch();
-
-            try {
-              await rejectCandidate(id, reason, message);
-
-              setIsOpen(false);
-              setIsSuccessDialogOpen(true);
-            } catch (e) {
-              toast.error(dict["somethingWrong"]);
-              endRefetch();
-            } finally {
-              setRejectionPending(false);
-            }
-          }}
-        >
-          <p>{dict.reason}</p>
-          {/* // Don't autofocus the first input so that on mobile the form is visble workaround */}
-          <input
-            type="text"
-            style={{ position: "absolute", top: "-9999px" }}
-            autoFocus
-          />
-          <select
-            value={reason}
-            required
-            onChange={(e) => setReason(e.target.value)}
-            className="bg-transparent border-2 border-digitalent-blue text-digitalent-blue px-4 -mx-[0.1rem] focus:outline-none focus:ring-2 focus:ring-digitalent-blue focus:border-transparent    "
-          >
-            <option value="">{dict.select} *</option>
-            {reasons.map((reason) => (
-              <option key={reason[0]} value={reason[0]}>
-                {reason[1]}
-              </option>
-            ))}
-          </select>
-
-          <TextInput
-            label={dict.message}
-            name="message"
-            rows={3}
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-          />
-
-          <Button
-            type="primary"
-            name="Reject"
-            submitType
-            disabled={!reason || rejectionPending}
-          >
-            {dict.send}
-            <LoadingEllipsis isLoading={rejectionPending} />
-          </Button>
-        </form>
-      </Dialog>
-      <Dialog
-        isOpen={isSuccessDialogOpen}
-        title={dict["successTitle"]}
-        setIsOpen={(isOpen) => {
-          setIsSuccessDialogOpen(isOpen);
-
-          if (!isOpen) router.refresh();
-        }}
-      >
-        <h1>{dict["success"][candidateGender === "m" ? "male" : "female"]}</h1>
+        {steps[currentStepName]}
       </Dialog>
     </>
   );

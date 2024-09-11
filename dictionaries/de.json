@@ -73,7 +73,7 @@
     "slotsPlaceholder": "Hinzugefügliche Slots werden hier angezeigt"
   },
   "rejectModal": {
-    "title": "Kandidat ablehnen",
+    "formStepTitle": "Kandidat ablehnen",
     "reason": "Schade, dass es nicht passt. Was ist der Hintergrund für deine Entscheidung?",
     "select": "Bitte wähle einen Grund aus",
     "message": "Kommentare (optional)",
@@ -94,7 +94,7 @@
       "male": "Schade, dass du den Kandidaten nicht einladen möchtest. Wir werden ihn entsprechend informieren.",
       "female": "Schade, dass du die Kandidatin nicht einladen möchtest. Wir werden sie entsprechend informieren."
     },
-    "successTitle": "KANDIDAT ABGELEHNT",
+    "successStepTitle": "KANDIDAT ABGELEHNT",
     "close": "Schließen"
   },
   "contactModal": {

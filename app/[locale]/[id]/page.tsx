@@ -273,6 +273,7 @@ export default async function Home({
               ...dict.toastMessages,
             }}
             id={id}
+            locale={locale}
             candidateGender={candidate?.gender}
             isRejectButtonVisible={user.isRejectButtonVisible}
           />

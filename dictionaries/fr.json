@@ -73,7 +73,7 @@
     "slotsPlaceholder": "Les disponibilités ajoutées s'affichent ici"
   },
   "rejectModal": {
-    "title": "Rejeter le candidat",
+    "formStepTitle": "Rejeter le candidat",
     "reason": "Dommage. Quelle est la raison de votre décision?",
     "select": "Sélectionner une raison",
     "message": "Commentaires (facultatif)",
@@ -94,7 +94,7 @@
       "male": "C'est dommage que vous ne vouliez pas inviter le candidat. Nous les informerons en conséquence.",
       "female": "C'est dommage que vous ne vouliez pas inviter la candidate. Nous l'informerons en conséquence."
     },
-    "successTitle": "Rejet réussi",
+    "successStepTitle": "Rejet réussi",
     "close": "Fermer"
   },
   "contactModal": {
