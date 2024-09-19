@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import { inviteCandidate, isLoggedIn } from "./fetchers";
@@ -42,7 +42,7 @@ export const useTokenCheck = (
 
     // Cleanup interval on component unmount
     return () => clearInterval(interval);
-  }, [router]);
+  }, [router, id, locale, dict.expiredMessage, dict.expiredError]);
 };
 
 //
@@ -54,22 +54,57 @@ export const useAutoLogout = (
   dict: Dictionary["tokenExpiry"]
 ) => {
   const router = useRouter();
-  const FIVE_MINUTES = 5 * 60 * 1000;
+  const FIVE_MINUTES = 60 * 1000;
+  const [secondsLeft, setSecondsLeft] = useState(FIVE_MINUTES / 1000);
 
-  const logoutUser = async () => {
-    try {
-      await logoutAndRedirect(id, locale, router);
-    } finally {
-      toast(dict.inactivity, { icon: "ℹ️" });
-    }
-  };
+  const toastIdRef = useRef("remainingTime");
 
   useEffect(() => {
+    const messageDiv = (
+      <div style={{ background: "#E7E248", padding: "1rem 3rem" }}>
+        You will be logged out in: <b>{secondsLeft}</b>s
+      </div>
+    );
+    // Display inactivity message
+    if (secondsLeft < 11 && secondsLeft > 0) {
+      toast.custom(messageDiv, {
+        id: toastIdRef.current,
+        duration: 90000,
+        icon: "ℹ️",
+      });
+    }
+
+    // on inactiviy timout restart -> restart secondsLeft
+    if (secondsLeft === FIVE_MINUTES / 1000 || secondsLeft <= 0) {
+      toast.dismiss(toastIdRef.current);
+    }
+  }, [secondsLeft, dict.inactivity, FIVE_MINUTES, toastIdRef]);
+
+  useEffect(() => {
+    const logoutUser = async () => {
+      try {
+        await logoutAndRedirect(id, locale, router);
+      } finally {
+        toastIdRef.current = toast(dict.inactivity, {
+          icon: "ℹ️",
+          duration: 10000,
+        });
+      }
+    };
+
     let timeout = setTimeout(logoutUser, FIVE_MINUTES);
+
+    function decrementSecondsLeft() {
+      setSecondsLeft((secondsLeft) => secondsLeft - 1);
+    }
+
+    const interval = setInterval(decrementSecondsLeft, 1000);
 
     const resetInactivityTimeout = () => {
       clearTimeout(timeout);
       timeout = setTimeout(logoutUser, FIVE_MINUTES);
+
+      setSecondsLeft(FIVE_MINUTES / 1000);
     };
 
     const events = ["mousemove", "keydown", "click", "scroll"];
@@ -83,8 +118,9 @@ export const useAutoLogout = (
         window.removeEventListener(event, resetInactivityTimeout)
       );
       clearTimeout(timeout);
+      clearInterval(interval);
     };
-  }, []);
+  }, [FIVE_MINUTES, dict.inactivity, id, locale, router]);
 
   return null;
 };
