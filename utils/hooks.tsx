@@ -54,76 +54,95 @@ export const useAutoLogout = (
   dict: Dictionary["tokenExpiry"]
 ) => {
   const router = useRouter();
-  const FIVE_MINUTES = 60 * 1000;
-  const [secondsLeft, setSecondsLeft] = useState(FIVE_MINUTES / 1000);
+  const FIVE_MINUTES = 20 * 1000;
+  const { resetToastCounter, toastCounterIdRef, decrToastCounter } =
+    useInactivityToast(FIVE_MINUTES, dict);
 
-  const toastIdRef = useRef("remainingTime");
+  // Log user out after 5 minutes of inactivity
+  useEffect(() => {
+    const events = ["mousemove", "keydown", "click", "scroll"];
 
+    async function logoutUser() {
+      try {
+        await logoutAndRedirect(id, locale, router);
+      } finally {
+        toast.dismiss(toastCounterIdRef.current);
+        toast(dict.inactivity, {
+          icon: "ℹ️",
+          duration: 10000,
+        });
+      }
+    }
+
+    // Initial start of timeout and interval.
+    let timeout = setTimeout(logoutUser, FIVE_MINUTES);
+    const counterInterval = setInterval(decrToastCounter, 1000);
+
+    function resetTimeout() {
+      clearTimeout(timeout);
+      timeout = setTimeout(logoutUser, FIVE_MINUTES);
+    }
+
+    function eventHandler() {
+      resetTimeout();
+      resetToastCounter();
+    }
+    // Set resetting event listeners
+    events.forEach((event) => window.addEventListener(event, eventHandler));
+
+    return () => {
+      events.forEach((event) =>
+        window.removeEventListener(event, eventHandler)
+      );
+      clearTimeout(timeout);
+      clearInterval(counterInterval);
+    };
+  }, [FIVE_MINUTES, id, locale, router]);
+
+  return null;
+};
+
+function useInactivityToast(
+  initialMsLeft: number,
+  dict: Dictionary["tokenExpiry"]
+) {
+  const initialSecondsLeft = initialMsLeft / 1000;
+  const [counter, setCounter] = useState(initialSecondsLeft);
+  const toastCounterIdRef = useRef("remainingTime");
+
+  function decrToastCounter() {
+    setCounter((secondsLeft) => secondsLeft - 1);
+  }
+
+  function resetToastCounter() {
+    setCounter(initialSecondsLeft);
+    toast.dismiss(toastCounterIdRef.current);
+  }
+
+  // Display inactivity message
   useEffect(() => {
     const messageDiv = (
       <div style={{ background: "#E7E248", padding: "1rem 3rem" }}>
-        You will be logged out in: <b>{secondsLeft}</b>s
+        {dict.inactivityCounter} <b>{counter}</b>s
       </div>
     );
     // Display inactivity message
-    if (secondsLeft < 11 && secondsLeft > 0) {
+    if (counter < 11 && counter > 0) {
       toast.custom(messageDiv, {
-        id: toastIdRef.current,
+        id: toastCounterIdRef.current,
         duration: 90000,
         icon: "ℹ️",
       });
     }
 
     // on inactiviy timout restart -> restart secondsLeft
-    if (secondsLeft === FIVE_MINUTES / 1000 || secondsLeft <= 0) {
-      toast.dismiss(toastIdRef.current);
+    if (counter === initialSecondsLeft || counter <= 0) {
+      toast.dismiss(toastCounterIdRef.current);
     }
-  }, [secondsLeft, dict.inactivity, FIVE_MINUTES, toastIdRef]);
+  }, [counter, initialMsLeft, toastCounterIdRef]);
 
-  useEffect(() => {
-    const logoutUser = async () => {
-      try {
-        await logoutAndRedirect(id, locale, router);
-      } finally {
-        toastIdRef.current = toast(dict.inactivity, {
-          icon: "ℹ️",
-          duration: 10000,
-        });
-      }
-    };
-
-    let timeout = setTimeout(logoutUser, FIVE_MINUTES);
-
-    function decrementSecondsLeft() {
-      setSecondsLeft((secondsLeft) => secondsLeft - 1);
-    }
-
-    const interval = setInterval(decrementSecondsLeft, 1000);
-
-    const resetInactivityTimeout = () => {
-      clearTimeout(timeout);
-      timeout = setTimeout(logoutUser, FIVE_MINUTES);
-
-      setSecondsLeft(FIVE_MINUTES / 1000);
-    };
-
-    const events = ["mousemove", "keydown", "click", "scroll"];
-
-    events.forEach((event) =>
-      window.addEventListener(event, resetInactivityTimeout)
-    );
-
-    return () => {
-      events.forEach((event) =>
-        window.removeEventListener(event, resetInactivityTimeout)
-      );
-      clearTimeout(timeout);
-      clearInterval(interval);
-    };
-  }, [FIVE_MINUTES, dict.inactivity, id, locale, router]);
-
-  return null;
-};
+  return { toastCounterIdRef, decrToastCounter, resetToastCounter };
+}
 
 export function useDialog(name: string) {
   const searchParams = useSearchParams();

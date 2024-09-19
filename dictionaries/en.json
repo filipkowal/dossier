@@ -133,6 +133,7 @@
   "tokenExpiry": {
     "expiredMessage": "Your token has expired. Please log in again.",
     "expiredError": "There was an error when checking validity of your token. Please log in again.",
-    "inactivity": "You've been logged out due to incativity."
+    "inactivity": "You've been logged out due to inactivity.",
+    "inactivityCounter": "You will be logged out in: "
   }
 }
