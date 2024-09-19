@@ -54,7 +54,7 @@ export const useAutoLogout = (
   dict: Dictionary["tokenExpiry"]
 ) => {
   const router = useRouter();
-  const FIVE_MINUTES = 20 * 1000;
+  const FIVE_MINUTES = 5 * 60 * 1000;
   const { resetToastCounter, toastCounterIdRef, decrToastCounter } =
     useInactivityToast(FIVE_MINUTES, dict);
 
