@@ -81,6 +81,12 @@ export default function TimeSlotInputs({
         name="Add slot"
         submitType
         className="bg-digitalent-blue text-white disabled:bg-digitalent-blue disabled:text-white hover:disabled:bg-digitalent-blue hover:disabled:text-white h-14 !py-0"
+        disabled={
+          !date ||
+          !startTime ||
+          !endTime ||
+          startTime.add(interviewDuration, "minute").isAfter(endTime)
+        }
       >
         {dict.addSlot}
       </Button>
