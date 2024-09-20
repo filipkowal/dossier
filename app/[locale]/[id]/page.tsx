@@ -24,6 +24,7 @@ import { cookies } from "next/headers";
 import ImageWithPlaceholder from "@/components/ImageWithPlaceholder";
 import { revalidateMainPathAction } from "@/utils/actions";
 import ProfessionalDetails from "./ProfessionalDetails";
+import ContactDetails from "./ContactDetails";
 
 export const dynamic = "force-dynamic";
 
@@ -108,67 +109,7 @@ export default async function Home({
           </div>
           {/* Mobile End */}
 
-          <div className="flex flex-col leading-7 lg:flex-row xl:flex-col lg:gap-16 xl:gap-8 sm:gap-8 sm:mt-8 justify-between xl:w-[19rem]">
-            <div className="md:w-1/2 xl:w-full">
-              <h2 className="text-xl font-title mb-4 sm:mb-8">
-                {dict.candidate.contactDetails}
-              </h2>
-              <p>{candidate.phoneNumber}</p>
-              {candidate.email ? (
-                <div className="flex gap-2">
-                  <p className="overflow-hidden text-ellipsis">
-                    {candidate.email}
-                  </p>
-                  <CopyButton
-                    value={candidate.email}
-                    dict={dict.toastMessages}
-                  />
-                </div>
-              ) : (
-                ""
-              )}
-
-              {candidate.linkedIn && (
-                <Link
-                  href={candidate.linkedIn}
-                  target="_blank"
-                  className="block whitespace-nowrap overflow-hidden text-ellipsis max-w-[100%]"
-                >
-                  <Image
-                    alt="linked-in"
-                    src={LinkedInIcon}
-                    className="inline mb-[0.3rem]"
-                    width={18}
-                  />{" "}
-                  {candidate.linkedIn?.replace(/\/$/, "").slice(27)}
-                  <Image
-                    alt="open-linkedin"
-                    src={ShareIcon}
-                    className="inline mb-[0.3rem] ml-2"
-                    width={20}
-                  />
-                </Link>
-              )}
-            </div>
-            <div className="md:w-1/2 xl:w-full">
-              <p className="whitespace-nowrap">
-                {candidate?.birthDate || ""}{" "}
-                {candidate?.candidateAge
-                  ? "(" + candidate.candidateAge + ")"
-                  : ""}
-              </p>
-
-              <p className="overflow-hidden text-ellipsis">
-                {candidate.address?.street || ""}
-              </p>
-              <p className="overflow-hidden text-ellipsis">
-                {(candidate.address?.zip || "") +
-                  " " +
-                  (candidate.address?.city || "")}
-              </p>
-              <p>{candidate.address?.country || ""}</p>
-            </div>
-          </div>
+          <ContactDetails candidate={candidate} dict={dict} />
         </div>
       </div>
 
