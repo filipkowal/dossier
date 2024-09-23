@@ -46,6 +46,8 @@ export default function RootLayout({
   const headersList = headers();
   const locale = getLocale(headersList);
 
+  throw new Error("Test error message");
+
   return (
     <html
       className={`${merriweather.variable} ${stolzl.variable} text-digitalent-blue font-serif`}
