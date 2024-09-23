@@ -57,6 +57,8 @@ export default function ErrorPage({
     window.location.reload();
   };
 
+  console.log("Error: ", error);
+
   return (
     <div className="w-full h-full text-center pt-16 text-digitalent-blue">
       <p className="text-3xl py-32">{dict.somethingWrong}</p>
