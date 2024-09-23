@@ -42,6 +42,7 @@ export default async function RootLayout({
 }) {
   const dict = await getDictionary(params.locale);
 
+  throw new Error("test message");
   return (
     <>
       <main className="min-h-screen bg-digitalent-gray-light flex flex-col justify-between">
