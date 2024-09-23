@@ -33,8 +33,8 @@ const merriweather = Merriweather({
 const stolzl = localFont({
   variable: "--font-stolzl",
   src: [
-    { path: "../public/fonts/Stolzl-Regular.ttf", weight: "400" },
-    { path: "../public/fonts/Stolzl-Medium.ttf", weight: "500" },
+    { path: "../../public/fonts/Stolzl-Regular.ttf", weight: "400" },
+    { path: "../../public/fonts/Stolzl-Medium.ttf", weight: "500" },
   ],
 });
 
@@ -46,7 +46,7 @@ export default function RootLayout({
   const headersList = headers();
   const locale = getLocale(headersList);
 
-  throw new Error("Test error message");
+  throw new Error("test error message");
 
   return (
     <html

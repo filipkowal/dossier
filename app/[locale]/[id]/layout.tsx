@@ -1,6 +1,6 @@
 import { type Locale } from "@/i18n-config";
 import Link from "next/link";
-import "@/app/globals.css";
+import "@/app/[locale]/globals.css";
 import localFont from "next/font/local";
 import type { Metadata } from "next";
 import { CookiePopup, Header } from "@/components";

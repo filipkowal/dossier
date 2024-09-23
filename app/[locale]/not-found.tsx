@@ -1,6 +1,6 @@
 import { type Locale } from "@/i18n-config";
 import Link from "next/link";
-import "@/app/globals.css";
+import "@/app/[locale]/globals.css";
 import localFont from "next/font/local";
 import { CookiePopup, NotFound } from "@/components";
 import { getDictionary, getLocale } from "@/utils";
@@ -9,7 +9,7 @@ import HeaderSimple from "@/components/HeaderSimple";
 
 const loew = localFont({
   variable: "--font-loew",
-  src: "../public/fonts/Loew-Heavy.otf",
+  src: "../../public/fonts/Loew-Heavy.otf",
   preload: false,
 });
 
