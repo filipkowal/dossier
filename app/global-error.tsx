@@ -1,7 +1,7 @@
 "use client";
 import { ErrorPage } from "@/components";
 import { type Locale } from "@/i18n-config";
-import { useParams } from "next/navigation";
+import { useParams, useSelectedLayoutSegment } from "next/navigation";
 import { Metadata } from "next";
 import localFont from "next/font/local";
 import { Merriweather } from "next/font/google";
@@ -48,19 +48,21 @@ export default function GlobalError({
 }) {
   console.log("global error");
   const paramsUse = useParams() as { locale: Locale };
+  const segment = useSelectedLayoutSegment();
+  console.log("segment", segment);
   console.log("paramsUse", paramsUse);
   console.log("params", params);
 
   return (
     <html
       className={`${merriweather.variable} ${stolzl.variable} text-digitalent-blue font-serif`}
-      lang={params.locale || "en"}
+      lang={segment || "en"}
     >
       <head>
         <link rel="icon" href="/thumbnail.png" />
       </head>
       <body>
-        <ErrorPage error={error} locale={params.locale || "en"} />
+        <ErrorPage error={error} locale={(segment as Locale) || "en"} />
       </body>
     </html>
   );
