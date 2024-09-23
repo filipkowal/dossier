@@ -44,6 +44,8 @@ export default async function RootLayout({
   const cookieStore = cookies();
   const cookie = cookieStore.get(`token-${params.id}`);
 
+  throw new Error("Test layout error");
+
   return (
     <>
       <main className="min-h-screen bg-digitalent-gray-light flex flex-col justify-between">
