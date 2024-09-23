@@ -39,8 +39,16 @@ const stolzl = localFont({
   ],
 });
 
-export default function RootLayout({ error }: { error: Error }) {
-  const params = useParams() as { locale: Locale };
+export default function GlobalError({
+  error,
+  params,
+}: {
+  error: Error;
+  params: { locale: Locale };
+}) {
+  const paramsUse = useParams() as { locale: Locale };
+  console.log("paramsUse", paramsUse);
+  console.log("params", params);
 
   return (
     <html
