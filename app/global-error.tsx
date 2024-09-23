@@ -1,7 +1,7 @@
 "use client";
 import { ErrorPage } from "@/components";
 import { type Locale } from "@/i18n-config";
-import { useParams, useSelectedLayoutSegment } from "next/navigation";
+import { useSelectedLayoutSegment } from "next/navigation";
 import { Metadata } from "next";
 import localFont from "next/font/local";
 import { Merriweather } from "next/font/google";
@@ -47,10 +47,8 @@ export default function GlobalError({
   params: { locale: Locale };
 }) {
   console.log("global error");
-  const paramsUse = useParams() as { locale: Locale };
   const segment = useSelectedLayoutSegment();
   console.log("segment", segment);
-  console.log("paramsUse", paramsUse);
   console.log("params", params);
 
   return (
