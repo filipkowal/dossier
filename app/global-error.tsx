@@ -34,8 +34,8 @@ const merriweather = Merriweather({
 const stolzl = localFont({
   variable: "--font-stolzl",
   src: [
-    { path: "../../public/fonts/Stolzl-Regular.ttf", weight: "400" },
-    { path: "../../public/fonts/Stolzl-Medium.ttf", weight: "500" },
+    { path: "../public/fonts/Stolzl-Regular.ttf", weight: "400" },
+    { path: "../public/fonts/Stolzl-Medium.ttf", weight: "500" },
   ],
 });
 
@@ -46,6 +46,7 @@ export default function GlobalError({
   error: Error;
   params: { locale: Locale };
 }) {
+  console.log("global error");
   const paramsUse = useParams() as { locale: Locale };
   console.log("paramsUse", paramsUse);
   console.log("params", params);
