@@ -1,5 +1,6 @@
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/utils";
+import ContactSection from "./contactSection";
 
 export default async function Home({
   params,
@@ -17,6 +18,15 @@ export default async function Home({
         </div>{" "}
         <p>{dict["heading"]}</p>
         <p className="pt-4">{dict["message"]}</p>
+        <ContactSection
+          dict={{
+            ...dict,
+            ...dictionary["contactModal"],
+            ...dictionary.mainButtons,
+            ...dictionary.toastMessages,
+          }}
+          id={params.id}
+        />
       </div>
     </div>
   );
