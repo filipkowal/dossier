@@ -1,6 +1,6 @@
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/utils";
-import ContactSection from "./contactSection";
+import ContactSection from "./ContactSection";
 
 export default async function Home({
   params,

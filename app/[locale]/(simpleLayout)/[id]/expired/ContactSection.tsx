@@ -1,7 +1,9 @@
 "use client";
 import ContactForm from "@/app/[locale]/[id]/ContactForm";
 import { Button, Dialog } from "@/components";
-import { Dictionary, useDialog } from "@/utils";
+import { Dictionary, useDialog, useSteps } from "@/utils";
+import Image from "next/image";
+import SuccessIcon from "@/public/success.webp";
 
 export default function ContactSection({
   dict,
@@ -13,6 +15,22 @@ export default function ContactSection({
   id: string;
 }) {
   const { isOpen, setIsOpen } = useDialog("contact");
+
+  const stepNames = ["form", "success"] as const;
+
+  const { currentStepName, incrStep, decrStep } = useSteps(stepNames);
+
+  const steps = {
+    form: <ContactForm dict={dict} id={id} incrStep={incrStep} />,
+    success: (
+      <>
+        <div className="flex justify-center">
+          <Image src={SuccessIcon} alt="Success Icon" width={80} height={80} />
+        </div>
+        <h1>{dict["success"]}</h1>
+      </>
+    ),
+  };
   return (
     <div className="md:min-w-[30rem]">
       <Button
@@ -25,10 +43,13 @@ export default function ContactSection({
 
       <Dialog
         isOpen={isOpen}
-        setIsOpen={setIsOpen}
+        setIsOpen={(v) => {
+          setIsOpen(v);
+          decrStep();
+        }}
         title={dict.contactDigitalent}
       >
-        <ContactForm dict={dict} id={id} incrStep={() => setIsOpen(false)} />
+        {steps[currentStepName]}
       </Dialog>
     </div>
   );
