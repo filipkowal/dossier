@@ -6,15 +6,9 @@ import Image from "next/image";
 export default async function PdfButton({
   pdfDossierPromise,
 }: {
-  pdfDossierPromise?: Promise<GetPdfDossierResponse>;
+  pdfDossierPromise?: Promise<GetPdfDossierResponse | undefined>;
 }) {
-  let pdfDossier: GetPdfDossierResponse | undefined;
-  try {
-    pdfDossier = await pdfDossierPromise;
-  } catch (error) {
-    console.error("Failed to get PDF dossier", error);
-    return null;
-  }
+  const pdfDossier = await pdfDossierPromise;
 
   if (typeof pdfDossier !== "string") return null;
 

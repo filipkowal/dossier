@@ -113,14 +113,18 @@ export async function getPdfDossier(
   locale: Locale,
   id: string,
   cookie?: RequestCookie
-): Promise<GetPdfDossierResponse> {
-  const response = await getData({
-    endpoint: `candidate/${id}/pdf`,
-    locale,
-    cookie,
-  });
-
-  return response;
+): Promise<GetPdfDossierResponse | undefined> {
+  try {
+    const result = await getData({
+      endpoint: `candidate/${id}/pdf`,
+      locale,
+      cookie,
+    });
+    return result;
+  } catch (error) {
+    console.error("Failed to fetch PDF dossier", error);
+    return undefined;
+  }
 }
 
 export async function getRelationshipManager(

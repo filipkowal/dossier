@@ -19,7 +19,9 @@ export default async function Header({
 }) {
   let dict, user, pdfDossierPromise;
   try {
+    // don't await the pdf dossier promise because we don't need it yet
     pdfDossierPromise = getPdfDossier(params.locale, params.id, cookie);
+
     [dict, user] = await Promise.all([
       getDictionary(params.locale),
       getUser(params.locale, params.id, cookie),
