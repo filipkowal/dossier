@@ -52,6 +52,12 @@ export async function middleware(request: NextRequest) {
 
   // Redirect to login if not authorized
   if (!isLoginPage(pathname) && !isAuthorized) {
+    console.log(
+      "isLoginPage: ",
+      isLoginPage(pathname),
+      "\nisAuthorized: ",
+      isAuthorized
+    );
     const pathSegments = pathname.split("/");
 
     const newPath = `/${pathSegments[1]}/${pathSegments[2]}/login/`;
