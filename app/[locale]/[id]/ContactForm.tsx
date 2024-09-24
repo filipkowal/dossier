@@ -8,21 +8,13 @@ import toast from "react-hot-toast";
 import sampleAvatar from "@/public/sampleAvatar.webp";
 import LoadingEllipsis from "@/components/LoadingEllipsis";
 
-export default function ContactForm({
-  dict,
-  id,
-  incrStep,
+const RelationshipManagerCard = ({
   relationshipManager,
 }: {
-  dict: Dictionary["contactModal"] & Dictionary["toastMessages"];
-  id: string;
-  incrStep: () => void;
   relationshipManager?: RelationshipManager;
-}) {
-  const [isSending, setIsSending] = useState(false);
-  const [message, setMessage] = useState("");
-
-  const RelationshipManagerCard = () => (
+}) => {
+  if (!relationshipManager) return null;
+  return (
     <div className="flex gap-4 items-center bg-digitalent-blue text-white p-6">
       <ImageWithPlaceholder
         src={relationshipManager?.photo}
@@ -41,6 +33,21 @@ export default function ContactForm({
       </div>
     </div>
   );
+};
+
+export default function ContactForm({
+  dict,
+  id,
+  incrStep,
+  relationshipManager,
+}: {
+  dict: Dictionary["contactModal"] & Dictionary["toastMessages"];
+  id: string;
+  incrStep: () => void;
+  relationshipManager?: RelationshipManager;
+}) {
+  const [isSending, setIsSending] = useState(false);
+  const [message, setMessage] = useState("");
 
   return (
     <form
@@ -68,7 +75,7 @@ export default function ContactForm({
       }}
     >
       <div className="flex flex-col gap-4">
-        {relationshipManager && <RelationshipManagerCard />}
+        <RelationshipManagerCard relationshipManager={relationshipManager} />
 
         <TextInput
           label={dict.messageLabel}
