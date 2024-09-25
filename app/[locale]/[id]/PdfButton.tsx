@@ -2,6 +2,7 @@ import { Button } from "@/components";
 import { GetPdfDossierResponse } from "@/utils";
 import DownloadIcon from "@/public/download.png";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function PdfButton({
   pdfDossierPromise,
@@ -13,9 +14,9 @@ export default async function PdfButton({
   if (typeof pdfDossier !== "string") return null;
 
   return (
-    <a
+    <Link
       href={pdfDossier}
-      download="dossier.pdf"
+      download=""
       className="sm:w-1/3 xl:w-1/4 max-w-[32rem]"
     >
       <Button name={"PDF"} type="invert" className="flex gap-2 ml-8">
@@ -26,6 +27,6 @@ export default async function PdfButton({
         />
         PDF
       </Button>
-    </a>
+    </Link>
   );
 }
