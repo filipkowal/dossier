@@ -14,7 +14,7 @@ export default async function PdfButton({
   if (typeof pdfDossier !== "string") return null;
 
   return (
-    <Link
+    <a
       href={pdfDossier}
       download=""
       className="sm:w-1/3 xl:w-1/4 max-w-[32rem]"
@@ -27,6 +27,6 @@ export default async function PdfButton({
         />
         PDF
       </Button>
-    </Link>
+    </a>
   );
 }
