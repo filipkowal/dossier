@@ -116,7 +116,7 @@
   },
   "loginForm": {
     "verifyItsYou": "VÉRIFIEZ QUE C'EST VOUS",
-    "sendCodeInstruction": "Envoyez le code à votre téléphone pour vous vérifier.",
+    "sendCodeInstruction": "Envoie le code à ton téléphone pour t'authentifier",
     "resendButton": "Envoyer le SMS avec le code",
     "enterCodeInstruction": "Entrez le code du SMS",
     "toastError": "Échec de l'envoi du code SMS",
