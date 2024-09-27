@@ -1,2 +1,2 @@
 // revert to merge
-export const SERVER_URL = "https://vertical.digitalent.cloud/api/dossier";
+export const SERVER_URL = "https://merge.digitalent.cloud/api/dossier";
