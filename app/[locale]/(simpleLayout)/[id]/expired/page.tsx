@@ -18,7 +18,8 @@ export default async function Home({
         </div>{" "}
         <p>{dict["heading"]}</p>
         <p className="pt-4">{dict["message"]}</p>
-        <ContactSection
+        {/* The contact API is not supported for expired Dossiers yet */}
+        {/* <ContactSection
           dict={{
             ...dict,
             ...dictionary["contactModal"],
@@ -26,7 +27,7 @@ export default async function Home({
             ...dictionary.toastMessages,
           }}
           id={params.id}
-        />
+        /> */}
       </div>
     </div>
   );
