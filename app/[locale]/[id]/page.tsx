@@ -46,11 +46,8 @@ export default async function Home({
       getDictionary(params.locale),
       getRelationshipManager(params.locale, params.id, cookie),
     ]);
-    console.log("layout tried to fetch");
   } catch (error) {
-    console.log("layout catched error");
     if (error instanceof HttpError && error.status === 410) {
-      console.log("layout catched 410 error");
       await revalidateMainPathAction({ locale, id });
       redirect(`/${locale}/${id}/expired`);
     }

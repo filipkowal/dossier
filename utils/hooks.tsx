@@ -30,7 +30,6 @@ export const useTokenCheck = (
           router.refresh();
         }
       } catch (e) {
-        console.log(e);
         toast.error(dict.expiredError);
         router.push(`/${locale}/${id}/login`);
         router.refresh();

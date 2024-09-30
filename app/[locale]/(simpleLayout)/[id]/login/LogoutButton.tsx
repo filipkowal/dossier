@@ -23,7 +23,6 @@ export default function LogoutButton({
       toast.success(dict.logoutSuccess);
     } catch (error) {
       toast.error(dict.logoutError);
-      console.error(error);
     }
   }
 

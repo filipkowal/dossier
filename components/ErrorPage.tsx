@@ -41,7 +41,6 @@ export default function ErrorPage({
 
   useEffect(() => {
     async function getDict() {
-      console.error(error);
       const d = await getDictionary(locale);
       setDict({
         ...d.utilityPages,
@@ -56,8 +55,6 @@ export default function ErrorPage({
   const handleRefresh = () => {
     window.location.reload();
   };
-
-  console.log("Error: ", error);
 
   return (
     <div className="w-full h-full text-center pt-16 text-digitalent-blue">

@@ -122,7 +122,6 @@ export async function getPdfDossier(
     });
     return result;
   } catch (error) {
-    console.error("Failed to fetch PDF dossier", error);
     return undefined;
   }
 }

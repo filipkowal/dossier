@@ -27,7 +27,6 @@ export default async function Header({
       getUser(params.locale, params.id, cookie),
     ]);
   } catch (error) {
-    console.error(error);
     return <HeaderSimple params={params} />;
   }
 

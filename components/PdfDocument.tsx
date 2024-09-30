@@ -24,9 +24,7 @@ const PdfDocument: React.FC<PdfDocumentProps> = ({ fileUrl, parentWidth }) => {
 
         const blob = await res.blob();
         setFileContent(blob);
-      } catch (error) {
-        console.error("Error fetching PDF:", error);
-      }
+      } catch (error) {}
     }
 
     fetchPdf();
@@ -43,7 +41,7 @@ const PdfDocument: React.FC<PdfDocumentProps> = ({ fileUrl, parentWidth }) => {
   return (
     <Document
       file={fileContent}
-      onLoadError={(error) => console.error("Error loading document:", error)}
+      onLoadError={(error) => {}}
       onLoadSuccess={onDocumentLoadSuccess}
     >
       {Array.from(new Array(numPages), (el, index) => (
