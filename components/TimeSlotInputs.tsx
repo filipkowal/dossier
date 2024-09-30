@@ -17,6 +17,7 @@ export default function TimeSlotInputs({
   const [date, setDate] = useState<Dayjs | null>(null);
   const [startTime, setStartTime] = useState<Dayjs | null>(null);
   const [endTime, setEndTime] = useState<Dayjs | null>(null);
+  const [hasErrors, setHasErrors] = useState(false);
 
   const addSlot = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,8 +51,6 @@ export default function TimeSlotInputs({
     setEndTime(null);
   };
 
-  const isValidDate = date && date.isValid() && !date.isBefore(new Date());
-
   return (
     <form
       className="flex flex-col sm:flex-row items-center gap-3 sm:gap-2 md:gap-6"
@@ -61,20 +60,32 @@ export default function TimeSlotInputs({
         name="date"
         label={dict.slotDate}
         value={date}
-        onChange={(newValue) => setDate(newValue)}
+        onChange={(newValue, context) => {
+          setDate(newValue);
+          if (context.validationError) setHasErrors(true);
+          else setHasErrors(false);
+        }}
         disablePast
       />
       <TimePicker
         name="startTime"
         label={dict.slotStartTime}
         value={startTime}
-        onChange={(newValue) => setStartTime(newValue)}
+        onChange={(newValue, context) => {
+          setStartTime(newValue);
+          if (context.validationError) setHasErrors(true);
+          else setHasErrors(false);
+        }}
       />
       <TimePicker
         name="endTime"
         label={dict.slotEndTime}
         value={endTime}
-        onChange={(newValue) => setEndTime(newValue)}
+        onChange={(newValue, context) => {
+          setEndTime(newValue);
+          if (context.validationError) setHasErrors(true);
+          else setHasErrors(false);
+        }}
         minTime={
           startTime ? startTime.add(interviewDuration, "minute") : undefined
         }
@@ -83,14 +94,7 @@ export default function TimeSlotInputs({
         name="Add slot"
         submitType
         className="bg-digitalent-blue text-white disabled:bg-digitalent-blue disabled:text-white hover:disabled:bg-digitalent-blue hover:disabled:text-white h-14 !py-0"
-        disabled={
-          !isValidDate ||
-          !startTime ||
-          !startTime.isValid() ||
-          !endTime ||
-          !endTime.isValid() ||
-          startTime.add(interviewDuration, "minute").isAfter(endTime)
-        }
+        disabled={!startTime || !endTime || !date || hasErrors}
       >
         {dict.addSlot}
       </Button>
