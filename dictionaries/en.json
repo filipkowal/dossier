@@ -70,7 +70,8 @@
     "noDate": "Please provide your availability date",
     "noStartTime": "Please provide your availability start time",
     "noEndTime": "Please provide your availability end time",
-    "slotsPlaceholder": "Added slots will appear here"
+    "slotsPlaceholder": "Added slots will appear here",
+    "newSlotNotAdded": "You have entered a time slot's data, but the slot has not been added. Please remove the data or add the slot."
   },
   "rejectModal": {
     "formStepTitle": "Reject Candidate",

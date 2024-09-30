@@ -9,10 +9,12 @@ export default function TimeSlotInputs({
   dict,
   interviewDuration,
   setAvailabilitySlots,
+  setIsNewTimeSlotSet,
 }: {
   dict: Dictionary["inviteModal"];
   interviewDuration: number;
   setAvailabilitySlots: Dispatch<SetStateAction<TimeSlots>>;
+  setIsNewTimeSlotSet: Dispatch<SetStateAction<boolean>>;
 }) {
   const [date, setDate] = useState<Dayjs | null>(null);
   const [startTime, setStartTime] = useState<Dayjs | null>(null);
@@ -50,6 +52,14 @@ export default function TimeSlotInputs({
     setStartTime(null);
     setEndTime(null);
   };
+
+  useEffect(() => {
+    if (date && startTime && endTime) {
+      setIsNewTimeSlotSet(true);
+    } else {
+      setIsNewTimeSlotSet(false);
+    }
+  }, [date, startTime, endTime]);
 
   return (
     <form

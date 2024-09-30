@@ -70,7 +70,8 @@
     "noDate": "Merci de donner ta date de disponibilité",
     "noStartTime": "Merci de donner ton heure de début de disponibilité",
     "noEndTime": "Merci de donner ton heure de fin de disponibilité",
-    "slotsPlaceholder": "Les disponibilités ajoutées s'affichent ici"
+    "slotsPlaceholder": "Les disponibilités ajoutées s'affichent ici",
+    "newSlotNotAdded": "Tu as saisi les données d’un créneau, mais le créneau n’a pas été ajouté. Merci de supprimer les données ou d’ajouter le créneau."
   },
   "rejectModal": {
     "formStepTitle": "Rejeter le candidat",

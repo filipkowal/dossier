@@ -11,11 +11,13 @@ export default function AvailabilityStep({
   setAvailabilitySlots,
   dict,
   interviewDuration,
+  setIsNewTimeSlotSet,
 }: {
   availabilitySlots: TimeSlots;
   setAvailabilitySlots: Dispatch<SetStateAction<TimeSlots>>;
   dict: Dictionary["inviteModal"];
   interviewDuration: number;
+  setIsNewTimeSlotSet: Dispatch<SetStateAction<boolean>>;
 }) {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={"de"}>
@@ -30,6 +32,7 @@ export default function AvailabilityStep({
             dict={dict}
             interviewDuration={interviewDuration}
             setAvailabilitySlots={setAvailabilitySlots}
+            setIsNewTimeSlotSet={setIsNewTimeSlotSet}
           />
         </div>
 

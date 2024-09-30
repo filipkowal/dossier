@@ -40,6 +40,8 @@ export default function InviteSection({
     getFormValues,
     steps,
     onSubmit,
+    isNewTimeSlotSet,
+    setIsNewTimeSlotSet,
   } = useInviteForm({ user, locale, id, dict });
 
   const { isOpen, setIsOpen } = useDialog("invite");
@@ -68,6 +70,7 @@ export default function InviteSection({
         setAvailabilitySlots={setAvailabilitySlots}
         dict={dict}
         interviewDuration={interviewDuration}
+        setIsNewTimeSlotSet={setIsNewTimeSlotSet}
       />
     ),
     success: (
@@ -118,6 +121,11 @@ export default function InviteSection({
               onSubmit={async () => {
                 if (availabilitySlots.length < 1) {
                   toast.error(dict["noSlots"]);
+                  return;
+                }
+
+                if (isNewTimeSlotSet) {
+                  toast.error(dict["newSlotNotAdded"]);
                   return;
                 }
 

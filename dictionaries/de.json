@@ -70,7 +70,8 @@
     "noDate": "Bitte gib ein Datum an",
     "noStartTime": "Bitte gib an, wann dein Zeitfenster startet",
     "noEndTime": "Bitte gib an, wann dein Zeitfenster endet",
-    "slotsPlaceholder": "Hinzugefügliche Slots werden hier angezeigt"
+    "slotsPlaceholder": "Hinzugefügliche Slots werden hier angezeigt",
+    "newSlotNotAdded": "Du hast die Daten für einen Zeit-Slot eingegeben, aber der Slot wurde nicht hinzugefügt. Bitte entferne die Daten oder füge den Slot hinzu."
   },
   "rejectModal": {
     "formStepTitle": "Kandidat ablehnen",

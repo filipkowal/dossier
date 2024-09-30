@@ -223,6 +223,7 @@ export const useInviteForm = ({
   const [interviewDuration, setInterviewDuration] = useState(30);
   const [invitePending, setInvitePending] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [isNewTimeSlotSet, setIsNewTimeSlotSet] = useState(false);
 
   const stepsObject: {
     location: boolean | undefined;
@@ -317,5 +318,7 @@ export const useInviteForm = ({
     resetInviteData,
     getFormValues,
     onSubmit,
+    isNewTimeSlotSet,
+    setIsNewTimeSlotSet,
   };
 };
