@@ -2,7 +2,6 @@ import { Button } from "@/components";
 import { GetPdfDossierResponse } from "@/utils";
 import DownloadIcon from "@/public/download.png";
 import Image from "next/image";
-import Link from "next/link";
 
 export default async function PdfButton({
   pdfDossierPromise,

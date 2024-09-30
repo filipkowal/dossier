@@ -1,8 +1,8 @@
 import { type Dictionary, type TimeSlots } from "@/utils";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
-import type { Dayjs } from "dayjs";
+import { Dayjs } from "dayjs";
 import Button from "./Button";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function TimeSlotInputs({
@@ -50,6 +50,8 @@ export default function TimeSlotInputs({
     setEndTime(null);
   };
 
+  const isValidDate = date && date.isValid() && !date.isBefore(new Date());
+
   return (
     <form
       className="flex flex-col sm:flex-row items-center gap-3 sm:gap-2 md:gap-6"
@@ -82,9 +84,11 @@ export default function TimeSlotInputs({
         submitType
         className="bg-digitalent-blue text-white disabled:bg-digitalent-blue disabled:text-white hover:disabled:bg-digitalent-blue hover:disabled:text-white h-14 !py-0"
         disabled={
-          !date ||
+          !isValidDate ||
           !startTime ||
+          !startTime.isValid() ||
           !endTime ||
+          !endTime.isValid() ||
           startTime.add(interviewDuration, "minute").isAfter(endTime)
         }
       >
