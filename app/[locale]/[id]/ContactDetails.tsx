@@ -13,7 +13,7 @@ export default function ContactDetails({
   dict: Dictionary;
 }) {
   return (
-    <div className="flex flex-col leading-7 lg:flex-row xl:flex-col lg:gap-16 xl:gap-8 sm:gap-8 sm:mt-8 justify-between xl:w-[19rem]">
+    <div className="flex flex-col leading-7 lg:flex-row xl:flex-col lg:gap-16 xl:gap-8 sm:gap-8 justify-between xl:w-[19rem]">
       <div className="md:w-1/2 xl:w-full">
         <h2 className="text-xl font-title mb-4 sm:mb-8">
           {dict.candidate.contactDetails}

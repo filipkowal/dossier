@@ -64,7 +64,7 @@ export default async function Home({
 
       <div className="w-full xl:grid xl:grid-cols-[minmax(450px,1fr),2fr] 2xl:grid-cols-[minmax(250px,1fr),2fr]">
         <div className="flex flex-col bg-digitalent-blue text-white sm:items-start xl:items-end md:px-8 lg:px-16 xl:px-0">
-          <div className="flex flex-col justify-end items-center md:items-start xl:h-[34vh] 3xl:h-[30vh] pt-16 md:px-16 md:w-[27rem] 2xl:w-[35rem] w-full">
+          <div className="flex flex-col justify-end items-center md:items-start xl:h-[16.45rem] pt-16 md:px-16 md:w-[27rem] 2xl:w-[35rem] w-full">
             <ImageWithPlaceholder
               alt="Candidate image"
               src={candidate.candidateImage}
@@ -76,7 +76,7 @@ export default async function Home({
               }
             />
           </div>
-          <div className="flex flex-col mt-20 xl:mt-8 sm:px-16 px-8 mb-12 min-h-[70vh]">
+          <div className="flex flex-col mt-20 xl:mt-16 sm:px-16 px-8 mb-16">
             {/* Mobile */}
             <div className="flex flex-col md:hidden font-title text-2xl gap-12 mb-16">
               <div>
@@ -112,7 +112,7 @@ export default async function Home({
 
         <div className="flex flex-col">
           {/* Desktop */}
-          <div className="hidden xl:flex flex-col pt-16 sm:px-16 2xl:px-32 bg-digitalent-blue text-white justify-end min-h-[34vh] 3xl:h-[30vh]">
+          <div className="hidden xl:flex flex-col pt-16 xl:pt-32 sm:px-16 2xl:px-32 bg-digitalent-blue text-white justify-end">
             <div className="max-w-[48rem] font-title flex text-3xl gap-12 mb-16">
               <div className="text-digitalent-green">
                 <h1>{dict.candidate.candidate}:</h1>
