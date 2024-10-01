@@ -46,7 +46,7 @@ export default async function RootLayout({
 
   return (
     <>
-      <main className="min-h-screen bg-digitalent-gray-light flex flex-col justify-between">
+      <main className="min-h-screen bg-digitalent-gray-light flex flex-col">
         <Header params={params} cookie={cookie} />
         {children}
 

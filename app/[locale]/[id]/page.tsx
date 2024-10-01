@@ -55,7 +55,7 @@ export default async function Home({
     <>
       <DossierStatus candidate={candidate} />
 
-      <div className="w-full xl:grid xl:grid-cols-[minmax(450px,1fr),2fr] 2xl:grid-cols-[minmax(250px,1fr),2fr]">
+      <div className="w-full min-h-screen xl:grid xl:grid-cols-[minmax(450px,1fr),2fr] 2xl:grid-cols-[minmax(250px,1fr),2fr]">
         <div className="flex flex-col bg-digitalent-blue text-white sm:items-start xl:items-end md:px-8 lg:px-16 xl:px-0">
           <div className="flex flex-col justify-end items-center md:items-start xl:h-[16.45rem] pt-16 md:px-16 md:w-[27rem] 2xl:w-[35rem] w-full">
             <ImageWithPlaceholder
