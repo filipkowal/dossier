@@ -19,7 +19,11 @@ export default function TimeSlotInputs({
   const [date, setDate] = useState<Dayjs | null>(null);
   const [startTime, setStartTime] = useState<Dayjs | null>(null);
   const [endTime, setEndTime] = useState<Dayjs | null>(null);
-  const [hasErrors, setHasErrors] = useState(false);
+  const [errors, setErrors] = useState({
+    date: false,
+    startTime: false,
+    endTime: false,
+  });
 
   const addSlot = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -61,6 +65,12 @@ export default function TimeSlotInputs({
     }
   }, [date, startTime, endTime]);
 
+  function setError(context: any, propName: "date" | "startTime" | "endTime") {
+    if (context.validationError)
+      setErrors((errors) => ({ ...errors, [propName]: true }));
+    else setErrors((errors) => ({ ...errors, [propName]: false }));
+  }
+
   return (
     <form
       className="flex flex-col sm:flex-row items-center gap-3 sm:gap-2 md:gap-6"
@@ -72,8 +82,7 @@ export default function TimeSlotInputs({
         value={date}
         onChange={(newValue, context) => {
           setDate(newValue);
-          if (context.validationError) setHasErrors(true);
-          else setHasErrors(false);
+          setError(context, "date");
         }}
         disablePast
       />
@@ -83,8 +92,7 @@ export default function TimeSlotInputs({
         value={startTime}
         onChange={(newValue, context) => {
           setStartTime(newValue);
-          if (context.validationError) setHasErrors(true);
-          else setHasErrors(false);
+          setError(context, "startTime");
         }}
       />
       <TimePicker
@@ -93,8 +101,7 @@ export default function TimeSlotInputs({
         value={endTime}
         onChange={(newValue, context) => {
           setEndTime(newValue);
-          if (context.validationError) setHasErrors(true);
-          else setHasErrors(false);
+          setError(context, "endTime");
         }}
         minTime={
           startTime ? startTime.add(interviewDuration, "minute") : undefined
@@ -104,7 +111,14 @@ export default function TimeSlotInputs({
         name="Add slot"
         submitType
         className="bg-digitalent-blue text-white disabled:bg-digitalent-blue disabled:text-white hover:disabled:bg-digitalent-blue hover:disabled:text-white h-14 !py-0"
-        disabled={!startTime || !endTime || !date || hasErrors}
+        disabled={
+          !startTime ||
+          !endTime ||
+          !date ||
+          errors["date"] ||
+          errors["startTime"] ||
+          errors["endTime"]
+        }
       >
         {dict.addSlot}
       </Button>

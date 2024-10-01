@@ -1,10 +1,5 @@
 import { Locale } from "@/i18n-config";
-import {
-  HttpError,
-  SearchParams,
-  getDictionary,
-  getRelationshipManager,
-} from "@/utils";
+import { HttpError, getDictionary, getRelationshipManager } from "@/utils";
 import { getCandidate, getUser } from "@/utils";
 import CvAndCertificates from "./CvAndCertificates";
 import DossierStatus from "./DossierStatus";
@@ -29,10 +24,8 @@ const LongCandidateInfo = dynamicImport(() => import("./LongCandidateInfo"), {
 
 export default async function Home({
   params,
-  searchParams,
 }: {
   params: { locale: Locale; id: string };
-  searchParams?: SearchParams;
 }) {
   const { id, locale } = params;
   const cookieStore = cookies();
