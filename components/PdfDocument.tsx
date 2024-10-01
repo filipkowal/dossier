@@ -43,6 +43,7 @@ const PdfDocument: React.FC<PdfDocumentProps> = ({ fileUrl, parentWidth }) => {
       file={fileContent}
       onLoadError={(error) => {}}
       onLoadSuccess={onDocumentLoadSuccess}
+      className={"flex flex-col items-center justify-center"}
     >
       {Array.from(new Array(numPages), (el, index) => (
         <Page
