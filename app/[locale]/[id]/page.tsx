@@ -18,6 +18,8 @@ import { revalidateMainPathAction } from "@/utils/actions";
 import ProfessionalDetails from "./ProfessionalDetails";
 import ContactDetails from "./ContactDetails";
 import ActionButtons from "./ActionButtons";
+import { HeadingXL } from "./HeadingXL";
+import Heading from "./Heading";
 
 export const dynamic = "force-dynamic";
 
@@ -75,56 +77,14 @@ export default async function Home({
             />
           </div>
           <div className="flex flex-col mt-20 xl:mt-16 sm:px-16 px-8 mb-16">
-            {/* Mobile */}
-            <div className="flex flex-col md:hidden font-title text-2xl gap-12 mb-16">
-              <div>
-                <h1>
-                  {candidate.firstName} {candidate.lastName}
-                </h1>
-                <h1 className="text-base mt-4 text-digitalent-green">
-                  {" " + dict.candidate.candidatesFor}:
-                </h1>
-                <h1 className="text-xl">{candidate.vacancyTitle}</h1>
-              </div>
-            </div>
-
-            <div className="hidden md:flex xl:hidden flex-col md">
-              <div className="max-w-[48rem] font-title flex text-3xl gap-12 mb-16">
-                <div className="text-digitalent-green">
-                  <h1>{dict.candidate.candidate}:</h1>
-                  <h1>{dict.candidate.vacancy}:</h1>
-                </div>
-                <div>
-                  <h1>
-                    {candidate.firstName} {candidate.lastName}
-                  </h1>
-                  <h1>{candidate.vacancyTitle}</h1>
-                </div>
-              </div>
-            </div>
-            {/* Mobile End */}
+            <Heading dict={dict.candidate} candidate={candidate} />
 
             <ContactDetails candidate={candidate} dict={dict} />
           </div>
         </div>
 
         <div className="flex flex-col">
-          {/* Desktop */}
-          <div className="hidden xl:flex flex-col pt-16 xl:pt-32 sm:px-16 2xl:px-32 bg-digitalent-blue text-white justify-end">
-            <div className="max-w-[48rem] font-title flex text-3xl gap-12 mb-16">
-              <div className="text-digitalent-green">
-                <h1>{dict.candidate.candidate}:</h1>
-                <h1>{dict.candidate.vacancy}:</h1>
-              </div>
-              <div>
-                <h1>
-                  {candidate.firstName} {candidate.lastName}
-                </h1>
-                <h1>{candidate.vacancyTitle}</h1>
-              </div>
-            </div>
-          </div>
-          {/* Desktop End */}
+          <HeadingXL dict={dict.candidate} candidate={candidate} />
 
           <div className="flex flex-col my-12 sm:my-16 sm:px-16 md:px-24 lg:px-32 px-8">
             <div className="max-w-[48rem]">
