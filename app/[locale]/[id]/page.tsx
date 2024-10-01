@@ -4,7 +4,6 @@ import { getCandidate, getUser } from "@/utils";
 import CvAndCertificates from "./CvAndCertificates";
 import DossierStatus from "./DossierStatus";
 import { notFound, redirect } from "next/navigation";
-import dynamicImport from "next/dynamic";
 import AvatarMale from "@/public/avatar-male.webp";
 import AvatarFemale from "@/public/avatar-female.webp";
 import { cookies } from "next/headers";
@@ -15,12 +14,9 @@ import ContactDetails from "./ContactDetails";
 import ActionButtons from "./ActionButtons";
 import { HeadingXL } from "./HeadingXL";
 import Heading from "./Heading";
+import LongCandidateInfo from "./LongCandidateInfo";
 
 export const dynamic = "force-dynamic";
-
-const LongCandidateInfo = dynamicImport(() => import("./LongCandidateInfo"), {
-  ssr: false,
-});
 
 export default async function Home({
   params,

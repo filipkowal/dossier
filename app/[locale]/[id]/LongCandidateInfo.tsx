@@ -1,4 +1,3 @@
-"use client";
 import { Candidate, Dictionary } from "@/utils";
 
 export default function LongCandidateInfo({
