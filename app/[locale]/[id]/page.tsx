@@ -1,5 +1,4 @@
 import { Locale } from "@/i18n-config";
-import InviteSection from "./InviteSection";
 import {
   HttpError,
   SearchParams,
@@ -8,11 +7,9 @@ import {
 } from "@/utils";
 import { getCandidate, getUser } from "@/utils";
 import CvAndCertificates from "./CvAndCertificates";
-import RejectSection from "./RejectSection";
 import DossierStatus from "./DossierStatus";
 import { notFound, redirect } from "next/navigation";
 import dynamicImport from "next/dynamic";
-import ContactSection from "./ContactSection";
 import AvatarMale from "@/public/avatar-male.webp";
 import AvatarFemale from "@/public/avatar-female.webp";
 import { cookies } from "next/headers";
@@ -20,6 +17,7 @@ import ImageWithPlaceholder from "@/components/ImageWithPlaceholder";
 import { revalidateMainPathAction } from "@/utils/actions";
 import ProfessionalDetails from "./ProfessionalDetails";
 import ContactDetails from "./ContactDetails";
+import ActionButtons from "./ActionButtons";
 
 export const dynamic = "force-dynamic";
 
@@ -145,41 +143,16 @@ export default async function Home({
           </div>
           <CvAndCertificates cvAndCertificates={candidate.file} />
         </div>
-        <div className="z-10 flex fixed md:bottom-6 bottom-0 justify-center sm:gap-3 md:gap-6 w-full">
-          <InviteSection
-            dict={{
-              ...dict.inviteModal,
-              ...dict.mainButtons,
-              ...dict.toastMessages,
-            }}
-            user={user}
-            params={params}
-            candidateGender={candidate?.gender}
-            searchParams={searchParams}
-          />
 
-          <RejectSection
-            dict={{
-              ...dict.rejectModal,
-              ...dict.mainButtons,
-              ...dict.toastMessages,
-            }}
-            id={id}
-            locale={locale}
-            candidateGender={candidate?.gender}
-            isRejectButtonVisible={user.isRejectButtonVisible}
-          />
-
-          <ContactSection
-            dict={{
-              ...dict.mainButtons,
-              ...dict.contactModal,
-              ...dict.toastMessages,
-            }}
-            relationshipManager={relationshipManager}
-            id={id}
-          />
-        </div>
+        <ActionButtons
+          dict={dict}
+          user={user}
+          params={params}
+          candidate={candidate}
+          id={id}
+          locale={locale}
+          relationshipManager={relationshipManager}
+        />
       </div>
     </>
   );
