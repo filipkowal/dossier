@@ -4,7 +4,7 @@ import "@/app/globals.css";
 import localFont from "next/font/local";
 import type { Metadata } from "next";
 import { CookiePopup, Header } from "@/components";
-import { getDictionary } from "@/utils";
+import { getDictionary, SERVER_URL } from "@/utils";
 import TokenExpiryChecker from "@/components/TokenExpiryChecker";
 import { cookies } from "next/headers";
 
@@ -43,6 +43,8 @@ export default async function RootLayout({
   const dict = await getDictionary(params.locale);
   const cookieStore = cookies();
   const cookie = cookieStore.get(`token-${params.id}`);
+
+  console.log("api url: ", SERVER_URL);
 
   return (
     <>
