@@ -132,8 +132,8 @@
     "message": "Bitte kontaktiere uns für weitere Informationen."
   },
   "tokenExpiry": {
-    "expiredMessage": "Your token has expired. Please log in again.",
-    "expiredError": "There was an error when checking validity of your token. Please log in again.",
+    "expiredMessage": "Dein Token ist abgelaufen. Bitte melde dich erneut an.",
+    "expiredError": "Beim Überprüfen deines Tokens ist ein Fehler aufgetreten. Bitte melde dich erneut an.",
     "inactivity": "Du wurdest wegen Inaktivität ausgeloggt.",
     "inactivityCounter": "Du wirst abgemeldet in: "
   }

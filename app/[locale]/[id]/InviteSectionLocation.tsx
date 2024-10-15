@@ -60,8 +60,8 @@ export default function LocationStep({
         />
         <div className="relative">
           <Tooltip
-            content="We will provide the link later unless you add it here."
-            ariaLabel="We will provide the link later unless you add it here."
+            content={dict.meetingLinkTooltip}
+            ariaLabel={dict.meetingLinkTooltip}
           >
             <InformationCircleIcon width={24} />
           </Tooltip>
