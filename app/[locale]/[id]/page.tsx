@@ -75,7 +75,7 @@ export default async function Home({
         <div className="flex flex-col">
           <HeadingXL dict={dict.candidate} candidate={candidate} />
 
-          <div className="flex flex-col max-w-[48rem] my-12 sm:my-16 sm:px-16 md:px-24 lg:px-32 px-8">
+          <div className="flex flex-col max-w-[54rem] my-12 sm:my-16 sm:px-16 md:px-24 lg:px-32 xl:px-16 px-8">
             <h2 className="text-xl font-title mb-4 sm:mb-8 ">
               {dict.candidate.professionalDetails}
             </h2>
