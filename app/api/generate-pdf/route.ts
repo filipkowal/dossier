@@ -15,7 +15,6 @@ export async function GET(req: NextRequest) {
 
     const pdfDossierUrl = await getPdfDossierUrl(locale, id, cookie);
 
-    console.log("pdfDossierUrl", pdfDossierUrl);
     const pdfDossierPromise = pdfDossierUrl
       ? fetch(pdfDossierUrl, {
           headers: { Cookie: cookie ? `${cookie.name}=${cookie.value}` : "" },
@@ -24,26 +23,13 @@ export async function GET(req: NextRequest) {
 
     const candidate = await getCandidate(locale, id, cookie);
 
-    const newPdf = await createNewPdf(candidate);
+    const newPdf = createNewPdf(candidate);
 
-    // return new Response(Buffer.from(mergedPdfBytes), {
-    //   headers: {
-    //     "Content-Type": "application/pdf",
-    //     "Content-Disposition": `attachment; filename=${candidate.firstName}-${candidate.lastName}-dossier.pdf`,
-    //   },
-    // });
+    const mergedPdf = await mergePdfs(newPdf, pdfDossierPromise);
 
-    let pdfDossierBytes: ArrayBuffer | undefined;
-    try {
-      const pdfDossier = await pdfDossierPromise;
-      pdfDossierBytes = await pdfDossier?.arrayBuffer();
-    } catch (error) {
-      console.log(error);
-    }
+    console.log(mergedPdf);
 
-    console.log("pdfDossierBytes", pdfDossierBytes);
-
-    return new Response(await newPdf.save(), {
+    return new Response(mergedPdf, {
       headers: {
         "Content-Type": "application/pdf",
         "Content-Disposition": `attachment; filename=${candidate.firstName}-${candidate.lastName}-Dossier.pdf`,
@@ -97,20 +83,18 @@ async function createNewPdf(candidate: Candidate) {
 }
 
 async function mergePdfs(
-  newPdf: PDFDocument,
+  newPdfPromise: Promise<PDFDocument>,
   pdfDossierPromise: Promise<Response> | undefined
 ) {
-  // Step 2: Await the fetch of the original PDF dossier
   let pdfDossierBytes: ArrayBuffer | undefined;
+  let newPdf: PDFDocument | undefined = undefined;
   try {
-    const pdfDossier = await pdfDossierPromise;
-    console.log(
-      "pdfDossier length",
-      (await pdfDossier?.arrayBuffer())?.byteLength
-    );
-    pdfDossierBytes = await pdfDossier?.arrayBuffer();
+    [pdfDossierBytes, newPdf] = await Promise.all([
+      await (await pdfDossierPromise)?.arrayBuffer(),
+      await newPdfPromise,
+    ]);
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 
   // Step 3: Load the original PDF
