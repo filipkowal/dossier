@@ -5,7 +5,7 @@ import { getDictionary } from "@/utils";
 import { type Locale } from "@/i18n-config";
 import NavLinks from "./NavLinks";
 import PdfButton from "@/app/[locale]/[id]/PdfButton";
-import { getPdfDossier, getUser } from "@/utils";
+import { getUser } from "@/utils";
 import HeaderSimple from "./HeaderSimple";
 import LogoutButton from "@/app/[locale]/(simpleLayout)/[id]/login/LogoutButton";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
@@ -17,11 +17,8 @@ export default async function Header({
   params: { locale: Locale; id: string };
   cookie: undefined | RequestCookie;
 }) {
-  let dict, user, pdfDossierPromise;
+  let dict, user;
   try {
-    // don't await the pdf dossier promise because we don't need it yet
-    pdfDossierPromise = getPdfDossier(params.locale, params.id, cookie);
-
     [dict, user] = await Promise.all([
       getDictionary(params.locale),
       getUser(params.locale, params.id, cookie),
@@ -42,7 +39,7 @@ export default async function Header({
         </div>
         {user.canDownloadPdf ? (
           <div>
-            <PdfButton pdfDossierPromise={pdfDossierPromise} />
+            <PdfButton locale={params.locale} id={params.id} />
           </div>
         ) : (
           ""

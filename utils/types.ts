@@ -7,7 +7,7 @@ export type GetCandidateResponse =
   paths["/{locale}/candidate/{id}"]["get"]["responses"]["200"]["content"]["application/json"];
 export type GetUserResponse =
   paths["/{locale}/user/{id}"]["get"]["responses"]["200"]["content"]["application/json"];
-export type GetPdfDossierResponse =
+export type GetPdfDossierUrlResponse =
   paths["/{locale}/candidate/{id}/pdf"]["get"]["responses"]["200"]["content"]["application/json"];
 export type GetIsLoggedInResponse =
   paths["/auth/isLoggedIn/{id}"]["get"]["responses"]["200"]["content"]["application/json"];

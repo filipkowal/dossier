@@ -3,7 +3,7 @@ import { type Locale } from "../i18n-config";
 import {
   GetCandidateResponse,
   GetIsLoggedInResponse,
-  GetPdfDossierResponse,
+  GetPdfDossierUrlResponse,
   GetRelatnshipManagerResponse,
   GetUserResponse,
 } from ".";
@@ -44,7 +44,7 @@ export async function postData(endpoint: string, data?: any) {
   return content;
 }
 
-async function getData({
+export async function getData({
   endpoint,
   locale,
   init = {},
@@ -109,11 +109,11 @@ export async function getUser(
   return response;
 }
 
-export async function getPdfDossier(
+export async function getPdfDossierUrl(
   locale: Locale,
   id: string,
   cookie?: RequestCookie
-): Promise<GetPdfDossierResponse | undefined> {
+): Promise<GetPdfDossierUrlResponse | undefined> {
   try {
     const result = await getData({
       endpoint: `candidate/${id}/pdf`,
