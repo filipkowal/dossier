@@ -1,6 +1,15 @@
-import { PDFDocument, rgb } from "pdf-lib";
-import { Candidate, getCandidate, getPdfDossierUrl, Locale } from "@/utils";
+import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
+import {
+  Candidate,
+  getCandidate,
+  getPdfDossierUrl,
+  Locale,
+  staticImageDataToBuffer,
+  tc,
+} from "@/utils";
 import { NextRequest } from "next/server";
+import logoImg from "@/public/logo.png";
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 export async function GET(req: NextRequest) {
   try {
@@ -23,7 +32,7 @@ export async function GET(req: NextRequest) {
 
     const candidate = await getCandidate(locale, id, cookie);
 
-    const newPdf = createNewPdf(candidate);
+    const newPdf = createNewPdf(candidate, cookie);
 
     const mergedPdf = await mergePdfs(newPdf, pdfDossierPromise);
 
@@ -37,49 +46,197 @@ export async function GET(req: NextRequest) {
     });
   } catch (error) {
     console.error("Error generating PDF:", error);
-    return error;
+    return Response.error();
   }
 }
 
-async function createNewPdf(candidate: Candidate) {
-  // Step 1: Create a new PDF document for the candidate details
-  const newPdf = await PDFDocument.create();
-  const newPage = newPdf.addPage([595, 842]); // A4 size
-  const { width, height } = newPage.getSize();
+async function createNewPdf(
+  candidate: Candidate,
+  cookie: RequestCookie | undefined
+) {
+  // Step 1: Create a new PDF document
+  const pdfDoc = await PDFDocument.create();
+  const page = pdfDoc.addPage([595, 842]); // A4 size
+  const { width, height } = page.getSize();
 
-  // Add candidate details
-  newPage.drawText("Candidate Details", {
-    x: 50,
-    y: height - 50,
-    size: 24,
+  // Step 2: Load a standard font
+  const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+
+  // async function addCandImage() {
+  //   console.log("XXXXXadd candidate imageXXXXX");
+  //   // Step 3: Add a header with the logo and candidate name
+  //   const candidateImageUrl = candidate.candidateImage || ""; // Replace with candidate's image URL
+
+  //   // Fetch and embed the candidate image
+  //   const candidateImage = await fetchImage(candidateImageUrl);
+  //   const image = await pdfDoc.embedPng(candidateImage);
+
+  //   // Draw the candidate image
+  //   const imageDims = image.scale(0.6);
+  //   page.drawImage(image, {
+  //     x: width - 120,
+  //     y: height - 150,
+  //     width: imageDims.width,
+  //     height: imageDims.height,
+  //   });
+  // }
+
+  // await addCandImage();
+
+  async function addLogo() {
+    console.log("XXXXXadd logoXXXXX");
+    // Fetch and embed the logo
+    const [logoBuffer, error] = await tc(
+      staticImageDataToBuffer(logoImg, cookie)
+    );
+    if (error) throw new Error("Error converting logo:\n" + error);
+    const logo = await pdfDoc.embedPng(logoBuffer);
+
+    // Draw the logo
+    const logoDims = logo.scale(0.5);
+    page.drawImage(logo, {
+      x: 50,
+      y: height - 100,
+      width: logoDims.width,
+      height: logoDims.height,
+    });
+  }
+  await addLogo();
+
+  // Add candidate name and vacancy
+  const headerY = height - 50;
+  page.drawText("Candidate:", {
+    x: 200,
+    y: headerY,
+    size: 12,
+    font: boldFont,
+    color: rgb(0, 0, 0),
+  });
+  page.drawText(`${candidate.firstName} ${candidate.lastName}`, {
+    x: 270,
+    y: headerY,
+    size: 14,
+    font,
     color: rgb(0, 0, 0),
   });
 
-  let yPosition = height - 100;
-  const details = [
-    `Name: ${candidate.firstName} ${candidate.lastName}`,
-    `Gender: ${candidate.gender === "m" ? "Male" : "Female"}`,
-    `Vacancy Title: ${candidate.vacancyTitle}`,
-    `Current Position: ${candidate.currentPosition}`,
-    `Employer: ${candidate.employerName}`,
-    `Phone: ${candidate.phoneNumber}`,
-    `Email: ${candidate.email}`,
-    `Desired Salary: ${candidate.desiredSalary}`,
-    `Notice Period: ${candidate.noticePeriod}`,
-    `Desired Workload: ${candidate.desiredWorkload}`,
-  ];
-
-  for (const detail of details) {
-    newPage.drawText(detail, {
-      x: 50,
-      y: yPosition,
+  page.drawText("Vacancy:", {
+    x: 200,
+    y: headerY - 20,
+    size: 12,
+    font: boldFont,
+    color: rgb(0, 0, 0),
+  });
+  candidate?.vacancyTitle &&
+    page.drawText(candidate?.vacancyTitle, {
+      x: 270,
+      y: headerY - 20,
       size: 14,
+      font,
       color: rgb(0, 0, 0),
     });
-    yPosition -= 20;
+
+  // Step 4: Add the "Professional Details" section
+  const professionalDetailsY = headerY - 80;
+  page.drawText("Professional Details", {
+    x: 50,
+    y: professionalDetailsY,
+    size: 16,
+    font: boldFont,
+    color: rgb(0, 0, 0),
+  });
+
+  const details = [
+    `Desired salary: ${candidate.desiredSalary}`,
+    `Notice period: ${candidate.noticePeriod}`,
+    `Current position: ${candidate.currentPosition}`,
+  ];
+
+  let detailsY = professionalDetailsY - 20;
+  for (const detail of details) {
+    page.drawText(detail, {
+      x: 50,
+      y: detailsY,
+      size: 12,
+      font,
+      color: rgb(0, 0, 0),
+    });
+    detailsY -= 15;
   }
 
-  return newPdf;
+  // Step 5: Add the "Relevant Experience" section
+  const interviewSummaryText = candidate.interviewSummary;
+  const interviewSummaryY = detailsY - 20;
+  let interviewSummaryYPos = interviewSummaryY - 20;
+
+  if (interviewSummaryText) {
+    page.drawText("Interview Summary", {
+      x: 50,
+      y: interviewSummaryY,
+      size: 16,
+      font: boldFont,
+      color: rgb(0, 0, 0),
+    });
+
+    const interviewSummaryLines = splitTextIntoLines(interviewSummaryText, 80); // Split text into lines for wrapping
+    for (const line of interviewSummaryLines) {
+      page.drawText(line, {
+        x: 50,
+        y: interviewSummaryYPos,
+        size: 12,
+        font,
+        color: rgb(0, 0, 0),
+      });
+      interviewSummaryYPos -= 15;
+    }
+  }
+
+  const reasonText = candidate.reasonForChange;
+  const reasonY = interviewSummaryYPos - 20;
+  let reasonYPos = reasonY - 20;
+  if (reasonText) {
+    // Step 6: Add the "Reason for Change" section
+    page.drawText("Reason for Change", {
+      x: 50,
+      y: reasonY,
+      size: 16,
+      font: boldFont,
+      color: rgb(0, 0, 0),
+    });
+    const reasonLines = splitTextIntoLines(reasonText, 80); // Split text into lines for wrapping
+    for (const line of reasonLines) {
+      page.drawText(line, {
+        x: 50,
+        y: reasonYPos,
+        size: 12,
+        font,
+        color: rgb(0, 0, 0),
+      });
+      reasonYPos -= 15;
+    }
+  }
+
+  // Step 7: Return the created PDF
+  return pdfDoc;
+}
+
+// Helper Function: Split text into lines
+function splitTextIntoLines(text: string, maxChars: number): string[] {
+  const words = text.split(" ");
+  const lines: string[] = [];
+  let currentLine = "";
+
+  for (const word of words) {
+    if ((currentLine + word).length > maxChars) {
+      lines.push(currentLine.trim());
+      currentLine = word + " ";
+    } else {
+      currentLine += word + " ";
+    }
+  }
+  if (currentLine) lines.push(currentLine.trim());
+  return lines;
 }
 
 async function mergePdfs(

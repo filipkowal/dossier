@@ -5,6 +5,7 @@ import { match as matchLocale } from "@formatjs/intl-localematcher";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { logout } from "./fetchers";
 import { ReadonlyURLSearchParams } from "next/navigation";
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 // We enumerate all dictionaries here for better linting and typescript support
 // We also get the default import for cleaner types
@@ -113,4 +114,48 @@ export function updateSearchParams(
 
   // Update the URL with the new search parameters
   router.push(`?${params.toString()}`, { scroll: false });
+}
+
+export async function staticImageDataToBuffer(
+  staticImageData: {
+    src: string;
+  },
+  cookie: RequestCookie | undefined
+) {
+  if (process.env.NODE_ENV === "development") {
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+  }
+  // Ensure the src is an absolute URL
+  console.log("PAATH: \n", process.env.NEXT_PUBLIC_BASE_URL);
+  const absoluteUrl = `${process.env.NEXT_PUBLIC_BASE_URL}${staticImageData.src}`;
+
+  console.log("Fetching image from URL:", absoluteUrl);
+
+  try {
+    const response = await fetch(absoluteUrl, {
+      headers: {
+        Cookie: cookie ? `${cookie.name}=${cookie.value}` : "",
+      },
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(
+        `Failed to fetch image: ${response.statusText} - ${errorText}`
+      );
+    }
+
+    return await response.arrayBuffer();
+  } catch (error) {
+    console.error("Error fetching image:", error);
+    throw error;
+  }
+}
+
+export async function tc(promise: Promise<any>) {
+  try {
+    return [await promise, null];
+  } catch (error) {
+    return [null, error];
+  }
 }
