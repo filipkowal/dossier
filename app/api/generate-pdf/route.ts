@@ -11,6 +11,9 @@ import {
 import { NextRequest } from "next/server";
 import logoImg from "@/public/logo.png";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import { readFileSync } from "fs";
+import path from "path";
+import fontkit from "@pdf-lib/fontkit";
 
 export async function GET(req: NextRequest) {
   try {
@@ -37,8 +40,6 @@ export async function GET(req: NextRequest) {
 
     const mergedPdf = await mergePdfs(newPdf, pdfDossierPromise);
 
-    console.log(mergedPdf);
-
     return new Response(mergedPdf, {
       headers: {
         "Content-Type": "application/pdf",
@@ -57,12 +58,33 @@ async function createNewPdf(
 ) {
   // Step 1: Create a new PDF document
   const pdfDoc = await PDFDocument.create();
+  pdfDoc.registerFontkit(fontkit);
+
   const page = pdfDoc.addPage([595, 842]); // A4 size
   const { width, height } = page.getSize();
 
   // Step 2: Load a standard font
-  const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-  const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+
+  const stolzlPath = path.join(
+    process.cwd(),
+    "public",
+    "fonts",
+    "Stolzl-Medium.ttf"
+  );
+  const merriweatherPath = path.join(
+    process.cwd(),
+    "public",
+    "fonts",
+    "Merriweather-Regular.ttf"
+  );
+
+  const stolzlBytes = readFileSync(path.resolve(__dirname, stolzlPath));
+  const merriweatherBytes = readFileSync(
+    path.resolve(__dirname, merriweatherPath)
+  );
+
+  const font = await pdfDoc.embedFont(merriweatherBytes);
+  const boldFont = await pdfDoc.embedFont(stolzlBytes);
 
   async function addCandImage() {
     if (process.env.NODE_ENV === "development") {
@@ -82,7 +104,6 @@ async function createNewPdf(
     const imageBuffer = Buffer.from(base64Data, "base64");
 
     let image;
-    console.log("MIME TYPE: ", mimeType);
     if (mimeType.includes("png")) {
       image = await pdfDoc.embedPng(imageBuffer);
     } else if (mimeType.includes("jpeg") || mimeType.includes("jpg")) {
