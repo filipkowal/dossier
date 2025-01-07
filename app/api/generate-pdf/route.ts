@@ -1,6 +1,7 @@
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import {
   Candidate,
+  fetchImage,
   getCandidate,
   getPdfDossierUrl,
   Locale,
@@ -63,29 +64,46 @@ async function createNewPdf(
   const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
   const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
 
-  // async function addCandImage() {
-  //   console.log("XXXXXadd candidate imageXXXXX");
-  //   // Step 3: Add a header with the logo and candidate name
-  //   const candidateImageUrl = candidate.candidateImage || ""; // Replace with candidate's image URL
+  async function addCandImage() {
+    if (process.env.NODE_ENV === "development") {
+      process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+    }
 
-  //   // Fetch and embed the candidate image
-  //   const candidateImage = await fetchImage(candidateImageUrl);
-  //   const image = await pdfDoc.embedPng(candidateImage);
+    const candidateImageUrl = candidate.candidateImage || ""; // Replace with candidate's image URL
 
-  //   // Draw the candidate image
-  //   const imageDims = image.scale(0.6);
-  //   page.drawImage(image, {
-  //     x: width - 120,
-  //     y: height - 150,
-  //     width: imageDims.width,
-  //     height: imageDims.height,
-  //   });
-  // }
+    const candidateImageBase64 = await fetchImage(candidateImageUrl, cookie);
 
-  // await addCandImage();
+    const mimeType = candidateImageBase64.substring(
+      candidateImageBase64.indexOf(":") + 1,
+      candidateImageBase64.indexOf(";")
+    );
+
+    const base64Data = candidateImageBase64.split(",")[1]; // Remove the data URL prefix
+    const imageBuffer = Buffer.from(base64Data, "base64");
+
+    let image;
+    console.log("MIME TYPE: ", mimeType);
+    if (mimeType.includes("png")) {
+      image = await pdfDoc.embedPng(imageBuffer);
+    } else if (mimeType.includes("jpeg") || mimeType.includes("jpg")) {
+      image = await pdfDoc.embedJpg(imageBuffer);
+    } else {
+      throw new Error("Unsupported image format");
+    }
+
+    // Draw the candidate image
+    const imageDims = image.scale(0.6);
+    page.drawImage(image, {
+      x: width - 120,
+      y: height - 150,
+      width: imageDims.width,
+      height: imageDims.height,
+    });
+  }
+
+  await addCandImage();
 
   async function addLogo() {
-    console.log("XXXXXadd logoXXXXX");
     // Fetch and embed the logo
     const [logoBuffer, error] = await tc(
       staticImageDataToBuffer(logoImg, cookie)
