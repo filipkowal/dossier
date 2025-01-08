@@ -190,53 +190,128 @@ async function createNewPdf(
     });
 
   // Step 4: Add the "Professional Details" section
-  const professionalDetailsY = headerY - 110;
+  const proDetailsHeadingY = headerY - 110;
   page.drawText("Professional Details", {
     x: 50,
-    y: professionalDetailsY,
+    y: proDetailsHeadingY,
     size: 16,
     font: boldFont,
     color: rgb(0, 0, 0),
   });
 
-  const details = [
-    `Current position: ${candidate.currentPosition}`,
-    `Notice period: ${candidate.noticePeriod}`,
-    `Desired salary: CHF ${addHighComma(candidate.desiredSalary)}`,
-    `Desired workload: ${candidate.desiredWorkload}%`,
+  const proDetails: [string, string | undefined][] = [
+    [`Current position: `, candidate.currentPosition],
+    [`Notice period: `, candidate.noticePeriod],
+    [`Desired salary: `, `CHF ${addHighComma(candidate.desiredSalary)}`],
+    [`Desired workload: `, `${candidate.desiredWorkload}%`],
   ];
 
-  let detailsY = professionalDetailsY - headingLineHeight;
-  for (const detail of details) {
-    page.drawText(detail, {
+  let proDetailsY = proDetailsHeadingY - headingLineHeight;
+  for (const detail of proDetails) {
+    if (!detail[1]) continue;
+
+    page.drawText(detail[0], {
       x: 50,
-      y: detailsY,
+      y: proDetailsY,
       size: 12,
       font,
       color: rgb(0, 0, 0),
       maxWidth: maxChars * 7,
     });
+    page.drawText(detail[1], {
+      x: 50 + 130,
+      y: proDetailsY,
+      size: 12,
+      font,
+      color: rgb(0, 0, 0),
+    });
 
-    detailsY -= lineHeight;
+    // go to the next line
+    proDetailsY -= lineHeight;
     if (detail.length > 75) {
-      // if the line is too long and wrapped, add some space
-      detailsY -= lineHeight;
+      // if the line is too long and wrapped, go to next line
+      proDetailsY -= lineHeight;
     }
   }
 
+  const contactDetailsHeadingY = proDetailsY - headingLineHeight;
+  let contactDetailsY = contactDetailsHeadingY - headingLineHeight;
+  page.drawText("Personal & Contact Details", {
+    x: 50,
+    y: contactDetailsHeadingY,
+    size: 16,
+    font: boldFont,
+    color: rgb(0, 0, 0),
+  });
+
+  const contactDetails = [
+    candidate.email,
+    candidate.phoneNumber,
+    candidate.linkedIn,
+  ];
+  const address = [
+    candidate.address?.street,
+    candidate.address?.zip + " " + candidate.address?.city,
+    candidate.address?.country,
+  ];
+
+  if (candidate.birthDate)
+    page.drawText(
+      candidate?.candidateAge
+        ? candidate.birthDate + ` (${candidate.candidateAge})`
+        : candidate.birthDate,
+      {
+        x: 50,
+        y: contactDetailsY,
+        size: 12,
+        font,
+        color: rgb(0, 0, 0),
+        maxWidth: maxChars * 7,
+      }
+    );
+  contactDetailsY -= lineHeight;
+
+  for (const detail of contactDetails) {
+    if (!detail) continue;
+
+    page.drawText(detail, {
+      x: 50,
+      y: contactDetailsY,
+      size: 12,
+      font,
+      color: rgb(0, 0, 0),
+    });
+    contactDetailsY -= lineHeight;
+  }
+  contactDetailsY -= lineHeight;
+
+  for (const detail of address) {
+    if (!detail) continue;
+
+    page.drawText(detail, {
+      x: 50,
+      y: contactDetailsY,
+      size: 12,
+      font,
+      color: rgb(0, 0, 0),
+    });
+    contactDetailsY -= lineHeight;
+  }
+
   // Step 5: Add the "Relevant Experience" section
+  const interviewSummaryHeadingY = contactDetailsY - headingLineHeight;
+  let interviewSummaryY = interviewSummaryHeadingY - headingLineHeight;
+
   const interviewSummaryHtml = candidate.interviewSummary;
   const interviewSummaryText = interviewSummaryHtml
     ? convert(interviewSummaryHtml, convertOptions)
     : null;
-  const interviewSummaryY = detailsY - headingLineHeight;
-  let interviewSummaryYPos = interviewSummaryY - headingLineHeight;
 
   console.log("Interview Summary: ", interviewSummaryText);
   if (interviewSummaryText) {
     page.drawText("Interview Summary", {
       x: 50,
-      y: interviewSummaryY,
+      y: interviewSummaryHeadingY,
       size: 16,
       font: boldFont,
       color: rgb(0, 0, 0),
@@ -249,12 +324,12 @@ async function createNewPdf(
     for (const line of interviewSummaryLines) {
       page.drawText(line, {
         x: 50,
-        y: interviewSummaryYPos,
+        y: interviewSummaryY,
         size: 12,
         font,
         color: rgb(0, 0, 0),
       });
-      interviewSummaryYPos -= lineHeight;
+      interviewSummaryY -= lineHeight;
     }
   }
 
@@ -262,7 +337,7 @@ async function createNewPdf(
   const reasonText = reasonHtml ? convert(reasonHtml, convertOptions) : null;
 
   console.log("Reason for Change: ", reasonText);
-  const reasonY = interviewSummaryYPos - headingLineHeight;
+  const reasonY = interviewSummaryY - headingLineHeight;
   let reasonYPos = reasonY - headingLineHeight;
   if (reasonText) {
     // Step 6: Add the "Reason for Change" section
