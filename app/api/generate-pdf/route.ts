@@ -1,5 +1,6 @@
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import {
+  addHighComma,
   Candidate,
   fetchImage,
   getCandidate,
@@ -89,13 +90,14 @@ async function createNewPdf(
   const boldFont = await pdfDoc.embedFont(stolzlBytes);
 
   const paddingLeft = 50;
-  const paddingTop = 100;
-  const lineHeight = 20;
+  const paddingTop = 80;
+  const lineHeight = 23;
   const headingLineHeight = 30;
   const convertOptions = {
     wordwrap: null,
     preserveNewlines: false,
   };
+  const maxChars = 75;
 
   // async function addCandImage() {
   //   if (process.env.NODE_ENV === "development") {
@@ -188,7 +190,7 @@ async function createNewPdf(
     });
 
   // Step 4: Add the "Professional Details" section
-  const professionalDetailsY = headerY - 80;
+  const professionalDetailsY = headerY - 110;
   page.drawText("Professional Details", {
     x: 50,
     y: professionalDetailsY,
@@ -198,9 +200,10 @@ async function createNewPdf(
   });
 
   const details = [
-    `Desired salary: ${candidate.desiredSalary}`,
-    `Notice period: ${candidate.noticePeriod}`,
     `Current position: ${candidate.currentPosition}`,
+    `Notice period: ${candidate.noticePeriod}`,
+    `Desired salary: CHF ${addHighComma(candidate.desiredSalary)}`,
+    `Desired workload: ${candidate.desiredWorkload}%`,
   ];
 
   let detailsY = professionalDetailsY - headingLineHeight;
@@ -211,8 +214,14 @@ async function createNewPdf(
       size: 12,
       font,
       color: rgb(0, 0, 0),
+      maxWidth: maxChars * 7,
     });
+
     detailsY -= lineHeight;
+    if (detail.length > 75) {
+      // if the line is too long and wrapped, add some space
+      detailsY -= lineHeight;
+    }
   }
 
   // Step 5: Add the "Relevant Experience" section
@@ -233,7 +242,10 @@ async function createNewPdf(
       color: rgb(0, 0, 0),
     });
 
-    const interviewSummaryLines = splitTextIntoLines(interviewSummaryText, 80);
+    const interviewSummaryLines = splitTextIntoLines(
+      interviewSummaryText,
+      maxChars
+    );
     for (const line of interviewSummaryLines) {
       page.drawText(line, {
         x: 50,
@@ -261,7 +273,7 @@ async function createNewPdf(
       font: boldFont,
       color: rgb(0, 0, 0),
     });
-    const reasonLines = splitTextIntoLines(reasonText, 80); // Split text into lines for wrapping
+    const reasonLines = splitTextIntoLines(reasonText, maxChars); // Split text into lines for wrapping
     for (const line of reasonLines) {
       page.drawText(line, {
         x: 50,
