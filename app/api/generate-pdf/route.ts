@@ -14,6 +14,7 @@ import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { readFileSync } from "fs";
 import path from "path";
 import fontkit from "@pdf-lib/fontkit";
+import { convert } from "html-to-text";
 
 export async function GET(req: NextRequest) {
   try {
@@ -56,6 +57,7 @@ async function createNewPdf(
   candidate: Candidate,
   cookie: RequestCookie | undefined
 ) {
+  console.log(candidate);
   // Step 1: Create a new PDF document
   const pdfDoc = await PDFDocument.create();
   pdfDoc.registerFontkit(fontkit);
@@ -86,93 +88,102 @@ async function createNewPdf(
   const font = await pdfDoc.embedFont(merriweatherBytes);
   const boldFont = await pdfDoc.embedFont(stolzlBytes);
 
-  async function addCandImage() {
-    if (process.env.NODE_ENV === "development") {
-      process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-    }
+  const paddingLeft = 50;
+  const paddingTop = 100;
+  const lineHeight = 20;
+  const headingLineHeight = 30;
+  const convertOptions = {
+    wordwrap: null,
+    preserveNewlines: false,
+  };
 
-    const candidateImageUrl = candidate.candidateImage || ""; // Replace with candidate's image URL
+  // async function addCandImage() {
+  //   if (process.env.NODE_ENV === "development") {
+  //     process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+  //   }
 
-    const candidateImageBase64 = await fetchImage(candidateImageUrl, cookie);
+  //   const candidateImageUrl = candidate.candidateImage || ""; // Replace with candidate's image URL
 
-    const mimeType = candidateImageBase64.substring(
-      candidateImageBase64.indexOf(":") + 1,
-      candidateImageBase64.indexOf(";")
-    );
+  //   const candidateImageBase64 = await fetchImage(candidateImageUrl, cookie);
 
-    const base64Data = candidateImageBase64.split(",")[1]; // Remove the data URL prefix
-    const imageBuffer = Buffer.from(base64Data, "base64");
+  //   const mimeType = candidateImageBase64.substring(
+  //     candidateImageBase64.indexOf(":") + 1,
+  //     candidateImageBase64.indexOf(";")
+  //   );
 
-    let image;
-    if (mimeType.includes("png")) {
-      image = await pdfDoc.embedPng(imageBuffer);
-    } else if (mimeType.includes("jpeg") || mimeType.includes("jpg")) {
-      image = await pdfDoc.embedJpg(imageBuffer);
-    } else {
-      throw new Error("Unsupported image format");
-    }
+  //   const base64Data = candidateImageBase64.split(",")[1]; // Remove the data URL prefix
+  //   const imageBuffer = Buffer.from(base64Data, "base64");
 
-    // Draw the candidate image
-    const imageDims = image.scale(0.6);
-    page.drawImage(image, {
-      x: width - 120,
-      y: height - 150,
-      width: imageDims.width,
-      height: imageDims.height,
-    });
-  }
+  //   let image;
+  //   if (mimeType.includes("png")) {
+  //     image = await pdfDoc.embedPng(imageBuffer);
+  //   } else if (mimeType.includes("jpeg") || mimeType.includes("jpg")) {
+  //     image = await pdfDoc.embedJpg(imageBuffer);
+  //   } else {
+  //     throw new Error("Unsupported image format");
+  //   }
 
-  await addCandImage();
+  //   // Draw the candidate image
+  //   const imageDims = image.scale(0.6);
+  //   page.drawImage(image, {
+  //     x: width - 120,
+  //     y: height - 150,
+  //     width: imageDims.width,
+  //     height: imageDims.height,
+  //   });
+  // }
 
-  async function addLogo() {
-    // Fetch and embed the logo
-    const [logoBuffer, error] = await tc(
-      staticImageDataToBuffer(logoImg, cookie)
-    );
-    if (error) throw new Error("Error converting logo:\n" + error);
-    const logo = await pdfDoc.embedPng(logoBuffer);
+  // await addCandImage();
 
-    // Draw the logo
-    const logoDims = logo.scale(0.5);
-    page.drawImage(logo, {
-      x: 50,
-      y: height - 100,
-      width: logoDims.width,
-      height: logoDims.height,
-    });
-  }
-  await addLogo();
+  // async function addLogo() {
+  //   // Fetch and embed the logo
+  //   const [logoBuffer, error] = await tc(
+  //     staticImageDataToBuffer(logoImg, cookie)
+  //   );
+  //   if (error) throw new Error("Error converting logo:\n" + error);
+  //   const logo = await pdfDoc.embedPng(logoBuffer);
+
+  //   // Draw the logo
+  //   const logoDims = logo.scale(0.5);
+  //   page.drawImage(logo, {
+  //     x: 50,
+  //     y: height - 100,
+  //     width: logoDims.width,
+  //     height: logoDims.height,
+  //   });
+  // }
+  // await addLogo();
 
   // Add candidate name and vacancy
-  const headerY = height - 50;
+  const headerY = height - paddingTop;
   page.drawText("Candidate:", {
-    x: 200,
+    x: paddingLeft,
     y: headerY,
-    size: 12,
+    size: 16,
     font: boldFont,
     color: rgb(0, 0, 0),
   });
   page.drawText(`${candidate.firstName} ${candidate.lastName}`, {
-    x: 270,
+    x: paddingLeft + 130,
     y: headerY,
-    size: 14,
-    font,
+    size: 20,
+    font: boldFont,
     color: rgb(0, 0, 0),
   });
 
   page.drawText("Vacancy:", {
-    x: 200,
-    y: headerY - 20,
-    size: 12,
+    x: paddingLeft,
+    y: headerY - 30,
+    size: 16,
     font: boldFont,
     color: rgb(0, 0, 0),
   });
   candidate?.vacancyTitle &&
     page.drawText(candidate?.vacancyTitle, {
-      x: 270,
-      y: headerY - 20,
-      size: 14,
-      font,
+      x: paddingLeft + 130,
+      y: headerY - 30,
+      size: 20,
+      font: boldFont,
       color: rgb(0, 0, 0),
     });
 
@@ -192,7 +203,7 @@ async function createNewPdf(
     `Current position: ${candidate.currentPosition}`,
   ];
 
-  let detailsY = professionalDetailsY - 20;
+  let detailsY = professionalDetailsY - headingLineHeight;
   for (const detail of details) {
     page.drawText(detail, {
       x: 50,
@@ -201,14 +212,18 @@ async function createNewPdf(
       font,
       color: rgb(0, 0, 0),
     });
-    detailsY -= 15;
+    detailsY -= lineHeight;
   }
 
   // Step 5: Add the "Relevant Experience" section
-  const interviewSummaryText = candidate.interviewSummary;
-  const interviewSummaryY = detailsY - 20;
-  let interviewSummaryYPos = interviewSummaryY - 20;
+  const interviewSummaryHtml = candidate.interviewSummary;
+  const interviewSummaryText = interviewSummaryHtml
+    ? convert(interviewSummaryHtml, convertOptions)
+    : null;
+  const interviewSummaryY = detailsY - headingLineHeight;
+  let interviewSummaryYPos = interviewSummaryY - headingLineHeight;
 
+  console.log("Interview Summary: ", interviewSummaryText);
   if (interviewSummaryText) {
     page.drawText("Interview Summary", {
       x: 50,
@@ -218,7 +233,7 @@ async function createNewPdf(
       color: rgb(0, 0, 0),
     });
 
-    const interviewSummaryLines = splitTextIntoLines(interviewSummaryText, 80); // Split text into lines for wrapping
+    const interviewSummaryLines = splitTextIntoLines(interviewSummaryText, 80);
     for (const line of interviewSummaryLines) {
       page.drawText(line, {
         x: 50,
@@ -227,13 +242,16 @@ async function createNewPdf(
         font,
         color: rgb(0, 0, 0),
       });
-      interviewSummaryYPos -= 15;
+      interviewSummaryYPos -= lineHeight;
     }
   }
 
-  const reasonText = candidate.reasonForChange;
-  const reasonY = interviewSummaryYPos - 20;
-  let reasonYPos = reasonY - 20;
+  const reasonHtml = candidate.reasonForChange;
+  const reasonText = reasonHtml ? convert(reasonHtml, convertOptions) : null;
+
+  console.log("Reason for Change: ", reasonText);
+  const reasonY = interviewSummaryYPos - headingLineHeight;
+  let reasonYPos = reasonY - headingLineHeight;
   if (reasonText) {
     // Step 6: Add the "Reason for Change" section
     page.drawText("Reason for Change", {
@@ -252,7 +270,7 @@ async function createNewPdf(
         font,
         color: rgb(0, 0, 0),
       });
-      reasonYPos -= 15;
+      reasonYPos -= lineHeight;
     }
   }
 
