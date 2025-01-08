@@ -10,7 +10,6 @@ import {
   tc,
 } from "@/utils";
 import { NextRequest } from "next/server";
-import logoImg from "@/public/logo.png";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { readFileSync } from "fs";
 import path from "path";
@@ -144,24 +143,26 @@ async function createNewPdf(
 
   // await addCandImage();
 
-  // async function addLogo() {
-  //   // Fetch and embed the logo
-  //   const [logoBuffer, error] = await tc(
-  //     staticImageDataToBuffer(logoImg, cookie)
-  //   );
-  //   if (error) throw new Error("Error converting logo:\n" + error);
-  //   const logo = await pdfDoc.embedPng(logoBuffer);
+  // draw a black square of 60x60 at the top left corner
+  page.drawRectangle({
+    x: 0,
+    y: height - 35,
+    width: 50,
+    height: 35,
+    color: rgb(0, 0, 0),
+  });
 
-  //   // Draw the logo
-  //   const logoDims = logo.scale(0.5);
-  //   page.drawImage(logo, {
-  //     x: 50,
-  //     y: height - 100,
-  //     width: logoDims.width,
-  //     height: logoDims.height,
-  //   });
-  // }
-  // await addLogo();
+  // Add the logo on top of the black square
+  const logoPath = path.join(process.cwd(), "public", "thumbnail.png");
+  const logoBytes = readFileSync(logoPath);
+  const logo = await pdfDoc.embedPng(logoBytes);
+  const logoDims = logo.scale(0.3);
+  page.drawImage(logo, {
+    x: 15,
+    y: height - 28,
+    width: logoDims.width,
+    height: logoDims.height,
+  });
 
   // Add candidate name and vacancy
   const headerY = height - paddingTop;
