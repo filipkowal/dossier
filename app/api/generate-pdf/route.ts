@@ -1,4 +1,4 @@
-import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
+import { PDFDocument, PDFPage, rgb, StandardFonts } from "pdf-lib";
 import {
   addHighComma,
   Candidate,
@@ -63,7 +63,7 @@ async function createNewPdf(
   const pdfDoc = await PDFDocument.create();
   pdfDoc.registerFontkit(fontkit);
 
-  const page = pdfDoc.addPage([595, 842]); // A4 size
+  let page = pdfDoc.addPage([595, 842]); // A4 size
   const { width, height } = page.getSize();
 
   // Step 2: Load a standard font
@@ -98,6 +98,13 @@ async function createNewPdf(
     preserveNewlines: false,
   };
   const maxChars = 75;
+
+  function getPageAndY(y: number): [PDFPage, number] {
+    if (y < 50) {
+      return [pdfDoc.addPage([595, 842]), height - paddingTop];
+    }
+    return [page, y];
+  }
 
   // async function addCandImage() {
   //   if (process.env.NODE_ENV === "development") {
@@ -175,7 +182,7 @@ async function createNewPdf(
 
   page.drawText("Vacancy:", {
     x: paddingLeft,
-    y: headerY - 30,
+    y: headerY - headingLineHeight,
     size: 16,
     font: boldFont,
     color: rgb(0, 0, 0),
@@ -183,7 +190,7 @@ async function createNewPdf(
   candidate?.vacancyTitle &&
     page.drawText(candidate?.vacancyTitle, {
       x: paddingLeft + 130,
-      y: headerY - 30,
+      y: headerY - headingLineHeight,
       size: 20,
       font: boldFont,
       color: rgb(0, 0, 0),
@@ -307,7 +314,6 @@ async function createNewPdf(
     ? convert(interviewSummaryHtml, convertOptions)
     : null;
 
-  console.log("Interview Summary: ", interviewSummaryText);
   if (interviewSummaryText) {
     page.drawText("Interview Summary", {
       x: 50,
@@ -330,34 +336,37 @@ async function createNewPdf(
         color: rgb(0, 0, 0),
       });
       interviewSummaryY -= lineHeight;
+      [page, interviewSummaryY] = getPageAndY(interviewSummaryY);
     }
   }
 
   const reasonHtml = candidate.reasonForChange;
   const reasonText = reasonHtml ? convert(reasonHtml, convertOptions) : null;
 
-  console.log("Reason for Change: ", reasonText);
-  const reasonY = interviewSummaryY - headingLineHeight;
-  let reasonYPos = reasonY - headingLineHeight;
+  const reasonHeadingY = interviewSummaryY - headingLineHeight;
+  let reasonY = reasonHeadingY - headingLineHeight;
   if (reasonText) {
     // Step 6: Add the "Reason for Change" section
     page.drawText("Reason for Change", {
       x: 50,
-      y: reasonY,
+      y: reasonHeadingY,
       size: 16,
       font: boldFont,
       color: rgb(0, 0, 0),
     });
+    [page, reasonY] = getPageAndY(reasonY);
+
     const reasonLines = splitTextIntoLines(reasonText, maxChars); // Split text into lines for wrapping
     for (const line of reasonLines) {
       page.drawText(line, {
         x: 50,
-        y: reasonYPos,
+        y: reasonY,
         size: 12,
         font,
         color: rgb(0, 0, 0),
       });
-      reasonYPos -= lineHeight;
+      reasonY -= lineHeight;
+      [page, reasonY] = getPageAndY(reasonY);
     }
   }
 
