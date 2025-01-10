@@ -149,10 +149,10 @@ async function createNewPdf(
   const logoPath = path.join(process.cwd(), "public", "logo-black-sm.png");
   const logoBytes = readFileSync(logoPath);
   const logo = await pdfDoc.embedPng(logoBytes);
-  const logoDims = logo.scale(0.5);
+  const logoDims = logo.scale(0.4);
   page.drawImage(logo, {
-    x: 11,
-    y: height - 40,
+    x: 14,
+    y: height - 37,
     width: logoDims.width,
     height: logoDims.height,
   });
@@ -191,7 +191,7 @@ async function createNewPdf(
     });
 
   // Step 4: Add the "Professional Details" section
-  const proDetailsHeadingY = headerY - headingLineHeight * 3;
+  const proDetailsHeadingY = headerY - headingLineHeight * 2 - lineHeight;
   page.drawText("Professional & Personal Details", {
     x: ml,
     y: proDetailsHeadingY,
