@@ -88,8 +88,10 @@ async function createNewPdf(
   const font = await pdfDoc.embedFont(merriweatherBytes);
   const boldFont = await pdfDoc.embedFont(stolzlBytes);
 
-  const paddingLeft = 50;
-  const paddingTop = 80;
+  const ml = 50;
+  const mt = 71;
+  const headingSize = 14;
+  const textSize = 12;
   const lineHeight = 23;
   const headingLineHeight = 30;
   const convertOptions = {
@@ -100,7 +102,7 @@ async function createNewPdf(
 
   function getPageAndY(y: number): [PDFPage, number] {
     if (y < 50) {
-      return [pdfDoc.addPage([595, 842]), height - paddingTop];
+      return [pdfDoc.addPage([595, 842]), height - mt];
     }
     return [page, y];
   }
@@ -143,66 +145,57 @@ async function createNewPdf(
 
   // await addCandImage();
 
-  // draw a black square of 60x60 at the top left corner
-  page.drawRectangle({
-    x: 0,
-    y: height - 35,
-    width: 50,
-    height: 35,
-    color: rgb(0, 0, 0),
-  });
-
   // Add the logo on top of the black square
-  const logoPath = path.join(process.cwd(), "public", "thumbnail.png");
+  const logoPath = path.join(process.cwd(), "public", "logo-black-sm.png");
   const logoBytes = readFileSync(logoPath);
   const logo = await pdfDoc.embedPng(logoBytes);
-  const logoDims = logo.scale(0.3);
+  const logoDims = logo.scale(0.5);
   page.drawImage(logo, {
-    x: 15,
-    y: height - 28,
+    x: 11,
+    y: height - 40,
     width: logoDims.width,
     height: logoDims.height,
   });
 
   // Add candidate name and vacancy
-  const headerY = height - paddingTop;
+  const headerY = height - mt;
   page.drawText("Candidate:", {
-    x: paddingLeft,
+    x: ml,
     y: headerY,
-    size: 16,
+    size: headingSize,
     font: boldFont,
     color: rgb(0, 0, 0),
   });
   page.drawText(`${candidate.firstName} ${candidate.lastName}`, {
-    x: paddingLeft + 130,
+    x: ml + 130,
     y: headerY,
-    size: 20,
+    size: 18,
     font: boldFont,
     color: rgb(0, 0, 0),
   });
 
   page.drawText("Vacancy:", {
-    x: paddingLeft,
+    x: ml,
     y: headerY - headingLineHeight,
-    size: 16,
+    size: headingSize,
     font: boldFont,
     color: rgb(0, 0, 0),
   });
   candidate?.vacancyTitle &&
     page.drawText(candidate?.vacancyTitle, {
-      x: paddingLeft + 130,
+      x: ml + 130,
       y: headerY - headingLineHeight,
-      size: 20,
+      size: 18,
       font: boldFont,
       color: rgb(0, 0, 0),
     });
 
   // Step 4: Add the "Professional Details" section
-  const proDetailsHeadingY = headerY - 110;
-  page.drawText("Professional Details", {
-    x: 50,
+  const proDetailsHeadingY = headerY - headingLineHeight * 3;
+  page.drawText("Professional & Personal Details", {
+    x: ml,
     y: proDetailsHeadingY,
-    size: 16,
+    size: headingSize,
     font: boldFont,
     color: rgb(0, 0, 0),
   });
@@ -219,7 +212,7 @@ async function createNewPdf(
     if (!detail[1]) continue;
 
     page.drawText(detail[0], {
-      x: 50,
+      x: ml,
       y: proDetailsY,
       size: 12,
       font,
@@ -227,7 +220,7 @@ async function createNewPdf(
       maxWidth: maxChars * 7,
     });
     page.drawText(detail[1], {
-      x: 50 + 130,
+      x: ml + 130,
       y: proDetailsY,
       size: 12,
       font,
@@ -241,13 +234,36 @@ async function createNewPdf(
       proDetailsY -= lineHeight;
     }
   }
+  if (candidate.birthDate) {
+    page.drawText("Birth Date:", {
+      x: ml,
+      y: proDetailsY,
+      size: 12,
+      font,
+      color: rgb(0, 0, 0),
+    });
+
+    page.drawText(
+      candidate?.candidateAge
+        ? candidate.birthDate + ` (${candidate.candidateAge})`
+        : candidate.birthDate,
+      {
+        x: ml + 130,
+        y: proDetailsY,
+        size: 12,
+        font,
+        color: rgb(0, 0, 0),
+      }
+    );
+    proDetailsY -= lineHeight;
+  }
 
   const contactDetailsHeadingY = proDetailsY - headingLineHeight;
   let contactDetailsY = contactDetailsHeadingY - headingLineHeight;
-  page.drawText("Personal & Contact Details", {
-    x: 50,
+  page.drawText("Contact", {
+    x: ml,
     y: contactDetailsHeadingY,
-    size: 16,
+    size: headingSize,
     font: boldFont,
     color: rgb(0, 0, 0),
   });
@@ -255,7 +271,7 @@ async function createNewPdf(
   const contactDetails = [
     candidate.email,
     candidate.phoneNumber,
-    candidate.linkedIn,
+    candidate.linkedIn?.substring(25),
   ];
   const address = [
     candidate.address?.street,
@@ -263,47 +279,44 @@ async function createNewPdf(
     candidate.address?.country,
   ];
 
-  if (candidate.birthDate)
-    page.drawText(
-      candidate?.candidateAge
-        ? candidate.birthDate + ` (${candidate.candidateAge})`
-        : candidate.birthDate,
-      {
-        x: 50,
-        y: contactDetailsY,
-        size: 12,
-        font,
-        color: rgb(0, 0, 0),
-        maxWidth: maxChars * 7,
-      }
-    );
-  contactDetailsY -= lineHeight;
+  const columnGap = 30;
+  const columnWidth = 240;
 
   for (const detail of contactDetails) {
     if (!detail) continue;
 
     page.drawText(detail, {
-      x: 50,
+      x: ml,
       y: contactDetailsY,
       size: 12,
       font,
       color: rgb(0, 0, 0),
+      maxWidth: columnWidth,
+      wordBreaks: [""],
     });
     contactDetailsY -= lineHeight;
+    if (detail.length * 7 > columnWidth) {
+      contactDetailsY -= lineHeight;
+    }
   }
-  contactDetailsY -= lineHeight;
 
+  let addressY = contactDetailsHeadingY - headingLineHeight;
   for (const detail of address) {
     if (!detail) continue;
 
     page.drawText(detail, {
-      x: 50,
-      y: contactDetailsY,
+      x: ml + columnWidth + columnGap,
+      y: addressY,
       size: 12,
       font,
       color: rgb(0, 0, 0),
+      maxWidth: columnWidth,
+      wordBreaks: [""],
     });
-    contactDetailsY -= lineHeight;
+    addressY -= lineHeight;
+    if (detail.length * 7 > columnWidth) {
+      addressY -= lineHeight;
+    }
   }
 
   // Step 5: Add the "Relevant Experience" section
@@ -317,9 +330,9 @@ async function createNewPdf(
 
   if (interviewSummaryText) {
     page.drawText("Interview Summary", {
-      x: 50,
+      x: ml,
       y: interviewSummaryHeadingY,
-      size: 16,
+      size: headingSize,
       font: boldFont,
       color: rgb(0, 0, 0),
     });
@@ -330,7 +343,7 @@ async function createNewPdf(
     );
     for (const line of interviewSummaryLines) {
       page.drawText(line, {
-        x: 50,
+        x: ml,
         y: interviewSummaryY,
         size: 12,
         font,
@@ -349,9 +362,9 @@ async function createNewPdf(
   if (reasonText) {
     // Step 6: Add the "Reason for Change" section
     page.drawText("Reason for Change", {
-      x: 50,
+      x: ml,
       y: reasonHeadingY,
-      size: 16,
+      size: headingSize,
       font: boldFont,
       color: rgb(0, 0, 0),
     });
@@ -360,7 +373,7 @@ async function createNewPdf(
     const reasonLines = splitTextIntoLines(reasonText, maxChars); // Split text into lines for wrapping
     for (const line of reasonLines) {
       page.drawText(line, {
-        x: 50,
+        x: ml,
         y: reasonY,
         size: 12,
         font,
