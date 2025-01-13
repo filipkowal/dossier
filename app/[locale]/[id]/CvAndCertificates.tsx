@@ -6,10 +6,7 @@ import "react-pdf/dist/Page/AnnotationLayer.css";
 import { Candidate } from "@/utils";
 import PdfDocument from "@/components/PdfDocument";
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  "pdfjs-dist/build/pdf.worker.min.js",
-  import.meta.url
-).toString();
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 const CvAndCertificates = ({
   cvAndCertificates,
