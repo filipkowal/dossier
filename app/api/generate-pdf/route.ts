@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
 
     const candidate = await getCandidate(locale, id, cookie);
 
-    const newPdf = createNewPdf(candidate);
+    const newPdf = createNewPdf(candidate, locale);
 
     const mergedPdf = await mergePdfs(newPdf, pdfDossierPromise);
 

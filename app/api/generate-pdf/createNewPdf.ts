@@ -1,5 +1,5 @@
 import { PDFDocument, rgb } from "pdf-lib";
-import { Candidate } from "@/utils";
+import { Candidate, getDictionary, Locale } from "@/utils";
 import { readFileSync } from "fs";
 import path from "path";
 import fontkit from "@pdf-lib/fontkit";
@@ -14,7 +14,13 @@ import {
 } from "./constants";
 import getHelpers from "./getHelpers";
 
-export default async function createNewPdf(candidate: Candidate) {
+export default async function createNewPdf(
+  candidate: Candidate,
+  locale: Locale
+) {
+  const dict = await getDictionary(locale);
+  const d = dict.candidate;
+
   // Create a new PDF document
 
   let pdfDoc = await PDFDocument.create();
@@ -75,7 +81,7 @@ export default async function createNewPdf(candidate: Candidate) {
 
   let currentY = pageHeight - mt;
 
-  drawHeading(page, "Candidate:", currentY);
+  drawHeading(page, `${d.candidate}:`, currentY);
   drawHeading(
     page,
     `${candidate.firstName} ${candidate.lastName}`,
@@ -87,7 +93,7 @@ export default async function createNewPdf(candidate: Candidate) {
   if (candidate.vacancyTitle) {
     currentY = currentY - headingLineHeight;
 
-    drawHeading(page, "Vacancy:", currentY);
+    drawHeading(page, `${d.vacancy}:`, currentY);
     drawHeading(page, candidate.vacancyTitle, currentY, secondColumnX, 18);
   }
 
@@ -95,7 +101,7 @@ export default async function createNewPdf(candidate: Candidate) {
 
   currentY = currentY - headingLineHeight - lineHeight;
 
-  drawHeading(page, "Professional & Personal Details", currentY);
+  drawHeading(page, d.proAndPersonalDetails, currentY);
 
   currentY = currentY - headingLineHeight;
 
@@ -109,17 +115,17 @@ export default async function createNewPdf(candidate: Candidate) {
   }
 
   if (birthDate) {
-    drawText(page, "Birth Date:", currentY);
+    drawText(page, `${d.birthDate}:`, currentY);
     drawText(page, birthDate, currentY, secondColumnX);
 
     currentY -= lineHeight;
   }
 
-  // Add the "Contact" section
+  // Add the "Contact Details" section
 
   currentY = currentY - headingLineHeight;
 
-  drawHeading(page, "Contact", currentY);
+  drawHeading(page, d.contactDetails, currentY);
 
   currentY = currentY - headingLineHeight;
   let addressY = currentY;
@@ -168,7 +174,7 @@ export default async function createNewPdf(candidate: Candidate) {
 
   [pdfDoc, page, currentY] = drawLongParagraph(
     interviewSummary,
-    "Interview Summary",
+    d.interviewSummary,
     currentY,
     page,
     pdfDoc
@@ -180,7 +186,7 @@ export default async function createNewPdf(candidate: Candidate) {
 
   [pdfDoc, page, currentY] = drawLongParagraph(
     reason,
-    "Reason for Change",
+    d.reasonForChange,
     currentY,
     page,
     pdfDoc
