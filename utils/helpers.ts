@@ -6,6 +6,7 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 import { logout } from "./fetchers";
 import { ReadonlyURLSearchParams } from "next/navigation";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import { PDFDocument } from "pdf-lib";
 
 // We enumerate all dictionaries here for better linting and typescript support
 // We also get the default import for cleaner types
@@ -158,4 +159,57 @@ export async function tc(promise: Promise<any>) {
   } catch (error) {
     return [null, error];
   }
+}
+
+export function splitTextIntoLines(text: string, maxChars: number): string[] {
+  const words = text.split(" ");
+  const lines: string[] = [];
+  let currentLine = "";
+
+  for (const word of words) {
+    if ((currentLine + word).length > maxChars) {
+      lines.push(currentLine.trim());
+      currentLine = word + " ";
+    } else {
+      currentLine += word + " ";
+    }
+  }
+  if (currentLine) lines.push(currentLine.trim());
+  return lines;
+}
+
+export async function mergePdfs(
+  newPdfPromise: Promise<PDFDocument>,
+  pdfDossierPromise: Promise<Response> | undefined
+) {
+  let pdfDossierBytes: ArrayBuffer | undefined;
+  let newPdf: PDFDocument | undefined = undefined;
+
+  try {
+    [pdfDossierBytes, newPdf] = await Promise.all([
+      await (await pdfDossierPromise)?.arrayBuffer(),
+      await newPdfPromise,
+    ]);
+  } catch (error) {
+    throw error;
+  }
+
+  // Load the original PDF
+  const existingPdfDoc = pdfDossierBytes
+    ? await PDFDocument.load(pdfDossierBytes)
+    : null;
+
+  // Merge the existing PDF into the new PDF
+  if (existingPdfDoc) {
+    const copiedPages = await newPdf.copyPages(
+      existingPdfDoc,
+      existingPdfDoc.getPageIndices()
+    );
+    copiedPages.forEach((page) => newPdf.addPage(page));
+  }
+
+  // Serialize the merged PDF
+  const mergedPdfBytes = await newPdf.save();
+
+  return mergedPdfBytes;
 }
