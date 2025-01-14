@@ -1,8 +1,10 @@
 "use client";
 import { Button } from "@/components";
+import LoadingEllipsis from "@/components/LoadingEllipsis";
 import { Locale } from "@/i18n-config";
 import DownloadIcon from "@/public/download.png";
 import Image from "next/image";
+import { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function PdfButton({
@@ -12,8 +14,11 @@ export default function PdfButton({
   locale: Locale;
   id: string;
 }) {
+  const [isDownloading, setIsDownloading] = useState(false);
   const handleDownload = async () => {
     try {
+      setIsDownloading(true);
+
       const response = await fetch(
         `${
           process.env.NODE_ENV === "development"
@@ -47,6 +52,8 @@ export default function PdfButton({
       toast.error(
         "An error occurred while downloading the PDF. Please try again."
       ); // @fixme add error translations
+    } finally {
+      setIsDownloading(false);
     }
   };
 
@@ -57,11 +64,15 @@ export default function PdfButton({
       className="flex gap-2 ml-8"
       onClick={handleDownload}
     >
-      <Image
-        src={DownloadIcon}
-        className="h-4 w-4 mt-1"
-        alt="download as pdf"
-      />
+      {isDownloading ? (
+        <LoadingEllipsis isLoading />
+      ) : (
+        <Image
+          src={DownloadIcon}
+          className="h-4 w-4 mt-1"
+          alt="download as pdf"
+        />
+      )}
       PDF
     </Button>
   );
