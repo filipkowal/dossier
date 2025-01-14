@@ -15,7 +15,11 @@ export default function PdfButton({
   const handleDownload = async () => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/generate-pdf?locale=${locale}&id=${id}`
+        `${
+          process.env.NODE_ENV === "development"
+            ? process.env.NEXT_PUBLIC_BASE_URL + "/"
+            : ""
+        }api/generate-pdf?locale=${locale}&id=${id}`
       );
 
       if (response.ok) {
