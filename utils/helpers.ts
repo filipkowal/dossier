@@ -180,7 +180,7 @@ export function splitTextIntoLines(text: string, maxChars: number): string[] {
 
 export async function mergePdfs(
   newPdfPromise: Promise<PDFDocument>,
-  pdfDossierPromise: Promise<Response> | undefined
+  pdfDossierPromise: Promise<Response | null> | undefined
 ) {
   let pdfDossierBytes: ArrayBuffer | undefined;
   let newPdf: PDFDocument | undefined = undefined;
