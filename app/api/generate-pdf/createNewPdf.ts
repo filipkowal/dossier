@@ -166,7 +166,7 @@ export default async function createNewPdf(
   }
 
   // Set the currentY to the lowest of the two columns
-  currentY = Math.min(currentY, addressY);
+  currentY = Math.min(currentY, addressY) + lineHeight;
 
   // Add the "Relevant Experience" section
 

@@ -103,28 +103,43 @@ export default function getHelpers(
     const proDetails: [string, string | undefined][] = [
       [`Current position: `, candidate.currentPosition],
       [`Notice period: `, candidate.noticePeriod],
-      [`Desired salary: `, `CHF ${addHighComma(candidate.desiredSalary)}`],
-      [`Desired workload: `, `${candidate.desiredWorkload}%`],
-    ];
-    const birthDate = candidate?.candidateAge
-      ? candidate.birthDate + ` (${candidate.candidateAge})`
-      : candidate.birthDate;
+      [
+        `Desired salary: `,
+        candidate.desiredSalary &&
+          `CHF ${addHighComma(candidate.desiredSalary)}`,
+      ],
+      [
+        `Desired workload: `,
+        candidate.desiredWorkload && `${candidate.desiredWorkload}%`,
+      ],
+    ].filter(
+      (detail): detail is [string, string | undefined] =>
+        typeof detail[1] === "string"
+    );
+
+    const birthDate =
+      candidate.birthDate &&
+      `${candidate.birthDate} (${candidate.candidateAge})`;
     const contactDetails = [
       candidate.email,
       candidate.phoneNumber,
       candidate.linkedIn?.substring(25),
-    ];
+    ].filter((detail): detail is string => typeof detail === "string");
     const address = [
       candidate.address?.street,
-      candidate.address?.zip + " " + candidate.address?.city,
+      candidate.address?.zip
+        ? candidate.address?.zip + " " + candidate.address?.city
+        : candidate.address?.city,
       candidate.address?.country,
-    ];
-    const interviewSummary = candidate.interviewSummary
-      ? convert(candidate.interviewSummary, convertOptions)
-      : null;
-    const reason = candidate.reasonForChange
-      ? convert(candidate.reasonForChange, convertOptions)
-      : null;
+    ].filter((detail): detail is string => typeof detail === "string");
+    const interviewSummary =
+      candidate.interviewSummary && candidate.interviewSummary.length > 0
+        ? convert(candidate.interviewSummary, convertOptions)
+        : null;
+    const reason =
+      candidate.reasonForChange && candidate.reasonForChange.length > 0
+        ? convert(candidate.reasonForChange, convertOptions)
+        : null;
 
     return {
       proDetails,
