@@ -66,13 +66,13 @@ export default async function createNewPdf(
 
   // Add dt logo
 
-  const logoPath = path.join(process.cwd(), "public", "logo-black-sm.png");
+  const logoPath = path.join(process.cwd(), "public", "logo-black-name-sm.png");
   const logoBytes = readFileSync(logoPath);
   const logo = await pdfDoc.embedPng(logoBytes);
   const logoDims = logo.scale(0.4);
   page.drawImage(logo, {
-    x: 14,
-    y: pageHeight - 37,
+    x: 8,
+    y: pageHeight - 30,
     width: logoDims.width,
     height: logoDims.height,
   });
