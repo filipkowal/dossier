@@ -166,9 +166,9 @@ export default async function createNewPdf(
   }
 
   // Set the currentY to the lowest of the two columns
-  currentY = Math.min(currentY, addressY) + lineHeight;
+  currentY = Math.min(currentY, addressY);
 
-  // Add the "Relevant Experience" section
+  // Add the "interview summary" section
 
   currentY = currentY - headingLineHeight;
 
