@@ -16,7 +16,7 @@ export default function HeaderSimple({
       className="flex flex-row h-16 bg-digitalent-blue justify-between items-center py-3 px-4 sm:px-8 sm:fixed top-0 z-20 w-full"
     >
       <div>
-        <Link href={`/${params?.locale}${params?.id ? "/" + params.id : ""}`}>
+        <Link href={`https://digitalent.ch`}>
           <>
             <Image
               src={DigitalentLogo}

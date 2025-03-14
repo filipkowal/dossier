@@ -127,10 +127,7 @@ export async function staticImageDataToBuffer(
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
   }
   // Ensure the src is an absolute URL
-  console.log("PAATH: \n", process.env.NEXT_PUBLIC_BASE_URL);
   const absoluteUrl = `${process.env.NEXT_PUBLIC_BASE_URL}${staticImageData.src}`;
-
-  console.log("Fetching image from URL:", absoluteUrl);
 
   try {
     const response = await fetch(absoluteUrl, {

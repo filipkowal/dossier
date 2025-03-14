@@ -7,16 +7,34 @@ import {
   ml,
   mt,
   textSize,
-  convertOptions,
 } from "./constants";
 import { addHighComma, Candidate, splitTextIntoLines } from "@/utils";
 import { convert } from "html-to-text";
+
+const convertOptions = {
+  wordwrap: null,
+  selectors: [
+    { 
+      selector: 'ul', 
+      format: 'unorderedList',
+      options: {
+        itemPrefix: ' ',
+      }
+    },
+  ]
+};
+
+function stripHtml(html: string | null): string | null {
+  if (!html) return null;
+  return convert(html, convertOptions);
+}
 
 export default function getHelpers(
   font: PDFFont,
   boldFont: PDFFont,
   pageHeight: number
 ) {
+
   function drawText(
     page: PDFPage,
     text: string,
@@ -64,11 +82,14 @@ export default function getHelpers(
 
       y = y - headingLineHeight;
 
-      const interviewSummaryLines = splitTextIntoLines(text, maxChars);
+      const strippedText = stripHtml(text);
+      const interviewSummaryLines = splitTextIntoLines(strippedText || '', maxChars);
 
       for (const line of interviewSummaryLines) {
-        drawText(page, line, y);
-
+        console.log("line: ", line);
+        const oneLine = line.replace(/\n/g, '');
+        console.log("oneLine: ", oneLine);
+        drawText(page, oneLine, y);
         [pdfDoc, page, y] = getPageAndY(pdfDoc, page, y);
       }
     }
@@ -120,11 +141,13 @@ export default function getHelpers(
     const birthDate =
       candidate.birthDate &&
       `${candidate.birthDate} (${candidate.candidateAge})`;
+
     const contactDetails = [
       candidate.email,
       candidate.phoneNumber,
       candidate.linkedIn?.substring(25),
     ].filter((detail): detail is string => typeof detail === "string");
+
     const address = [
       candidate.address?.street,
       candidate.address?.zip
@@ -132,10 +155,12 @@ export default function getHelpers(
         : candidate.address?.city,
       candidate.address?.country,
     ].filter((detail): detail is string => typeof detail === "string");
+
     const interviewSummary =
-      candidate.interviewSummary && candidate.interviewSummary.length > 0
-        ? convert(candidate.interviewSummary, convertOptions)
-        : null;
+    candidate.interviewSummary && candidate.interviewSummary.length > 0
+    ? convert(candidate.interviewSummary, convertOptions)
+    : null;
+    
     const reason =
       candidate.reasonForChange && candidate.reasonForChange.length > 0
         ? convert(candidate.reasonForChange, convertOptions)
