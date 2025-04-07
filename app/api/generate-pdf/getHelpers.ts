@@ -82,7 +82,6 @@ export default function getHelpers(
     let page = currentPage;
 
     if (text) {
-      console.log("text: ", text);
       drawHeading(page, title, y);
 
       y = y - headingLineHeight;

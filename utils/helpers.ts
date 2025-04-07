@@ -173,48 +173,50 @@ export function splitTextIntoLines(text: string, maxChars: number): string[] {
     }
 
     // Check if this is a list item
-    const isListItem =
-      paragraph.trim().startsWith("•") ||
-      paragraph.trim().startsWith("*") ||
-      /^\d+\./.test(paragraph.trim());
+    const regex = /^((\d+\.)\s*)|^(•\s*)/;
+    const listItemPrefix = paragraph.trim().match(regex);
+    const prefix = listItemPrefix?.[0] ?? "";
 
-    if (isListItem) {
+    if (prefix) {
       // Extract the bullet point prefix (including any indentation)
-      const prefixMatch = paragraph.match(/^(\s*[•\d]+\.\s*)/);
-      const prefix = prefixMatch ? prefixMatch[1] : "";
-      const content = paragraph.slice(prefix.length);
+
+      const content = paragraph.slice(prefix?.length);
+
+      // Add extra space around the prefix
+      const spacedPrefix = "  " + prefix + "  ";
 
       // Split the content while preserving the prefix
       const words = content.split(" ");
-      let currentLine = prefix;
+      let currentLine = spacedPrefix;
 
       for (const word of words) {
-        const nextLine = (currentLine + word).trim();
-        if (nextLine.length > maxChars && currentLine !== prefix) {
-          lines.push(currentLine.trim());
-          currentLine = " ".repeat(prefix.length) + word + " ";
+        const nextLine = currentLine + word;
+        if (nextLine.length > maxChars && currentLine !== spacedPrefix) {
+          lines.push(currentLine);
+          // indent the next line of the list item
+          currentLine = " ".repeat(spacedPrefix.length) + word + " ";
         } else {
           currentLine += word + " ";
         }
       }
 
-      if (currentLine) lines.push(currentLine.trim());
+      if (currentLine) lines.push(currentLine);
     } else {
       // For regular text, split by character count
       const words = paragraph.split(" ");
       let currentLine = "";
 
       for (const word of words) {
-        const nextLine = (currentLine + word).trim();
+        const nextLine = currentLine + word;
         if (nextLine.length > maxChars && currentLine) {
-          lines.push(currentLine.trim());
+          lines.push(currentLine);
           currentLine = word + " ";
         } else {
           currentLine += word + " ";
         }
       }
 
-      if (currentLine) lines.push(currentLine.trim());
+      if (currentLine) lines.push(currentLine);
     }
   }
 
