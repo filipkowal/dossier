@@ -159,19 +159,62 @@ export async function tc(promise: Promise<any>) {
 }
 
 export function splitTextIntoLines(text: string, maxChars: number): string[] {
-  const words = text.split(" ");
+  // First split by newlines to preserve bullet point structure
+  const paragraphs = text.split("\n");
   const lines: string[] = [];
-  let currentLine = "";
 
-  for (const word of words) {
-    if ((currentLine + word).length > maxChars) {
-      lines.push(currentLine.trim());
-      currentLine = word + " ";
+  for (const paragraph of paragraphs) {
+    // Skip empty lines
+    if (!paragraph.trim()) {
+      continue;
+    }
+
+    // Check if this is a list item
+    const isListItem =
+      paragraph.trim().startsWith("•") ||
+      paragraph.trim().startsWith("*") ||
+      /^\d+\./.test(paragraph.trim());
+
+    if (isListItem) {
+      // Extract the bullet point prefix (including any indentation)
+      const prefixMatch = paragraph.match(/^(\s*[•\d]+\.\s*)/);
+      const prefix = prefixMatch ? prefixMatch[1] : "";
+      const content = paragraph.slice(prefix.length);
+
+      // Split the content while preserving the prefix
+      const words = content.split(" ");
+      let currentLine = prefix;
+
+      for (const word of words) {
+        const nextLine = (currentLine + word).trim();
+        if (nextLine.length > maxChars && currentLine !== prefix) {
+          lines.push(currentLine.trim());
+          currentLine = " ".repeat(prefix.length) + word + " ";
+        } else {
+          currentLine += word + " ";
+        }
+      }
+
+      if (currentLine) lines.push(currentLine.trim());
     } else {
-      currentLine += word + " ";
+      // For regular text, split by character count
+      const words = paragraph.split(" ");
+      let currentLine = "";
+
+      for (const word of words) {
+        const nextLine = (currentLine + word).trim();
+        if (nextLine.length > maxChars && currentLine) {
+          lines.push(currentLine.trim());
+          currentLine = word + " ";
+        } else {
+          currentLine += word + " ";
+        }
+      }
+
+      if (currentLine) lines.push(currentLine.trim());
     }
   }
-  if (currentLine) lines.push(currentLine.trim());
+
   return lines;
 }
 

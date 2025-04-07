@@ -14,27 +14,45 @@ import { convert } from "html-to-text";
 const convertOptions = {
   wordwrap: null,
   selectors: [
-    { 
-      selector: 'ul', 
-      format: 'unorderedList',
+    {
+      selector: "ul",
+      format: "unorderedList",
       options: {
-        itemPrefix: ' ',
-      }
+        itemPrefix: "• ",
+        leadingLineBreaks: 1,
+        trailingLineBreaks: 1,
+      },
     },
-  ]
+    {
+      selector: "ol",
+      format: "orderedList",
+      options: {
+        leadingLineBreaks: 1,
+        trailingLineBreaks: 1,
+      },
+    },
+    {
+      selector: "p",
+      options: {
+        leadingLineBreaks: 1,
+        trailingLineBreaks: 1,
+      },
+    },
+    {
+      selector: "br",
+      options: {
+        leadingLineBreaks: 1,
+        trailingLineBreaks: 0,
+      },
+    },
+  ],
 };
-
-function stripHtml(html: string | null): string | null {
-  if (!html) return null;
-  return convert(html, convertOptions);
-}
 
 export default function getHelpers(
   font: PDFFont,
   boldFont: PDFFont,
   pageHeight: number
 ) {
-
   function drawText(
     page: PDFPage,
     text: string,
@@ -78,17 +96,15 @@ export default function getHelpers(
     let page = currentPage;
 
     if (text) {
+      console.log("text: ", text);
       drawHeading(page, title, y);
 
       y = y - headingLineHeight;
 
-      const strippedText = stripHtml(text);
-      const interviewSummaryLines = splitTextIntoLines(strippedText || '', maxChars);
+      const interviewSummaryLines = splitTextIntoLines(text || "", maxChars);
 
       for (const line of interviewSummaryLines) {
-        console.log("line: ", line);
-        const oneLine = line.replace(/\n/g, '');
-        console.log("oneLine: ", oneLine);
+        const oneLine = line.replace(/\n/g, "");
         drawText(page, oneLine, y);
         [pdfDoc, page, y] = getPageAndY(pdfDoc, page, y);
       }
@@ -157,10 +173,10 @@ export default function getHelpers(
     ].filter((detail): detail is string => typeof detail === "string");
 
     const interviewSummary =
-    candidate.interviewSummary && candidate.interviewSummary.length > 0
-    ? convert(candidate.interviewSummary, convertOptions)
-    : null;
-    
+      candidate.interviewSummary && candidate.interviewSummary.length > 0
+        ? convert(candidate.interviewSummary, convertOptions)
+        : null;
+
     const reason =
       candidate.reasonForChange && candidate.reasonForChange.length > 0
         ? convert(candidate.reasonForChange, convertOptions)
