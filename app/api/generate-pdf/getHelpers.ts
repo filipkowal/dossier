@@ -31,20 +31,6 @@ const convertOptions = {
         trailingLineBreaks: 1,
       },
     },
-    {
-      selector: "p",
-      options: {
-        leadingLineBreaks: 1,
-        trailingLineBreaks: 1,
-      },
-    },
-    {
-      selector: "br",
-      options: {
-        leadingLineBreaks: 1,
-        trailingLineBreaks: 0,
-      },
-    },
   ],
 };
 

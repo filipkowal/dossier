@@ -164,8 +164,11 @@ export function splitTextIntoLines(text: string, maxChars: number): string[] {
   const lines: string[] = [];
 
   for (const paragraph of paragraphs) {
-    // Skip empty lines
+    // Skip more than one empty line
     if (!paragraph.trim()) {
+      if (lines[lines.length - 1] !== "") {
+        lines.push("");
+      }
       continue;
     }
 
