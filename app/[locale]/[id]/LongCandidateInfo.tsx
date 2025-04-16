@@ -41,7 +41,7 @@ function Section({
         dangerouslySetInnerHTML={{
           __html: content || "",
         }}
-        className="[&>ul]:mb-4 [&>ol]:mb-4 [&>ul]:mt-2 [&>ol]:mt-2"
+        className="[&>ul]:my-2 [&>ol]:my-2"
       ></div>
     </>
   );
