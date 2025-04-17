@@ -63,7 +63,7 @@ export default function TimeSlotInputs({
     } else {
       setIsNewTimeSlotSet(false);
     }
-  }, [date, startTime, endTime]);
+  }, [date, startTime, endTime, setIsNewTimeSlotSet]);
 
   function setError(context: any, propName: "date" | "startTime" | "endTime") {
     if (context.validationError)

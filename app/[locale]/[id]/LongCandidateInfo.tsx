@@ -41,6 +41,7 @@ function Section({
         dangerouslySetInnerHTML={{
           __html: content || "",
         }}
+        className="[&>ul]:my-2 [&>ol]:my-2"
       ></div>
     </>
   );

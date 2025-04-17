@@ -33,7 +33,7 @@ export default function ProfessionalDetails({
         title={dict.candidate.noticePeriod}
         value={candidate.noticePeriod}
       />
-      {user.canViewSalary ? (
+      {user.canViewSalary && candidate.desiredSalary ? (
         <Detail
           title={dict.candidate.desiredSalary}
           value={`CHF ${addHighComma(candidate.desiredSalary)}`}

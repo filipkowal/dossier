@@ -16,6 +16,8 @@
     "vacancy": "Vacancy",
     "contactDetails": "Contact Details",
     "personalDetails": "Personal Details",
+    "proAndPersonalDetails": "Professional & Personal Details",
+    "birthDate": "Birth Date",
     "desiredSalary": "Desired Salary",
     "targetSalary": "Target Salary",
     "noticePeriod": "Notice Period",
