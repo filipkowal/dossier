@@ -15,12 +15,20 @@ const convertOptions = {
   wordwrap: null,
   selectors: [
     {
+      selector: "p",
+      format: "block",
+      options: {
+        leadingLineBreaks: 1,
+        trailingLineBreaks: 1,
+      },
+    },
+    {
       selector: "ul",
       format: "unorderedList",
       options: {
         itemPrefix: "• ",
         leadingLineBreaks: 1,
-        trailingLineBreaks: 1,
+        trailingLineBreaks: 2,
       },
     },
     {
@@ -28,7 +36,7 @@ const convertOptions = {
       format: "orderedList",
       options: {
         leadingLineBreaks: 1,
-        trailingLineBreaks: 1,
+        trailingLineBreaks: 2,
       },
     },
   ],
