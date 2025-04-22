@@ -46,7 +46,7 @@ export async function GET(req: NextRequest) {
       status: 200,
       headers: {
         "Content-Type": "application/pdf",
-        "Content-Disposition": `attachment; filename=${filename};`,
+        "Content-Disposition": `attachment; filename=${filename}`,
       },
     });
   } catch (error) {
