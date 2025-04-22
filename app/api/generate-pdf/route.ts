@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server";
 import { getCandidate, getPdfDossierUrl, Locale, mergePdfs } from "@/utils";
 import createNewPdf from "./createNewPdf";
+import { transliterate as tr } from "transliteration";
 
 export const dynamic = "force-dynamic";
 
@@ -37,11 +38,15 @@ export async function GET(req: NextRequest) {
     const newPdf = createNewPdf(candidate, locale);
     const mergedPdf = await mergePdfs(newPdf, pdfDossierPromise);
 
+    const filename = `${tr(
+      candidate?.firstName ? candidate.firstName + "-" : ""
+    )}${tr(candidate?.lastName ?? "")}-Dossier.pdf`;
+
     return new Response(mergedPdf, {
       status: 200,
       headers: {
         "Content-Type": "application/pdf",
-        "Content-Disposition": `attachment; filename=${candidate.firstName}-${candidate.lastName}-Dossier.pdf`,
+        "Content-Disposition": `attachment; filename=${filename};`,
       },
     });
   } catch (error) {
