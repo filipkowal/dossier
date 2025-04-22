@@ -72,8 +72,8 @@ export default async function createNewPdf(
   const logo = await pdfDoc.embedPng(logoBytes);
   const logoDims = logo.scale(0.4);
   page.drawImage(logo, {
-    x: 8,
-    y: pageHeight - 30,
+    x: ml,
+    y: pageHeight - 40,
     width: logoDims.width,
     height: logoDims.height,
   });
