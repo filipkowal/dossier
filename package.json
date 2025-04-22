@@ -29,7 +29,8 @@
     "react-pdf": "^9.2.1",
     "sharp": "^0.33.3",
     "tailwind-scrollbar-hide": "^1.1.7",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "transliteration": "^2.3.5"
   },
   "devDependencies": {
     "@types/html-to-text": "^9.0.4",
