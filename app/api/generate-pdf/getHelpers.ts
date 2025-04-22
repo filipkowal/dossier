@@ -8,7 +8,12 @@ import {
   mt,
   textSize,
 } from "./constants";
-import { addHighComma, Candidate, splitTextIntoLines } from "@/utils";
+import {
+  addHighComma,
+  Candidate,
+  Dictionary,
+  splitTextIntoLines,
+} from "@/utils";
 import { convert } from "html-to-text";
 
 const convertOptions = {
@@ -130,20 +135,20 @@ export default function getHelpers(
   }
 
   function getTexts(candidate: Candidate) {
-    const proDetails: [string, string | undefined][] = [
-      [`Current position: `, candidate.currentPosition],
-      [`Notice period: `, candidate.noticePeriod],
+    const proDetails: [keyof Dictionary["candidate"], string | undefined][] = [
+      ["currentPosition", candidate.currentPosition],
+      [`noticePeriod`, candidate.noticePeriod],
       [
-        `Desired salary: `,
+        `desiredSalary`,
         candidate.desiredSalary &&
           `CHF ${addHighComma(candidate.desiredSalary)}`,
       ],
       [
-        `Desired workload: `,
+        `desiredWorkload`,
         candidate.desiredWorkload && `${candidate.desiredWorkload}%`,
       ],
     ].filter(
-      (detail): detail is [string, string | undefined] =>
+      (detail): detail is [keyof Dictionary["candidate"], string | undefined] =>
         typeof detail[1] === "string"
     );
 
