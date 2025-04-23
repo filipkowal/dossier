@@ -11,6 +11,7 @@ import {
   lineHeight,
   secondColumnX,
   maxChars,
+  secondColumnXTitle,
 } from "./constants";
 import getHelpers from "./getHelpers";
 
@@ -71,8 +72,8 @@ export default async function createNewPdf(
   const logo = await pdfDoc.embedPng(logoBytes);
   const logoDims = logo.scale(0.4);
   page.drawImage(logo, {
-    x: 8,
-    y: pageHeight - 30,
+    x: ml,
+    y: pageHeight - 40,
     width: logoDims.width,
     height: logoDims.height,
   });
@@ -86,7 +87,7 @@ export default async function createNewPdf(
     page,
     `${candidate.firstName} ${candidate.lastName}`,
     currentY,
-    secondColumnX,
+    secondColumnXTitle,
     18
   );
 
@@ -94,7 +95,7 @@ export default async function createNewPdf(
     currentY = currentY - headingLineHeight;
 
     drawHeading(page, `${d.vacancy}:`, currentY);
-    drawHeading(page, candidate.vacancyTitle, currentY, secondColumnX, 18);
+    drawHeading(page, candidate.vacancyTitle, currentY, secondColumnXTitle, 18);
   }
 
   // Add the "Personal & Professional Details" section
@@ -108,7 +109,7 @@ export default async function createNewPdf(
   for (const detail of proDetails) {
     if (!detail[1]) continue;
 
-    drawText(page, detail[0], currentY);
+    drawText(page, `${d[detail[0]]}:`, currentY);
     drawText(page, detail[1], currentY, secondColumnX);
 
     currentY = getNextLineY(currentY, detail.length > maxChars);
