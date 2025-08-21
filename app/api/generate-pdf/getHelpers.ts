@@ -84,6 +84,89 @@ export default function getHelpers(
     });
   }
 
+  function drawWrapped(
+    pdfDoc: PDFDocument,
+    page: PDFPage,
+    text: string,
+    y: number,
+    x: number,
+    size: number,
+    maxWidth: number,
+    isBold: boolean
+  ): [PDFDocument, PDFPage, number, number] {
+    const activeFont = isBold ? boldFont : font;
+    let currentLine = "";
+    let currentY = y;
+    let linesDrawn = 0;
+
+    const words = text.split(" ");
+
+    for (const word of words) {
+      const testLine = currentLine ? currentLine + " " + word : word;
+      const lineWidth = activeFont.widthOfTextAtSize(testLine, size);
+      if (lineWidth > maxWidth && currentLine) {
+        if (currentY - lineHeight < mt) {
+          page = pdfDoc.addPage([595, 842]);
+          currentY = pageHeight - mt;
+        }
+        page.drawText(currentLine, {
+          x,
+          y: currentY,
+          size,
+          font: activeFont,
+          color: rgb(0, 0, 0),
+        });
+        currentY -= lineHeight;
+        linesDrawn += 1;
+        currentLine = word;
+      } else {
+        currentLine = testLine;
+      }
+    }
+
+    if (currentLine) {
+      if (currentY - lineHeight < mt) {
+        page = pdfDoc.addPage([595, 842]);
+        currentY = pageHeight - mt;
+      }
+      page.drawText(currentLine, {
+        x,
+        y: currentY,
+        size,
+        font: activeFont,
+        color: rgb(0, 0, 0),
+      });
+      currentY -= lineHeight;
+      linesDrawn += 1;
+    }
+
+    return [pdfDoc, page, currentY, linesDrawn];
+  }
+
+  function drawWrappedText(
+    pdfDoc: PDFDocument,
+    page: PDFPage,
+    text: string,
+    y: number,
+    x: number,
+    size: number,
+    maxWidth: number
+  ): [PDFDocument, PDFPage, number, number] {
+    return drawWrapped(pdfDoc, page, text, y, x, size, maxWidth, false);
+  }
+
+  function drawWrappedHeading(
+    pdfDoc: PDFDocument,
+    page: PDFPage,
+    text: string,
+    y: number,
+    x: number,
+    size: number,
+    maxWidth: number
+  ): [PDFDocument, PDFPage, number, number] {
+    return drawWrapped(pdfDoc, page, text, y, x, size, maxWidth, true);
+  }
+
   function drawLongParagraph(
     text: string | null,
     title: string,
@@ -102,9 +185,15 @@ export default function getHelpers(
       const interviewSummaryLines = splitTextIntoLines(text || "", maxChars);
 
       for (const line of interviewSummaryLines) {
+        // Ensure there is room for the next line; otherwise, start a new page
+        if (y - lineHeight < mt) {
+          page = pdfDoc.addPage([595, 842]);
+          y = pageHeight - mt;
+        }
+
         const oneLine = line.replace(/\n/g, "");
         drawText(page, oneLine, y);
-        [pdfDoc, page, y] = getPageAndY(pdfDoc, page, y);
+        y = y - lineHeight;
       }
     }
 
@@ -194,6 +283,8 @@ export default function getHelpers(
     drawText,
     drawHeading,
     drawLongParagraph,
+    drawWrappedText,
+    drawWrappedHeading,
     getPageAndY,
     getNextLineY,
     getTexts,
