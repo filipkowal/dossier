@@ -28,7 +28,7 @@ export default async function createNewPdf(
   pdfDoc.registerFontkit(fontkit);
 
   let page = pdfDoc.addPage([595, 842]); // A4 size
-  const { height: pageHeight } = page.getSize();
+  const { height: pageHeight, width: pageWidth } = page.getSize();
 
   // Load fonts
 
@@ -53,8 +53,15 @@ export default async function createNewPdf(
   const font = await pdfDoc.embedFont(merriweatherBytes);
   const boldFont = await pdfDoc.embedFont(stolzlBytes);
 
-  const { drawHeading, drawText, drawLongParagraph, getNextLineY, getTexts } =
-    getHelpers(font, boldFont, pageHeight);
+  const {
+    drawHeading,
+    drawText,
+    drawLongParagraph,
+    getNextLineY,
+    getTexts,
+    drawWrappedText,
+    drawWrappedHeading,
+  } = getHelpers(font, boldFont, pageHeight);
 
   const {
     proDetails,
@@ -83,19 +90,33 @@ export default async function createNewPdf(
   let currentY = pageHeight - mt;
 
   drawHeading(page, `${d.candidate}:`, currentY);
-  drawHeading(
+  let linesDrawn = 0;
+  [pdfDoc, page, currentY, linesDrawn] = drawWrappedHeading(
+    pdfDoc,
     page,
     `${candidate.firstName} ${candidate.lastName}`,
     currentY,
     secondColumnXTitle,
-    18
+    18,
+    pageWidth - ml - secondColumnXTitle
   );
+  // If multiple lines were drawn for the name, add only the extra spacing beyond the first line
+  currentY += lineHeight; // undo first line's decrement; keep extra lines' spacing only
 
   if (candidate.vacancyTitle) {
     currentY = currentY - headingLineHeight;
 
     drawHeading(page, `${d.vacancy}:`, currentY);
-    drawHeading(page, candidate.vacancyTitle, currentY, secondColumnXTitle, 18);
+    [pdfDoc, page, currentY, linesDrawn] = drawWrappedHeading(
+      pdfDoc,
+      page,
+      candidate.vacancyTitle,
+      currentY,
+      secondColumnXTitle,
+      18,
+      pageWidth - ml - secondColumnXTitle
+    );
+    currentY += lineHeight; // undo first line's decrement for the title
   }
 
   // Add the "Personal & Professional Details" section
@@ -110,16 +131,28 @@ export default async function createNewPdf(
     if (!detail[1]) continue;
 
     drawText(page, `${d[detail[0]]}:`, currentY);
-    drawText(page, detail[1], currentY, secondColumnX);
-
-    currentY = getNextLineY(currentY, detail.length > maxChars);
+    [pdfDoc, page, currentY] = drawWrappedText(
+      pdfDoc,
+      page,
+      detail[1],
+      currentY,
+      secondColumnX,
+      textSize,
+      pageWidth - ml - secondColumnX
+    );
   }
 
   if (birthDate) {
     drawText(page, `${d.birthDate}:`, currentY);
-    drawText(page, birthDate, currentY, secondColumnX);
-
-    currentY -= lineHeight;
+    [pdfDoc, page, currentY] = drawWrappedText(
+      pdfDoc,
+      page,
+      birthDate,
+      currentY,
+      secondColumnX,
+      textSize,
+      pageWidth - ml - secondColumnX
+    );
   }
 
   // Add the "Contact Details" section
@@ -137,33 +170,29 @@ export default async function createNewPdf(
   for (const detail of contactDetails) {
     if (!detail) continue;
 
-    page.drawText(detail, {
-      x: ml,
-      y: currentY,
-      size: textSize,
-      font,
-      color: rgb(0, 0, 0),
-      maxWidth: columnWidth,
-      wordBreaks: [""],
-    });
-
-    currentY = getNextLineY(currentY, detail.length * 7 > columnWidth);
+    [pdfDoc, page, currentY] = drawWrappedText(
+      pdfDoc,
+      page,
+      detail,
+      currentY,
+      ml,
+      textSize,
+      columnWidth
+    );
   }
 
   for (const detail of address) {
     if (!detail) continue;
 
-    page.drawText(detail, {
-      x: ml + columnWidth + columnGap,
-      y: addressY,
-      size: textSize,
-      font,
-      color: rgb(0, 0, 0),
-      maxWidth: columnWidth,
-      wordBreaks: [""],
-    });
-
-    addressY = getNextLineY(addressY, detail.length * 7 > columnWidth);
+    [pdfDoc, page, addressY] = drawWrappedText(
+      pdfDoc,
+      page,
+      detail,
+      addressY,
+      ml + columnWidth + columnGap,
+      textSize,
+      columnWidth
+    );
   }
 
   // Set the currentY to the lowest of the two columns
