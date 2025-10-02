@@ -1,5 +1,5 @@
 import { PDFDocument, rgb } from "pdf-lib";
-import { Candidate, getDictionary, Locale } from "@/utils";
+import { Candidate, getDictionary, Locale, User } from "@/utils";
 import { readFileSync } from "fs";
 import path from "path";
 import fontkit from "@pdf-lib/fontkit";
@@ -17,7 +17,8 @@ import getHelpers from "./getHelpers";
 
 export default async function createNewPdf(
   candidate: Candidate,
-  locale: Locale
+  locale: Locale,
+  user: User
 ) {
   const dict = await getDictionary(locale);
   const d = dict.candidate;
@@ -70,7 +71,7 @@ export default async function createNewPdf(
     address,
     interviewSummary,
     reason,
-  } = getTexts(candidate);
+  } = getTexts(candidate, user);
 
   // Add dt logo
 

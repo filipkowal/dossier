@@ -13,6 +13,7 @@ import {
   Candidate,
   Dictionary,
   splitTextIntoLines,
+  User,
 } from "@/utils";
 import { convert } from "html-to-text";
 
@@ -223,15 +224,19 @@ export default function getHelpers(
     return y;
   }
 
-  function getTexts(candidate: Candidate) {
+  function getTexts(candidate: Candidate, user: User) {
     const proDetails: [keyof Dictionary["candidate"], string | undefined][] = [
       ["currentPosition", candidate.currentPosition],
       [`noticePeriod`, candidate.noticePeriod],
-      [
-        `desiredSalary`,
-        candidate.desiredSalary &&
-          `CHF ${addHighComma(candidate.desiredSalary)}`,
-      ],
+      // Only include salary if user has permission to view it
+      ...(user.canViewSalary && candidate.desiredSalary
+        ? [
+            [
+              `desiredSalary`,
+              `CHF ${addHighComma(candidate.desiredSalary)}`,
+            ] as [keyof Dictionary["candidate"], string],
+          ]
+        : []),
       [
         `desiredWorkload`,
         candidate.desiredWorkload && `${candidate.desiredWorkload}%`,

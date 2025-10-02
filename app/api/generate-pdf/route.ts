@@ -1,5 +1,11 @@
 import { NextRequest } from "next/server";
-import { getCandidate, getPdfDossierUrl, Locale, mergePdfs } from "@/utils";
+import {
+  getCandidate,
+  getUser,
+  getPdfDossierUrl,
+  Locale,
+  mergePdfs,
+} from "@/utils";
 import createNewPdf from "./createNewPdf";
 import { transliterate as tr } from "transliteration";
 
@@ -33,9 +39,12 @@ export async function GET(req: NextRequest) {
         })
       : undefined;
 
-    const candidate = await getCandidate(locale, id, cookie);
+    const [candidate, user] = await Promise.all([
+      getCandidate(locale, id, cookie),
+      getUser(locale, id, cookie),
+    ]);
 
-    const newPdf = createNewPdf(candidate, locale);
+    const newPdf = createNewPdf(candidate, locale, user);
     const mergedPdf = await mergePdfs(newPdf, pdfDossierPromise);
 
     const filename = `${tr(
