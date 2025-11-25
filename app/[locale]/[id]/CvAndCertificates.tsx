@@ -6,7 +6,13 @@ import "react-pdf/dist/Page/AnnotationLayer.css";
 import { Candidate } from "@/utils";
 import PdfDocument from "@/components/PdfDocument";
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+/**
+ * Use the UMD worker build – pdf.js expects a classic worker script and will
+ * silently keep a null transport if the ES module worker fails to load. That
+ * manifests later as "sendWithPromise" being undefined. Pointing to the `.js`
+ * build keeps the worker initialization happy both locally and in production.
+ */
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 const CvAndCertificates = ({
   cvAndCertificates,
