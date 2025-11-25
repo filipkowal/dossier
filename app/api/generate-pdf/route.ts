@@ -51,7 +51,11 @@ export async function GET(req: NextRequest) {
       candidate?.firstName ? candidate.firstName + "-" : ""
     )}${tr(candidate?.lastName ?? "")}-Dossier.pdf`;
 
-    return new Response(mergedPdf, {
+    const pdfArrayBuffer = new ArrayBuffer(mergedPdf.byteLength);
+    new Uint8Array(pdfArrayBuffer).set(mergedPdf);
+    const pdfBlob = new Blob([pdfArrayBuffer], { type: "application/pdf" });
+
+    return new Response(pdfBlob, {
       status: 200,
       headers: {
         "Content-Type": "application/pdf",
