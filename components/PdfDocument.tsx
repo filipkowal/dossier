@@ -2,12 +2,15 @@
 import React, { useState, useEffect } from "react";
 import { Document, Page } from "react-pdf";
 import "react-pdf/dist/Page/TextLayer.css";
+import { pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 
 interface PdfDocumentProps {
   fileUrl: string;
   parentWidth?: number;
 }
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 const PdfDocument: React.FC<PdfDocumentProps> = ({ fileUrl, parentWidth }) => {
   const [numPages, setNumPages] = useState(0);
@@ -44,6 +47,8 @@ const PdfDocument: React.FC<PdfDocumentProps> = ({ fileUrl, parentWidth }) => {
       onLoadError={(error) => {}}
       onLoadSuccess={onDocumentLoadSuccess}
       className={"flex flex-col items-center justify-center"}
+      // workaround for sendWithPromise issue  https://github.com/wojtekmaj/react-pdf/issues/974#issuecomment-3306589769
+      key={`${fileUrl}-${numPages}`}
     >
       {Array.from(new Array(numPages), (el, index) => (
         <Page
