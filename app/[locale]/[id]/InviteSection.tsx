@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import AvailabilityStep from "./InviteSectionAvailability";
 import LocationStep from "./InviteSectionLocation";
 import SuccessStep from "./InviteSectionSuccess";
+import InviteSectionCalendarUrl from "./InviteSectionCalendarUrl";
 
 export default function InviteSection({
   dict,
@@ -42,6 +43,8 @@ export default function InviteSection({
     onSubmit,
     isNewTimeSlotSet,
     setIsNewTimeSlotSet,
+    calendarUrl,
+    setCalendarUrl,
   } = useInviteForm({ user, locale, id, dict });
 
   const { isOpen, setIsOpen } = useDialog("invite");
@@ -71,6 +74,14 @@ export default function InviteSection({
         dict={dict}
         interviewDuration={interviewDuration}
         setIsNewTimeSlotSet={setIsNewTimeSlotSet}
+      />
+    ),
+    calendarUrl: (
+      <InviteSectionCalendarUrl
+        key={"calendarUrl"}
+        dict={dict}
+        calendarUrl={calendarUrl}
+        setCalendarUrl={setCalendarUrl}
       />
     ),
     success: (
@@ -119,7 +130,7 @@ export default function InviteSection({
               isPending={invitePending}
               setIsOpen={setIsOpen}
               onSubmit={async () => {
-                if (availabilitySlots.length < 1) {
+                if (availabilitySlots.length < 1 && !calendarUrl) {
                   toast.error(dict["noSlots"]);
                   return;
                 }

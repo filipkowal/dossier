@@ -43,6 +43,7 @@
     "locationStepTitle": "Interview Location & Duration",
     "availabilityStepTitle": "Your Availability",
     "successStepTitle": "Invite successfull",
+    "calendarUrlStepTitle": "Your Availability",
     "location": "Location",
     "online": "Online",
     "inPerson": "In person",
@@ -50,6 +51,7 @@
     "meetingLinkTooltip": "We will provide the link later unless you add it here.",
     "address": "Address of the interview meeting",
     "duration": "Duration (minutes)",
+    "calendarUrl": "Verify your availability calendar URL",
     "slotsDescription": {
       "0": "Choose",
       "1": "2 - 3 availability time slots",
