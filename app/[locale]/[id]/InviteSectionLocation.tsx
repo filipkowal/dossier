@@ -12,6 +12,7 @@ export default function LocationStep({
   isInterviewOnline,
   interviewDuration,
   setInterviewDuration,
+  calendarUrl,
   dict,
 }: {
   setIsInterviewOnline: Dispatch<SetStateAction<boolean>>;
@@ -23,6 +24,7 @@ export default function LocationStep({
   interviewDuration: number;
   setInterviewDuration: Dispatch<SetStateAction<number>>;
   dict: Dictionary["inviteModal"];
+  calendarUrl: string;
 }) {
   return (
     <>
@@ -70,23 +72,32 @@ export default function LocationStep({
         className="w-[11.58rem]"
       />
 
-      <div className="flex items-center mt-4">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          className="size-6 w-6 min-w-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
-          />
-        </svg>
-        <span className="ml-2">{dict.calendarUrl}</span>
-      </div>
+      {calendarUrl ? (
+        <div className="flex items-center mt-4">
+          <span>
+            {dict.calendarUrl["0"]}
+            <Tooltip content={calendarUrl} ariaLabel={calendarUrl}>
+              {" "}
+              <span className="font-bold ml-1">{dict.calendarUrl["1"]}</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="size-4 mr-1 w-4 min-w-4 inline-block"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244"
+                />
+              </svg>
+            </Tooltip>
+            {dict.calendarUrl["2"]}
+          </span>
+        </div>
+      ) : null}
     </>
   );
 }

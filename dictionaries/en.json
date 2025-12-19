@@ -50,7 +50,11 @@
     "meetingLinkTooltip": "We will provide the link later unless you add it here.",
     "address": "Address of the interview meeting",
     "duration": "Duration (minutes)",
-    "calendarUrl": "We use your calendar link to find a suitable appointment with the candidate.",
+    "calendarUrl": {
+      "0": "We use your ",
+      "1": "calendar link ",
+      "2": " to find a suitable appointment with the candidate."
+    },
     "slotsDescription": {
       "0": "Choose",
       "1": "2 - 3 availability time slots",

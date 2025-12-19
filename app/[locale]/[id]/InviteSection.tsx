@@ -63,6 +63,7 @@ export default function InviteSection({
         interviewDuration={interviewDuration}
         setInterviewDuration={setInterviewDuration}
         dict={dict}
+        calendarUrl={calendarUrl}
       />
     ),
     availability: (
