@@ -6,7 +6,6 @@ import toast from "react-hot-toast";
 import AvailabilityStep from "./InviteSectionAvailability";
 import LocationStep from "./InviteSectionLocation";
 import SuccessStep from "./InviteSectionSuccess";
-import InviteSectionCalendarUrl from "./InviteSectionCalendarUrl";
 
 export default function InviteSection({
   dict,
@@ -74,14 +73,6 @@ export default function InviteSection({
         dict={dict}
         interviewDuration={interviewDuration}
         setIsNewTimeSlotSet={setIsNewTimeSlotSet}
-      />
-    ),
-    calendarUrl: (
-      <InviteSectionCalendarUrl
-        key={"calendarUrl"}
-        dict={dict}
-        calendarUrl={calendarUrl}
-        setCalendarUrl={setCalendarUrl}
       />
     ),
     success: (

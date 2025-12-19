@@ -50,24 +50,6 @@ export default function LocationStep({
         </Checkbox>
       </div>
 
-      <div className={isInterviewOnline ? "flex items-center" : "hidden"}>
-        <TextInput
-          name="interviewLink"
-          label={dict.meetingLink}
-          onChange={(e) => setInterviewLink(e.target.value)}
-          className="max-w-3/4 w-[28rem] mr-4"
-          value={interviewLink}
-        />
-        <div className="relative">
-          <Tooltip
-            content={dict.meetingLinkTooltip}
-            ariaLabel={dict.meetingLinkTooltip}
-          >
-            <InformationCircleIcon width={24} />
-          </Tooltip>
-        </div>
-      </div>
-
       <div className={!isInterviewOnline ? "flex" : "hidden"}>
         <TextInput
           name="interviewLocation"
@@ -87,6 +69,24 @@ export default function LocationStep({
         label={dict.duration}
         className="w-[11.58rem]"
       />
+
+      <div className="flex items-center mt-4">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="currentColor"
+          className="size-6 w-6 min-w-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+          />
+        </svg>
+        <span className="ml-2">{dict.calendarUrl}</span>
+      </div>
     </>
   );
 }

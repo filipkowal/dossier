@@ -228,14 +228,12 @@ export const useInviteForm = ({
   const stepsObject: {
     location: boolean | undefined;
     availability: boolean | undefined;
-    calendarUrl: boolean | undefined;
     success: boolean;
   } = {
     location: user.isInterviewLocationInputVisible,
     availability: user.calendarUrl
       ? false
       : user.isInterviewAvailabilityInputVisible,
-    calendarUrl: user.calendarUrl ? true : false,
     success: true,
   };
 
