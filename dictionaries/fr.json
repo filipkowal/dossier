@@ -50,6 +50,11 @@
     "meetingLinkTooltip": "Nous fournirons le lien ultérieurement à moins que vous ne l'ajoutiez ici.",
     "address": "Adresse de l'entretien",
     "duration": "Durée (minutes)",
+    "calendarUrl": {
+      "0": "Nous utilisons votre ",
+      "1": "lien de calendrier ",
+      "2": " pour trouver un créneau approprié avec le candidat."
+    },
     "slotsDescription": {
       "0": "Choisis",
       "1": "2 - 3 créneaux horaires disponibles",

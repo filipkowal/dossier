@@ -42,6 +42,8 @@ export default function InviteSection({
     onSubmit,
     isNewTimeSlotSet,
     setIsNewTimeSlotSet,
+    calendarUrl,
+    setCalendarUrl,
   } = useInviteForm({ user, locale, id, dict });
 
   const { isOpen, setIsOpen } = useDialog("invite");
@@ -61,6 +63,7 @@ export default function InviteSection({
         interviewDuration={interviewDuration}
         setInterviewDuration={setInterviewDuration}
         dict={dict}
+        calendarUrl={calendarUrl}
       />
     ),
     availability: (
@@ -119,7 +122,7 @@ export default function InviteSection({
               isPending={invitePending}
               setIsOpen={setIsOpen}
               onSubmit={async () => {
-                if (availabilitySlots.length < 1) {
+                if (availabilitySlots.length < 1 && !calendarUrl) {
                   toast.error(dict["noSlots"]);
                   return;
                 }

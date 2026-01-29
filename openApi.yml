@@ -125,6 +125,9 @@ components:
           type: boolean
         address:
           $ref: "#/components/schemas/Address"
+        calendarUrl:
+          type: string
+          example: "https://calendly.com/123"
     Address:
       type: object
       properties:
@@ -462,17 +465,27 @@ paths:
                 url:
                   type: string
                   example: "https://meet.google.com/abc-def-ghi"
+                calendarUrl:
+                  type: string
+                  example: "https://calendly.com/123"
                 availabilitySlots:
                   type: array
                   items:
                     type: object
                     properties:
-                      startDateTime:
+                      id:
+                        type: number
+                      date:
                         type: string
-                        format: date-time
+                        format: date
+                      startTime:
+                        type: string
+                        format: time
+                        example: "13:00"
                       endTime:
                         type: string
                         format: time
+                        example: "15:30"
       responses:
         "200":
           description: Success

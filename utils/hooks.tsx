@@ -223,6 +223,7 @@ export const useInviteForm = ({
   const [invitePending, setInvitePending] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [isNewTimeSlotSet, setIsNewTimeSlotSet] = useState(false);
+  const [calendarUrl, setCalendarUrl] = useState(user.calendarUrl || "");
 
   const stepsObject: {
     location: boolean | undefined;
@@ -230,7 +231,9 @@ export const useInviteForm = ({
     success: boolean;
   } = {
     location: user.isInterviewLocationInputVisible,
-    availability: user.isInterviewAvailabilityInputVisible,
+    availability: user.calendarUrl
+      ? false
+      : user.isInterviewAvailabilityInputVisible,
     success: true,
   };
 
@@ -261,6 +264,7 @@ export const useInviteForm = ({
       channel: isInterviewOnline ? "online" : ("onsite" as "online" | "onsite"),
       address: interviewLocation,
       url: interviewLink,
+      calendarUrl,
       availabilitySlots: availabilitySlots.map((slot) => ({
         ...slot,
         date: dayjs(slot.date).format("YYYY-MM-DD"),
@@ -319,5 +323,7 @@ export const useInviteForm = ({
     onSubmit,
     isNewTimeSlotSet,
     setIsNewTimeSlotSet,
+    calendarUrl,
+    setCalendarUrl,
   };
 };

@@ -148,6 +148,7 @@ export async function inviteCandidate(
     channel?: "online" | "onsite";
     address?: string;
     url?: string;
+    calendarUrl?: string;
     availabilitySlots?: {
       startTime?: string;
       endTime?: string;
