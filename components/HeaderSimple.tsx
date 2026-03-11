@@ -16,23 +16,21 @@ export default function HeaderSimple({
       className="flex flex-row h-16 bg-digitalent-blue justify-between items-center py-3 px-4 sm:px-8 sm:fixed top-0 z-20 w-full"
     >
       <div>
-        <Link href={`https://digitalent.ch`}>
-          <>
-            <Image
-              src={DigitalentLogo}
-              alt="logo"
-              width="70"
-              height="42.281"
-              className="hidden sm:block"
-            />
-            <Image
-              src={Thumnbail}
-              alt="logo"
-              width="35"
-              height="35"
-              className="block sm:hidden"
-            />
-          </>
+        <Link href={`https://digitalent.ch`} className="flex">
+          <Image
+            src={DigitalentLogo}
+            alt="logo"
+            width="70"
+            height="42.281"
+            className="hidden sm:block"
+          />
+          <Image
+            src={Thumnbail}
+            alt="logo"
+            width="35"
+            height="35"
+            className="block sm:hidden"
+          />
         </Link>
       </div>
 

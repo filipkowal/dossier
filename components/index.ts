@@ -10,7 +10,7 @@ export { default as LanguageSelector } from "./LanguageSelector";
 export { default as NavLinks } from "./NavLinks";
 export { default as NotFound } from "./NotFound";
 export { default as NumberInput } from "./NumberInput";
-export { default as PdfDocument } from "./PdfDocument";
+ 
 export { default as Spinner } from "./Spinner";
 export { default as TextInput } from "./TextInput";
 export { default as ToastProvider } from "./ToastProvider";

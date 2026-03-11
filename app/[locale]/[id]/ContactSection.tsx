@@ -46,7 +46,7 @@ export default function ContactSection({
     <>
       <Button
         name="Contact"
-        className="sm:w-1/3 xl:w-1/4 max-w-[32rem] bg-digitalent-gray-light  disabled:hover:bg-digitalent-gray-light"
+        className="sm:w-1/3 xl:w-1/4 max-w-lg bg-digitalent-gray-light  disabled:hover:bg-digitalent-gray-light"
         onClick={() => setIsOpen(true)}
       >
         <span className="flex gap-4 w-full justify-center">

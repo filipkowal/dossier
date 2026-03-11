@@ -19,12 +19,12 @@ export default function PdfButton({
     try {
       setIsDownloading(true);
 
+      const baseUrl = process.env.NODE_ENV === "development" && process.env.NEXT_PUBLIC_BASE_URL
+        ? process.env.NEXT_PUBLIC_BASE_URL
+        : "";
+
       const response = await fetch(
-        `${
-          process.env.NODE_ENV === "development"
-            ? process.env.NEXT_PUBLIC_BASE_URL + "/"
-            : "/"
-        }api/generate-pdf?locale=${locale}&id=${id}`
+        `${baseUrl}/api/generate-pdf?locale=${locale}&id=${id}`
       );
 
       if (response.ok) {

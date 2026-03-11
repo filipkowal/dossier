@@ -38,12 +38,12 @@ const stolzl = localFont({
   ],
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const headersList = headers();
+  const headersList = await headers();
   const locale = getLocale(headersList);
 
   return (
@@ -54,8 +54,8 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/thumbnail.png" />
       </head>
-      <body>
-        {children}
+      <body suppressHydrationWarning>
+        <div>{children}</div>
         <ToastProvider />
       </body>
     </html>

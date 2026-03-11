@@ -73,7 +73,7 @@ export default function TimeSlotInputs({
 
   return (
     <form
-      className="flex flex-col sm:flex-row items-center gap-3 sm:gap-2 md:gap-6"
+      className="flex flex-col sm:flex-row flex-wrap w-full items-center gap-3 sm:gap-2 md:gap-6"
       onSubmit={addSlot}
     >
       <DatePicker
@@ -110,7 +110,7 @@ export default function TimeSlotInputs({
       <Button
         name="Add slot"
         submitType
-        className="bg-digitalent-blue text-white disabled:bg-digitalent-blue disabled:text-white hover:disabled:bg-digitalent-blue hover:disabled:text-white h-14 !py-0"
+        className="bg-digitalent-blue text-white disabled:bg-digitalent-blue disabled:text-white hover:disabled:bg-digitalent-blue hover:disabled:text-white h-14 py-0!"
         disabled={
           !startTime ||
           !endTime ||

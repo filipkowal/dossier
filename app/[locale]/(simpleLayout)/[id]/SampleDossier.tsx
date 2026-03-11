@@ -4,9 +4,9 @@ import Image from "next/image";
 
 const SampleDossier = () => {
   return (
-    <div className="w-full sm:pt-16 xl:grid xl:grid-cols-[minmax(450px,1fr),2fr] 2xl:grid-cols-[minmax(250px,1fr),2fr]">
+    <div className="w-full sm:pt-16 xl:grid xl:grid-cols-[minmax(450px,1fr)_2fr] 2xl:grid-cols-[minmax(250px,1fr)_2fr]">
       <div className="flex flex-col bg-digitalent-blue text-white sm:items-start xl:items-end md:px-8 lg:px-16 xl:px-0">
-        <div className="flex flex-col justify-end items-center md:items-start xl:h-[34vh] 3xl:h-[30vh] pt-16 md:px-16 2xl:px-32 md:w-[27rem] 2xl:w-[35rem] w-full">
+        <div className="flex flex-col justify-end items-center md:items-start xl:h-[34vh] 3xl:h-[30vh] pt-16 md:px-16 2xl:px-32 md:w-108 2xl:w-140 w-full">
           <Image
             src={SampleAvatar}
             alt="Sample Avatar"
@@ -24,7 +24,7 @@ const SampleDossier = () => {
             </div>
           </div>
           <div className="hidden md:flex xl:hidden flex-col md blur-sm">
-            <div className="max-w-[48rem] font-title flex text-3xl gap-12 mb-16">
+            <div className="max-w-3xl font-title flex text-3xl gap-12 mb-16">
               <div className="text-digitalent-green">
                 <h1>Candidate:</h1>
                 <h1>Vacancy:</h1>
@@ -35,7 +35,7 @@ const SampleDossier = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col leading-7 lg:flex-row xl:flex-col lg:gap-16 xl:gap-8 sm:gap-8 sm:mt-8 justify-between xl:w-[19rem] blur-sm">
+          <div className="flex flex-col leading-7 lg:flex-row xl:flex-col lg:gap-16 xl:gap-8 sm:gap-8 sm:mt-8 justify-between xl:w-76 blur-sm">
             <div className="md:w-1/2 xl:w-full">
               <h2 className="text-xl font-title mb-4 sm:mb-8">
                 Contact Details
@@ -61,7 +61,7 @@ const SampleDossier = () => {
       </div>
       <div className="flex flex-col">
         <div className="hidden xl:flex flex-col pt-16 sm:px-16 2xl:px-32 bg-digitalent-blue text-white justify-end min-h-[34vh] 3xl:h-[30vh]">
-          <div className="max-w-[48rem] font-title flex text-3xl gap-12 mb-16 blur-md">
+          <div className="max-w-3xl font-title flex text-3xl gap-12 mb-16 blur-md">
             <div className="text-digitalent-green">
               <h1>Candidate:</h1>
               <h1>Vacancy:</h1>
@@ -73,7 +73,7 @@ const SampleDossier = () => {
           </div>
         </div>
         <div className="flex flex-col my-12 sm:my-16 sm:px-16 md:px-24 lg:px-32 px-8">
-          <div className="max-w-[48rem] blur-sm">
+          <div className="max-w-3xl blur-sm">
             <h2 className="text-xl font-title mb-4 sm:mb-8 ">
               Professional Details
             </h2>
@@ -91,7 +91,7 @@ const SampleDossier = () => {
                 Desired Workload: <b>80%</b>
               </p>
             </div>
-            <div className="hidden sm:grid grid-cols-[300px,1fr]">
+            <div className="hidden sm:grid grid-cols-[300px_1fr]">
               <div>
                 <p>Current Position:</p>
                 <p>Notice Period:</p>

@@ -31,8 +31,8 @@ export default function Checkbox({
         required={required}
         value={value}
         disabled={disabled}
-        className={`form-checkbox -translate-y-[0.125rem] my-3 mr-4 ${className}
-      ring-1 !ring-offset-0 h-6 w-6 ${
+        className={`form-checkbox -translate-y-0.5 my-3 mr-4 ${className}
+      ring-1 ring-offset-0! h-6 w-6 ${
         disabled
           ? "ring-transparent border-gray-300 bg-gray-300"
           : inverse

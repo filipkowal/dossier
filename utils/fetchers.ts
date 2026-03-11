@@ -62,7 +62,7 @@ export async function getData({
     cache: "no-store",
     ...init,
     headers: {
-      Cookie: cookie ? `${cookie.name}=${cookie.value}` : "", // Forward the token cookie
+      Cookie: cookie && cookie.value ? `${cookie.name}=${cookie.value}` : "", // Forward the token cookie
     },
   });
 
@@ -233,7 +233,9 @@ export async function fetchImage(
         Cookie:
           typeof cookie === "string"
             ? cookie
-            : `${cookie.name}=${cookie.value}`,
+            : cookie.value
+            ? `${cookie.name}=${cookie.value}`
+            : "",
       },
     };
   }

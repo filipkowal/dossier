@@ -13,8 +13,8 @@ const loew = localFont({
   preload: false,
 });
 
-export default async function LayoutForNotFound({}: {}) {
-  const headersList = headers();
+export default async function LayoutForNotFound({ }: {}) {
+  const headersList = await headers();
 
   const locale = getLocale(headersList);
   const dict = await getDictionary((locale || "en") as Locale);

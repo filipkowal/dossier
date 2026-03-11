@@ -64,14 +64,14 @@ export default function NumberInput({
 
   return (
     <div className="flex items-center">
-      <div className={`group relative mb-[0.5rem] ${className}`}>
+      <div className={`group relative mb-2 ${className}`}>
         <input
           type="number"
           className={`ring-2 bg-digitalent-gray-light text-digitalent-blue 
                     ring-digitalent-blue border-none pl-4 
                       mt-4 block autofill:bg-digitalent-gray-light ${className} 
                       [&:not(:placeholder-shown)+label]:-translate-y-[1.2rem] [&:not(:placeholder-shown)+label]:text-sm
-                      [&:not(:placeholder-shown)]:invalid:[&:not(:focus)]:ring-red-500 [&:not(:placeholder-shown)]:invalid:[&:not(:focus)]:ring-offset-red-500`}
+                      not-placeholder-shown:invalid:not-focus:ring-red-500 not-placeholder-shown:invalid:not-focus:ring-offset-red-500`}
           required={required}
           name={name}
           value={inputValue}
@@ -92,7 +92,7 @@ export default function NumberInput({
           <label
             className={` bg-digitalent-gray-light px-1 absolute left-4 top-6 transition-all ease-out font-light
           group-focus-within:-translate-y-[1.2rem] group-focus-within:text-sm
-          max-w-[90%] overflow-hidden overflow-ellipsis whitespace-nowrap`}
+          max-w-[90%] overflow-hidden text-ellipsis whitespace-nowrap`}
             htmlFor={name}
           >
             {label + (required ? " *" : "")}
@@ -102,14 +102,14 @@ export default function NumberInput({
 
       <Button
         name="-"
-        className="h-[2.75rem] mt-2"
+        className="h-11 mt-2"
         onClick={() => handleButtonClick("subtract")}
       >
         -
       </Button>
       <Button
         name="+"
-        className="h-[2.75rem] mt-2 border-l-0"
+        className="h-11 mt-2 border-l-0"
         onClick={() => handleButtonClick("add")}
       >
         +

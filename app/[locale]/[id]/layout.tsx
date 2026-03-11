@@ -37,19 +37,20 @@ export default async function RootLayout({
   params,
   children,
 }: {
-  params: { locale: Locale; id: string };
+  params: Promise<{ locale: string; id: string }>;
   children: React.ReactNode;
 }) {
-  const dict = await getDictionary(params.locale);
-  const cookieStore = cookies();
-  const cookie = cookieStore.get(`token-${params.id}`);
+  const { locale, id } = await params;
+  const dict = await getDictionary(locale as Locale);
+  const cookieStore = await cookies();
+  const cookie = cookieStore.get(`token-${id}`);
 
   console.log("api url: ", SERVER_URL);
 
   return (
-    <>
-      <main className="min-h-screen bg-digitalent-gray-light flex flex-col">
-        <Header params={params} cookie={cookie} />
+    <div>
+      <div className="min-h-screen bg-digitalent-gray-light flex flex-col">
+        <Header params={{ locale: locale as Locale, id }} cookie={cookie} />
         {children}
 
         <footer className={`self-bottom w-full ${loew.variable}`}>
@@ -61,10 +62,10 @@ export default async function RootLayout({
             © 2023
           </div>
         </footer>
-      </main>
+      </div>
 
       <CookiePopup dict={dict.cookiePopup} />
-      <TokenExpiryChecker params={params} dict={dict.tokenExpiry} />
-    </>
+      <TokenExpiryChecker params={{ locale: locale as Locale, id }} dict={dict.tokenExpiry} />
+    </div>
   );
 }

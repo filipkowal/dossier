@@ -2,6 +2,7 @@
 const path = require("path");
 
 const nextConfig = {
+  turbopack: {},
   webpack: (config) => {
     config.resolve.alias.canvas = false;
 
