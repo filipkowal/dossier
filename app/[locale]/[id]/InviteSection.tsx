@@ -92,7 +92,7 @@ export default function InviteSection({
         <Button
           type="primary"
           name={dict.inviteToInterview}
-          className="w-full sm:w-1/3 xl:w-1/4 max-w-[32rem]"
+          className="w-full sm:w-1/3 xl:w-1/4 max-w-lg"
           onClick={async () => {
             if (showNoForm) {
               onSubmit({ setIsOpen, incrStep });

@@ -45,7 +45,7 @@ export default function RejectSection({
         <Button
           name="Reject"
           onClick={() => setIsOpen(true)}
-          className="w-full sm:w-1/3 xl:w-1/4 max-w-[32rem] text-white bg-digitalent-blue"
+          className="w-full sm:w-1/3 xl:w-1/4 max-w-lg text-white bg-digitalent-blue"
         >
           <span className="hidden sm:block">{dict.notInterested}</span>
           <span className="sm:hidden">{dict.reject}</span>

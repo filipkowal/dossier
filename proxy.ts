@@ -12,7 +12,7 @@ import {
 
 const PUBLIC_FILE = /\.(.*)$/;
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const locale = getLocale(request.headers);
 

@@ -17,7 +17,7 @@ export default function ContactDetails({
       <h2 className="text-xl font-title mb-4 sm:mb-8">
         {dict.candidate.contactDetails}
       </h2>
-      <div className="flex flex-col leading-7 gap-8 xl:w-[19rem]">
+      <div className="flex flex-col leading-7 gap-8 xl:w-76">
         <div>
           {candidate?.phoneNumber ? <p>{candidate.phoneNumber}</p> : ""}
           {candidate.email ? (
@@ -33,7 +33,7 @@ export default function ContactDetails({
             <Link
               href={candidate.linkedIn}
               target="_blank"
-              className="block whitespace-nowrap overflow-hidden text-ellipsis max-w-[100%]"
+              className="block whitespace-nowrap overflow-hidden text-ellipsis max-w-full"
             >
               <Image
                 alt="linked-in"

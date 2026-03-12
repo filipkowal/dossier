@@ -5,9 +5,10 @@ import ContactSection from "./ContactSection";
 export default async function Home({
   params,
 }: {
-  params: { locale: Locale; id: string };
+  params: Promise<{ locale: Locale; id: string }>;
 }) {
-  const dictionary = await getDictionary(params.locale);
+  const { locale, id } = await params;
+  const dictionary = await getDictionary(locale);
   const dict = dictionary["dossierExpired"];
 
   return (
@@ -26,7 +27,7 @@ export default async function Home({
             ...dictionary.mainButtons,
             ...dictionary.toastMessages,
           }}
-          id={params.id}
+          id={id}
         /> */}
       </div>
     </div>

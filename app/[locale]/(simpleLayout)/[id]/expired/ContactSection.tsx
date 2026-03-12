@@ -32,7 +32,7 @@ export default function ContactSection({
     ),
   };
   return (
-    <div className="md:min-w-[30rem]">
+    <div className="md:min-w-120">
       <Button
         className="w-full mt-6"
         name={dict.contactDigitalent}

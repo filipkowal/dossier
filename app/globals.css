@@ -1,6 +1,31 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@plugin "@tailwindcss/forms";
+@plugin "tailwind-scrollbar-hide";
+@plugin "tailwindcss-animate";
+
+@theme {
+  --color-digitalent-green: #66b573;
+  --color-digitalent-green-light: #d7e4dd;
+  --color-digitalent-gray-light: #f2f2f2;
+  --color-digitalent-gray-dark: #131313;
+  --color-digitalent-yellow: #e7e248;
+  --color-digitalent-blue: #193b44;
+  --color-digitalent-mine: #363636;
+
+  --breakpoint-2xl: 1536px;
+  --breakpoint-3xl: 1920px;
+
+  /* Replaced font definitions pointing to next/font variables */
+  --font-sans: var(--font-inter), sans-serif;
+  --font-title: var(--font-stolzl), sans-serif;
+  --font-serif: var(--font-merriweather), serif;
+  --font-logo: var(--font-loew), sans-serif;
+
+  --height-initial: initial;
+
+  --shadow-all-sides: 0 10px 25px 0 rgba(0, 0, 0, 0.17), 0 4px 7px 0 rgba(0, 0, 0, 0.0);
+}
 
 :root {
   --digitalent-white: "white";

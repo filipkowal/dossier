@@ -58,7 +58,7 @@ export default function LocationStep({
           value={interviewLocation}
           label={dict.address}
           onChange={(e) => setInterviewLocation(e.target.value)}
-          className={`max-w-3/4 w-[28rem] mr-4`}
+          className={`max-w-3/4 w-md mr-4`}
         />
       </div>
 

@@ -32,7 +32,7 @@ const Button = forwardRef(
     return (
       <button
         onClick={onClick}
-        className={`px-[20px] py-[10px] border-2 uppercase font-title 
+        className={`px-[20px] py-[10px] border-2 uppercase font-title cursor-pointer
         font-medium  disabled:opacity-50 disabled:cursor-not-allowed ${typeClass[type]} ${className}`}
         disabled={disabled}
         name={name}

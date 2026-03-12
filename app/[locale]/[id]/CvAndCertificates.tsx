@@ -1,9 +1,12 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
-import "react-pdf/dist/Page/TextLayer.css";
-import "react-pdf/dist/Page/AnnotationLayer.css";
+ 
 import { Candidate } from "@/utils";
-import PdfDocument from "@/components/PdfDocument";
+import dynamic from "next/dynamic";
+
+const PdfDocument = dynamic(() => import("@/components/PdfDocument"), {
+  ssr: false,
+});
 
 const CvAndCertificates = ({
   cvAndCertificates,
@@ -31,7 +34,7 @@ const CvAndCertificates = ({
   return (
     <div className="w-full" ref={parentRef}>
       <div
-        className="relative top-0 left-0 -translate-y-[62px] w-full h-[1px] bg-transparent"
+        className="relative top-0 left-0 -translate-y-[62px] w-full h-px bg-transparent"
         id="cvAndCertificates"
       />
       {cvAndCertificates && (

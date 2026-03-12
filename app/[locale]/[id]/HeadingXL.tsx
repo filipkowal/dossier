@@ -9,7 +9,7 @@ export function HeadingXL({
 }) {
   return (
     <div className="hidden xl:flex flex-col pt-16 xl:pt-32 sm:px-16 2xl:px-32 bg-digitalent-blue text-white justify-end">
-      <div className="max-w-[48rem] font-title flex text-3xl gap-12 mb-16">
+      <div className="max-w-3xl font-title flex text-3xl gap-12 mb-16">
         <div className="text-digitalent-green">
           <h1>{dict.candidate}:</h1>
           <h1>{dict.vacancy}:</h1>

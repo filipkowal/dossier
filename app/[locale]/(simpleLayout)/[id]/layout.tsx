@@ -37,15 +37,16 @@ export default async function RootLayout({
   params,
   children,
 }: {
-  params: { locale: Locale; id: string };
+  params: Promise<{ locale: string; id: string }>;
   children: React.ReactNode;
 }) {
-  const dict = await getDictionary(params.locale);
+  const resolvedParams = await params;
+  const dict = await getDictionary(resolvedParams.locale as Locale);
 
   return (
-    <>
-      <main className="min-h-screen bg-digitalent-gray-light flex flex-col justify-between">
-        <HeaderSimple params={params} />
+    <div>
+      <div className="min-h-screen bg-digitalent-gray-light flex flex-col justify-between">
+        <HeaderSimple params={resolvedParams} />
 
         {children}
         <SampleDossier />
@@ -59,9 +60,9 @@ export default async function RootLayout({
             © 2023
           </div>
         </footer>
-      </main>
+      </div>
 
       <CookiePopup dict={dict.cookiePopup} />
-    </>
+    </div>
   );
 }

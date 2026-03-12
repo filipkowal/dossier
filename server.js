@@ -14,11 +14,16 @@ const httpsOptions = {
 };
 
 app.prepare().then(() => {
+  const hostname = dev ? "127.0.0.1" : "digitalent.cloud";
   createServer(httpsOptions, (req, res) => {
     const parsedUrl = parse(req.url, true);
     handle(req, res, parsedUrl);
-  }).listen(3000, "digitalent.cloud", (err) => {
+  }).listen(3000, hostname, (err) => {
     if (err) throw err;
-    console.log("> Server listening on https://digitalent.cloud:3000");
+    const localHostLabel = dev ? "digitalent.cloud" : hostname;
+    console.log(`> Server listening on https://${localHostLabel}:3000`);
+    if (dev) {
+      console.log(`> IMPORTANT: Please ensure you have added '127.0.0.1 digitalent.cloud' to your /etc/hosts file.`);
+    }
   });
 });

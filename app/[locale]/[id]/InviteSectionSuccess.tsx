@@ -1,5 +1,5 @@
 import Image from "next/image";
-import SuccessIcon from "/public/success.webp";
+import SuccessIcon from "@/public/success.webp";
 import { Dictionary } from "@/utils";
 
 export default function SuccessStep({

@@ -5,12 +5,13 @@ import { getDictionary } from "@/utils";
 export default async function LoginPage({
   params,
 }: {
-  params: { locale: Locale; id: Locale };
+  params: Promise<{ locale: Locale; id: Locale }>;
 }) {
-  const dict = await getDictionary(params.locale);
+  const resolvedParams = await params;
+  const dict = await getDictionary(resolvedParams.locale);
   return (
     <div>
-      <LoginForm dict={dict["loginForm"]} params={params} />
+      <LoginForm dict={dict["loginForm"]} params={resolvedParams} />
     </div>
   );
 }
