@@ -34,7 +34,7 @@ export default async function Header({
   return (
     <HeaderSimple params={params}>
       <div className="flex flex-row items-center font-title">
-        <div className="hidden md:block">
+        <div className="hidden md:block text-white">
           <NavLinks dict={dict.header} />
         </div>
         {user.canDownloadPdf ? (
