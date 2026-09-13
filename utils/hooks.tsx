@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import { inviteCandidate, isLoggedIn } from "./fetchers";
@@ -31,12 +31,13 @@ export const useTokenCheck = (
         }
       } catch (e) {
         toast.error(dict.expiredError);
-        router.push(`/${locale}/${id}/login`);
-        router.refresh();
       }
     };
 
-    // Check token every minute
+    // Initial check
+    checkToken();
+
+    // Set interval to check token every minute
     const interval = setInterval(checkToken, 60000);
 
     // Cleanup interval on component unmount
@@ -96,7 +97,7 @@ export const useAutoLogout = (
       clearTimeout(timeout);
       clearInterval(counterInterval);
     };
-  }, [FIVE_MINUTES, id, locale, router]);
+  }, [FIVE_MINUTES, decrToastCounter, dict.inactivity, id, locale, resetToastCounter, router, toastCounterIdRef]);
 
   return null;
 };
@@ -109,14 +110,14 @@ function useInactivityToast(
   const [counter, setCounter] = useState(initialSecondsLeft);
   const toastCounterIdRef = useRef("remainingTime");
 
-  function decrToastCounter() {
+  const decrToastCounter = useCallback(() => {
     setCounter((secondsLeft) => secondsLeft - 1);
-  }
+  }, []);
 
-  function resetToastCounter() {
+  const resetToastCounter = useCallback(() => {
     setCounter(initialSecondsLeft);
     toast.dismiss(toastCounterIdRef.current);
-  }
+  }, [initialSecondsLeft]);
 
   // Display inactivity message
   useEffect(() => {
@@ -138,7 +139,7 @@ function useInactivityToast(
     if (counter === initialSecondsLeft || counter <= 0) {
       toast.dismiss(toastCounterIdRef.current);
     }
-  }, [counter, initialMsLeft, toastCounterIdRef]);
+  }, [counter, dict.inactivityCounter, initialSecondsLeft]);
 
   return { toastCounterIdRef, decrToastCounter, resetToastCounter };
 }
@@ -147,17 +148,19 @@ export function useDialog(name: string) {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const [isOpen, setIsOpenInternal] = useState(
-    searchParams?.get("modal") === name
-  );
+  // Optimistic local state: the URL is the source of truth, but router.push
+  // needs a server round-trip on dynamic pages, so the dialog would otherwise
+  // not react until the RSC response arrives.
+  const urlIsOpen = searchParams?.get("modal") === name;
+  const [isOpen, setIsOpenInternal] = useState(urlIsOpen);
 
-  useEffect(() => {
-    if (searchParams?.get("modal") === name) {
-      setIsOpenInternal(true);
-    } else {
-      setIsOpenInternal(false);
-    }
-  }, [searchParams]);
+  // Sync with the URL (Back/Forward buttons, direct links) by adjusting state
+  // during render when the URL changes: https://react.dev/reference/react/useState#storing-information-from-previous-renders
+  const [prevUrlIsOpen, setPrevUrlIsOpen] = useState(urlIsOpen);
+  if (prevUrlIsOpen !== urlIsOpen) {
+    setPrevUrlIsOpen(urlIsOpen);
+    setIsOpenInternal(urlIsOpen);
+  }
 
   function setIsOpen(value: boolean) {
     if (value) {

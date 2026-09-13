@@ -4,7 +4,7 @@ import "@/app/globals.css";
 import localFont from "next/font/local";
 import type { Metadata } from "next";
 import { CookiePopup, Header } from "@/components";
-import { getDictionary, SERVER_URL } from "@/utils";
+import { getDictionary } from "@/utils";
 import TokenExpiryChecker from "@/components/TokenExpiryChecker";
 import { cookies } from "next/headers";
 
@@ -45,11 +45,9 @@ export default async function RootLayout({
   const cookieStore = await cookies();
   const cookie = cookieStore.get(`token-${id}`);
 
-  console.log("api url: ", SERVER_URL);
-
   return (
     <div>
-      <div className="min-h-screen bg-digitalent-gray-light flex flex-col">
+      <main className="min-h-screen bg-digitalent-gray-light flex flex-col">
         <Header params={{ locale: locale as Locale, id }} cookie={cookie} />
         {children}
 
@@ -62,7 +60,7 @@ export default async function RootLayout({
             © 2023
           </div>
         </footer>
-      </div>
+      </main>
 
       <CookiePopup dict={dict.cookiePopup} />
       <TokenExpiryChecker params={{ locale: locale as Locale, id }} dict={dict.tokenExpiry} />

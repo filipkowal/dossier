@@ -45,7 +45,7 @@ export default async function RootLayout({
 
   return (
     <div>
-      <div className="min-h-screen bg-digitalent-gray-light flex flex-col justify-between">
+      <main className="min-h-screen bg-digitalent-gray-light flex flex-col justify-between">
         <HeaderSimple params={resolvedParams} />
 
         {children}
@@ -60,7 +60,7 @@ export default async function RootLayout({
             © 2023
           </div>
         </footer>
-      </div>
+      </main>
 
       <CookiePopup dict={dict.cookiePopup} />
     </div>
