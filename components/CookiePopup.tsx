@@ -1,26 +1,48 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import Button from "./Button";
+
+function subscribe(callback: () => void) {
+  window.addEventListener("storage", callback);
+  return () => window.removeEventListener("storage", callback);
+}
+
+function getSnapshot() {
+  try {
+    return localStorage.getItem("cookieConsent");
+  } catch {
+    // localStorage unavailable (blocked cookies, sandboxed iframe): consent
+    // can't be persisted, so don't show a banner that could never be dismissed
+    return "true";
+  }
+}
+
+function getServerSnapshot() {
+  return "true";
+}
 
 export default function CookiePopup({
   dict,
 }: {
   dict: { title: string; message: string; acceptButton: string };
 }) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    if (typeof localStorage === "undefined") return;
-
-    if (!localStorage?.getItem("cookieConsent")) setIsOpen(true);
-  }, []);
+  const [dismissed, setDismissed] = useState(false);
+  const consent = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot
+  );
+  const isOpen = !consent && !dismissed;
 
   function handleClose() {
-    setIsOpen(false);
-
-    if (typeof localStorage !== "undefined")
-      localStorage?.setItem("cookieConsent", "true");
+    setDismissed(true);
+    try {
+      localStorage.setItem("cookieConsent", "true");
+      window.dispatchEvent(new Event("storage"));
+    } catch {
+      // write failed (private mode, quota): banner still closes for this session
+    }
   }
 
   if (!isOpen) return null;

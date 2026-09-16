@@ -1,13 +1,5 @@
 /** @type {import('next').NextConfig} */
-const path = require("path");
-
 const nextConfig = {
-  turbopack: {},
-  webpack: (config) => {
-    config.resolve.alias.canvas = false;
-
-    return config;
-  },
   images: {
     minimumCacheTTL: 86400, // 1 day
     remotePatterns: [

@@ -6,6 +6,16 @@ import {
 } from "@/utils";
 import { ReactNode } from "react";
 
+function Detail({ title, value }: { title: string; value: ReactNode }) {
+  if (!value) return null;
+  return (
+    <div className="flex gap-2 flex-wrap sm:flex-nowrap sm:justify-between sm:grid grid-cols-2">
+      <p className="nowrap min-w-fit">{title}: </p>
+      <p className="font-bold sm:font-normal">{value}</p>
+    </div>
+  );
+}
+
 export default function ProfessionalDetails({
   dict,
   candidate,
@@ -15,13 +25,6 @@ export default function ProfessionalDetails({
   candidate: Candidate;
   user: User;
 }) {
-  const Detail = ({ title, value }: { title: string; value: ReactNode }) =>
-    value ? (
-      <div className="flex gap-2 flex-wrap sm:flex-nowrap sm:justify-between sm:grid grid-cols-2">
-        <p className="nowrap min-w-fit">{title}: </p>
-        <p className="font-bold sm:font-normal">{value}</p>
-      </div>
-    ) : null;
 
   return (
     <div className="flex flex-col gap-2">

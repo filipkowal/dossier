@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useRef, useState } from "react";
 import Button from "./Button";
 
 export default function NumberInput({
@@ -31,6 +31,14 @@ export default function NumberInput({
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState(value);
 
+  // Sync with the value prop by adjusting state during render:
+  // https://react.dev/reference/react/useState#storing-information-from-previous-renders
+  const [prevValue, setPrevValue] = useState(value);
+  if (prevValue !== value) {
+    setPrevValue(value);
+    setInputValue(value);
+  }
+
   // @fixme value is not updated when it is above max
   const setValueRestricted = (v: number) => {
     let newValue = v;
@@ -57,10 +65,6 @@ export default function NumberInput({
     setInputValue(newValue);
     setValue(newValue);
   };
-
-  useEffect(() => {
-    setInputValue(value);
-  }, [value]);
 
   return (
     <div className="flex items-center">
